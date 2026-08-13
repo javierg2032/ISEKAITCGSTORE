@@ -1,0 +1,2111 @@
+<t t-name="website.homepage">
+
+    <t t-call="website.layout">
+
+        <style>
+/* =====================================================
+   ISEKAI TCG STORE
+   ESTILOS COMPLETOS DE LA HOME
+   ODOO 19
+   ===================================================== */
+
+
+/* =====================================================
+   VARIABLES
+   ===================================================== */
+
+#isekai-home {
+
+    --isekai-primary: #406fce;
+    --isekai-secondary: #263570;
+    --isekai-primary-hover: #315db4;
+
+    --isekai-bg: #0b1120;
+    --isekai-surface: #131c35;
+    --isekai-card: #1a2647;
+
+    --isekai-text: #f8fafc;
+    --isekai-muted: #94a3b8;
+
+    --isekai-border: rgba(255,255,255,.10);
+
+    background: var(--isekai-bg) !important;
+
+    color: var(--isekai-text) !important;
+
+    min-height: 100vh;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+
+/* =====================================================
+   CORRECCIÓN GENERAL DE ODOO
+   ===================================================== */
+
+#isekai-home,
+#isekai-home div,
+#isekai-home header,
+#isekai-home nav,
+#isekai-home section,
+#isekai-home footer {
+
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   CONTENEDOR
+   ===================================================== */
+
+#isekai-home .isekai-container {
+
+    width: 100%;
+
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+#isekai-home .isekai-header {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    width: 100%;
+
+    background:
+        rgba(11,17,32,.97) !important;
+
+    border-bottom:
+        1px solid
+        rgba(64,111,206,.30);
+
+    backdrop-filter:
+        blur(15px);
+}
+
+
+#isekai-home .isekai-header-inner {
+
+    min-height: 82px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+}
+
+
+/* =====================================================
+   LOGO
+   ===================================================== */
+
+#isekai-home .isekai-logo {
+
+    display: flex !important;
+
+    align-items: center;
+
+    text-decoration: none !important;
+
+    flex-shrink: 0;
+
+    height: 68px;
+}
+
+
+#isekai-home .isekai-logo-image {
+
+    display: block !important;
+
+    width: auto !important;
+
+    height: 58px !important;
+
+    max-width: 220px !important;
+
+    object-fit: contain;
+}
+
+
+/* =====================================================
+   BUSCADOR
+   ===================================================== */
+
+#isekai-home .isekai-search {
+
+    flex: 1;
+
+    max-width: 600px;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    position: relative;
+}
+
+
+#isekai-home .isekai-search input {
+
+    width: 100% !important;
+
+    height: 46px !important;
+
+    padding:
+        0 55px 0 20px !important;
+
+    border-radius: 25px !important;
+
+    border:
+        1px solid
+        rgba(64,111,206,.35) !important;
+
+    background:
+        #131c35 !important;
+
+    color:
+        #ffffff !important;
+
+    outline: none !important;
+
+    box-shadow: none;
+}
+
+
+#isekai-home .isekai-search input:focus {
+
+    border-color:
+        var(--isekai-primary) !important;
+
+    color:
+        #ffffff !important;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(64,111,206,.15) !important;
+}
+
+
+#isekai-home .isekai-search input::placeholder {
+
+    color:
+        #94a3b8 !important;
+
+    opacity: 1 !important;
+}
+
+
+#isekai-home .isekai-search button {
+
+    position: absolute !important;
+
+    right: 5px;
+
+    top: 5px;
+
+    width: 36px !important;
+
+    height: 36px !important;
+
+    padding: 0 !important;
+
+    border: 0 !important;
+
+    border-radius: 50% !important;
+
+    background:
+        #406fce !important;
+
+    color:
+        #ffffff !important;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+#isekai-home .isekai-search button:hover {
+
+    background:
+        #315db4 !important;
+
+    color:
+        #ffffff !important;
+}
+
+
+#isekai-home .isekai-search button i {
+
+    color:
+        #ffffff !important;
+}
+
+
+/* =====================================================
+   USUARIO
+   ===================================================== */
+
+#isekai-home .isekai-user {
+
+    position: relative;
+
+    flex-shrink: 0;
+}
+
+
+#isekai-home .isekai-user-dropdown {
+
+    position: relative;
+}
+
+
+#isekai-home .isekai-user-button {
+
+    height: 46px !important;
+
+    display: flex !important;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding:
+        0 16px !important;
+
+    border-radius: 25px !important;
+
+    background:
+        #131c35 !important;
+
+    border:
+        1px solid
+        rgba(64,111,206,.30) !important;
+
+    color:
+        #ffffff !important;
+
+    text-decoration: none !important;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+}
+
+
+#isekai-home .isekai-user-button:hover {
+
+    background:
+        #406fce !important;
+
+    border-color:
+        #406fce !important;
+
+    color:
+        #ffffff !important;
+}
+
+
+#isekai-home .isekai-user-button span {
+
+    color:
+        #ffffff !important;
+
+    font-size:
+        14px;
+
+    font-weight:
+        600;
+}
+
+
+#isekai-home .isekai-user-button i {
+
+    color:
+        #ffffff !important;
+}
+
+
+#isekai-home .isekai-user-button .isekai-user-arrow {
+
+    color:
+        #8db0ff !important;
+
+    font-size:
+        11px;
+}
+
+
+/* =====================================================
+   POPUP USUARIO
+   ===================================================== */
+
+#isekai-home .isekai-user-menu {
+
+    position: absolute !important;
+
+    top:
+        calc(100% + 12px);
+
+    right: 0;
+
+    width: 280px;
+
+    background:
+        #131c35 !important;
+
+    border:
+        1px solid
+        rgba(64,111,206,.40) !important;
+
+    border-radius:
+        16px !important;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.50) !important;
+
+    overflow:
+        hidden;
+
+    z-index:
+        2000;
+
+    opacity:
+        0;
+
+    visibility:
+        hidden;
+
+    transform:
+        translateY(-8px);
+
+    transition:
+        opacity .2s ease,
+        visibility .2s ease,
+        transform .2s ease;
+}
+
+
+/*
+   Mostramos el popup al pasar el ratón
+   por encima de la zona de usuario.
+*/
+
+#isekai-home .isekai-user-dropdown:hover
+.isekai-user-menu {
+
+    opacity:
+        1;
+
+    visibility:
+        visible;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =====================================================
+   CABECERA DEL POPUP
+   ===================================================== */
+
+#isekai-home .isekai-user-menu-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 18px;
+
+    background:
+        #263570 !important;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.08);
+}
+
+
+#isekai-home .isekai-user-menu-header &gt; i {
+
+    flex-shrink: 0;
+
+    font-size:
+        28px;
+
+    color:
+        #8db0ff !important;
+}
+
+
+#isekai-home .isekai-user-menu-header div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+
+#isekai-home .isekai-user-menu-header strong {
+
+    display: block;
+
+    color:
+        #ffffff !important;
+
+    font-size:
+        14px;
+
+    font-weight:
+        700;
+}
+
+
+#isekai-home .isekai-user-menu-header small {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color:
+        #b8c5dd !important;
+
+    font-size:
+        12px;
+}
+
+
+/* =====================================================
+   ENLACES DEL POPUP
+   ===================================================== */
+
+#isekai-home .isekai-user-menu-links {
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 8px;
+
+    background:
+        #131c35 !important;
+}
+
+
+#isekai-home .isekai-user-menu-links a {
+
+    display: flex !important;
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: 100%;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    background:
+        transparent !important;
+
+    color:
+        #f8fafc !important;
+
+    text-decoration: none !important;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+
+#isekai-home .isekai-user-menu-links a:hover {
+
+    background:
+        rgba(64,111,206,.20) !important;
+
+    color:
+        #ffffff !important;
+
+    text-decoration: none !important;
+}
+
+
+#isekai-home .isekai-user-menu-links a i {
+
+    width: 18px;
+
+    flex-shrink: 0;
+
+    text-align: center;
+
+    color:
+        #7fa5ff !important;
+}
+
+
+#isekai-home .isekai-user-menu-links a:hover i {
+
+    color:
+        #ffffff !important;
+}
+
+
+/* =====================================================
+   CERRAR SESIÓN
+   ===================================================== */
+
+#isekai-home
+.isekai-user-menu-links
+a.isekai-logout {
+
+    margin-top: 5px;
+
+    padding-top: 14px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.08);
+
+    color:
+        #ffb4b4 !important;
+}
+
+
+#isekai-home
+.isekai-user-menu-links
+a.isekai-logout i {
+
+    color:
+        #ff8f8f !important;
+}
+
+
+/* =====================================================
+   CATEGORÍAS
+   ===================================================== */
+
+#isekai-home .isekai-category-nav {
+
+    width: 100%;
+
+    background:
+        #263570 !important;
+
+    border-bottom:
+        2px solid
+        #406fce !important;
+}
+
+
+#isekai-home .isekai-category-list {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    padding:
+        12px 0;
+}
+
+
+#isekai-home .isekai-category-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        9px 18px;
+
+    border-radius:
+        999px;
+
+    color:
+        #ffffff !important;
+
+    background:
+        rgba(255,255,255,.06) !important;
+
+    border:
+        1px solid
+        rgba(255,255,255,.10) !important;
+
+    text-decoration:
+        none !important;
+
+    font-weight:
+        600;
+
+    white-space:
+        nowrap;
+
+    transition:
+        .2s;
+}
+
+
+#isekai-home .isekai-category-button:hover {
+
+    background:
+        #406fce !important;
+
+    border-color:
+        #406fce !important;
+
+    color:
+        #ffffff !important;
+}
+
+
+/* =====================================================
+   HERO
+   ===================================================== */
+
+#isekai-home .isekai-hero {
+
+    padding:
+        30px 0;
+}
+
+
+#isekai-home .isekai-carousel {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 480px;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    border:
+        1px solid
+        rgba(64,111,206,.40);
+
+    background:
+        #263570;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.25);
+}
+
+
+/* =====================================================
+   DIAPOSITIVAS
+   ===================================================== */
+
+#isekai-home .isekai-slide {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    background-size: cover;
+
+    background-position: center;
+
+    transition:
+        opacity .5s ease,
+        visibility .5s ease;
+}
+
+
+#isekai-home .isekai-slide.active {
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+#isekai-home .isekai-slide-1 {
+
+    background:
+        linear-gradient(
+            135deg,
+            #263570 0%,
+            #406fce 100%
+        );
+}
+
+
+#isekai-home .isekai-slide-2 {
+
+    background:
+        linear-gradient(
+            135deg,
+            #172348 0%,
+            #406fce 100%
+        );
+}
+
+
+#isekai-home .isekai-slide-3 {
+
+    background:
+        linear-gradient(
+            135deg,
+            #263570 0%,
+            #151c35 100%
+        );
+}
+
+
+/* =====================================================
+   OVERLAY
+   ===================================================== */
+
+#isekai-home .isekai-slide-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(11,17,32,.95) 0%,
+            rgba(11,17,32,.70) 45%,
+            rgba(11,17,32,.15) 100%
+        );
+}
+
+
+/* =====================================================
+   CONTENIDO HERO
+   ===================================================== */
+
+#isekai-home .isekai-slide-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    max-width: 700px;
+
+    padding:
+        60px 70px;
+}
+
+
+#isekai-home .isekai-hero-label {
+
+    display: block;
+
+    margin-bottom: 12px;
+
+    color:
+        #8db0ff !important;
+
+    font-size:
+        13px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .18em;
+}
+
+
+#isekai-home .isekai-slide-content h1 {
+
+    max-width: 700px;
+
+    margin:
+        0 0 18px;
+
+    color:
+        #ffffff !important;
+
+    font-size:
+        clamp(38px,5vw,64px);
+
+    line-height:
+        1.05;
+
+    font-weight:
+        800;
+}
+
+
+#isekai-home .isekai-slide-content p {
+
+    max-width: 600px;
+
+    margin:
+        0 0 28px;
+
+    color:
+        #d1d9e8 !important;
+
+    font-size:
+        18px;
+
+    line-height:
+        1.6;
+}
+
+
+/* =====================================================
+   BOTÓN HERO
+   ===================================================== */
+
+#isekai-home .isekai-hero-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding:
+        13px 22px;
+
+    border-radius:
+        999px;
+
+    background:
+        #406fce !important;
+
+    border:
+        1px solid
+        #406fce !important;
+
+    color:
+        #ffffff !important;
+
+    text-decoration:
+        none !important;
+
+    font-weight:
+        700;
+
+    transition:
+        background .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+
+#isekai-home .isekai-hero-button:hover {
+
+    background:
+        #315db4 !important;
+
+    color:
+        #ffffff !important;
+
+    text-decoration:
+        none !important;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 8px 25px
+        rgba(64,111,206,.35);
+}
+
+
+/* =====================================================
+   FLECHAS
+   ===================================================== */
+
+#isekai-home .isekai-carousel-arrow {
+
+    position: absolute;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    z-index: 10;
+
+    width: 46px;
+
+    height: 46px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0 !important;
+
+    border:
+        1px solid
+        rgba(255,255,255,.20) !important;
+
+    border-radius: 50% !important;
+
+    background:
+        rgba(11,17,32,.60) !important;
+
+    color:
+        #ffffff !important;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease;
+}
+
+
+#isekai-home .isekai-carousel-arrow:hover {
+
+    background:
+        #406fce !important;
+
+    border-color:
+        #406fce !important;
+}
+
+
+#isekai-home .isekai-carousel-arrow i {
+
+    color:
+        #ffffff !important;
+}
+
+
+#isekai-home .isekai-carousel-prev {
+
+    left: 20px;
+}
+
+
+#isekai-home .isekai-carousel-next {
+
+    right: 20px;
+}
+
+
+/* =====================================================
+   INDICADORES
+   ===================================================== */
+
+#isekai-home .isekai-carousel-dots {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 20px;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 10;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+#isekai-home .isekai-carousel-dot {
+
+    width: 9px;
+
+    height: 9px;
+
+    display: block;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.35) !important;
+
+    border:
+        1px solid
+        rgba(255,255,255,.30) !important;
+
+    cursor: pointer;
+
+    transition:
+        width .2s ease,
+        background .2s ease;
+}
+
+
+#isekai-home .isekai-carousel-dot.active {
+
+    width: 26px;
+
+    border-radius: 999px;
+
+    background:
+        #406fce !important;
+
+    border-color:
+        #406fce !important;
+}
+
+
+/* =====================================================
+   SECCIONES
+   ===================================================== */
+
+#isekai-home .isekai-section {
+
+    padding:
+        30px 0 70px;
+}
+
+
+#isekai-home .isekai-section-title {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: end;
+
+    margin-bottom: 25px;
+
+    padding-bottom: 12px;
+
+    border-bottom:
+        2px solid
+        #263570;
+}
+
+
+#isekai-home .isekai-section-title span {
+
+    color:
+        #6f9cff !important;
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .12em;
+}
+
+
+#isekai-home .isekai-section-title h2 {
+
+    margin:
+        4px 0 0;
+
+    color:
+        #ffffff !important;
+
+    font-size:
+        32px;
+}
+
+
+#isekai-home .isekai-section-title a {
+
+    color:
+        #7fa5ff !important;
+
+    text-decoration:
+        none !important;
+}
+
+
+#isekai-home .isekai-section-title a:hover {
+
+    color:
+        #ffffff !important;
+}
+
+
+/* =====================================================
+   PRODUCTOS
+   ===================================================== */
+
+#isekai-home .isekai-products-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap: 20px;
+}
+
+
+#isekai-home .isekai-product-card {
+
+    display: block;
+
+    background:
+        #1a2647 !important;
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    border-radius:
+        16px;
+
+    overflow:
+        hidden;
+
+    text-decoration:
+        none !important;
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+
+#isekai-home .isekai-product-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        rgba(64,111,206,.50);
+
+    box-shadow:
+        0 15px 35px
+        rgba(0,0,0,.25);
+}
+
+
+#isekai-home .isekai-product-image {
+
+    width: 100%;
+
+    aspect-ratio:
+        1 / 1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        #111a30;
+
+    overflow: hidden;
+}
+
+
+#isekai-home .isekai-product-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    transition:
+        transform .3s ease;
+}
+
+
+#isekai-home .isekai-product-card:hover
+.isekai-product-image img {
+
+    transform:
+        scale(1.05);
+}
+
+
+#isekai-home .isekai-product-info {
+
+    padding: 16px;
+}
+
+
+#isekai-home .isekai-product-name {
+
+    color:
+        #ffffff !important;
+
+    font-size:
+        16px;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.35;
+
+    margin-bottom:
+        8px;
+}
+
+
+#isekai-home .isekai-product-price {
+
+    color:
+        #8db0ff !important;
+
+    font-size:
+        18px;
+
+    font-weight:
+        800;
+}
+
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+#isekai-home .isekai-footer {
+
+    padding:
+        40px 0;
+
+    background:
+        #131c35 !important;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.10);
+}
+
+
+#isekai-home .isekai-footer strong {
+
+    color:
+        #ffffff !important;
+}
+
+
+#isekai-home .isekai-footer p {
+
+    color:
+        #94a3b8 !important;
+}
+
+
+/* =====================================================
+   RESPONSIVE - TABLET
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+    #isekai-home .isekai-header-inner {
+
+        flex-wrap: wrap;
+
+        padding-top: 12px;
+
+        padding-bottom: 12px;
+    }
+
+
+    #isekai-home .isekai-search {
+
+        order: 3;
+
+        flex-basis: 100%;
+
+        max-width: none;
+    }
+
+
+    #isekai-home .isekai-category-list {
+
+        justify-content:
+            flex-start;
+
+        overflow-x:
+            auto;
+
+        padding-left:
+            10px;
+
+        padding-right:
+            10px;
+    }
+
+
+    #isekai-home .isekai-carousel {
+
+        height:
+            420px;
+    }
+
+
+    #isekai-home .isekai-slide-content {
+
+        padding:
+            45px 55px;
+    }
+
+
+    #isekai-home .isekai-products-grid {
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE - MÓVIL
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+    #isekai-home .isekai-container {
+
+        padding-left:
+            14px;
+
+        padding-right:
+            14px;
+    }
+
+
+    #isekai-home .isekai-logo-image {
+
+        height:
+            48px !important;
+
+        max-width:
+            170px !important;
+    }
+
+
+    #isekai-home .isekai-user-button {
+
+        padding:
+            0 13px !important;
+    }
+
+
+    #isekai-home .isekai-user-button span {
+
+        display:
+            none;
+    }
+
+
+    #isekai-home .isekai-user-menu {
+
+        right:
+            -10px;
+
+        width:
+            260px;
+    }
+
+
+    #isekai-home .isekai-carousel {
+
+        height:
+            430px;
+
+        border-radius:
+            16px;
+    }
+
+
+    #isekai-home .isekai-slide-content {
+
+        padding:
+            35px 30px 60px;
+    }
+
+
+    #isekai-home .isekai-slide-content h1 {
+
+        font-size:
+            36px;
+    }
+
+
+    #isekai-home .isekai-slide-content p {
+
+        font-size:
+            16px;
+    }
+
+
+    #isekai-home .isekai-carousel-arrow {
+
+        width:
+            38px;
+
+        height:
+            38px;
+    }
+
+
+    #isekai-home .isekai-carousel-prev {
+
+        left:
+            12px;
+    }
+
+
+    #isekai-home .isekai-carousel-next {
+
+        right:
+            12px;
+    }
+
+
+    #isekai-home .isekai-products-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    #isekai-home .isekai-section-title {
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+        gap:
+            10px;
+    }
+
+}
+        </style>
+
+
+        <!-- =====================================================
+             HOME
+             ===================================================== -->
+
+        <div id="isekai-home">
+
+
+            <!-- =================================================
+                 HEADER
+                 ================================================= -->
+
+            <header class="isekai-header">
+
+                <div class="isekai-container isekai-header-inner">
+
+
+                    <!-- LOGO -->
+
+                    <a href="/" class="isekai-logo">
+
+                        <img src="/web/image/website/1/logo/ISEKAITCGSTORE?unique=6ebc7c3" alt="Isekai TCG Store" class="isekai-logo-image"/>
+
+                    </a>
+
+
+                    <!-- BUSCADOR -->
+
+                    <form action="/shop" method="get" class="isekai-search">
+
+                        <input type="search" name="search" placeholder="Buscar productos..." autocomplete="off"/>
+
+                        <button type="submit">
+
+                            <i class="fa fa-search"/>
+
+                        </button>
+
+                    </form>
+
+
+                    <!-- USUARIO -->
+
+                    <div class="isekai-user">
+
+
+                        <!-- =====================================
+                             USUARIO NO CONECTADO
+                             ===================================== -->
+
+                        <t t-if="request.env.user._is_public()">
+
+                            <div class="isekai-user-dropdown">
+
+                                <button type="button" class="isekai-user-button">
+
+                                    <i class="fa fa-user"/>
+
+                                    <span>
+                                        Mi cuenta
+                                    </span>
+
+                                    <i class="fa fa-chevron-down isekai-user-arrow"/>
+
+                                </button>
+
+
+                                <div class="isekai-user-menu">
+
+
+                                    <div class="isekai-user-menu-header">
+
+                                        <i class="fa fa-user-circle"/>
+
+                                        <div>
+
+                                            <strong>
+                                                Bienvenido
+                                            </strong>
+
+                                            <small>
+                                                Accede a tu cuenta
+                                            </small>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="isekai-user-menu-links">
+
+                                        <a href="/web/login?redirect=/">
+
+                                            <i class="fa fa-sign-in"/>
+
+                                            Iniciar sesión
+
+                                        </a>
+
+
+                                        <a href="/web/signup?redirect=/">
+
+                                            <i class="fa fa-user-plus"/>
+
+                                            Crear cuenta
+
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </t>
+
+
+                        <!-- =====================================
+                             USUARIO CONECTADO
+                             ===================================== -->
+
+                        <t t-else="">
+
+                            <div class="isekai-user-dropdown">
+
+                                <button type="button" class="isekai-user-button">
+
+                                    <i class="fa fa-user"/>
+
+                                    <span t-out="request.env.user.name"/>
+
+                                    <i class="fa fa-chevron-down isekai-user-arrow"/>
+
+                                </button>
+
+
+                                <div class="isekai-user-menu">
+
+
+                                    <div class="isekai-user-menu-header">
+
+                                        <i class="fa fa-user-circle"/>
+
+                                        <div>
+
+                                            <strong>
+                                                Mi cuenta
+                                            </strong>
+
+                                            <small t-out="request.env.user.email"/>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="isekai-user-menu-links">
+
+
+                                        <a href="/my/home">
+
+                                            <i class="fa fa-user"/>
+
+                                            Mi perfil
+
+                                        </a>
+
+
+                                        <a href="/my/orders">
+
+                                            <i class="fa fa-box"/>
+
+                                            Mis pedidos
+
+                                        </a>
+
+
+                                        <a href="/shop/cart">
+
+                                            <i class="fa fa-shopping-cart"/>
+
+                                            Mi carrito
+
+                                        </a>
+
+
+                                        <a href="/web/session/logout?redirect=/" class="isekai-logout">
+
+                                            <i class="fa fa-sign-out"/>
+
+                                            Cerrar sesión
+
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </t>
+
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =================================================
+                 CATEGORÍAS
+                 ================================================= -->
+
+            <nav class="isekai-category-nav">
+
+                <div class="isekai-container">
+
+                    <div class="isekai-category-list">
+
+
+                        <a href="/shop" class="isekai-category-button">
+
+                            Accesorios TCG
+
+                        </a>
+
+
+                        <a href="/shop" class="isekai-category-button">
+
+                            Juegos TCG
+
+                        </a>
+
+
+                        <a href="/shop" class="isekai-category-button">
+
+                            Warhammer
+
+                        </a>
+
+
+                        <a href="/shop" class="isekai-category-button">
+
+                            Funko POP
+
+                        </a>
+
+
+                        <a href="/shop" class="isekai-category-button">
+
+                            Figuras Anime
+
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+            </nav>
+
+
+            <!-- =================================================
+                 CARRUSEL
+                 ================================================= -->
+
+            <section class="isekai-hero o_colored_level">
+
+                <div class="isekai-container">
+
+
+                    <div class="isekai-carousel" data-isekai-carousel="true">
+
+
+                        
+
+                        <article class="isekai-slide isekai-slide-1" style="opacity: 1; visibility: visible;">
+
+                            <div class="isekai-slide-overlay"/>
+
+
+                            <div class="isekai-slide-content">
+
+                                <span class="isekai-hero-label">
+
+                                    ISEKAI TCG STORE
+
+                                </span>
+
+
+                                <h1>
+
+                                    Tu tienda de TCG
+                                    y coleccionismo
+
+                                </h1>
+
+
+                                <p>
+
+                                    Descubre cartas,
+                                    accesorios,
+                                    Warhammer,
+                                    Funko POP,
+                                    figuras anime
+                                    y mucho más.
+
+                                </p>
+
+
+                                <a href="/shop" class="isekai-hero-button">
+
+                                    VER TIENDA
+
+                                    <i class="fa fa-arrow-right"/>
+
+                                </a>
+
+                            </div>
+
+                        </article>
+
+
+                        
+
+                        <article class="isekai-slide isekai-slide-2" style="opacity: 0; visibility: hidden;">
+
+                            <div class="isekai-slide-overlay"/>
+
+
+                            <div class="isekai-slide-content">
+
+                                <span class="isekai-hero-label">
+
+                                    NUEVAS LLEGADAS
+
+                                </span>
+
+
+                                <h1>
+
+                                    Las últimas novedades
+
+                                </h1>
+
+
+                                <p>
+
+                                    Descubre los productos
+                                    que acabamos de incorporar
+                                    a la tienda.
+
+                                </p>
+
+
+                                <a href="#isekai-novedades" class="isekai-hero-button">
+
+                                    VER NOVEDADES
+
+                                    <i class="fa fa-arrow-right"/>
+
+                                </a>
+
+                            </div>
+
+                        </article>
+
+
+                        
+
+                        <article class="isekai-slide isekai-slide-3" style="opacity: 0; visibility: hidden;">
+
+                            <div class="isekai-slide-overlay"/>
+
+
+                            <div class="isekai-slide-content">
+
+                                <span class="isekai-hero-label">
+
+                                    COLECCIONISMO
+
+                                </span>
+
+
+                                <h1>
+
+                                    Encuentra tu
+                                    próxima colección
+
+                                </h1>
+
+
+                                <p>
+
+                                    TCG, figuras,
+                                    Funko POP y productos
+                                    para coleccionistas.
+
+                                </p>
+
+
+                                <a href="/shop" class="isekai-hero-button">
+
+                                    EXPLORAR
+
+                                    <i class="fa fa-arrow-right"/>
+
+                                </a>
+
+                            </div>
+
+                        </article>
+
+
+                        
+
+                        <button type="button" class="isekai-carousel-arrow isekai-carousel-prev" aria-label="Anterior">
+
+                            <i class="fa fa-chevron-left"/>
+
+                        </button>
+
+
+                        
+
+                        <button type="button" class="isekai-carousel-arrow isekai-carousel-next" aria-label="Siguiente">
+
+                            <i class="fa fa-chevron-right"/>
+
+                        </button>
+
+
+                        
+
+                        <div class="isekai-carousel-dots">
+
+                            <span class="isekai-carousel-dot active"/>
+
+                            <span class="isekai-carousel-dot"/>
+
+                            <span class="isekai-carousel-dot"/>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 NOVEDADES
+                 ================================================= -->
+
+            <section class="isekai-section" id="isekai-novedades">
+
+                <div class="isekai-container">
+
+
+                    <div class="isekai-section-title">
+
+                        <div>
+
+                            <span>
+                                DESCUBRE
+                            </span>
+
+                            <h2>
+                                Últimas novedades
+                            </h2>
+
+                        </div>
+
+
+                        <a href="/shop">
+
+                            Ver todos
+
+                            <i class="fa fa-arrow-right"/>
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- PRODUCTOS DE ODOO -->
+
+                    <div class="isekai-products-grid">
+
+
+                        <t t-foreach="request.env['product.template'].sudo().search([('sale_ok', '=', True)], order='create_date desc', limit=4)" t-as="product">
+
+
+                            <a t-att-href="'/shop/' + str(product.id)" class="isekai-product-card" style="text-decoration:none;">
+
+
+                                <!-- IMAGEN -->
+
+                                <div class="isekai-product-image">
+
+                                    <img t-if="product.image_1920" t-att-src="'/web/image/product.template/%s/image_1920' % product.id" t-att-alt="product.name"/>
+
+
+                                    <span t-else="" style="color:#94a3b8;">
+
+                                        Sin imagen
+
+                                    </span>
+
+                                </div>
+
+
+                                <!-- INFORMACIÓN -->
+
+                                <div class="isekai-product-info">
+
+                                    <div class="isekai-product-name" t-out="product.name"/>
+
+
+                                    <div class="isekai-product-price">
+
+                                        <span t-out="product.list_price"/>
+
+                                        €
+
+                                    </div>
+
+                                </div>
+
+
+                            </a>
+
+
+                        </t>
+
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FOOTER
+                 ================================================= -->
+
+            <footer class="isekai-footer">
+
+                <div class="isekai-container">&amp;nbsp;<br/>
+
+                </div>
+
+            </footer>
+
+
+        </div>
+
+    </t>
+
+</t>
