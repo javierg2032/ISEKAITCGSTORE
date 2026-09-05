@@ -280,15 +280,15 @@
                  CARRUSEL
                  ================================================= -->
 
-            <section class="isekai-hero">
+            <section class="isekai-hero o_colored_level">
 
                 <div class="isekai-container">
 
                     <div class="isekai-carousel" data-isekai-carousel="true" aria-label="Promociones destacadas">
 
-                        <!-- DIAPOSITIVA 1 -->
+                        
 
-                        <article class="isekai-slide isekai-slide-1 active">
+                        <article class="isekai-slide isekai-slide-1" style="opacity: 0; visibility: hidden;">
 
                             <div class="isekai-slide-overlay"/>
 
@@ -325,9 +325,9 @@
                         </article>
 
 
-                        <!-- DIAPOSITIVA 2 -->
+                        
 
-                        <article class="isekai-slide isekai-slide-2">
+                        <article class="isekai-slide isekai-slide-2" style="opacity: 0; visibility: hidden;">
 
                             <div class="isekai-slide-overlay"/>
 
@@ -360,9 +360,9 @@
                         </article>
 
 
-                        <!-- DIAPOSITIVA 3 -->
+                        
 
-                        <article class="isekai-slide isekai-slide-3">
+                        <article class="isekai-slide isekai-slide-3 active" style="opacity: 1; visibility: visible;">
 
                             <div class="isekai-slide-overlay"/>
 
@@ -396,7 +396,7 @@
                         </article>
 
 
-                        <!-- FLECHA ANTERIOR -->
+                        
 
                         <button type="button" class="isekai-carousel-arrow isekai-carousel-prev" aria-label="Anterior" title="Anterior">
 
@@ -405,7 +405,7 @@
                         </button>
 
 
-                        <!-- FLECHA SIGUIENTE -->
+                        
 
                         <button type="button" class="isekai-carousel-arrow isekai-carousel-next" aria-label="Siguiente" title="Siguiente">
 
@@ -414,15 +414,15 @@
                         </button>
 
 
-                        <!-- INDICADORES -->
+                        
 
                         <div class="isekai-carousel-dots" aria-label="Seleccionar diapositiva">
 
-                            <button type="button" class="isekai-carousel-dot active" aria-label="Diapositiva 1" aria-current="true"/>
+                            <button type="button" class="isekai-carousel-dot" aria-label="Diapositiva 1"/>
 
                             <button type="button" class="isekai-carousel-dot" aria-label="Diapositiva 2"/>
 
-                            <button type="button" class="isekai-carousel-dot" aria-label="Diapositiva 3"/>
+                            <button type="button" class="isekai-carousel-dot active" aria-label="Diapositiva 3" aria-current="true"/>
 
                         </div>
 
