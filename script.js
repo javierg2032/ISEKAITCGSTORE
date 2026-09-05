@@ -1,593 +1,552 @@
+/* ================================================================
+   ISEKAI TCG STORE
+   JAVASCRIPT GLOBAL
+   - Menú de categorías
+   - Menú de usuario
+   - Modo claro / oscuro
+   - Carrusel de Home
+   - Detección de Shop
+   ================================================================ */
+
 (function () {
     "use strict";
 
     function initIsekai() {
-        const home = document.getElementById("isekai-home");
 
-        if (!home) {
+        /* =========================================================
+           DETECCIÓN DE PÁGINA
+           ========================================================= */
+
+        const home = document.getElementById("isekai-home");
+        const shop = document.querySelector("#wrap.isekai-shop-page");
+        const body = document.body;
+
+        if (!body) {
             return;
         }
 
+        body.classList.toggle("isekai-shop-active", !!shop);
+
 
         /* =========================================================
-           1. CARRUSEL
+           MODO CLARO / OSCURO
            ========================================================= */
 
-        function initCarousel() {
-            const carousel = home.querySelector(".isekai-carousel");
+        const themeButtons =
+            document.querySelectorAll(".isekai-theme-toggle");
 
-            if (!carousel) {
-                return;
+        function getSavedTheme() {
+            try {
+                return localStorage.getItem("isekai-theme");
+            } catch (error) {
+                return null;
             }
+        }
 
-            const slides = carousel.querySelectorAll(".isekai-slide");
-            const dots = carousel.querySelectorAll(".isekai-carousel-dot");
-            const previousButton =
-                carousel.querySelector(".isekai-carousel-prev");
-            const nextButton =
-                carousel.querySelector(".isekai-carousel-next");
-
-            if (!slides.length) {
-                return;
+        function saveTheme(theme) {
+            try {
+                localStorage.setItem("isekai-theme", theme);
+            } catch (error) {
+                /* Si localStorage está bloqueado, el tema
+                   seguirá funcionando durante esta sesión. */
             }
+        }
 
-            let currentSlide = 0;
-            let autoplayTimer = null;
+        function applyTheme(theme) {
 
-            function showSlide(index) {
-                if (index >= slides.length) {
-                    index = 0;
-                }
+            const isLight = theme === "light";
 
-                if (index < 0) {
-                    index = slides.length - 1;
-                }
-
-                currentSlide = index;
-
-                slides.forEach(function (slide, slideIndex) {
-                    const isActive = slideIndex === currentSlide;
-
-                    slide.style.opacity = isActive ? "1" : "0";
-                    slide.style.visibility = isActive
-                        ? "visible"
-                        : "hidden";
-
-                    slide.classList.toggle("active", isActive);
-                });
-
-                dots.forEach(function (dot, dotIndex) {
-                    const isActive = dotIndex === currentSlide;
-
-                    dot.classList.toggle("active", isActive);
-
-                    if (isActive) {
-                        dot.setAttribute("aria-current", "true");
-                    } else {
-                        dot.removeAttribute("aria-current");
-                    }
-                });
-            }
-
-
-            function startAutoplay() {
-                if (autoplayTimer !== null) {
-                    return;
-                }
-
-                autoplayTimer = setInterval(function () {
-                    showSlide(currentSlide + 1);
-                }, 5000);
-            }
-
-
-            function stopAutoplay() {
-                if (autoplayTimer === null) {
-                    return;
-                }
-
-                clearInterval(autoplayTimer);
-                autoplayTimer = null;
-            }
-
-
-            function restartAutoplay() {
-                stopAutoplay();
-                startAutoplay();
-            }
-
-
-            function nextSlide() {
-                showSlide(currentSlide + 1);
-                restartAutoplay();
-            }
-
-
-            function previousSlide() {
-                showSlide(currentSlide - 1);
-                restartAutoplay();
-            }
-
-
-            /* -----------------------------------------------------
-               Botón siguiente
-               ----------------------------------------------------- */
-
-            if (nextButton) {
-                nextButton.addEventListener("click", function (event) {
-                    event.preventDefault();
-
-                    nextSlide();
-                });
-            }
-
-
-            /* -----------------------------------------------------
-               Botón anterior
-               ----------------------------------------------------- */
-
-            if (previousButton) {
-                previousButton.addEventListener("click", function (event) {
-                    event.preventDefault();
-
-                    previousSlide();
-                });
-            }
-
-
-            /* -----------------------------------------------------
-               Indicadores
-               ----------------------------------------------------- */
-
-            dots.forEach(function (dot, index) {
-                dot.addEventListener("click", function (event) {
-                    event.preventDefault();
-
-                    showSlide(index);
-                    restartAutoplay();
-                });
-            });
-
-
-            /* -----------------------------------------------------
-               Pausar al pasar el ratón
-               ----------------------------------------------------- */
-
-            carousel.addEventListener("mouseenter", function () {
-                stopAutoplay();
-            });
-
-            carousel.addEventListener("mouseleave", function () {
-                startAutoplay();
-            });
-
-
-            /* -----------------------------------------------------
-               Pausar al utilizar teclado
-               ----------------------------------------------------- */
-
-            carousel.addEventListener("focusin", function () {
-                stopAutoplay();
-            });
-
-            carousel.addEventListener("focusout", function () {
-                setTimeout(function () {
-                    if (!carousel.contains(document.activeElement)) {
-                        startAutoplay();
-                    }
-                }, 0);
-            });
-
-
-            /* -----------------------------------------------------
-               Pausar si la pestaña deja de estar visible
-               ----------------------------------------------------- */
-
-            document.addEventListener(
-                "visibilitychange",
-                function () {
-                    if (document.hidden) {
-                        stopAutoplay();
-                    } else {
-                        startAutoplay();
-                    }
-                }
+            body.classList.toggle(
+                "isekai-light-theme",
+                isLight
             );
 
-
-            /* -----------------------------------------------------
-               Inicialización
-               ----------------------------------------------------- */
-
-            showSlide(0);
-            startAutoplay();
-        }
-
-
-        /* =========================================================
-           2. MENÚS DE CATEGORÍAS
-           ========================================================= */
-
-        function initCategoryMenus() {
-            const categoryDropdowns =
-                home.querySelectorAll(".isekai-category-dropdown");
-
-            if (!categoryDropdowns.length) {
-                return;
-            }
-
-
-            categoryDropdowns.forEach(function (dropdown) {
-                const button =
-                    dropdown.querySelector(".isekai-category-button");
-
-                const menu =
-                    dropdown.querySelector(".isekai-subcategory-menu");
-
-                if (!button || !menu) {
-                    return;
-                }
-
-
-                button.setAttribute("aria-expanded", "false");
-
-
-                button.addEventListener("click", function (event) {
-                    /*
-                     * Las categorías con subcategorías funcionan
-                     * como desplegable.
-                     *
-                     * Evitamos que el enlace navegue directamente
-                     * al hacer clic en ellas.
-                     */
-                    event.preventDefault();
-                    event.stopPropagation();
-
-
-                    const isOpen =
-                        dropdown.classList.contains("isekai-open");
-
-
-                    /* Cerrar todos los demás */
-                    categoryDropdowns.forEach(function (otherDropdown) {
-                        otherDropdown.classList.remove("isekai-open");
-
-                        const otherButton =
-                            otherDropdown.querySelector(
-                                ".isekai-category-button"
-                            );
-
-                        if (otherButton) {
-                            otherButton.setAttribute(
-                                "aria-expanded",
-                                "false"
-                            );
-                        }
-                    });
-
-
-                    /* Abrir el seleccionado */
-                    if (!isOpen) {
-                        dropdown.classList.add("isekai-open");
-
-                        button.setAttribute(
-                            "aria-expanded",
-                            "true"
-                        );
-                    }
-                });
-
-
-                /*
-                 * Evita que hacer clic dentro del menú provoque
-                 * el cierre mediante el listener global.
-                 */
-                menu.addEventListener("click", function (event) {
-                    event.stopPropagation();
-                });
-            });
-        }
-
-
-        /* =========================================================
-           3. MENÚ DE USUARIO
-           ========================================================= */
-
-        function initUserMenus() {
-            const userDropdowns =
-                home.querySelectorAll(".isekai-user-dropdown");
-
-            if (!userDropdowns.length) {
-                return;
-            }
-
-
-            userDropdowns.forEach(function (dropdown) {
-                const button =
-                    dropdown.querySelector(".isekai-user-button");
-
-                const menu =
-                    dropdown.querySelector(".isekai-user-menu");
-
-                if (!button || !menu) {
-                    return;
-                }
-
-
-                button.setAttribute("aria-expanded", "false");
-
-
-                button.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    event.stopPropagation();
-
-
-                    const isOpen =
-                        dropdown.classList.contains("isekai-open");
-
-
-                    /* Cerrar todos los menús de usuario */
-                    userDropdowns.forEach(function (otherDropdown) {
-                        otherDropdown.classList.remove("isekai-open");
-
-                        const otherButton =
-                            otherDropdown.querySelector(
-                                ".isekai-user-button"
-                            );
-
-                        if (otherButton) {
-                            otherButton.setAttribute(
-                                "aria-expanded",
-                                "false"
-                            );
-                        }
-                    });
-
-
-                    /* Abrir el seleccionado */
-                    if (!isOpen) {
-                        dropdown.classList.add("isekai-open");
-
-                        button.setAttribute(
-                            "aria-expanded",
-                            "true"
-                        );
-                    }
-                });
-
-
-                /*
-                 * Evita que hacer clic dentro del menú
-                 * provoque el cierre inmediatamente.
-                 */
-                menu.addEventListener("click", function (event) {
-                    event.stopPropagation();
-                });
-            });
-        }
-
-
-        /* =========================================================
-           4. CERRAR MENÚS AL HACER CLIC FUERA
-           ========================================================= */
-
-        function initOutsideClick() {
-            document.addEventListener("click", function (event) {
-
-                /*
-                 * Si el clic está dentro de Isekai, comprobamos
-                 * específicamente si está fuera de los menús.
-                 */
-
-                const categoryDropdowns =
-                    home.querySelectorAll(
-                        ".isekai-category-dropdown"
-                    );
-
-                categoryDropdowns.forEach(function (dropdown) {
-                    if (!dropdown.contains(event.target)) {
-                        dropdown.classList.remove(
-                            "isekai-open"
-                        );
-
-                        const button =
-                            dropdown.querySelector(
-                                ".isekai-category-button"
-                            );
-
-                        if (button) {
-                            button.setAttribute(
-                                "aria-expanded",
-                                "false"
-                            );
-                        }
-                    }
-                });
-
-
-                const userDropdowns =
-                    home.querySelectorAll(
-                        ".isekai-user-dropdown"
-                    );
-
-                userDropdowns.forEach(function (dropdown) {
-                    if (!dropdown.contains(event.target)) {
-                        dropdown.classList.remove(
-                            "isekai-open"
-                        );
-
-                        const button =
-                            dropdown.querySelector(
-                                ".isekai-user-button"
-                            );
-
-                        if (button) {
-                            button.setAttribute(
-                                "aria-expanded",
-                                "false"
-                            );
-                        }
-                    }
-                });
-            });
-        }
-
-
-        /* =========================================================
-           5. MODO CLARO / OSCURO
-           ========================================================= */
-
-        function initThemeToggle() {
-            const toggle =
-                home.querySelector(".isekai-theme-toggle");
-
-            if (!toggle) {
-                return;
-            }
-
-
-            /* -----------------------------------------------------
-               Recuperar tema guardado
-               ----------------------------------------------------- */
-
-            let savedTheme = null;
-
-            try {
-                savedTheme =
-                    localStorage.getItem("isekai-theme");
-            } catch (error) {
-                /*
-                 * Si localStorage está bloqueado por el navegador,
-                 * simplemente utilizamos el modo oscuro.
-                 */
-                savedTheme = null;
-            }
-
-
-            /*
-             * El modo oscuro es el predeterminado.
-             */
-            if (savedTheme === "light") {
-                home.setAttribute(
-                    "data-theme",
-                    "light"
+            body.classList.toggle(
+                "isekai-dark-theme",
+                !isLight
+            );
+
+            themeButtons.forEach(function (button) {
+
+                button.classList.toggle(
+                    "isekai-light-mode",
+                    isLight
                 );
-            } else {
-                home.setAttribute(
-                    "data-theme",
-                    "dark"
-                );
-            }
 
-
-            /* -----------------------------------------------------
-               Actualizar accesibilidad del botón
-               ----------------------------------------------------- */
-
-            function updateThemeButton() {
-                const isLight =
-                    home.getAttribute("data-theme") === "light";
-
-
-                toggle.setAttribute(
+                button.setAttribute(
                     "aria-pressed",
                     isLight ? "true" : "false"
                 );
 
-
-                if (isLight) {
-                    toggle.setAttribute(
-                        "aria-label",
-                        "Cambiar a modo oscuro"
-                    );
-
-                    toggle.setAttribute(
-                        "title",
-                        "Cambiar a modo oscuro"
-                    );
-                } else {
-                    toggle.setAttribute(
-                        "aria-label",
-                        "Cambiar a modo claro"
-                    );
-
-                    toggle.setAttribute(
-                        "title",
-                        "Cambiar a modo claro"
-                    );
-                }
-            }
-
-
-            /* -----------------------------------------------------
-               Cambiar tema
-               ----------------------------------------------------- */
-
-            toggle.addEventListener("click", function (event) {
-                event.preventDefault();
-                event.stopPropagation();
-
-
-                const isLight =
-                    home.getAttribute("data-theme") === "light";
-
-
-                const newTheme =
-                    isLight ? "dark" : "light";
-
-
-                home.setAttribute(
-                    "data-theme",
-                    newTheme
+                button.setAttribute(
+                    "aria-label",
+                    isLight
+                        ? "Cambiar a modo oscuro"
+                        : "Cambiar a modo claro"
                 );
 
-
-                try {
-                    localStorage.setItem(
-                        "isekai-theme",
-                        newTheme
-                    );
-                } catch (error) {
-                    /*
-                     * No hacemos nada si localStorage no está disponible.
-                     */
-                }
-
-
-                updateThemeButton();
+                button.setAttribute(
+                    "title",
+                    isLight
+                        ? "Cambiar a modo oscuro"
+                        : "Cambiar a modo claro"
+                );
             });
-
-
-            /* -----------------------------------------------------
-               Estado inicial
-               ----------------------------------------------------- */
-
-            updateThemeButton();
         }
+
+        const savedTheme = getSavedTheme();
+
+        applyTheme(
+            savedTheme === "light"
+                ? "light"
+                : "dark"
+        );
+
+        themeButtons.forEach(function (button) {
+
+            if (button.dataset.isekaiThemeReady === "true") {
+                return;
+            }
+
+            button.dataset.isekaiThemeReady = "true";
+
+            button.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    const isLight =
+                        body.classList.contains(
+                            "isekai-light-theme"
+                        );
+
+                    const newTheme =
+                        isLight
+                            ? "dark"
+                            : "light";
+
+                    applyTheme(newTheme);
+                    saveTheme(newTheme);
+                }
+            );
+        });
 
 
         /* =========================================================
-           6. INICIALIZACIÓN
+           CATEGORÍAS
            ========================================================= */
 
-        initCarousel();
-        initCategoryMenus();
-        initUserMenus();
-        initThemeToggle();
-        initOutsideClick();
+        /*
+         * IMPORTANTE:
+         * No limitamos la búsqueda a #isekai-home.
+         * De esta forma el mismo header funciona también en Shop.
+         */
+
+        const categoryDropdowns =
+            document.querySelectorAll(
+                ".isekai-category-dropdown"
+            );
+
+        function closeAllCategories() {
+
+            categoryDropdowns.forEach(
+                function (dropdown) {
+
+                    dropdown.classList.remove(
+                        "isekai-open"
+                    );
+
+                    const button =
+                        dropdown.querySelector(
+                            ".isekai-category-button"
+                        );
+
+                    if (button) {
+                        button.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+                    }
+                }
+            );
+        }
+
+        categoryDropdowns.forEach(function (dropdown) {
+
+            const button =
+                dropdown.querySelector(
+                    ".isekai-category-button"
+                );
+
+            const menu =
+                dropdown.querySelector(
+                    ".isekai-subcategory-menu"
+                );
+
+            /*
+             * Las categorías sin subcategorías siguen siendo
+             * enlaces normales hacia /shop/category/...
+             */
+            if (!button || !menu) {
+                return;
+            }
+
+            button.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    const isOpen =
+                        dropdown.classList.contains(
+                            "isekai-open"
+                        );
+
+                    closeAllCategories();
+
+                    if (!isOpen) {
+
+                        dropdown.classList.add(
+                            "isekai-open"
+                        );
+
+                        button.setAttribute(
+                            "aria-expanded",
+                            "true"
+                        );
+                    }
+                }
+            );
+
+            menu.addEventListener(
+                "click",
+                function (event) {
+                    event.stopPropagation();
+                }
+            );
+        });
+
+
+        /* =========================================================
+           MENÚ DE USUARIO
+           ========================================================= */
+
+        const userDropdowns =
+            document.querySelectorAll(
+                ".isekai-user-dropdown"
+            );
+
+        function closeAllUserMenus() {
+
+            userDropdowns.forEach(
+                function (dropdown) {
+
+                    dropdown.classList.remove(
+                        "isekai-open"
+                    );
+
+                    const button =
+                        dropdown.querySelector(
+                            ".isekai-user-button"
+                        );
+
+                    if (button) {
+                        button.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+                    }
+                }
+            );
+        }
+
+        userDropdowns.forEach(function (dropdown) {
+
+            const button =
+                dropdown.querySelector(
+                    ".isekai-user-button"
+                );
+
+            const menu =
+                dropdown.querySelector(
+                    ".isekai-user-menu"
+                );
+
+            if (!button || !menu) {
+                return;
+            }
+
+            button.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    const isOpen =
+                        dropdown.classList.contains(
+                            "isekai-open"
+                        );
+
+                    closeAllUserMenus();
+
+                    if (!isOpen) {
+
+                        dropdown.classList.add(
+                            "isekai-open"
+                        );
+
+                        button.setAttribute(
+                            "aria-expanded",
+                            "true"
+                        );
+                    }
+                }
+            );
+
+            menu.addEventListener(
+                "click",
+                function (event) {
+                    event.stopPropagation();
+                }
+            );
+        });
+
+
+        /* =========================================================
+           CLICK FUERA DE LOS MENÚS
+           ========================================================= */
+
+        document.addEventListener(
+            "click",
+            function () {
+
+                closeAllCategories();
+                closeAllUserMenus();
+            }
+        );
+
+
+        /* =========================================================
+           ESCAPE
+           ========================================================= */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key !== "Escape") {
+                    return;
+                }
+
+                closeAllCategories();
+                closeAllUserMenus();
+            }
+        );
+
+
+        /* =========================================================
+           CARRUSEL HOME
+           ========================================================= */
+
+        if (home) {
+
+            const carousel =
+                home.querySelector(
+                    ".isekai-carousel"
+                );
+
+            if (carousel &&
+                carousel.dataset.isekaiCarouselReady !== "true") {
+
+                carousel.dataset.isekaiCarouselReady = "true";
+
+                const slides =
+                    carousel.querySelectorAll(
+                        ".isekai-slide"
+                    );
+
+                const dots =
+                    carousel.querySelectorAll(
+                        ".isekai-carousel-dot"
+                    );
+
+                const previousButton =
+                    carousel.querySelector(
+                        ".isekai-carousel-prev"
+                    );
+
+                const nextButton =
+                    carousel.querySelector(
+                        ".isekai-carousel-next"
+                    );
+
+                if (slides.length > 1) {
+
+                    let currentSlide = 0;
+                    let autoplay = null;
+
+                    function showSlide(index) {
+
+                        currentSlide =
+                            (index + slides.length) %
+                            slides.length;
+
+                        slides.forEach(
+                            function (slide, slideIndex) {
+
+                                slide.classList.toggle(
+                                    "active",
+                                    slideIndex === currentSlide
+                                );
+                            }
+                        );
+
+                        dots.forEach(
+                            function (dot, dotIndex) {
+
+                                dot.classList.toggle(
+                                    "active",
+                                    dotIndex === currentSlide
+                                );
+
+                                dot.setAttribute(
+                                    "aria-current",
+                                    dotIndex === currentSlide
+                                        ? "true"
+                                        : "false"
+                                );
+                            }
+                        );
+                    }
+
+                    function nextSlide() {
+                        showSlide(currentSlide + 1);
+                    }
+
+                    function previousSlide() {
+                        showSlide(currentSlide - 1);
+                    }
+
+                    function stopAutoplay() {
+
+                        if (autoplay !== null) {
+                            clearInterval(autoplay);
+                            autoplay = null;
+                        }
+                    }
+
+                    function startAutoplay() {
+
+                        stopAutoplay();
+
+                        autoplay = setInterval(
+                            function () {
+                                nextSlide();
+                            },
+                            6000
+                        );
+                    }
+
+                    if (previousButton) {
+
+                        previousButton.addEventListener(
+                            "click",
+                            function (event) {
+
+                                event.preventDefault();
+                                event.stopPropagation();
+
+                                previousSlide();
+                                startAutoplay();
+                            }
+                        );
+                    }
+
+                    if (nextButton) {
+
+                        nextButton.addEventListener(
+                            "click",
+                            function (event) {
+
+                                event.preventDefault();
+                                event.stopPropagation();
+
+                                nextSlide();
+                                startAutoplay();
+                            }
+                        );
+                    }
+
+                    dots.forEach(
+                        function (dot, dotIndex) {
+
+                            dot.addEventListener(
+                                "click",
+                                function (event) {
+
+                                    event.preventDefault();
+                                    event.stopPropagation();
+
+                                    showSlide(dotIndex);
+                                    startAutoplay();
+                                }
+                            );
+                        }
+                    );
+
+                    carousel.addEventListener(
+                        "mouseenter",
+                        function () {
+                            stopAutoplay();
+                        }
+                    );
+
+                    carousel.addEventListener(
+                        "mouseleave",
+                        function () {
+                            startAutoplay();
+                        }
+                    );
+
+                    carousel.addEventListener(
+                        "focusin",
+                        function () {
+                            stopAutoplay();
+                        }
+                    );
+
+                    carousel.addEventListener(
+                        "focusout",
+                        function () {
+                            startAutoplay();
+                        }
+                    );
+
+                    showSlide(0);
+                    startAutoplay();
+                }
+            }
+        }
     }
 
 
     /* =============================================================
-       ARRANQUE
+       INICIO SEGURO
        ============================================================= */
 
     if (document.readyState === "loading") {
+
         document.addEventListener(
             "DOMContentLoaded",
             initIsekai
         );
+
     } else {
+
         initIsekai();
     }
 
