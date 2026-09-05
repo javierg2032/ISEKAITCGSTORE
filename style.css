@@ -1,14 +1,14 @@
-/* =========================================================
+/* ================================================================
    ISEKAI TCG STORE
-   CUSTOM WEBSITE STYLES
-   ========================================================= */
+   SHOP / PRODUCTS
+   ================================================================ */
 
 
-/* =========================================================
-   VARIABLES BASE - DARK MODE
-   ========================================================= */
+/* ================================================================
+   VARIABLES
+   ================================================================ */
 
-#isekai-home {
+#wrap.isekai-shop-page {
 
     --isekai-primary: #3B75D4;
     --isekai-secondary: #254587;
@@ -24,77 +24,49 @@
 
     --isekai-border: #334155;
 
-    --isekai-header-bg: #0F172A;
+    --isekai-radius-sm: 8px;
+    --isekai-radius-md: 12px;
+    --isekai-radius-lg: 16px;
 
-    --isekai-footer-bg: #101C35;
-    --isekai-footer-surface: #162B55;
-    --isekai-footer-text: #FFFFFF;
-    --isekai-footer-muted: #B8C5DD;
+    --isekai-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.18);
 
-    width: 100%;
-    min-height: 100vh;
-
-    background: var(--isekai-bg) !important;
-    color: var(--isekai-text) !important;
-
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
-    overflow-x: hidden;
+    --isekai-shadow-hover:
+        0 14px 35px rgba(0, 0, 0, 0.30);
 }
 
 
-/* =========================================================
-   LIGHT MODE
-   ========================================================= */
+/* ================================================================
+   RESET LOCAL
+   ================================================================ */
 
-#isekai-home[data-theme="light"] {
-
-    --isekai-primary: #3B75D4;
-    --isekai-secondary: #254587;
-    --isekai-primary-hover: #254587;
-    --isekai-accent: #3B75D4;
-
-    --isekai-bg: #F8FAFC;
-    --isekai-surface: #FFFFFF;
-    --isekai-card: #FFFFFF;
-
-    --isekai-text: #1E293B;
-    --isekai-muted: #64748B;
-
-    --isekai-border: #E2E8F0;
-
-    --isekai-header-bg: #FFFFFF;
-
-    --isekai-footer-bg: #101C35;
-    --isekai-footer-surface: #162B55;
-    --isekai-footer-text: #FFFFFF;
-    --isekai-footer-muted: #B8C5DD;
-}
-
-
-/* =========================================================
-   RESET
-   ========================================================= */
-
-#isekai-home *,
-#isekai-home *::before,
-#isekai-home *::after {
+#wrap.isekai-shop-page,
+#wrap.isekai-shop-page *,
+#wrap.isekai-shop-page *::before,
+#wrap.isekai-shop-page *::after {
     box-sizing: border-box;
 }
 
 
-/* =========================================================
+/* ================================================================
+   PÁGINA
+   ================================================================ */
+
+#wrap.isekai-shop-page {
+    background: var(--isekai-bg);
+    color: var(--isekai-text);
+
+    min-height: 100vh;
+
+    padding-bottom: 40px;
+}
+
+
+/* ================================================================
    CONTENEDOR
-   ========================================================= */
+   ================================================================ */
 
-#isekai-home .isekai-container {
-
-    width: 100%;
+#wrap.isekai-shop-page .isekai-shop-container {
     max-width: 1400px;
 
     margin-left: auto;
@@ -105,3135 +77,1003 @@
 }
 
 
-/* =========================================================
-   HEADER
-   ========================================================= */
+/* ================================================================
+   FILA PRINCIPAL
+   ================================================================ */
 
-#isekai-home .isekai-header {
+#wrap.isekai-shop-page .isekai-shop-main-row {
+    align-items: flex-start;
 
-    position: sticky;
-    top: 0;
-
-    z-index: 1000;
-
-    width: 100%;
-
-    background: var(--isekai-header-bg) !important;
-
-    border-bottom:
-        1px solid
-        rgba(59, 117, 212, .30);
-
-    backdrop-filter: blur(15px);
+    margin-left: 0;
+    margin-right: 0;
 }
 
 
-#isekai-home[data-theme="light"] .isekai-header {
-
-    box-shadow:
-        0 4px 20px
-        rgba(15, 23, 42, .06);
-}
-
-
-#isekai-home .isekai-header-inner {
-
-    min-height: 82px;
-
-    display: flex;
-    align-items: center;
-
-    gap: 20px;
-}
-
-
-/* =========================================================
-   LOGO
-   ========================================================= */
-
-#isekai-home .isekai-logo {
-
-    display: flex !important;
-
-    align-items: center;
-
-    flex-shrink: 0;
-
-    height: 68px;
-
-    text-decoration: none !important;
-}
-
-
-#isekai-home .isekai-logo-image {
-
-    display: block !important;
-
-    width: auto !important;
-    height: 58px !important;
-
-    max-width: 220px !important;
-
-    object-fit: contain;
-}
-
-
-/* =========================================================
-   BUSCADOR
-   ========================================================= */
-
-#isekai-home .isekai-search {
-
-    position: relative;
-
-    display: flex;
-
-    flex: 1;
-
-    width: 100%;
-    max-width: 600px;
-
-    margin-left: auto;
-    margin-right: auto;
-}
-
-
-#isekai-home .isekai-search input {
-
-    width: 100% !important;
-    height: 46px !important;
-
-    padding:
-        0 55px 0 20px !important;
-
-    border:
-        1px solid
-        rgba(59, 117, 212, .35) !important;
-
-    border-radius: 25px !important;
-
-    background:
-        var(--isekai-surface) !important;
-
-    color:
-        var(--isekai-text) !important;
-
-    outline: none !important;
-
-    box-shadow: none !important;
-}
-
-
-#isekai-home .isekai-search input:focus {
-
-    border-color:
-        var(--isekai-primary) !important;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(128, 200, 255, .15) !important;
-}
-
-
-#isekai-home .isekai-search input::placeholder {
-
-    color:
-        var(--isekai-muted) !important;
-
-    opacity: 1 !important;
-}
-
-
-/* =========================================================
-   BOTÓN BUSCADOR
-   ========================================================= */
-
-#isekai-home .isekai-search button {
-
-    position: absolute !important;
-
-    top: 5px;
-    right: 5px;
-
-    width: 36px !important;
-    height: 36px !important;
-
-    display: flex !important;
-
-    align-items: center !important;
-    justify-content: center !important;
-
-    padding: 0 !important;
-
-    border: 0 !important;
-
-    border-radius: 50% !important;
-
-    background:
-        var(--isekai-primary) !important;
-
-    color: #FFFFFF !important;
-
-    cursor: pointer;
-
-    box-shadow: none !important;
-}
-
-
-#isekai-home .isekai-search button:hover {
-
-    background:
-        var(--isekai-primary-hover) !important;
-}
-
-
-/* =========================================================
-   LUPA
-   ========================================================= */
-
-#isekai-home .isekai-search-icon {
-
-    position: relative;
-
-    display: block !important;
-
-    width: 14px !important;
-    height: 14px !important;
-
-    border:
-        2px solid
-        #FFFFFF !important;
-
-    border-radius: 50%;
-}
-
-
-#isekai-home .isekai-search-icon::after {
-
-    content: "";
-
-    position: absolute;
-
-    right: -6px;
-    bottom: -3px;
-
-    width: 7px;
-    height: 2px;
-
-    background:
-        #FFFFFF !important;
-
-    border-radius: 2px;
-
-    transform: rotate(45deg);
-}
-
-
-/* =========================================================
-   CAMBIO DE TEMA
-   ========================================================= */
-
-#isekai-home .isekai-theme-toggle {
-
-    width: 46px;
-    height: 46px;
-
-    flex-shrink: 0;
-
-    display: flex !important;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 0 !important;
-
-    border:
-        1px solid
-        rgba(59, 117, 212, .30) !important;
-
-    border-radius: 50% !important;
-
-    background:
-        var(--isekai-surface) !important;
-
-    color:
-        var(--isekai-accent) !important;
-
-    cursor: pointer;
-
-    transition:
-        background .2s ease,
-        border-color .2s ease,
-        color .2s ease,
-        transform .2s ease;
-}
-
-
-#isekai-home .isekai-theme-toggle:hover {
-
-    background:
-        var(--isekai-primary) !important;
-
-    border-color:
-        var(--isekai-primary) !important;
-
-    color:
-        #FFFFFF !important;
-
-    transform:
-        translateY(-1px);
-}
-
-
-#isekai-home .isekai-theme-toggle i {
-
-    font-size: 17px;
-}
-
-
-#isekai-home .isekai-theme-icon-light {
-
-    display: none;
-}
-
-
-#isekai-home[data-theme="light"]
-.isekai-theme-icon-dark {
-
-    display: none;
-}
-
-
-#isekai-home[data-theme="light"]
-.isekai-theme-icon-light {
-
-    display: block;
-}
-
-
-/* =========================================================
-   USUARIO
-   ========================================================= */
-
-#isekai-home .isekai-user {
-
-    position: relative;
-
-    flex-shrink: 0;
-}
-
-
-#isekai-home .isekai-user-dropdown {
-
-    position: relative;
-}
-
-
-#isekai-home .isekai-user-button {
-
-    height: 46px !important;
-
-    display: flex !important;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 8px;
-
-    padding:
-        0 16px !important;
-
-    border:
-        1px solid
-        rgba(59, 117, 212, .30) !important;
-
-    border-radius: 25px !important;
-
-    background:
-        var(--isekai-surface) !important;
-
-    color:
-        var(--isekai-text) !important;
-
-    cursor: pointer;
-
-    white-space: nowrap;
-
-    text-decoration: none !important;
-}
-
-
-#isekai-home .isekai-user-button:hover {
-
-    background:
-        var(--isekai-primary) !important;
-
-    border-color:
-        var(--isekai-primary) !important;
-
-    color:
-        #FFFFFF !important;
-}
-
-
-#isekai-home .isekai-user-button span {
-
-    color:
-        var(--isekai-text) !important;
-
-    font-size: 14px;
-
-    font-weight: 600;
-}
-
-
-#isekai-home .isekai-user-button:hover span {
-
-    color:
-        #FFFFFF !important;
-}
-
-
-#isekai-home .isekai-user-button > i {
-
-    color:
-        var(--isekai-accent) !important;
-}
-
-
-#isekai-home .isekai-user-button:hover > i {
-
-    color:
-        #FFFFFF !important;
-}
-
-
-#isekai-home .isekai-user-arrow {
-
-    font-size: 11px;
-
-    transition:
-        transform .2s ease;
-}
-
-
-#isekai-home
-.isekai-user-dropdown.isekai-open
-.isekai-user-button {
-
-    background:
-        var(--isekai-primary) !important;
-
-    border-color:
-        var(--isekai-primary) !important;
-}
-
-
-#isekai-home
-.isekai-user-dropdown.isekai-open
-.isekai-user-arrow {
-
-    transform:
-        rotate(180deg);
-}
-
-
-/* =========================================================
-   POPUP USUARIO
-   ========================================================= */
-
-#isekai-home .isekai-user-menu {
-
-    position: absolute !important;
-
-    top:
-        calc(100% + 12px);
-
-    right: 0;
-
-    width: 280px;
-
-    background:
-        var(--isekai-surface) !important;
-
-    border:
-        1px solid
-        rgba(59, 117, 212, .40) !important;
-
-    border-radius: 16px !important;
-
-    box-shadow:
-        0 20px 50px
-        rgba(0, 0, 0, .50) !important;
-
-    overflow: hidden;
-
-    z-index: 2000;
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transform:
-        translateY(-8px);
-
-    transition:
-        opacity .2s ease,
-        visibility .2s ease,
-        transform .2s ease;
-}
-
-
-#isekai-home
-.isekai-user-dropdown.isekai-open
-.isekai-user-menu {
-
-    opacity: 1;
-
-    visibility: visible;
-
-    transform:
-        translateY(0);
-}
-
-
-/* =========================================================
-   CABECERA POPUP
-   ========================================================= */
-
-#isekai-home .isekai-user-menu-header {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    padding: 18px;
-
-    background:
-        var(--isekai-secondary) !important;
-
-    border-bottom:
-        1px solid
-        rgba(255, 255, 255, .08);
-}
-
-
-#isekai-home .isekai-user-menu-header > i {
-
-    flex-shrink: 0;
-
-    font-size: 28px;
-
-    color:
-        var(--isekai-accent) !important;
-}
-
-
-#isekai-home .isekai-user-menu-header div {
-
-    display: flex;
-
-    flex-direction: column;
-
+/* ================================================================
+   CONTENIDO
+   ================================================================ */
+
+#wrap.isekai-shop-page .isekai-products-content {
     min-width: 0;
+
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 
-#isekai-home .isekai-user-menu-header strong {
+/* ================================================================
+   SIDEBAR
+   ================================================================ */
 
-    display: block;
+#wrap.isekai-shop-page .isekai-shop-sidebar {
+    width: 270px;
 
-    color:
-        #FFFFFF !important;
+    flex: 0 0 270px;
 
-    font-size: 14px;
+    padding-right: 16px;
 }
 
 
-#isekai-home .isekai-user-menu-header small {
+#wrap.isekai-shop-page .isekai-filter-sidebar {
+    max-height: calc(100vh - 120px);
 
-    display: block;
+    scrollbar-width: thin;
 
-    margin-top: 3px;
-
-    color:
-        #B8C5DD !important;
-
-    font-size: 12px;
+    scrollbar-color:
+        var(--isekai-border)
+        transparent;
 }
 
 
-/* =========================================================
-   ENLACES POPUP
-   ========================================================= */
+/* ================================================================
+   SECCIONES DE FILTROS
+   ================================================================ */
 
-#isekai-home .isekai-user-menu-links {
-
-    display: flex;
-
-    flex-direction: column;
-
-    padding: 8px;
-
-    background:
-        var(--isekai-surface) !important;
+#wrap.isekai-shop-page .isekai-filter-section {
+    color: var(--isekai-text);
 }
 
 
-#isekai-home .isekai-user-menu-links a {
+#wrap.isekai-shop-page .isekai-filter-section,
+#wrap.isekai-shop-page .products_categories {
+    background: transparent;
+}
 
-    display: flex !important;
 
-    align-items: center;
+/* ================================================================
+   TEXTO DEL SIDEBAR
+   ================================================================ */
 
-    gap: 12px;
+#wrap.isekai-shop-page .isekai-shop-sidebar label,
+#wrap.isekai-shop-page .isekai-shop-sidebar span,
+#wrap.isekai-shop-page .isekai-shop-sidebar a {
+    color: var(--isekai-text);
+}
 
+
+#wrap.isekai-shop-page .isekai-shop-sidebar .text-muted {
+    color: var(--isekai-muted) !important;
+}
+
+
+/* ================================================================
+   LINKS SIDEBAR
+   ================================================================ */
+
+#wrap.isekai-shop-page .isekai-shop-sidebar a {
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+
+#wrap.isekai-shop-page .isekai-shop-sidebar a:hover {
+    color: var(--isekai-accent);
+}
+
+
+/* ================================================================
+   FILTROS ACTIVOS
+   ================================================================ */
+
+#wrap.isekai-shop-page .isekai-active-filters {
+    border-color: var(--isekai-border) !important;
+}
+
+
+#wrap.isekai-shop-page .isekai-clear-filters {
     width: 100%;
 
-    padding: 12px;
+    background: var(--isekai-surface);
 
-    border-radius: 10px;
+    border: 1px solid var(--isekai-border);
+    border-radius: var(--isekai-radius-sm);
 
-    background:
-        transparent !important;
+    color: var(--isekai-text);
 
-    color:
-        var(--isekai-text) !important;
-
-    text-decoration: none !important;
-
-    font-size: 14px;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
 }
 
 
-#isekai-home .isekai-user-menu-links a:hover {
+#wrap.isekai-shop-page .isekai-clear-filters:hover {
+    background: var(--isekai-card);
 
-    background:
-        rgba(59, 117, 212, .20) !important;
+    border-color: var(--isekai-primary);
 
-    color:
-        var(--isekai-text) !important;
+    color: var(--isekai-accent);
 }
 
 
-#isekai-home .isekai-user-menu-links a i {
+/* ================================================================
+   CABECERA SHOP
+   ================================================================ */
 
-    width: 18px;
+#wrap.isekai-shop-page .isekai-products-header {
+    border-bottom: 1px solid var(--isekai-border);
 
-    flex-shrink: 0;
+    margin-bottom: 24px;
 
-    text-align: center;
-
-    color:
-        var(--isekai-accent) !important;
+    color: var(--isekai-text);
 }
 
 
-#isekai-home .isekai-user-menu-links a.isekai-logout {
+/* ================================================================
+   BREADCRUMB
+   ================================================================ */
 
-    margin-top: 5px;
-
-    padding-top: 14px;
-
-    border-top:
-        1px solid
-        rgba(255, 255, 255, .08);
-
-    color:
-        #FFB4B4 !important;
+#wrap.isekai-shop-page .isekai-breadcrumb {
+    color: var(--isekai-muted);
 }
 
 
-/* =========================================================
-   CATEGORÍAS
-   ========================================================= */
+#wrap.isekai-shop-page .isekai-breadcrumb a {
+    color: var(--isekai-muted);
 
-#isekai-home .isekai-category-nav {
+    text-decoration: none;
 
-    width: 100%;
-
-    background:
-        var(--isekai-secondary) !important;
-
-    border-bottom:
-        2px solid
-        var(--isekai-primary) !important;
+    transition: color 0.2s ease;
 }
 
 
-#isekai-home .isekai-category-list {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 10px;
-
-    padding: 12px 0;
+#wrap.isekai-shop-page .isekai-breadcrumb a:hover {
+    color: var(--isekai-accent);
 }
 
 
-#isekai-home .isekai-category-dropdown {
+/* ================================================================
+   TÍTULO
+   ================================================================ */
 
-    position: relative;
+#wrap.isekai-shop-page .isekai-shop-title {
+    color: var(--isekai-text);
 
-    flex-shrink: 0;
+    font-weight: 700;
+
+    letter-spacing: -0.02em;
 }
 
 
-#isekai-home .isekai-category-button {
+#wrap.isekai-shop-page .isekai-title-muted {
+    color: var(--isekai-muted);
+}
 
+
+#wrap.isekai-shop-page .isekai-search-count {
+    color: var(--isekai-muted);
+}
+
+
+/* ================================================================
+   BADGES DE BÚSQUEDA
+   ================================================================ */
+
+#wrap.isekai-shop-page .isekai-search-badge,
+#wrap.isekai-shop-page .isekai-category-badge {
     display: inline-flex;
 
     align-items: center;
 
-    justify-content: center;
+    gap: 6px;
 
-    gap: 8px;
-
-    padding:
-        9px 18px;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, .10) !important;
+    padding: 7px 10px;
 
     border-radius: 999px;
 
-    background:
-        rgba(255, 255, 255, .06) !important;
-
-    color:
-        #FFFFFF !important;
-
-    text-decoration: none !important;
-
-    font-weight: 600;
-
-    white-space: nowrap;
-
-    cursor: pointer;
-
-    transition:
-        .2s;
-}
-
-
-#isekai-home .isekai-category-button:hover {
-
-    background:
-        var(--isekai-primary) !important;
-
-    border-color:
-        var(--isekai-primary) !important;
-
-    color:
-        #FFFFFF !important;
-}
-
-
-#isekai-home
-.isekai-category-dropdown.isekai-open
-.isekai-category-button {
-
-    background:
-        var(--isekai-primary) !important;
-
-    border-color:
-        var(--isekai-primary) !important;
-}
-
-
-#isekai-home
-.isekai-category-dropdown.isekai-open
-.isekai-category-arrow {
-
-    transform:
-        rotate(180deg);
-}
-
-
-#isekai-home .isekai-category-arrow {
-
-    font-size: 10px;
-
-    color:
-        #FFFFFF !important;
-
-    transition:
-        transform .2s ease;
-}
-
-
-#isekai-home .isekai-category-button:hover
-.isekai-category-arrow,
-#isekai-home
-.isekai-category-dropdown.isekai-open
-.isekai-category-arrow {
-
-    color:
-        #FFFFFF !important;
-}
-
-
-/* =========================================================
-   SUBCATEGORÍAS
-   ========================================================= */
-
-#isekai-home .isekai-subcategory-menu {
-
-    position: absolute;
-
-    top:
-        calc(100% + 8px);
-
-    left: 50%;
-
-    transform:
-        translateX(-50%)
-        translateY(-8px);
-
-    width: 240px;
-
-    padding: 8px;
-
-    background:
-        var(--isekai-surface) !important;
-
-    border:
-        1px solid
-        rgba(59, 117, 212, .40);
-
-    border-radius: 14px;
-
-    box-shadow:
-        0 18px 45px
-        rgba(0, 0, 0, .45);
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    z-index: 1500;
-
-    transition:
-        opacity .2s ease,
-        visibility .2s ease,
-        transform .2s ease;
-}
-
-
-#isekai-home
-.isekai-category-dropdown.isekai-open
-.isekai-subcategory-menu {
-
-    opacity: 1;
-
-    visibility: visible;
-
-    transform:
-        translateX(-50%)
-        translateY(0);
-}
-
-
-#isekai-home .isekai-subcategory-link {
-
-    display: block;
-
-    padding:
-        11px 12px;
-
-    border-radius: 9px;
-
-    color:
-        var(--isekai-text) !important;
-
-    text-decoration: none !important;
-
-    font-size: 14px;
+    font-size: 0.85rem;
 
     font-weight: 500;
 }
 
 
-#isekai-home .isekai-subcategory-link:hover {
+#wrap.isekai-shop-page .isekai-search-badge {
+    background: rgba(59, 117, 212, 0.18);
 
-    background:
-        rgba(59, 117, 212, .20) !important;
+    border: 1px solid rgba(59, 117, 212, 0.35);
 
-    color:
-        var(--isekai-text) !important;
+    color: var(--isekai-accent);
 }
 
 
-/* =========================================================
-   HERO
-   ========================================================= */
+#wrap.isekai-shop-page .isekai-category-badge {
+    background: rgba(128, 200, 255, 0.12);
 
-#isekai-home .isekai-hero {
+    border: 1px solid rgba(128, 200, 255, 0.25);
 
-    padding:
-        30px 0;
+    color: var(--isekai-accent);
 }
 
 
-#isekai-home .isekai-carousel {
-
-    position: relative;
-
-    width: 100%;
-
-    height: 480px;
-
-    overflow: hidden;
-
-    border:
-        1px solid
-        rgba(59, 117, 212, .40);
-
-    border-radius: 22px;
-
-    background:
-        var(--isekai-secondary);
-
-    box-shadow:
-        0 20px 50px
-        rgba(0, 0, 0, .25);
-}
-
-
-#isekai-home .isekai-slide {
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    display: flex;
+#wrap.isekai-shop-page .isekai-badge-close {
+    display: inline-flex;
 
     align-items: center;
+    justify-content: center;
 
-    overflow: hidden;
+    width: 18px;
+    height: 18px;
 
-    opacity: 0;
+    color: inherit;
 
-    visibility: hidden;
+    text-decoration: none;
 
-    background-size: cover;
+    opacity: 0.7;
 
-    background-position: center;
-
-    transition:
-        opacity .5s ease,
-        visibility .5s ease;
+    transition: opacity 0.2s ease;
 }
 
 
-#isekai-home .isekai-slide.active {
-
+#wrap.isekai-shop-page .isekai-badge-close:hover {
     opacity: 1;
-
-    visibility: visible;
 }
 
 
-/* =========================================================
-   FONDOS HERO
-   ========================================================= */
+/* ================================================================
+   DESCRIPCIÓN DE CATEGORÍA
+   ================================================================ */
 
-#isekai-home .isekai-slide-1 {
+#wrap.isekai-shop-page .isekai-category-description {
+    color: var(--isekai-muted);
 
-    background:
-        linear-gradient(
-            135deg,
-            #254587,
-            #3B75D4
-        );
+    line-height: 1.7;
+
+    margin-top: 8px;
 }
 
 
-#isekai-home .isekai-slide-2 {
-
-    background:
-        linear-gradient(
-            135deg,
-            #162B55,
-            #3B75D4
-        );
+#wrap.isekai-shop-page .isekai-category-description a {
+    color: var(--isekai-accent);
 }
 
 
-#isekai-home .isekai-slide-3 {
+/* ================================================================
+   CONTROLES
+   ================================================================ */
 
-    background:
-        linear-gradient(
-            135deg,
-            #254587,
-            #0F172A
-        );
-}
-
-
-#isekai-home .isekai-slide-overlay {
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(15, 23, 42, .95),
-            rgba(15, 23, 42, .70),
-            rgba(15, 23, 42, .15)
-        );
-}
-
-
-#isekai-home .isekai-slide-content {
-
-    position: relative;
-
-    z-index: 2;
-
+#wrap.isekai-shop-page .isekai-products-controls {
     width: 100%;
 
-    max-width: 700px;
-
-    padding:
-        60px 70px;
+    margin-top: 20px;
 }
 
 
-#isekai-home .isekai-hero-label {
-
-    display: block;
-
-    margin-bottom: 12px;
-
-    color:
-        var(--isekai-accent) !important;
-
-    font-size: 13px;
-
-    font-weight: 800;
-
-    letter-spacing: .18em;
-}
-
-
-#isekai-home .isekai-slide-content h1 {
-
-    max-width: 700px;
-
-    margin:
-        0 0 18px;
-
-    color:
-        #FFFFFF !important;
-
-    font-size:
-        clamp(38px, 5vw, 64px);
-
-    line-height: 1.05;
-
-    font-weight: 800;
-}
-
-
-#isekai-home .isekai-slide-content p {
-
-    max-width: 600px;
-
-    margin:
-        0 0 28px;
-
-    color:
-        #D1D9E8 !important;
-
-    font-size: 18px;
-
-    line-height: 1.6;
-}
-
-
-#isekai-home .isekai-hero-button {
-
-    display: inline-flex;
-
+#wrap.isekai-shop-page .isekai-products-controls-inner {
     align-items: center;
 
-    gap: 10px;
-
-    padding:
-        13px 22px;
-
-    border:
-        1px solid
-        var(--isekai-primary) !important;
-
-    border-radius: 999px;
-
-    background:
-        var(--isekai-primary) !important;
-
-    color:
-        #FFFFFF !important;
-
-    text-decoration: none !important;
-
-    font-weight: 700;
-
-    transition:
-        .2s;
+    gap: 12px;
 }
 
 
-#isekai-home .isekai-hero-button:hover {
-
-    background:
-        var(--isekai-primary-hover) !important;
-
-    color:
-        #FFFFFF !important;
-
-    transform:
-        translateY(-2px);
-}
-
-
-/* =========================================================
-   FLECHAS HERO
-   ========================================================= */
-
-#isekai-home .isekai-carousel-arrow {
-
-    position: absolute;
-
-    top: 50%;
-
-    z-index: 10;
-
-    width: 46px;
-    height: 46px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 0 !important;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, .20) !important;
-
-    border-radius: 50% !important;
-
-    background:
-        rgba(15, 23, 42, .60) !important;
-
-    color:
-        #FFFFFF !important;
-
-    cursor: pointer;
-
-    transform:
-        translateY(-50%);
-}
-
-
-#isekai-home .isekai-carousel-arrow:hover {
-
-    background:
-        var(--isekai-primary) !important;
-
-    border-color:
-        var(--isekai-primary) !important;
-}
-
-
-#isekai-home .isekai-carousel-prev {
-
-    left: 20px;
-}
-
-
-#isekai-home .isekai-carousel-next {
-
-    right: 20px;
-}
-
-
-/* =========================================================
-   INDICADORES
-   ========================================================= */
-
-#isekai-home .isekai-carousel-dots {
-
-    position: absolute;
-
-    left: 50%;
-
-    bottom: 20px;
-
-    z-index: 10;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    transform:
-        translateX(-50%);
-}
-
-
-#isekai-home .isekai-carousel-dot {
-
-    width: 9px;
-    height: 9px;
-
-    padding: 0;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, .30) !important;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255, 255, 255, .35) !important;
-
-    cursor: pointer;
-}
-
-
-#isekai-home .isekai-carousel-dot.active {
-
-    width: 26px;
-
-    border-radius: 999px;
-
-    background:
-        var(--isekai-accent) !important;
-
-    border-color:
-        var(--isekai-accent) !important;
-}
-
-
-/* =========================================================
-   SECCIONES
-   ========================================================= */
-
-#isekai-home .isekai-section {
-
-    padding:
-        30px 0 70px;
-}
-
-
-#isekai-home .isekai-section-title {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: flex-end;
-
-    margin-bottom: 25px;
-
-    padding-bottom: 12px;
-
-    border-bottom:
-        2px solid
-        var(--isekai-secondary);
-}
-
-
-#isekai-home .isekai-section-title > div {
-
+/* ================================================================
+   BUSCADOR
+   ================================================================ */
+
+#wrap.isekai-shop-page .isekai-products-search {
     min-width: 0;
 }
 
 
-#isekai-home .isekai-section-title span {
+#wrap.isekai-shop-page .isekai-products-search input {
+    min-height: 46px;
 
-    color:
-        var(--isekai-accent) !important;
+    background: var(--isekai-surface) !important;
 
-    font-size: 12px;
+    border: 1px solid var(--isekai-border) !important;
 
-    font-weight: 800;
+    border-radius: 999px !important;
 
-    letter-spacing: .12em;
-}
+    color: var(--isekai-text) !important;
 
-
-#isekai-home .isekai-section-title h2 {
-
-    margin:
-        4px 0 0;
-
-    color:
-        var(--isekai-text) !important;
-
-    font-size: 32px;
-}
-
-
-#isekai-home .isekai-section-title a {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    color:
-        var(--isekai-accent) !important;
-
-    text-decoration: none !important;
-
-    font-weight: 600;
-}
-
-
-#isekai-home .isekai-section-title a:hover {
-
-    color:
-        var(--isekai-primary-hover) !important;
-}
-
-
-/* =========================================================
-   PRODUCTOS
-   ========================================================= */
-
-#isekai-home .isekai-products-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-
-    gap: 20px;
-}
-
-
-#isekai-home .isekai-product-card {
-
-    display: block;
-
-    min-width: 0;
-
-    overflow: hidden;
-
-    background:
-        var(--isekai-card) !important;
-
-    border:
-        1px solid
-        var(--isekai-border);
-
-    border-radius: 16px;
-
-    text-decoration: none !important;
-
-    transition:
-        transform .2s ease,
-        border-color .2s ease,
-        box-shadow .2s ease;
-}
-
-
-#isekai-home .isekai-product-card:hover {
-
-    transform:
-        translateY(-5px);
-
-    border-color:
-        rgba(59, 117, 212, .50);
-
-    box-shadow:
-        0 15px 35px
-        rgba(0, 0, 0, .25);
-}
-
-
-#isekai-home .isekai-product-image {
-
-    width: 100%;
-
-    aspect-ratio: 1 / 1;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-
-    background:
-        #FFFFFF !important;
-}
-
-
-#isekai-home .isekai-product-image img {
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: contain;
-}
-
-
-#isekai-home .isekai-product-image span {
-
-    color:
-        #64748B !important;
-
-    font-size: 14px;
-}
-
-
-#isekai-home .isekai-product-info {
-
-    padding: 16px;
-}
-
-
-#isekai-home .isekai-product-name {
-
-    margin-bottom: 8px;
-
-    color:
-        var(--isekai-text) !important;
-
-    font-size: 16px;
-
-    font-weight: 700;
-
-    line-height: 1.35;
-}
-
-
-#isekai-home .isekai-product-price {
-
-    color:
-        var(--isekai-accent) !important;
-
-    font-size: 18px;
-
-    font-weight: 800;
-}
-
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
-#isekai-home .isekai-footer {
-
-    position: relative;
-
-    background:
-        var(--isekai-footer-bg) !important;
-
-    color:
-        var(--isekai-footer-text) !important;
-
-    border-top:
-        1px solid
-        rgba(59, 117, 212, .35);
-
-    overflow: hidden;
-}
-
-
-/* =========================================================
-   FOOTER - NEWSLETTER
-   ========================================================= */
-
-#isekai-home .isekai-footer-newsletter {
-
-    background:
-        linear-gradient(
-            135deg,
-            #162B55,
-            #254587
-        );
-
-    border-bottom:
-        1px solid
-        rgba(255, 255, 255, .08);
-}
-
-
-#isekai-home .isekai-newsletter-content {
-
-    min-height: 190px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 50px;
-
-    padding:
-        35px 0;
-}
-
-
-#isekai-home .isekai-newsletter-text {
-
-    flex: 1;
-
-    min-width: 0;
-}
-
-
-#isekai-home .isekai-footer-eyebrow {
-
-    display: block;
-
-    margin-bottom: 8px;
-
-    color:
-        var(--isekai-accent) !important;
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-    letter-spacing: .16em;
-}
-
-
-#isekai-home .isekai-newsletter-text h2 {
-
-    margin:
-        0 0 8px;
-
-    color:
-        #FFFFFF !important;
-
-    font-size:
-        clamp(24px, 3vw, 32px);
-
-    line-height: 1.2;
-
-    font-weight: 800;
-}
-
-
-#isekai-home .isekai-newsletter-text p {
-
-    max-width: 620px;
-
-    margin: 0;
-
-    color:
-        var(--isekai-footer-muted) !important;
-
-    font-size: 14px;
-
-    line-height: 1.6;
-}
-
-
-#isekai-home .isekai-newsletter-form {
-
-    flex-shrink: 0;
-
-    width: 100%;
-
-    max-width: 480px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-}
-
-
-#isekai-home .isekai-newsletter-form input {
-
-    flex: 1;
-
-    min-width: 0;
-
-    height: 50px;
-
-    padding:
-        0 18px;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, .15) !important;
-
-    border-radius: 10px !important;
-
-    background:
-        rgba(255, 255, 255, .08) !important;
-
-    color:
-        #FFFFFF !important;
-
-    outline: none !important;
+    padding-left: 18px;
+    padding-right: 18px;
 
     box-shadow: none !important;
 
-    font-size: 14px;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 
-#isekai-home .isekai-newsletter-form input::placeholder {
-
-    color:
-        #B8C5DD !important;
-
-    opacity: 1 !important;
+#wrap.isekai-shop-page .isekai-products-search input::placeholder {
+    color: var(--isekai-muted);
 }
 
 
-#isekai-home .isekai-newsletter-form input:focus {
+#wrap.isekai-shop-page .isekai-products-search input:focus {
+    border-color: var(--isekai-primary) !important;
 
-    border-color:
-        var(--isekai-accent) !important;
-
-    background:
-        rgba(255, 255, 255, .12) !important;
+    box-shadow:
+        0 0 0 3px rgba(59, 117, 212, 0.15) !important;
 }
 
 
-#isekai-home .isekai-newsletter-form button {
+/* ================================================================
+   BOTÓN BUSCADOR MÓVIL
+   ================================================================ */
 
-    height: 50px;
+#wrap.isekai-shop-page .isekai-mobile-search {
+    min-width: 44px;
+    min-height: 44px;
 
-    flex-shrink: 0;
+    background: var(--isekai-surface);
+
+    border: 1px solid var(--isekai-border);
+
+    border-radius: 50%;
+
+    color: var(--isekai-text);
+}
+
+
+/* ================================================================
+   CONTROLES ORDENAR / FILTROS
+   ================================================================ */
+
+#wrap.isekai-shop-page .isekai-products-dropdown-controls {
+    align-items: center;
+}
+
+
+#wrap.isekai-shop-page .isekai-products-dropdown-controls .btn {
+    min-height: 44px;
+
+    border-radius: 10px;
+
+    border: 1px solid var(--isekai-border);
+
+    background: var(--isekai-surface);
+
+    color: var(--isekai-text);
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+#wrap.isekai-shop-page .isekai-products-dropdown-controls .btn:hover {
+    background: var(--isekai-card);
+
+    border-color: var(--isekai-primary);
+
+    color: var(--isekai-accent);
+}
+
+
+/* ================================================================
+   BOTÓN FILTROS
+   ================================================================ */
+
+#wrap.isekai-shop-page .isekai-filter-button {
+    position: relative;
 
     display: inline-flex;
 
     align-items: center;
-
     justify-content: center;
 
-    gap: 8px;
+    gap: 4px;
 
-    padding:
-        0 20px;
+    min-height: 44px;
 
-    border:
-        1px solid
-        var(--isekai-primary) !important;
+    padding: 0 14px;
 
-    border-radius: 10px !important;
+    border-radius: 10px;
 
-    background:
-        var(--isekai-primary) !important;
+    background: var(--isekai-primary);
 
-    color:
-        #FFFFFF !important;
+    border: 1px solid var(--isekai-primary);
 
-    cursor: pointer;
+    color: #FFFFFF;
 
-    font-size: 14px;
-
-    font-weight: 700;
+    font-weight: 600;
 
     transition:
-        .2s ease;
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
 }
 
 
-#isekai-home .isekai-newsletter-form button:hover {
+#wrap.isekai-shop-page .isekai-filter-button:hover {
+    background: var(--isekai-primary-hover);
 
-    background:
-        var(--isekai-primary-hover) !important;
+    border-color: var(--isekai-primary-hover);
 
-    border-color:
-        var(--isekai-primary-hover) !important;
+    color: #FFFFFF;
 
-    transform:
-        translateY(-1px);
+    transform: translateY(-1px);
 }
 
 
-/* =========================================================
-   FOOTER - CONTENIDO PRINCIPAL
-   ========================================================= */
-
-#isekai-home .isekai-footer-main {
-
-    display: grid;
-
-    grid-template-columns:
-        2fr 1fr 1fr 1.4fr;
-
-    gap: 45px;
-
-    padding:
-        55px 0;
-}
-
-
-#isekai-home .isekai-footer-section {
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: flex-start;
-}
-
-
-#isekai-home .isekai-footer-section h3 {
-
-    position: relative;
-
-    margin:
-        0 0 20px;
-
-    padding-bottom: 10px;
-
-    color:
-        #FFFFFF !important;
-
-    font-size: 15px;
-
-    font-weight: 700;
-}
-
-
-#isekai-home .isekai-footer-section h3::after {
-
-    content: "";
-
+#wrap.isekai-shop-page .isekai-filter-active-indicator {
     position: absolute;
 
-    left: 0;
-    bottom: 0;
+    top: -5px;
+    right: -5px;
 
-    width: 28px;
-    height: 2px;
+    width: 10px;
+    height: 10px;
 
-    background:
-        var(--isekai-primary);
+    border-radius: 50%;
 
-    border-radius: 2px;
+    background: #ef4444;
+
+    border: 2px solid var(--isekai-bg);
 }
 
 
-/* =========================================================
-   FOOTER - MARCA
-   ========================================================= */
+/* ================================================================
+   ALERTA DE BÚSQUEDA
+   ================================================================ */
 
-#isekai-home .isekai-footer-logo {
+#wrap.isekai-shop-page .isekai-search-warning {
+    margin-top: 16px;
 
-    margin-bottom: 10px;
+    background: rgba(59, 117, 212, 0.10);
 
-    color:
-        var(--isekai-accent) !important;
+    border: 1px solid rgba(59, 117, 212, 0.30);
 
-    font-size: 13px;
+    border-radius: var(--isekai-radius-md);
 
-    font-weight: 900;
-
-    letter-spacing: .18em;
+    color: var(--isekai-text);
 }
 
 
-#isekai-home .isekai-footer-brand > strong {
+/* ================================================================
+   GRID
+   ================================================================ */
 
-    display: block;
-
-    margin-bottom: 15px;
-
-    color:
-        #FFFFFF !important;
-
-    font-size: 20px;
-
-    font-weight: 800;
+#wrap.isekai-shop-page .isekai-products-grid-wrapper {
+    width: 100%;
 }
 
 
-#isekai-home .isekai-footer-brand p {
+#wrap.isekai-shop-page .isekai-products-grid {
+    width: 100%;
 
-    max-width: 330px;
-
-    margin:
-        0 0 15px;
-
-    color:
-        var(--isekai-footer-muted) !important;
-
-    font-size: 14px;
-
-    line-height: 1.7;
+    margin-top: 8px;
 }
 
 
-#isekai-home .isekai-footer-location {
+/* ================================================================
+   PRODUCTO
+   ================================================================ */
 
-    display: flex;
+#wrap.isekai-shop-page .isekai-product {
+    min-width: 0;
 
-    align-items: center;
-
-    gap: 8px;
-
-    margin-top: 5px !important;
+    padding: 8px;
 }
 
 
-#isekai-home .isekai-footer-location i {
+#wrap.isekai-shop-page .isekai-product-wrapper {
+    position: relative;
 
-    color:
-        var(--isekai-accent);
-}
+    height: 100%;
 
+    background: var(--isekai-card);
 
-/* =========================================================
-   FOOTER - ENLACES
-   ========================================================= */
+    border: 1px solid var(--isekai-border);
 
-#isekai-home .isekai-footer-section > a {
+    border-radius: var(--isekai-radius-lg);
 
-    display: flex;
+    overflow: hidden;
 
-    align-items: center;
-
-    gap: 8px;
-
-    margin-bottom: 11px;
-
-    color:
-        var(--isekai-footer-muted) !important;
-
-    text-decoration: none !important;
-
-    font-size: 14px;
+    box-shadow: var(--isekai-shadow);
 
     transition:
-        color .2s ease,
-        transform .2s ease;
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 
-#isekai-home .isekai-footer-section > a i {
+#wrap.isekai-shop-page .isekai-product-wrapper:hover {
+    transform: translateY(-5px);
 
-    color:
-        var(--isekai-primary);
+    border-color: var(--isekai-primary);
 
-    font-size: 12px;
+    box-shadow: var(--isekai-shadow-hover);
+}
+
+
+/* ================================================================
+   IMÁGENES DE PRODUCTO
+   ================================================================ */
+
+#wrap.isekai-shop-page .isekai-product-wrapper img {
+    max-width: 100%;
 
     transition:
-        transform .2s ease;
+        transform 0.3s ease;
 }
 
 
-#isekai-home .isekai-footer-section > a:hover {
-
-    color:
-        #FFFFFF !important;
-
-    transform:
-        translateX(3px);
+#wrap.isekai-shop-page .isekai-product-wrapper:hover img {
+    transform: scale(1.025);
 }
 
 
-#isekai-home .isekai-footer-section > a:hover i {
+/* ================================================================
+   LINKS DE PRODUCTO
+   ================================================================ */
 
-    transform:
-        translateX(2px);
+#wrap.isekai-shop-page .isekai-product-wrapper a {
+    color: inherit;
 }
 
 
-/* =========================================================
-   FOOTER - CONTACTO
-   ========================================================= */
-
-#isekai-home .isekai-footer-address {
-
-    display: flex;
-
-    align-items: flex-start;
-
-    gap: 10px;
-
-    margin-top: 4px;
-
-    color:
-        var(--isekai-footer-muted) !important;
-
-    font-size: 14px;
-
-    line-height: 1.6;
+#wrap.isekai-shop-page .isekai-product-wrapper a:hover {
+    color: var(--isekai-accent);
 }
 
 
-#isekai-home .isekai-footer-address i {
+/* ================================================================
+   PRECIOS
+   ================================================================ */
 
-    margin-top: 4px;
-
-    color:
-        var(--isekai-accent);
+#wrap.isekai-shop-page .isekai-product-wrapper .oe_price,
+#wrap.isekai-shop-page .isekai-product-wrapper .product_price {
+    color: var(--isekai-text);
 }
 
 
-/* =========================================================
-   FOOTER - COMUNIDAD
-   ========================================================= */
-
-#isekai-home .isekai-footer-community {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 3fr;
-
-    gap: 45px;
-
-    padding:
-        28px 0;
-
-    border-top:
-        1px solid
-        rgba(255, 255, 255, .08);
-
-    border-bottom:
-        1px solid
-        rgba(255, 255, 255, .08);
+#wrap.isekai-shop-page .isekai-product-wrapper .text-muted {
+    color: var(--isekai-muted) !important;
 }
 
 
-#isekai-home .isekai-footer-community-column h3 {
+/* ================================================================
+   BOTONES DENTRO DE PRODUCTOS
+   ================================================================ */
 
-    margin:
-        0 0 16px;
+#wrap.isekai-shop-page .isekai-product-wrapper .btn-primary {
+    background: var(--isekai-primary);
 
-    color:
-        #FFFFFF !important;
+    border-color: var(--isekai-primary);
 
-    font-size: 15px;
+    color: #FFFFFF;
 
-    font-weight: 700;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 
-/* =========================================================
-   REDES SOCIALES
-   ========================================================= */
+#wrap.isekai-shop-page .isekai-product-wrapper .btn-primary:hover {
+    background: var(--isekai-primary-hover);
 
-#isekai-home .isekai-footer-social {
+    border-color: var(--isekai-primary-hover);
 
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 10px;
+    color: #FFFFFF;
 }
 
 
-#isekai-home .isekai-footer-social a {
+/* ================================================================
+   PAGINACIÓN
+   ================================================================ */
 
+#wrap.isekai-shop-page .isekai-products-pager {
+    margin-top: 36px;
+}
+
+
+#wrap.isekai-shop-page .isekai-products-pager .pagination {
+    gap: 6px;
+}
+
+
+#wrap.isekai-shop-page .isekai-products-pager .page-link {
+    min-width: 40px;
     min-height: 40px;
 
     display: inline-flex;
 
     align-items: center;
+    justify-content: center;
 
-    gap: 9px;
+    background: var(--isekai-surface);
 
-    padding:
-        0 14px;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, .10);
-
-    border-radius: 9px;
-
-    background:
-        rgba(255, 255, 255, .04);
-
-    color:
-        var(--isekai-footer-muted) !important;
-
-    text-decoration: none !important;
-
-    font-size: 13px;
-
-    transition:
-        .2s ease;
-}
-
-
-#isekai-home .isekai-footer-social a i {
-
-    color:
-        var(--isekai-accent);
-
-    font-size: 16px;
-}
-
-
-#isekai-home .isekai-footer-social a:hover {
-
-    background:
-        var(--isekai-primary);
-
-    border-color:
-        var(--isekai-primary);
-
-    color:
-        #FFFFFF !important;
-
-    transform:
-        translateY(-2px);
-}
-
-
-#isekai-home .isekai-footer-social a:hover i {
-
-    color:
-        #FFFFFF;
-}
-
-
-/* =========================================================
-   GRUPOS
-   ========================================================= */
-
-#isekai-home .isekai-footer-group-list {
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 8px;
-}
-
-
-#isekai-home .isekai-footer-group-list a {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    padding:
-        8px 12px;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, .08);
+    border: 1px solid var(--isekai-border);
 
     border-radius: 8px;
 
-    background:
-        rgba(255, 255, 255, .035);
-
-    color:
-        var(--isekai-footer-muted) !important;
-
-    text-decoration: none !important;
-
-    font-size: 12px;
+    color: var(--isekai-text);
 
     transition:
-        .2s ease;
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
 }
 
 
-#isekai-home .isekai-footer-group-list a:hover {
+#wrap.isekai-shop-page .isekai-products-pager .page-link:hover {
+    background: var(--isekai-card);
 
-    background:
-        rgba(59, 117, 212, .20);
+    border-color: var(--isekai-primary);
 
-    border-color:
-        rgba(59, 117, 212, .50);
-
-    color:
-        #FFFFFF !important;
-
-    transform:
-        translateY(-1px);
+    color: var(--isekai-accent);
 }
 
 
-/* =========================================================
-   FOOTER - LEGAL
-   ========================================================= */
+#wrap.isekai-shop-page .isekai-products-pager .active .page-link {
+    background: var(--isekai-primary);
 
-#isekai-home .isekai-footer-legal {
+    border-color: var(--isekai-primary);
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 25px;
-
-    padding:
-        24px 0;
+    color: #FFFFFF;
 }
 
 
-#isekai-home .isekai-footer-legal-title {
+/* ================================================================
+   PÁGINA SIN PRODUCTOS
+   ================================================================ */
 
-    flex-shrink: 0;
+#wrap.isekai-shop-page .isekai-empty-products {
+    color: var(--isekai-text);
+}
 
-    color:
-        #FFFFFF !important;
 
-    font-size: 13px;
+#wrap.isekai-shop-page .isekai-empty-image {
+    opacity: 0.7;
+}
+
+
+#wrap.isekai-shop-page .isekai-empty-title {
+    color: var(--isekai-text);
 
     font-weight: 700;
 }
 
 
-#isekai-home .isekai-footer-legal-links {
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    justify-content: flex-end;
-
-    gap:
-        7px 18px;
+#wrap.isekai-shop-page .isekai-empty-description {
+    color: var(--isekai-muted);
 }
 
 
-#isekai-home .isekai-footer-legal-links a {
+#wrap.isekai-shop-page .isekai-empty-link {
+    color: var(--isekai-accent);
 
-    color:
-        var(--isekai-footer-muted) !important;
+    text-decoration: none;
 
-    text-decoration: none !important;
+    font-weight: 600;
+}
 
-    font-size: 12px;
+
+#wrap.isekai-shop-page .isekai-empty-link:hover {
+    color: var(--isekai-primary-hover);
+
+    text-decoration: underline;
+}
+
+
+/* ================================================================
+   FOOTER DE CATEGORÍA
+   ================================================================ */
+
+#wrap.isekai-shop-page .isekai-category-footer {
+    margin-top: 40px;
+
+    padding-top: 24px;
+
+    border-top: 1px solid var(--isekai-border);
+
+    color: var(--isekai-muted);
+}
+
+
+/* ================================================================
+   ELEMENTOS NATIVOS DE ODOO
+   ================================================================ */
+
+#wrap.isekai-shop-page .form-control,
+#wrap.isekai-shop-page .form-select {
+    background-color: var(--isekai-surface);
+
+    border-color: var(--isekai-border);
+
+    color: var(--isekai-text);
+}
+
+
+#wrap.isekai-shop-page .form-control::placeholder {
+    color: var(--isekai-muted);
+}
+
+
+#wrap.isekai-shop-page .form-control:focus,
+#wrap.isekai-shop-page .form-select:focus {
+    background-color: var(--isekai-surface);
+
+    border-color: var(--isekai-primary);
+
+    color: var(--isekai-text);
+
+    box-shadow:
+        0 0 0 3px rgba(59, 117, 212, 0.15);
+}
+
+
+/* ================================================================
+   DROPDOWNS
+   ================================================================ */
+
+#wrap.isekai-shop-page .dropdown-menu {
+    background: var(--isekai-surface);
+
+    border: 1px solid var(--isekai-border);
+
+    border-radius: var(--isekai-radius-md);
+
+    box-shadow: var(--isekai-shadow-hover);
+
+    padding: 6px;
+}
+
+
+#wrap.isekai-shop-page .dropdown-menu .dropdown-item {
+    border-radius: 8px;
+
+    color: var(--isekai-text);
 
     transition:
-        color .2s ease;
+        background-color 0.2s ease,
+        color 0.2s ease;
 }
 
 
-#isekai-home .isekai-footer-legal-links a:hover {
+#wrap.isekai-shop-page .dropdown-menu .dropdown-item:hover,
+#wrap.isekai-shop-page .dropdown-menu .dropdown-item:focus {
+    background: var(--isekai-card);
 
-    color:
-        var(--isekai-accent) !important;
+    color: var(--isekai-accent);
 }
 
 
-/* =========================================================
-   FOOTER - PARTE INFERIOR
-   ========================================================= */
+/* ================================================================
+   CHECKBOXES
+   ================================================================ */
 
-#isekai-home .isekai-footer-bottom {
-
-    min-height: 68px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 20px;
-
-    border-top:
-        1px solid
-        rgba(255, 255, 255, .08);
+#wrap.isekai-shop-page input[type="checkbox"] {
+    accent-color: var(--isekai-primary);
 }
 
 
-#isekai-home .isekai-footer-copyright,
-#isekai-home .isekai-footer-tax,
-#isekai-home .isekai-footer-developer {
+/* ================================================================
+   ACORDEONES
+   ================================================================ */
 
-    color:
-        var(--isekai-footer-muted) !important;
+#wrap.isekai-shop-page .accordion-item {
+    background: transparent;
 
-    font-size: 12px;
+    border-color: var(--isekai-border);
 }
 
 
-#isekai-home .isekai-footer-developer strong {
+#wrap.isekai-shop-page .accordion-button {
+    background: transparent;
 
-    color:
-        #FFFFFF !important;
+    color: var(--isekai-text);
+
+    box-shadow: none;
 }
 
 
-/* =========================================================
-   PC GRANDE
-   ========================================================= */
+#wrap.isekai-shop-page .accordion-button:not(.collapsed) {
+    background: rgba(59, 117, 212, 0.08);
+
+    color: var(--isekai-accent);
+}
+
+
+#wrap.isekai-shop-page .accordion-body {
+    background: transparent;
+
+    color: var(--isekai-text);
+}
+
+
+/* ================================================================
+   RESPONSIVE - DESKTOP GRANDE
+   ================================================================ */
 
 @media (min-width: 1201px) {
 
-    #isekai-home .isekai-container {
-
+    #wrap.isekai-shop-page .isekai-shop-container {
         padding-left: 32px;
         padding-right: 32px;
     }
 
-}
-
-
-/* =========================================================
-   TABLET / PORTÁTIL
-   769px - 1200px
-   ========================================================= */
-
-@media (min-width: 769px) and (max-width: 1200px) {
-
-    #isekai-home .isekai-container {
-
+    #wrap.isekai-shop-page .isekai-products-content {
         padding-left: 20px;
         padding-right: 20px;
     }
 
-
-    #isekai-home .isekai-header-inner {
-
-        gap: 15px;
-    }
-
-
-    #isekai-home .isekai-logo-image {
-
-        max-width: 180px !important;
-
-        height: 52px !important;
-    }
-
-
-    #isekai-home .isekai-search {
-
-        max-width: none;
-    }
-
-
-    #isekai-home .isekai-category-list {
-
-        justify-content: center;
-
-        flex-wrap: wrap;
-
-        overflow-x: visible;
-
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-
-
-    #isekai-home .isekai-carousel {
-
-        height: 420px;
-    }
-
-
-    #isekai-home .isekai-slide-content {
-
-        padding:
-            45px 55px;
-    }
-
-
-    #isekai-home .isekai-slide-content h1 {
-
-        font-size:
-            clamp(36px, 5vw, 52px);
-    }
-
-
-    #isekai-home .isekai-products-grid {
-
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr));
-
-        gap: 18px;
-    }
-
-
-    #isekai-home .isekai-footer-main {
-
-        grid-template-columns:
-            1.8fr 1fr 1fr 1.3fr;
-
-        gap: 25px;
-    }
-
-
-    #isekai-home .isekai-footer-community {
-
-        grid-template-columns:
-            1fr 2.5fr;
-
-        gap: 30px;
-    }
-
 }
 
 
-/* =========================================================
-   TABLET
-   601px - 768px
-   ========================================================= */
+/* ================================================================
+   RESPONSIVE - TABLET
+   ================================================================ */
 
-@media (min-width: 601px) and (max-width: 768px) {
+@media (min-width: 769px) and (max-width: 1200px) {
 
-    #isekai-home .isekai-container {
-
-        padding-left: 18px;
-        padding-right: 18px;
-    }
-
-
-    #isekai-home .isekai-header-inner {
-
-        min-height: auto;
-
-        display: grid;
-
-        grid-template-columns:
-            auto 1fr auto auto;
-
-        gap: 12px;
-
-        padding-top: 12px;
-        padding-bottom: 12px;
-    }
-
-
-    #isekai-home .isekai-logo-image {
-
-        height: 50px !important;
-
-        max-width: 180px !important;
-    }
-
-
-    #isekai-home .isekai-search {
-
-        max-width: none;
-
-        min-width: 0;
-    }
-
-
-    #isekai-home .isekai-user-button {
-
-        padding:
-            0 13px !important;
-    }
-
-
-    #isekai-home .isekai-category-list {
-
-        justify-content: center;
-
-        flex-wrap: wrap;
-
-        overflow-x: visible;
-
-        gap: 8px;
-
-        padding:
-            10px 5px;
-    }
-
-
-    #isekai-home .isekai-category-button {
-
-        padding:
-            8px 14px;
-
-        font-size: 13px;
-    }
-
-
-    #isekai-home .isekai-hero {
-
-        padding:
-            20px 0;
-    }
-
-
-    #isekai-home .isekai-carousel {
-
-        height: 390px;
-
-        border-radius: 18px;
-    }
-
-
-    #isekai-home .isekai-slide-content {
-
-        padding:
-            40px 50px;
-    }
-
-
-    #isekai-home .isekai-slide-content h1 {
-
-        font-size: 42px;
-    }
-
-
-    #isekai-home .isekai-slide-content p {
-
-        font-size: 17px;
-    }
-
-
-    #isekai-home .isekai-products-grid {
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap: 16px;
-    }
-
-
-    #isekai-home .isekai-product-name {
-
-        font-size: 15px;
-    }
-
-
-    /* FOOTER */
-
-    #isekai-home .isekai-newsletter-content {
-
-        align-items: flex-start;
-
-        flex-direction: column;
-
-        gap: 25px;
-    }
-
-
-    #isekai-home .isekai-newsletter-form {
-
-        max-width: 100%;
-    }
-
-
-    #isekai-home .isekai-footer-main {
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap: 35px;
-    }
-
-
-    #isekai-home .isekai-footer-brand {
-
-        grid-column:
-            1 / -1;
-    }
-
-
-    #isekai-home .isekai-footer-community {
-
-        grid-template-columns:
-            1fr;
-
-        gap: 25px;
-    }
-
-
-    #isekai-home .isekai-footer-legal {
-
-        align-items: flex-start;
-
-        flex-direction: column;
-    }
-
-
-    #isekai-home .isekai-footer-legal-links {
-
-        justify-content: flex-start;
-    }
-
-
-    #isekai-home .isekai-footer-bottom {
-
-        align-items: flex-start;
-
-        flex-direction: column;
-
-        justify-content: center;
-
-        padding:
-            18px 0;
-
-        gap: 7px;
-    }
-
-}
-
-
-/* =========================================================
-   MÓVIL
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-    #isekai-home .isekai-container {
-
-        padding-left: 14px;
-        padding-right: 14px;
-    }
-
-
-    /* HEADER */
-
-    #isekai-home .isekai-header-inner {
-
-        display: grid;
-
-        grid-template-columns:
-            1fr auto auto;
-
-        gap: 10px;
-
-        min-height: auto;
-
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-
-
-    #isekai-home .isekai-logo {
-
-        height: 52px;
-    }
-
-
-    #isekai-home .isekai-logo-image {
-
-        width: auto !important;
-
-        height: 46px !important;
-
-        max-width: 170px !important;
-    }
-
-
-    /* BUSCADOR */
-
-    #isekai-home .isekai-search {
-
-        grid-column:
-            1 / -1;
-
-        grid-row: 2;
-
-        width: 100%;
-
-        max-width: none;
-
-        margin: 0;
-    }
-
-
-    #isekai-home .isekai-search input {
-
-        height: 44px !important;
-
-        padding:
-            0 52px 0 16px !important;
-    }
-
-
-    #isekai-home .isekai-search button {
-
-        width: 34px !important;
-
-        height: 34px !important;
-
-        top: 5px;
-        right: 5px;
-    }
-
-
-    /* TEMA */
-
-    #isekai-home .isekai-theme-toggle {
-
-        width: 46px;
-
-        height: 46px;
-    }
-
-
-    /* USUARIO */
-
-    #isekai-home .isekai-user-button {
-
-        width: 46px;
-
-        height: 46px !important;
-
-        padding: 0 !important;
-    }
-
-
-    #isekai-home .isekai-user-button span {
-
-        display: none;
-    }
-
-
-    #isekai-home .isekai-user-arrow {
-
-        display: none;
-    }
-
-
-    #isekai-home .isekai-user-menu {
-
-        right: -5px;
-
-        width: 280px;
-
-        max-width:
-            calc(100vw - 28px);
-    }
-
-
-    /* CATEGORÍAS */
-
-    #isekai-home .isekai-category-list {
-
-        justify-content: center;
-
-        flex-wrap: wrap;
-
-        overflow-x: visible;
-
-        gap: 8px;
-
-        padding:
-            10px 5px;
-    }
-
-
-    #isekai-home .isekai-category-button {
-
-        flex-shrink: 0;
-
-        padding:
-            8px 14px;
-
-        font-size: 13px;
-    }
-
-
-    #isekai-home .isekai-subcategory-menu {
-
-        position: absolute;
-
-        left: 50%;
-        right: auto;
-
-        top:
-            calc(100% + 8px);
-
-        width: 240px;
-
-        max-width:
-            calc(100vw - 28px);
-
-        transform:
-            translateX(-50%)
-            translateY(-8px);
-
-        margin-top: 0;
-    }
-
-
-    #isekai-home
-    .isekai-category-dropdown.isekai-open
-    .isekai-subcategory-menu {
-
-        transform:
-            translateX(-50%)
-            translateY(0);
-    }
-
-
-    /* HERO */
-
-    #isekai-home .isekai-hero {
-
-        padding:
-            15px 0;
-    }
-
-
-    #isekai-home .isekai-carousel {
-
-        height: 430px;
-
-        border-radius: 16px;
-    }
-
-
-    #isekai-home .isekai-slide-content {
-
-        display: flex;
-
-        flex-direction: column;
-
-        justify-content: center;
-
-        height: 100%;
-
-        padding:
-            30px 30px 65px;
-    }
-
-
-    #isekai-home .isekai-hero-label {
-
-        font-size: 11px;
-    }
-
-
-    #isekai-home .isekai-slide-content h1 {
-
-        margin-bottom: 15px;
-
-        font-size: 34px;
-
-        line-height: 1.08;
-    }
-
-
-    #isekai-home .isekai-slide-content p {
-
-        margin-bottom: 22px;
-
-        font-size: 15px;
-
-        line-height: 1.5;
-    }
-
-
-    #isekai-home .isekai-hero-button {
-
-        align-self: flex-start;
-
-        padding:
-            11px 18px;
-
-        font-size: 14px;
-    }
-
-
-    /* FLECHAS */
-
-    #isekai-home .isekai-carousel-arrow {
-
-        width: 38px;
-
-        height: 38px;
-    }
-
-
-    #isekai-home .isekai-carousel-prev {
-
-        left: 10px;
-    }
-
-
-    #isekai-home .isekai-carousel-next {
-
-        right: 10px;
-    }
-
-
-    /* INDICADORES */
-
-    #isekai-home .isekai-carousel-dots {
-
-        bottom: 14px;
-    }
-
-
-    /* SECCIONES */
-
-    #isekai-home .isekai-section {
-
-        padding:
-            20px 0 45px;
-    }
-
-
-    #isekai-home .isekai-section-title {
-
-        align-items: flex-start;
-
-        flex-direction: column;
-
-        gap: 10px;
-
-        margin-bottom: 18px;
-    }
-
-
-    #isekai-home .isekai-section-title h2 {
-
-        font-size: 27px;
-    }
-
-
-    /* PRODUCTOS */
-
-    #isekai-home .isekai-products-grid {
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap: 12px;
-    }
-
-
-    #isekai-home .isekai-product-info {
-
-        padding: 11px;
-    }
-
-
-    #isekai-home .isekai-product-name {
-
-        font-size: 14px;
-
-        line-height: 1.3;
-    }
-
-
-    #isekai-home .isekai-product-price {
-
-        font-size: 16px;
-    }
-
-
-    /* =====================================================
-       FOOTER MÓVIL
-       ===================================================== */
-
-    #isekai-home .isekai-newsletter-content {
-
-        min-height: auto;
-
-        align-items: flex-start;
-
-        flex-direction: column;
-
-        gap: 22px;
-
-        padding:
-            32px 0;
-    }
-
-
-    #isekai-home .isekai-newsletter-text h2 {
-
-        font-size: 25px;
-    }
-
-
-    #isekai-home .isekai-newsletter-text p {
-
-        font-size: 13px;
-    }
-
-
-    #isekai-home .isekai-newsletter-form {
-
-        width: 100%;
-
-        max-width: none;
-
-        align-items: stretch;
-
-        flex-direction: column;
-
-        gap: 8px;
-    }
-
-
-    #isekai-home .isekai-newsletter-form input,
-    #isekai-home .isekai-newsletter-form button {
-
-        width: 100%;
-    }
-
-
-    #isekai-home .isekai-footer-main {
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap:
-            35px 20px;
-
-        padding:
-            40px 0;
-    }
-
-
-    #isekai-home .isekai-footer-brand {
-
-        grid-column:
-            1 / -1;
-    }
-
-
-    #isekai-home .isekai-footer-brand > strong {
-
-        font-size: 18px;
-    }
-
-
-    #isekai-home .isekai-footer-section h3 {
-
-        margin-bottom: 16px;
-    }
-
-
-    #isekai-home .isekai-footer-section > a {
-
-        font-size: 13px;
-    }
-
-
-    #isekai-home .isekai-footer-community {
-
-        grid-template-columns:
-            1fr;
-
-        gap:
-            28px;
-
-        padding:
-            25px 0;
-    }
-
-
-    #isekai-home .isekai-footer-social {
-
-        width: 100%;
-    }
-
-
-    #isekai-home .isekai-footer-social a {
-
-        flex: 1;
-
-        justify-content: center;
-    }
-
-
-    #isekai-home .isekai-footer-group-list {
-
-        gap: 7px;
-    }
-
-
-    #isekai-home .isekai-footer-group-list a {
-
-        font-size: 11px;
-
-        padding:
-            7px 9px;
-    }
-
-
-    #isekai-home .isekai-footer-legal {
-
-        align-items: flex-start;
-
-        flex-direction: column;
-
-        gap: 15px;
-
-        padding:
-            22px 0;
-    }
-
-
-    #isekai-home .isekai-footer-legal-links {
-
-        justify-content: flex-start;
-
-        gap:
-            8px 15px;
-    }
-
-
-    #isekai-home .isekai-footer-legal-links a {
-
-        font-size: 11px;
-    }
-
-
-    #isekai-home .isekai-footer-bottom {
-
-        min-height: auto;
-
-        align-items: flex-start;
-
-        flex-direction: column;
-
-        justify-content: center;
-
-        gap: 7px;
-
-        padding:
-            18px 0;
+    #wrap.isekai-shop-page .isekai-shop-container {
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
-
-    #isekai-home .isekai-footer-copyright,
-    #isekai-home .isekai-footer-tax,
-    #isekai-home .isekai-footer-developer {
-
-        font-size: 11px;
+    #wrap.isekai-shop-page .isekai-product {
+        padding: 6px;
     }
-
-}
-
-
-/* =========================================================
-   MÓVIL MUY PEQUEÑO
-   ========================================================= */
-
-@media (max-width: 380px) {
-
-    #isekai-home .isekai-container {
 
+    #wrap.isekai-shop-page .isekai-products-content {
         padding-left: 10px;
         padding-right: 10px;
     }
 
+}
 
-    #isekai-home .isekai-logo-image {
 
-        height: 42px !important;
+/* ================================================================
+   RESPONSIVE - TABLET PEQUEÑO
+   ================================================================ */
 
-        max-width: 145px !important;
+@media (min-width: 601px) and (max-width: 768px) {
+
+    #wrap.isekai-shop-page .isekai-shop-container {
+        padding-left: 16px;
+        padding-right: 16px;
     }
 
-
-    #isekai-home .isekai-theme-toggle,
-    #isekai-home .isekai-user-button {
-
-        width: 42px;
-
-        height: 42px !important;
+    #wrap.isekai-shop-page .isekai-products-content {
+        padding-left: 4px;
+        padding-right: 4px;
     }
 
-
-    #isekai-home .isekai-carousel {
-
-        height: 400px;
+    #wrap.isekai-shop-page .isekai-product {
+        padding: 5px;
     }
 
-
-    #isekai-home .isekai-slide-content {
-
-        padding-left: 25px;
-
-        padding-right: 25px;
+    #wrap.isekai-shop-page .isekai-products-header {
+        margin-bottom: 18px;
     }
 
+}
 
-    #isekai-home .isekai-slide-content h1 {
 
-        font-size: 30px;
+/* ================================================================
+   RESPONSIVE - MÓVIL
+   ================================================================ */
+
+@media (max-width: 600px) {
+
+    #wrap.isekai-shop-page {
+        padding-bottom: 24px;
     }
 
-
-    #isekai-home .isekai-slide-content p {
-
-        font-size: 14px;
+    #wrap.isekai-shop-page .isekai-shop-container {
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
+    #wrap.isekai-shop-page .isekai-products-content {
+        width: 100%;
 
-    #isekai-home .isekai-products-grid {
-
-        gap: 9px;
+        padding-left: 0;
+        padding-right: 0;
     }
 
+    #wrap.isekai-shop-page .isekai-products-header {
+        margin-bottom: 14px;
 
-    #isekai-home .isekai-product-info {
-
-        padding: 9px;
+        padding-top: 18px !important;
+        padding-bottom: 16px !important;
     }
 
-
-    #isekai-home .isekai-product-name {
-
-        font-size: 13px;
+    #wrap.isekai-shop-page .isekai-shop-title {
+        font-size: 1.5rem;
     }
 
-
-    #isekai-home .isekai-product-price {
-
-        font-size: 15px;
+    #wrap.isekai-shop-page .isekai-products-controls {
+        margin-top: 14px;
     }
 
-
-    /* FOOTER */
-
-    #isekai-home .isekai-footer-main {
-
-        grid-template-columns:
-            1fr;
-
-        gap: 28px;
+    #wrap.isekai-shop-page .isekai-products-controls-inner {
+        gap: 8px;
     }
 
-
-    #isekai-home .isekai-footer-brand {
-
-        grid-column: auto;
+    #wrap.isekai-shop-page .isekai-products-grid {
+        margin-left: -4px;
+        margin-right: -4px;
     }
 
-
-    #isekai-home .isekai-newsletter-text h2 {
-
-        font-size: 23px;
+    #wrap.isekai-shop-page .isekai-product {
+        padding: 4px;
     }
 
-
-    #isekai-home .isekai-footer-group-list a {
-
-        font-size: 10px;
-
-        padding:
-            6px 8px;
+    #wrap.isekai-shop-page .isekai-product-wrapper {
+        border-radius: 12px;
     }
 
+    #wrap.isekai-shop-page .isekai-products-pager {
+        margin-top: 24px;
+    }
+
+}
+
+
+/* ================================================================
+   RESPONSIVE - MÓVIL PEQUEÑO
+   ================================================================ */
+
+@media (max-width: 380px) {
+
+    #wrap.isekai-shop-page .isekai-shop-container {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    #wrap.isekai-shop-page .isekai-shop-title {
+        font-size: 1.35rem;
+    }
+
+    #wrap.isekai-shop-page .isekai-product {
+        padding: 3px;
+    }
+
+    #wrap.isekai-shop-page .isekai-product-wrapper {
+        border-radius: 10px;
+    }
+
+}
+
+
+#wrap.isekai-shop-page #products_grid_before {
+    display: none !important;
+}
+
+#wrap.isekai-shop-page #products_grid {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+}
+
+#wrap.isekai-shop-page .isekai-products-content {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+@media (max-width: 600px) {
+    #wrap.isekai-shop-page .isekai-products-content {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
