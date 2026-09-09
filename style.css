@@ -1,6 +1,15 @@
 /* ================================================================
-   ISEKAI TCG STORE - GLOBAL + HOME + SHOP
+   ISEKAI TCG STORE - GLOBAL + HOME + SHOP + PORTAL
    Header y footer compartidos por todas las páginas
+
+   ISEKAI-CSS-REV: 2026-09-09-r5
+
+   ^ Marca de versión para depurar. Si al buscar este texto con
+   Ctrl+F dentro del archivo CSS que carga el navegador (pestaña
+   "Sources" o "Network" de las herramientas de desarrollador) NO
+   aparece, significa que Odoo está sirviendo una versión antigua
+   cacheada de este archivo y hay que regenerar/forzar la recarga
+   de los assets (ver instrucciones en el chat).
    ================================================================ */
 
 
@@ -30,8 +39,8 @@
     width: 100%;
     min-height: 100vh;
 
-    background: var(--isekai-bg) !important;
-    color: var(--isekai-text) !important;
+    background: var(--isekai-bg, #0b1120) !important;
+    color: var(--isekai-text, #f8fafc) !important;
 
     font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
@@ -134,7 +143,7 @@
 }
 
 .isekai-search input:focus {
-    border-color: var(--isekai-primary) !important;
+    border-color: var(--isekai-primary, #406fce) !important;
     box-shadow: 0 0 0 3px rgba(64,111,206,.15) !important;
 }
 
@@ -551,7 +560,7 @@
 #isekai-home .isekai-hero-label {
     display: block;
     margin-bottom: 12px;
-    color: var(--isekai-accent) !important;
+    color: var(--isekai-accent, #8db0ff) !important;
     font-size: 13px;
     font-weight: 800;
     letter-spacing: .18em;
@@ -560,7 +569,7 @@
 #isekai-home .isekai-slide-content h1 {
     max-width: 700px;
     margin: 0 0 18px;
-    color: var(--isekai-text) !important;
+    color: var(--isekai-text, #f8fafc) !important;
     font-size: 64px;
     line-height: 1.05;
     font-weight: 800;
@@ -569,7 +578,7 @@
 #isekai-home .isekai-slide-content p {
     max-width: 600px;
     margin: 0 0 28px;
-    color: var(--isekai-muted) !important;
+    color: var(--isekai-muted, #94a3b8) !important;
     font-size: 18px;
     line-height: 1.6;
 }
@@ -586,9 +595,9 @@
     align-items: center;
     gap: 10px;
     padding: 13px 22px;
-    border: 1px solid var(--isekai-primary) !important;
+    border: 1px solid var(--isekai-primary, #406fce) !important;
     border-radius: 999px;
-    background: var(--isekai-primary) !important;
+    background: var(--isekai-primary, #406fce) !important;
     color: #ffffff !important;
     text-decoration: none !important;
     font-weight: 700;
@@ -596,7 +605,7 @@
 }
 
 #isekai-home .isekai-hero-button:hover {
-    background: var(--isekai-primary-hover) !important;
+    background: var(--isekai-primary-hover, #315db4) !important;
     color: #ffffff !important;
     transform: translateY(-2px);
 }
@@ -678,11 +687,11 @@
     align-items: flex-end;
     margin-bottom: 25px;
     padding-bottom: 12px;
-    border-bottom: 2px solid var(--isekai-secondary);
+    border-bottom: 2px solid var(--isekai-secondary, #263570);
 }
 
 #isekai-home .isekai-section-title span {
-    color: var(--isekai-accent) !important;
+    color: var(--isekai-accent, #8db0ff) !important;
     font-size: 12px;
     font-weight: 800;
     letter-spacing: .12em;
@@ -690,12 +699,12 @@
 
 #isekai-home .isekai-section-title h2 {
     margin: 4px 0 0;
-    color: var(--isekai-text) !important;
+    color: var(--isekai-text, #f8fafc) !important;
     font-size: 32px;
 }
 
 #isekai-home .isekai-section-title a {
-    color: var(--isekai-accent) !important;
+    color: var(--isekai-accent, #8db0ff) !important;
     text-decoration: none !important;
 }
 
@@ -715,8 +724,8 @@
     display: block;
     min-width: 0;
     overflow: hidden;
-    background: var(--isekai-card) !important;
-    border: 1px solid var(--isekai-border);
+    background: var(--isekai-card, #1a2647) !important;
+    border: 1px solid var(--isekai-border, rgba(255,255,255,.10));
     border-radius: 16px;
     text-decoration: none !important;
     transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
@@ -724,7 +733,7 @@
 
 #isekai-home .isekai-product-card:hover {
     transform: translateY(-5px);
-    border-color: var(--isekai-primary);
+    border-color: var(--isekai-primary, #406fce);
     box-shadow: 0 15px 35px rgba(0,0,0,.25);
 }
 
@@ -758,14 +767,14 @@
 
 #isekai-home .isekai-product-name {
     margin-bottom: 8px;
-    color: var(--isekai-text) !important;
+    color: var(--isekai-text, #f8fafc) !important;
     font-size: 16px;
     font-weight: 700;
     line-height: 1.35;
 }
 
 #isekai-home .isekai-product-price {
-    color: var(--isekai-accent) !important;
+    color: var(--isekai-accent, #8db0ff) !important;
     font-size: 18px;
     font-weight: 800;
 }
@@ -1176,8 +1185,8 @@
    ================================================================ */
 
 #wrap.isekai-shop-page {
-    background: var(--isekai-bg);
-    color: var(--isekai-text);
+    background: var(--isekai-bg, #0b1120);
+    color: var(--isekai-text, #f8fafc);
     min-height: 100vh;
     padding-bottom: 0 !important; /* evita el hueco que deja Odoo antes del footer */
     font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -1248,9 +1257,9 @@
    ================================================================ */
 
 #wrap.isekai-shop-page .isekai-products-header {
-    border-bottom: 1px solid var(--isekai-border);
+    border-bottom: 1px solid var(--isekai-border, rgba(255,255,255,.10));
     margin-bottom: 24px;
-    color: var(--isekai-text);
+    color: var(--isekai-text, #f8fafc);
 }
 
 
@@ -1268,7 +1277,7 @@
 #wrap.isekai-shop-page .isekai-shop-eyebrow {
     display: block;
     margin-bottom: 4px;
-    color: var(--isekai-accent);
+    color: var(--isekai-accent, #8db0ff);
     font-size: 12px;
     font-weight: 800;
     letter-spacing: .12em;
@@ -1280,17 +1289,17 @@
    ================================================================ */
 
 #wrap.isekai-shop-page .isekai-breadcrumb {
-    color: var(--isekai-muted);
+    color: var(--isekai-muted, #94a3b8);
 }
 
 #wrap.isekai-shop-page .isekai-breadcrumb a {
-    color: var(--isekai-muted);
+    color: var(--isekai-muted, #94a3b8);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 #wrap.isekai-shop-page .isekai-breadcrumb a:hover {
-    color: var(--isekai-accent);
+    color: var(--isekai-accent, #8db0ff);
 }
 
 
@@ -1299,17 +1308,17 @@
    ================================================================ */
 
 #wrap.isekai-shop-page .isekai-shop-title {
-    color: var(--isekai-text);
+    color: var(--isekai-text, #f8fafc);
     font-weight: 700;
     letter-spacing: -0.02em;
 }
 
 #wrap.isekai-shop-page .isekai-title-muted {
-    color: var(--isekai-muted);
+    color: var(--isekai-muted, #94a3b8);
 }
 
 #wrap.isekai-shop-page .isekai-search-count {
-    color: var(--isekai-muted);
+    color: var(--isekai-muted, #94a3b8);
 }
 
 
@@ -1331,13 +1340,13 @@
 #wrap.isekai-shop-page .isekai-search-badge {
     background: rgba(64, 111, 206, 0.18);
     border: 1px solid rgba(64, 111, 206, 0.35);
-    color: var(--isekai-accent);
+    color: var(--isekai-accent, #8db0ff);
 }
 
 #wrap.isekai-shop-page .isekai-category-badge {
     background: rgba(141, 176, 255, 0.12);
     border: 1px solid rgba(141, 176, 255, 0.25);
-    color: var(--isekai-accent);
+    color: var(--isekai-accent, #8db0ff);
 }
 
 #wrap.isekai-shop-page .isekai-badge-close {
@@ -1362,13 +1371,13 @@
    ================================================================ */
 
 #wrap.isekai-shop-page .isekai-category-description {
-    color: var(--isekai-muted);
+    color: var(--isekai-muted, #94a3b8);
     line-height: 1.7;
     margin-top: 8px;
 }
 
 #wrap.isekai-shop-page .isekai-category-description a {
-    color: var(--isekai-accent);
+    color: var(--isekai-accent, #8db0ff);
 }
 
 
@@ -1392,10 +1401,10 @@
 
 #wrap.isekai-shop-page .isekai-products-search input {
     min-height: 46px;
-    background: var(--isekai-surface) !important;
-    border: 1px solid var(--isekai-border) !important;
+    background: var(--isekai-surface, #131c35) !important;
+    border: 1px solid var(--isekai-border, rgba(255,255,255,.10)) !important;
     border-radius: 999px !important;
-    color: var(--isekai-text) !important;
+    color: var(--isekai-text, #f8fafc) !important;
     padding-left: 18px;
     padding-right: 18px;
     box-shadow: none !important;
@@ -1403,21 +1412,21 @@
 }
 
 #wrap.isekai-shop-page .isekai-products-search input::placeholder {
-    color: var(--isekai-muted);
+    color: var(--isekai-muted, #94a3b8);
 }
 
 #wrap.isekai-shop-page .isekai-products-search input:focus {
-    border-color: var(--isekai-primary) !important;
+    border-color: var(--isekai-primary, #406fce) !important;
     box-shadow: 0 0 0 3px rgba(64, 111, 206, 0.15) !important;
 }
 
 #wrap.isekai-shop-page .isekai-mobile-search {
     min-width: 44px;
     min-height: 44px;
-    background: var(--isekai-surface);
-    border: 1px solid var(--isekai-border);
+    background: var(--isekai-surface, #131c35);
+    border: 1px solid var(--isekai-border, rgba(255,255,255,.10));
     border-radius: 50%;
-    color: var(--isekai-text);
+    color: var(--isekai-text, #f8fafc);
 }
 
 
@@ -1432,16 +1441,16 @@
 #wrap.isekai-shop-page .isekai-products-dropdown-controls .btn {
     min-height: 44px;
     border-radius: 10px;
-    border: 1px solid var(--isekai-border);
-    background: var(--isekai-surface);
-    color: var(--isekai-text);
+    border: 1px solid var(--isekai-border, rgba(255,255,255,.10));
+    background: var(--isekai-surface, #131c35);
+    color: var(--isekai-text, #f8fafc);
     transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 #wrap.isekai-shop-page .isekai-products-dropdown-controls .btn:hover {
-    background: var(--isekai-card);
-    border-color: var(--isekai-primary);
-    color: var(--isekai-accent);
+    background: var(--isekai-card, #1a2647);
+    border-color: var(--isekai-primary, #406fce);
+    color: var(--isekai-accent, #8db0ff);
 }
 
 #wrap.isekai-shop-page .isekai-filter-button {
@@ -1453,16 +1462,16 @@
     min-height: 44px;
     padding: 0 14px;
     border-radius: 10px;
-    background: var(--isekai-primary);
-    border: 1px solid var(--isekai-primary);
+    background: var(--isekai-primary, #406fce);
+    border: 1px solid var(--isekai-primary, #406fce);
     color: #FFFFFF;
     font-weight: 600;
     transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 #wrap.isekai-shop-page .isekai-filter-button:hover {
-    background: var(--isekai-primary-hover);
-    border-color: var(--isekai-primary-hover);
+    background: var(--isekai-primary-hover, #315db4);
+    border-color: var(--isekai-primary-hover, #315db4);
     color: #FFFFFF;
     transform: translateY(-1px);
 }
@@ -1475,7 +1484,7 @@
     height: 10px;
     border-radius: 50%;
     background: #ef4444;
-    border: 2px solid var(--isekai-bg);
+    border: 2px solid var(--isekai-bg, #0b1120);
 }
 
 
@@ -1487,8 +1496,8 @@
     margin-top: 16px;
     background: rgba(64, 111, 206, 0.10);
     border: 1px solid rgba(64, 111, 206, 0.30);
-    border-radius: var(--isekai-radius-md);
-    color: var(--isekai-text);
+    border-radius: var(--isekai-radius-md, 12px);
+    color: var(--isekai-text, #f8fafc);
 }
 
 
@@ -1515,18 +1524,18 @@
 #wrap.isekai-shop-page .isekai-product-wrapper {
     position: relative;
     height: 100%;
-    background: var(--isekai-card);
-    border: 1px solid var(--isekai-border);
-    border-radius: var(--isekai-radius-lg);
+    background: var(--isekai-card, #1a2647);
+    border: 1px solid var(--isekai-border, rgba(255,255,255,.10));
+    border-radius: var(--isekai-radius-lg, 16px);
     overflow: hidden;
-    box-shadow: var(--isekai-shadow);
+    box-shadow: var(--isekai-shadow, 0 8px 24px rgba(0,0,0,.18));
     transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 #wrap.isekai-shop-page .isekai-product-wrapper:hover {
     transform: translateY(-5px);
-    border-color: var(--isekai-primary);
-    box-shadow: var(--isekai-shadow-hover);
+    border-color: var(--isekai-primary, #406fce);
+    box-shadow: var(--isekai-shadow-hover, 0 14px 35px rgba(0,0,0,.30));
 }
 
 #wrap.isekai-shop-page .isekai-product-wrapper img {
@@ -1543,28 +1552,28 @@
 }
 
 #wrap.isekai-shop-page .isekai-product-wrapper a:hover {
-    color: var(--isekai-accent);
+    color: var(--isekai-accent, #8db0ff);
 }
 
 #wrap.isekai-shop-page .isekai-product-wrapper .oe_price,
 #wrap.isekai-shop-page .isekai-product-wrapper .product_price {
-    color: var(--isekai-text);
+    color: var(--isekai-text, #f8fafc);
 }
 
 #wrap.isekai-shop-page .isekai-product-wrapper .text-muted {
-    color: var(--isekai-muted) !important;
+    color: var(--isekai-muted, #94a3b8) !important;
 }
 
 #wrap.isekai-shop-page .isekai-product-wrapper .btn-primary {
-    background: var(--isekai-primary);
-    border-color: var(--isekai-primary);
+    background: var(--isekai-primary, #406fce);
+    border-color: var(--isekai-primary, #406fce);
     color: #FFFFFF;
     transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 #wrap.isekai-shop-page .isekai-product-wrapper .btn-primary:hover {
-    background: var(--isekai-primary-hover);
-    border-color: var(--isekai-primary-hover);
+    background: var(--isekai-primary-hover, #315db4);
+    border-color: var(--isekai-primary-hover, #315db4);
     color: #FFFFFF;
 }
 
@@ -1587,22 +1596,22 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--isekai-surface);
-    border: 1px solid var(--isekai-border);
+    background: var(--isekai-surface, #131c35);
+    border: 1px solid var(--isekai-border, rgba(255,255,255,.10));
     border-radius: 8px;
-    color: var(--isekai-text);
+    color: var(--isekai-text, #f8fafc);
     transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 #wrap.isekai-shop-page .isekai-products-pager .page-link:hover {
-    background: var(--isekai-card);
-    border-color: var(--isekai-primary);
-    color: var(--isekai-accent);
+    background: var(--isekai-card, #1a2647);
+    border-color: var(--isekai-primary, #406fce);
+    color: var(--isekai-accent, #8db0ff);
 }
 
 #wrap.isekai-shop-page .isekai-products-pager .active .page-link {
-    background: var(--isekai-primary);
-    border-color: var(--isekai-primary);
+    background: var(--isekai-primary, #406fce);
+    border-color: var(--isekai-primary, #406fce);
     color: #FFFFFF;
 }
 
@@ -1612,7 +1621,7 @@
    ================================================================ */
 
 #wrap.isekai-shop-page .isekai-empty-products {
-    color: var(--isekai-text);
+    color: var(--isekai-text, #f8fafc);
 }
 
 #wrap.isekai-shop-page .isekai-empty-image {
@@ -1620,22 +1629,22 @@
 }
 
 #wrap.isekai-shop-page .isekai-empty-title {
-    color: var(--isekai-text);
+    color: var(--isekai-text, #f8fafc);
     font-weight: 700;
 }
 
 #wrap.isekai-shop-page .isekai-empty-description {
-    color: var(--isekai-muted);
+    color: var(--isekai-muted, #94a3b8);
 }
 
 #wrap.isekai-shop-page .isekai-empty-link {
-    color: var(--isekai-accent);
+    color: var(--isekai-accent, #8db0ff);
     text-decoration: none;
     font-weight: 600;
 }
 
 #wrap.isekai-shop-page .isekai-empty-link:hover {
-    color: var(--isekai-primary-hover);
+    color: var(--isekai-primary-hover, #315db4);
     text-decoration: underline;
 }
 
@@ -1647,8 +1656,8 @@
 #wrap.isekai-shop-page .isekai-category-footer {
     margin-top: 40px;
     padding-top: 24px;
-    border-top: 1px solid var(--isekai-border);
-    color: var(--isekai-muted);
+    border-top: 1px solid var(--isekai-border, rgba(255,255,255,.10));
+    color: var(--isekai-muted, #94a3b8);
 }
 
 
@@ -1658,66 +1667,66 @@
 
 #wrap.isekai-shop-page .form-control,
 #wrap.isekai-shop-page .form-select {
-    background-color: var(--isekai-surface);
-    border-color: var(--isekai-border);
-    color: var(--isekai-text);
+    background-color: var(--isekai-surface, #131c35);
+    border-color: var(--isekai-border, rgba(255,255,255,.10));
+    color: var(--isekai-text, #f8fafc);
 }
 
 #wrap.isekai-shop-page .form-control::placeholder {
-    color: var(--isekai-muted);
+    color: var(--isekai-muted, #94a3b8);
 }
 
 #wrap.isekai-shop-page .form-control:focus,
 #wrap.isekai-shop-page .form-select:focus {
-    background-color: var(--isekai-surface);
-    border-color: var(--isekai-primary);
-    color: var(--isekai-text);
+    background-color: var(--isekai-surface, #131c35);
+    border-color: var(--isekai-primary, #406fce);
+    color: var(--isekai-text, #f8fafc);
     box-shadow: 0 0 0 3px rgba(64, 111, 206, 0.15);
 }
 
 #wrap.isekai-shop-page .dropdown-menu {
-    background: var(--isekai-surface);
-    border: 1px solid var(--isekai-border);
-    border-radius: var(--isekai-radius-md);
-    box-shadow: var(--isekai-shadow-hover);
+    background: var(--isekai-surface, #131c35);
+    border: 1px solid var(--isekai-border, rgba(255,255,255,.10));
+    border-radius: var(--isekai-radius-md, 12px);
+    box-shadow: var(--isekai-shadow-hover, 0 14px 35px rgba(0,0,0,.30));
     padding: 6px;
 }
 
 #wrap.isekai-shop-page .dropdown-menu .dropdown-item {
     border-radius: 8px;
-    color: var(--isekai-text);
+    color: var(--isekai-text, #f8fafc);
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 #wrap.isekai-shop-page .dropdown-menu .dropdown-item:hover,
 #wrap.isekai-shop-page .dropdown-menu .dropdown-item:focus {
-    background: var(--isekai-card);
-    color: var(--isekai-accent);
+    background: var(--isekai-card, #1a2647);
+    color: var(--isekai-accent, #8db0ff);
 }
 
 #wrap.isekai-shop-page input[type="checkbox"] {
-    accent-color: var(--isekai-primary);
+    accent-color: var(--isekai-primary, #406fce);
 }
 
 #wrap.isekai-shop-page .accordion-item {
     background: transparent;
-    border-color: var(--isekai-border);
+    border-color: var(--isekai-border, rgba(255,255,255,.10));
 }
 
 #wrap.isekai-shop-page .accordion-button {
     background: transparent;
-    color: var(--isekai-text);
+    color: var(--isekai-text, #f8fafc);
     box-shadow: none;
 }
 
 #wrap.isekai-shop-page .accordion-button:not(.collapsed) {
     background: rgba(64, 111, 206, 0.08);
-    color: var(--isekai-accent);
+    color: var(--isekai-accent, #8db0ff);
 }
 
 #wrap.isekai-shop-page .accordion-body {
     background: transparent;
-    color: var(--isekai-text);
+    color: var(--isekai-text, #f8fafc);
 }
 
 
@@ -1854,15 +1863,15 @@
    idénticas en ambas páginas) y responde también al modo claro.
    ================================================================ */
 
-.isekai-footer {
+.isekai-footer.isekai-footer {
     position: relative;
     width: 100%;
     margin: 0 !important;
     padding: 70px 0 0 !important;
-    background: linear-gradient(180deg, var(--isekai-surface) 0%, var(--isekai-bg) 100%) !important;
+    background: linear-gradient(180deg, var(--isekai-surface, #131c35) 0%, var(--isekai-bg, #0b1120) 100%) !important;
     border-top: 1px solid rgba(64,111,206,.35) !important;
     overflow: hidden;
-    color: var(--isekai-text);
+    color: var(--isekai-text, #f8fafc) !important;
     font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
 }
 
@@ -1874,7 +1883,7 @@
     width: 280px;
     height: 2px;
     transform: translateX(-50%);
-    background: var(--isekai-primary);
+    background: var(--isekai-primary, #406fce);
     box-shadow: 0 0 20px rgba(64,111,206,.65);
 }
 
@@ -1882,10 +1891,11 @@
     position: relative;
 }
 
-.isekai-footer-newsletter {
+.isekai-footer-newsletter.isekai-footer-newsletter {
     border-bottom: 1px solid rgba(255,255,255,.08);
     padding-bottom: 40px;
     margin-bottom: 40px;
+    background: transparent !important;
 }
 
 .isekai-newsletter-content {
@@ -1896,10 +1906,10 @@
     flex-wrap: wrap;
 }
 
-.isekai-footer-eyebrow {
+.isekai-footer-eyebrow.isekai-footer-eyebrow {
     display: block;
     margin-bottom: 8px;
-    color: var(--isekai-accent);
+    color: var(--isekai-accent, #8db0ff) !important;
     font-size: 12px;
     font-weight: 800;
     letter-spacing: .12em;
@@ -1907,14 +1917,14 @@
 
 .isekai-newsletter-text h2 {
     margin: 0 0 6px;
-    color: var(--isekai-text);
-    font-size: 22px;
+    color: var(--isekai-text, #f8fafc) !important;
+    font-size: 22px !important;
 }
 
 .isekai-newsletter-text p {
     margin: 0;
-    color: var(--isekai-muted);
-    font-size: 14px;
+    color: var(--isekai-muted, #94a3b8) !important;
+    font-size: 14px !important;
 }
 
 .isekai-newsletter-form {
@@ -1926,14 +1936,14 @@
     min-width: 260px;
     height: 46px;
     padding: 0 18px;
-    border: 1px solid var(--isekai-border);
+    border: 1px solid var(--isekai-border, rgba(255,255,255,.10));
     border-radius: 999px;
-    background: var(--isekai-surface);
-    color: var(--isekai-text);
+    background: var(--isekai-surface, #131c35);
+    color: var(--isekai-text, #f8fafc);
 }
 
 .isekai-newsletter-form input::placeholder {
-    color: var(--isekai-muted);
+    color: var(--isekai-muted, #94a3b8);
 }
 
 .isekai-newsletter-form button {
@@ -1942,17 +1952,17 @@
     gap: 8px;
     height: 46px;
     padding: 0 22px;
-    border: 1px solid var(--isekai-primary);
+    border: 1px solid var(--isekai-primary, #406fce);
     border-radius: 999px;
-    background: var(--isekai-primary);
+    background: var(--isekai-primary, #406fce);
     color: #ffffff;
     font-weight: 700;
     white-space: nowrap;
 }
 
 .isekai-newsletter-form button:hover {
-    background: var(--isekai-primary-hover);
-    border-color: var(--isekai-primary-hover);
+    background: var(--isekai-primary-hover, #315db4);
+    border-color: var(--isekai-primary-hover, #315db4);
 }
 
 .isekai-footer-main {
@@ -1973,7 +1983,7 @@
 }
 
 .isekai-footer-logo {
-    color: var(--isekai-accent);
+    color: var(--isekai-accent, #8db0ff);
     font-weight: 800;
     letter-spacing: .1em;
 }
@@ -1981,7 +1991,7 @@
 .isekai-footer-brand strong {
     display: inline-block !important;
     margin-bottom: 4px !important;
-    color: var(--isekai-text) !important;
+    color: var(--isekai-text, #f8fafc) !important;
     font-size: 22px !important;
     font-weight: 800 !important;
     letter-spacing: .05em;
@@ -1995,14 +2005,14 @@
     height: 3px;
     margin-top: 10px;
     border-radius: 3px;
-    background: var(--isekai-primary);
+    background: var(--isekai-primary, #406fce);
     box-shadow: 0 0 12px rgba(64,111,206,.45);
 }
 
 .isekai-footer-brand p {
     margin: 12px 0 0 !important;
     max-width: 350px;
-    color: var(--isekai-muted) !important;
+    color: var(--isekai-muted, #94a3b8) !important;
     font-size: 14px !important;
     line-height: 1.7;
 }
@@ -2011,7 +2021,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--isekai-muted) !important;
+    color: var(--isekai-muted, #94a3b8) !important;
     font-size: 13px;
 }
 
@@ -2019,7 +2029,7 @@
     position: relative;
     margin: 0 0 8px !important;
     padding-bottom: 10px;
-    color: var(--isekai-text) !important;
+    color: var(--isekai-text, #f8fafc) !important;
     font-size: 14px !important;
     font-weight: 800 !important;
     letter-spacing: .04em;
@@ -2034,14 +2044,14 @@
     height: 2px;
     margin-top: 9px;
     border-radius: 2px;
-    background: var(--isekai-primary);
+    background: var(--isekai-primary, #406fce);
 }
 
 .isekai-footer-section a {
     position: relative;
     width: fit-content;
     padding: 2px 0 !important;
-    color: var(--isekai-muted) !important;
+    color: var(--isekai-muted, #94a3b8) !important;
     font-size: 14px !important;
     font-weight: 500 !important;
     line-height: 1.5;
@@ -2053,14 +2063,14 @@
     content: "›";
     display: inline-block;
     margin-right: 7px;
-    color: var(--isekai-primary);
+    color: var(--isekai-primary, #406fce);
     font-size: 17px;
     font-weight: 700;
     transition: transform .2s ease;
 }
 
 .isekai-footer-section a:hover {
-    color: var(--isekai-text) !important;
+    color: var(--isekai-text, #f8fafc) !important;
     transform: translateX(4px);
 }
 
@@ -2071,7 +2081,7 @@
 .isekai-footer-address {
     display: flex;
     gap: 8px;
-    color: var(--isekai-muted);
+    color: var(--isekai-muted, #94a3b8);
     font-size: 13px;
     line-height: 1.6;
 }
@@ -2086,7 +2096,7 @@
 
 .isekai-footer-community-column h3 {
     margin: 0 0 12px;
-    color: var(--isekai-text);
+    color: var(--isekai-text, #f8fafc);
     font-size: 13px;
     font-weight: 800;
     letter-spacing: .04em;
@@ -2103,18 +2113,18 @@
     align-items: center;
     gap: 8px;
     padding: 9px 14px;
-    border: 1px solid var(--isekai-border);
+    border: 1px solid var(--isekai-border, rgba(255,255,255,.10));
     border-radius: 999px;
-    background: var(--isekai-surface);
-    color: var(--isekai-text);
+    background: var(--isekai-surface, #131c35);
+    color: var(--isekai-text, #f8fafc);
     text-decoration: none;
     font-size: 13px;
     transition: background-color .2s ease, border-color .2s ease, color .2s ease;
 }
 
 .isekai-footer-social a:hover {
-    background: var(--isekai-primary);
-    border-color: var(--isekai-primary);
+    background: var(--isekai-primary, #406fce);
+    border-color: var(--isekai-primary, #406fce);
     color: #ffffff;
 }
 
@@ -2126,19 +2136,19 @@
 
 .isekai-footer-group-list a {
     padding: 8px 14px;
-    border: 1px solid var(--isekai-border);
+    border: 1px solid var(--isekai-border, rgba(255,255,255,.10));
     border-radius: 999px;
-    background: var(--isekai-surface);
-    color: var(--isekai-muted);
+    background: var(--isekai-surface, #131c35);
+    color: var(--isekai-muted, #94a3b8);
     text-decoration: none;
     font-size: 13px;
     transition: background-color .2s ease, border-color .2s ease, color .2s ease;
 }
 
 .isekai-footer-group-list a:hover {
-    background: var(--isekai-card);
-    border-color: var(--isekai-primary);
-    color: var(--isekai-accent);
+    background: var(--isekai-card, #1a2647);
+    border-color: var(--isekai-primary, #406fce);
+    color: var(--isekai-accent, #8db0ff);
 }
 
 .isekai-footer-legal {
@@ -2148,7 +2158,7 @@
 
 .isekai-footer-legal-title {
     margin-bottom: 10px;
-    color: var(--isekai-muted);
+    color: var(--isekai-muted, #94a3b8);
     font-size: 12px;
     font-weight: 800;
     letter-spacing: .08em;
@@ -2162,13 +2172,13 @@
 }
 
 .isekai-footer-legal-links a {
-    color: var(--isekai-muted);
+    color: var(--isekai-muted, #94a3b8);
     font-size: 13px;
     text-decoration: none;
 }
 
 .isekai-footer-legal-links a:hover {
-    color: var(--isekai-accent);
+    color: var(--isekai-accent, #8db0ff);
 }
 
 .isekai-footer-bottom {
@@ -2179,7 +2189,7 @@
     min-height: 70px;
     padding: 20px 0 !important;
     border-top: 1px solid rgba(255,255,255,.08) !important;
-    color: var(--isekai-muted) !important;
+    color: var(--isekai-muted, #94a3b8) !important;
     font-size: 12px !important;
 }
 
@@ -2188,12 +2198,12 @@
 }
 
 .isekai-footer-developer strong {
-    color: var(--isekai-muted) !important;
+    color: var(--isekai-muted, #94a3b8) !important;
     font-weight: 600 !important;
 }
 
 .isekai-footer-developer strong:hover {
-    color: var(--isekai-accent) !important;
+    color: var(--isekai-accent, #8db0ff) !important;
 }
 
 
@@ -2533,7 +2543,7 @@ body.isekai-light-theme {
     border: 1px solid rgba(64,111,206,.30) !important;
     border-radius: 50% !important;
     background: var(--isekai-surface, #131c35) !important;
-    color: var(--isekai-accent-theme) !important;
+    color: var(--isekai-accent-theme, #8db0ff) !important;
     cursor: pointer;
     position: relative;
     overflow: hidden;
@@ -2545,15 +2555,15 @@ body.isekai-light-theme {
 }
 
 .isekai-theme-toggle:hover {
-    border-color: var(--isekai-primary-theme) !important;
-    color: var(--isekai-primary-theme) !important;
+    border-color: var(--isekai-primary-theme, #406fce) !important;
+    color: var(--isekai-primary-theme, #406fce) !important;
     transform: translateY(-1px);
 }
 
 .isekai-theme-toggle:focus,
 .isekai-theme-toggle:focus-visible {
     outline: none !important;
-    border-color: var(--isekai-primary-theme) !important;
+    border-color: var(--isekai-primary-theme, #406fce) !important;
     box-shadow: 0 0 0 3px rgba(64,111,206,.16) !important;
 }
 
@@ -2610,12 +2620,12 @@ body.isekai-light-theme .isekai-theme-icon-light {
    ================================================================ */
 
 body.isekai-light-theme .isekai-header {
-    background: var(--isekai-header-bg) !important;
+    background: var(--isekai-header-bg, #111a31) !important;
     border-bottom-color: #d9e2f0 !important;
 }
 
 body.isekai-light-theme .isekai-category-nav {
-    background: var(--isekai-nav-bg) !important;
+    background: var(--isekai-nav-bg, #263570) !important;
     border-bottom-color: #c9d7ef !important;
 }
 
@@ -2666,6 +2676,28 @@ body.isekai-light-theme .isekai-user-menu-header small {
     color: #64748b !important;
 }
 
+/* FIX: la cabecerita interna del popup (icono + "Mi cuenta"/email)
+   tenía un fondo azul marino fijo (#263570) que nunca cambiaba, y
+   el texto ya se ponía oscuro para el modo claro -> texto oscuro
+   sobre fondo oscuro, ilegible. Ahora el fondo también cambia. */
+body.isekai-light-theme .isekai-user-menu-header {
+    background: #eef3ff !important;
+    border-bottom-color: #d9e2f0 !important;
+}
+
+body.isekai-light-theme .isekai-user-menu-header > i {
+    color: #254587 !important;
+}
+
+body.isekai-light-theme .isekai-user-menu-links a i {
+    color: #3b75d4 !important;
+}
+
+body.isekai-light-theme .isekai-user-menu-links a.isekai-logout {
+    color: #dc2626 !important;
+    border-top-color: #e2e8f0 !important;
+}
+
 body.isekai-light-theme .isekai-user-button {
     background: #ffffff !important;
     border-color: #d9e2f0 !important;
@@ -2708,8 +2740,8 @@ body.isekai-light-theme #isekai-home {
 
     --isekai-border: #d9e2f0;
 
-    background: var(--isekai-bg) !important;
-    color: var(--isekai-text) !important;
+    background: var(--isekai-bg, #0b1120) !important;
+    color: var(--isekai-text, #f8fafc) !important;
 }
 
 body.isekai-light-theme #isekai-home .isekai-carousel {
@@ -2785,4 +2817,333 @@ body.isekai-light-theme .isekai-footer-community,
 body.isekai-light-theme .isekai-footer-legal,
 body.isekai-light-theme .isekai-footer-bottom {
     border-color: #e2e8f0 !important;
+}
+
+
+/* ================================================================
+   PORTAL - MI CUENTA (user.xml)
+   Mismas variables de color que Home y Shop, para que este
+   bloque no se vea "distinto" al resto del sitio. Los propios
+   <div>/<a> internos que genera "portal.portal_docs_entry" no
+   están en este repo (los aporta el módulo "portal" de Odoo), así
+   que aquí se sobreescriben las clases estándar de Bootstrap/Odoo
+   que ese template suele usar (.card, .alert, .o_portal_category,
+   .o_portal_cards). Si al probarlo en el navegador alguna tarjeta
+   no coge el estilo, hay que mirar el HTML generado con el
+   inspector y ajustar el selector correspondiente aquí.
+   ================================================================ */
+
+.isekai-portal-page {
+    --isekai-primary: #406fce;
+    --isekai-secondary: #263570;
+    --isekai-primary-hover: #315db4;
+    --isekai-accent: #8db0ff;
+
+    --isekai-bg: #0b1120;
+    --isekai-surface: #131c35;
+    --isekai-card: #1a2647;
+
+    --isekai-text: #f8fafc;
+    --isekai-muted: #94a3b8;
+
+    --isekai-border: rgba(255,255,255,.10);
+
+    display: block;
+    width: 100%;
+    min-height: 100vh;
+    background: var(--isekai-bg, #0b1120) !important;
+    color: var(--isekai-text, #f8fafc) !important;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.isekai-portal-page *,
+.isekai-portal-page *::before,
+.isekai-portal-page *::after {
+    box-sizing: border-box;
+}
+
+.isekai-portal-content {
+    padding: 40px 0 70px;
+}
+
+.isekai-portal-heading {
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--isekai-secondary, #263570);
+}
+
+.isekai-portal-heading .isekai-shop-eyebrow {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--isekai-accent, #8db0ff);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .12em;
+}
+
+.isekai-portal-heading h1 {
+    margin: 0 0 8px;
+    color: var(--isekai-text, #f8fafc);
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.isekai-portal-subtitle {
+    margin: 0;
+    color: var(--isekai-muted, #94a3b8);
+    font-size: 14px;
+}
+
+/* AVISOS */
+.isekai-portal-alerts .alert,
+.isekai-portal-alerts .alert-primary {
+    background: rgba(64, 111, 206, 0.14) !important;
+    border: 1px solid rgba(64, 111, 206, 0.35) !important;
+    border-radius: 12px !important;
+    color: var(--isekai-text, #f8fafc) !important;
+}
+
+/* TARJETAS - selectores genéricos por si portal.portal_docs_entry
+   usa Bootstrap "card" o clases propias "o_portal_docs_entry" */
+.isekai-portal-cards {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.isekai-portal-cards .card,
+.isekai-portal-cards .o_portal_docs_entry,
+.isekai-portal-cards a {
+    background: var(--isekai-card, #1a2647) !important;
+    border: 1px solid var(--isekai-border, rgba(255,255,255,.10)) !important;
+    border-radius: 16px !important;
+    color: var(--isekai-text, #f8fafc) !important;
+    text-decoration: none !important;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.isekai-portal-cards .card:hover,
+.isekai-portal-cards .o_portal_docs_entry:hover,
+.isekai-portal-cards a:hover {
+    transform: translateY(-5px);
+    border-color: var(--isekai-primary, #406fce) !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,.25);
+}
+
+.isekai-portal-cards .card-body,
+.isekai-portal-cards .card-title,
+.isekai-portal-cards h5,
+.isekai-portal-cards h4 {
+    color: var(--isekai-text, #f8fafc) !important;
+}
+
+.isekai-portal-cards .text-muted,
+.isekai-portal-cards small {
+    color: var(--isekai-muted, #94a3b8) !important;
+}
+
+.isekai-portal-cards .badge {
+    background: var(--isekai-primary, #406fce) !important;
+    color: #ffffff !important;
+}
+
+.isekai-portal-cards i,
+.isekai-portal-cards .fa {
+    color: var(--isekai-accent, #8db0ff) !important;
+}
+
+/* Spinner de carga de contadores (fetch AJAX de Odoo) */
+.isekai-portal-docs .o_portal_doc_spinner {
+    color: var(--isekai-accent, #8db0ff) !important;
+}
+
+
+/* OCULTAR HEADER NATIVO DE ODOO TAMBIÉN EN EL PORTAL */
+body.isekai-portal-active #wrapwrap > header#top,
+body.isekai-portal-active #wrapwrap > header.o_header_standard,
+body.isekai-portal-active #wrapwrap > header.o_header_affixed,
+body.isekai-portal-active header#top {
+    display: none !important;
+}
+
+body.isekai-portal-active #wrapwrap,
+body.isekai-portal-active .isekai-portal-page {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Odoo suele envolver el contenido del portal en un breadcrumb +
+   columna lateral (o_portal_wrap / o_portal_nav): se ocultan
+   porque la navegación equivalente ya la da nuestro header +
+   nav de categorías. */
+body.isekai-portal-active .o_portal_nav,
+body.isekai-portal-active .o_portal_breadcrumb,
+body.isekai-portal-active nav[aria-label="breadcrumb"] {
+    display: none !important;
+}
+
+
+/* ================================================================
+   MODO CLARO - PORTAL
+   ================================================================ */
+
+body.isekai-light-theme .isekai-portal-page {
+    --isekai-primary: #3b75d4;
+    --isekai-secondary: #254587;
+    --isekai-primary-hover: #2f65bd;
+    --isekai-accent: #254587;
+
+    --isekai-bg: #f5f7fb;
+    --isekai-surface: #ffffff;
+    --isekai-card: #ffffff;
+
+    --isekai-text: #172033;
+    --isekai-muted: #64748b;
+
+    --isekai-border: #d9e2f0;
+}
+
+body.isekai-light-theme .isekai-portal-cards .card,
+body.isekai-light-theme .isekai-portal-cards .o_portal_docs_entry,
+body.isekai-light-theme .isekai-portal-cards a {
+    box-shadow: 0 8px 24px rgba(23, 32, 51, .08);
+}
+
+body.isekai-light-theme .isekai-portal-alerts .alert,
+body.isekai-light-theme .isekai-portal-alerts .alert-primary {
+    background: rgba(59, 117, 212, 0.10) !important;
+    border-color: rgba(59, 117, 212, 0.30) !important;
+}
+
+
+/* ================================================================
+   RESPONSIVE - PORTAL
+   ================================================================ */
+
+@media (max-width: 600px) {
+    .isekai-portal-content {
+        padding: 24px 0 45px;
+    }
+
+    .isekai-portal-heading h1 {
+        font-size: 24px;
+    }
+
+    .isekai-portal-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+}
+
+
+/* ================================================================
+   PORTAL - CHROME NATIVO DE ODOO ALREDEDOR DE user.xml
+   ================================================================
+   El título "Mi cuenta" y la tarjeta de contacto (avatar, email,
+   "Editar información") NO vienen de user.xml: los genera
+   "portal.portal_layout", que envuelve TODAS las páginas /my/*
+   (Pedidos, Facturas, Direcciones...) y no forma parte de este
+   repositorio, así que no se puede editar su estructura desde
+   aquí — solo "pintarla" por CSS.
+
+   Todo este bloque va detrás de "body.isekai-portal-active", la
+   clase que script.js añade SOLO cuando la página actual contiene
+   nuestro bloque ".isekai-portal-page" (o sea, solo en /my/home).
+   Así evitamos que estas reglas afecten a /my/orders, /my/invoices,
+   /my/addresses, etc., que todavía usan el diseño nativo de Odoo
+   sin personalizar y necesitan seguir mostrando su título y su
+   barra lateral tal cual, hasta que se decida vestirlas también.
+
+   AVISO: los selectores de la tarjeta de contacto lateral
+   (.o_portal_my_details, el h5 con el nombre, el enlace a
+   /my/account) están basados en el HTML que compartiste. Si Odoo
+   cambia esas clases en una actualización, puede que alguna regla
+   deje de aplicar y haya que revisarla contra el HTML real.
+   ================================================================ */
+
+body.isekai-portal-active {
+    --isekai-primary: #406fce;
+    --isekai-bg: #0b1120;
+    --isekai-surface: #131c35;
+    --isekai-text: #f8fafc;
+    --isekai-muted: #94a3b8;
+    --isekai-accent: #8db0ff;
+    --isekai-border: rgba(255,255,255,.10);
+}
+
+body.isekai-portal-active.isekai-light-theme {
+    --isekai-bg: #f5f7fb;
+    --isekai-surface: #ffffff;
+    --isekai-text: #172033;
+    --isekai-muted: #64748b;
+    --isekai-accent: #254587;
+    --isekai-border: #d9e2f0;
+}
+
+/* Fondo de TODA la página, forzado en cada nivel de contenedor
+   de Odoo (container > row > columnas), no solo en el más
+   exterior. FIX: antes solo se oscurecía "#wrap.o_portal_wrap",
+   pero alguno de los niveles intermedios (la columna de la
+   tarjeta de contacto, en concreto) tiene su propio fondo blanco
+   puesto por Odoo que tapaba el nuestro -- por eso la tarjeta de
+   la derecha se seguía viendo "flotando" en blanco encima de una
+   página oscura en vez de fundirse con ella. */
+body.isekai-portal-active #wrap.o_portal_wrap,
+body.isekai-portal-active #wrap.o_portal_wrap > .container,
+body.isekai-portal-active #wrap.o_portal_wrap .row,
+body.isekai-portal-active .o_portal_content,
+body.isekai-portal-active .d-none.d-lg-flex.justify-content-end,
+body.isekai-portal-active .d-none.d-lg-flex.justify-content-end > div {
+    background: var(--isekai-bg, #0b1120) !important;
+}
+
+body.isekai-portal-active #wrap.o_portal_wrap {
+    min-height: 100vh;
+}
+
+/* Oculta el título nativo "Mi cuenta": ya lo mostramos dentro de
+   nuestra propia cabecera ("MI CUENTA" + "Bienvenido, ..."), así
+   que dejarlo duplicaría el título. */
+body.isekai-portal-active #wrap.o_portal_wrap > .container > .wrapper {
+    display: none !important;
+}
+
+/* TARJETA DE CONTACTO LATERAL (avatar + nombre + email +
+   "Editar información") y su versión en el offcanvas móvil. */
+body.isekai-portal-active .o_portal_my_details,
+body.isekai-portal-active .o_portal_address,
+body.isekai-portal-active .offcanvas-body {
+    color: var(--isekai-text, #f8fafc) !important;
+}
+
+body.isekai-portal-active .d-none.d-lg-flex.justify-content-end h5,
+body.isekai-portal-active .offcanvas-body h5 {
+    color: var(--isekai-text, #f8fafc) !important;
+}
+
+body.isekai-portal-active a[href="/my/account"] {
+    color: var(--isekai-accent, #8db0ff) !important;
+    text-decoration: none !important;
+}
+
+body.isekai-portal-active a[href="/my/account"]:hover {
+    text-decoration: underline !important;
+}
+
+body.isekai-portal-active .o_portal_address i,
+body.isekai-portal-active .o_portal_my_details i {
+    color: var(--isekai-accent, #8db0ff) !important;
+}
+
+body.isekai-portal-active .o_portal_content ~ div .rounded {
+    border: 1px solid var(--isekai-border, rgba(255,255,255,.10));
+}
+
+/* Offcanvas de "mi cuenta" en móvil */
+body.isekai-portal-active .offcanvas {
+    background: var(--isekai-surface, #131c35) !important;
+    color: var(--isekai-text, #f8fafc) !important;
+}
+
+body.isekai-portal-active .offcanvas .btn-close {
+    filter: invert(1);
 }

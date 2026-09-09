@@ -1,0 +1,311 @@
+<t name="My Portal" t-name="portal.portal_my_home">
+    <t t-call="portal.portal_layout" my_details="True">
+
+        <!-- =====================================================
+             MI CUENTA (PORTAL)
+             =====================================================
+             NOTA: se mantiene t-call="portal.portal_layout" tal
+             cual, porque ese template (que no forma parte de este
+             archivo) es el que gestiona el breadcrumb, el menú
+             lateral compartido con /my/orders, /my/invoices,
+             /my/addresses, etc. y la seguridad del portal. Aquí
+             solo se viste el contenido con la cabecera, nav y
+             footer de Isekai, igual que en index.xml y
+             products.xml.
+             ===================================================== -->
+        <div class="isekai-portal-page">
+
+            <!-- =================================================
+                 HEADER ISEKAI (idéntico a home/shop)
+                 ================================================= -->
+            <header class="isekai-header">
+                <div class="isekai-container isekai-header-inner">
+
+                    <!-- LOGO -->
+                    <a href="/" class="isekai-logo" aria-label="Isekai TCG Store">
+                        <img src="/web/image/1329-73065db4/01_Marca%20completa_fondo%20claro%20%284%29.webp" alt="" data-attachment-id="1328" class="isekai-logo-image img img-fluid o_we_custom_image o_attachment_pending_record_id" data-format-mimetype="image/webp" data-resize-width="162" data-original-id="1328" data-original-src="/web/image/1328-48608fe1/01_Marca%20completa_fondo%20claro%20%284%29.png" data-mimetype-before-conversion="image/png" data-mimetype="image/webp"/>
+                    </a>
+
+                    <!-- BUSCADOR -->
+                    <form action="/shop" method="get" class="isekai-search" role="search">
+                        <input type="search" name="search" placeholder="Buscar productos..." autocomplete="off" aria-label="Buscar productos"/>
+                        <button type="submit" aria-label="Buscar" title="Buscar">
+                            <span class="isekai-search-icon"/>
+                        </button>
+                    </form>
+
+                    <!-- MODO CLARO / OSCURO -->
+                    <button type="button" class="isekai-theme-toggle" aria-label="Cambiar a modo claro" aria-pressed="false" title="Cambiar a modo claro">
+                        <i class="fa fa-moon-o isekai-theme-icon-dark" aria-hidden="true"/>
+                        <i class="fa fa-sun-o isekai-theme-icon-light" aria-hidden="true"/>
+                    </button>
+
+                    <!-- USUARIO -->
+                    <div class="isekai-user">
+                        <t t-if="request.env.user._is_public()">
+                            <div class="isekai-user-dropdown">
+                                <button type="button" class="isekai-user-button" aria-expanded="false" aria-label="Abrir menú de usuario">
+                                    <i class="fa fa-user" aria-hidden="true"/>
+                                    <span>Mi cuenta</span>
+                                    <i class="fa fa-chevron-down isekai-user-arrow" aria-hidden="true"/>
+                                </button>
+                                <div class="isekai-user-menu">
+                                    <div class="isekai-user-menu-header">
+                                        <i class="fa fa-user-circle" aria-hidden="true"/>
+                                        <div>
+                                            <strong>Bienvenido</strong>
+                                            <small>Accede a tu cuenta</small>
+                                        </div>
+                                    </div>
+                                    <div class="isekai-user-menu-links">
+                                        <a href="/web/login?redirect=/my/home">
+                                            <i class="fa fa-sign-in" aria-hidden="true"/>
+                                            <span>Iniciar sesión</span>
+                                        </a>
+                                        <a href="/web/signup?redirect=/my/home">
+                                            <i class="fa fa-user-plus" aria-hidden="true"/>
+                                            <span>Crear cuenta</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <div class="isekai-user-dropdown">
+                                <button type="button" class="isekai-user-button" aria-expanded="false" aria-label="Abrir menú de usuario">
+                                    <i class="fa fa-user" aria-hidden="true"/>
+                                    <span t-out="request.env.user.name"/>
+                                    <i class="fa fa-chevron-down isekai-user-arrow" aria-hidden="true"/>
+                                </button>
+                                <div class="isekai-user-menu">
+                                    <div class="isekai-user-menu-header">
+                                        <i class="fa fa-user-circle" aria-hidden="true"/>
+                                        <div>
+                                            <strong>Mi cuenta</strong>
+                                            <small t-out="request.env.user.email"/>
+                                        </div>
+                                    </div>
+                                    <div class="isekai-user-menu-links">
+                                        <a href="/my/home">
+                                            <i class="fa fa-user" aria-hidden="true"/>
+                                            <span>Mi perfil</span>
+                                        </a>
+                                        <a href="/my/orders">
+                                            <i class="fa fa-box" aria-hidden="true"/>
+                                            <span>Mis pedidos</span>
+                                        </a>
+                                        <a href="/shop/cart">
+                                            <i class="fa fa-shopping-cart" aria-hidden="true"/>
+                                            <span>Mi carrito</span>
+                                        </a>
+                                        <a href="/web/session/logout?redirect=/" class="isekai-logout">
+                                            <i class="fa fa-sign-out" aria-hidden="true"/>
+                                            <span>Cerrar sesión</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </header>
+
+            <!-- =================================================
+                 CATEGORÍAS (idéntico patrón que home/shop)
+                 ================================================= -->
+            <nav class="isekai-category-nav" aria-label="Categorías de productos">
+                <div class="isekai-container">
+                    <div class="isekai-category-list">
+                        <t t-foreach="request.env['product.public.category'].sudo().search([('parent_id', '=', False)], order='sequence, name')" t-as="category_nav">
+                            <div class="isekai-category-dropdown">
+                                <a t-att-href="'/shop/category/%s' % category_nav.id" class="isekai-category-button" t-att-data-category-id="category_nav.id" t-att-aria-expanded="'false' if category_nav.child_id else None">
+                                    <span><t t-out="category_nav.name"/></span>
+                                    <i t-if="category_nav.child_id" class="fa fa-chevron-down isekai-category-arrow" aria-hidden="true"/>
+                                </a>
+                                <div t-if="category_nav.child_id" class="isekai-subcategory-menu" role="menu">
+                                    <t t-foreach="category_nav.child_id.sorted(key=lambda c: (c.sequence, c.name))" t-as="subcategory_nav">
+                                        <a t-att-href="'/shop/category/%s' % subcategory_nav.id" class="isekai-subcategory-link" role="menuitem">
+                                            <t t-out="subcategory_nav.name"/>
+                                        </a>
+                                    </t>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- =================================================
+                 CONTENIDO DEL PORTAL
+                 ================================================= -->
+            <div class="isekai-container isekai-portal-content">
+
+                <!-- CABECERA DE PÁGINA: mismo patrón "eyebrow +
+                     título" que "Todos los productos" en el Shop
+                     y "Últimas novedades" en la Home. -->
+                <div class="isekai-portal-heading">
+                    <span class="isekai-shop-eyebrow">MI CUENTA</span>
+                    <h1 class="isekai-shop-title">
+                        Bienvenido<t t-if="not request.env.user._is_public()">, <t t-out="request.env.user.name"/></t>
+                    </h1>
+                    <p class="isekai-portal-subtitle">
+                        Consulta tus pedidos, facturas, direcciones de envío y toda la información de tu cuenta.
+                    </p>
+                </div>
+
+                <div class="o_portal_my_home isekai-portal-docs">
+                    <div class="oe_structure" id="oe_structure_portal_my_home_1"/>
+
+                    <div class="o_portal_docs">
+
+                        <!-- AVISOS (p.ej. facturas pendientes, tickets abiertos...) -->
+                        <div t-if="portal_entries.get('alert', [])" class="o_portal_category d-flex flex-wrap gap-2 mt-3 o_not_editable isekai-portal-alerts" id="portal_alert_category">
+                            <t t-foreach="portal_entries.get('alert', [])" t-as="entry">
+                                <t t-call="portal.portal_docs_entry" bg_color.f="alert alert-primary align-items-center" show_count="True" placeholder_count="entry.placeholder_count"/>
+                            </t>
+                        </div>
+
+                        <!-- TARJETAS (Pedidos, Facturas, Direcciones, Tickets...) -->
+                        <div t-if="portal_cards or (editable and portal_hidden_cards)" class="o_portal_cards d-grid mt-3 isekai-portal-cards" id="portal_cards">
+                            <t t-foreach="portal_cards" t-as="entry">
+                                <t t-call="portal.portal_docs_entry" placeholder_count="entry.placeholder_count"/>
+                            </t>
+                            <t t-if="editable">
+                                <t t-foreach="portal_hidden_cards" t-as="entry">
+                                    <t t-call="portal.portal_docs_entry" placeholder_count="entry.placeholder_count"/>
+                                </t>
+                            </t>
+                        </div>
+
+                        <div class="o_portal_doc_spinner spinner-border text-o-color-2 align-self-center mt-5"/>
+                    </div>
+                </div>
+
+                <div class="oe_structure" id="oe_structure_portal_my_home_2"/>
+            </div>
+
+            <!-- =================================================
+                 FOOTER ISEKAI (idéntico a home/shop)
+                 ================================================= -->
+            <footer class="isekai-footer">
+
+                <!-- NEWSLETTER -->
+                <div class="isekai-footer-newsletter">
+                    <div class="isekai-container">
+                        <div class="isekai-newsletter-content">
+                            <div class="isekai-newsletter-text">
+                                <span class="isekai-footer-eyebrow">MANTENTE AL DÍA</span>
+                                <h2>Recibe las últimas ofertas y novedades</h2>
+                                <p>Suscríbete para conocer nuestras novedades, nuevos productos, promociones y eventos.</p>
+                            </div>
+                            <form class="isekai-newsletter-form" action="/website_mass_mailing/subscribe" method="post">
+                                <input type="email" name="email" placeholder="Su dirección de email" aria-label="Su dirección de email" required="required"/>
+                                <button type="submit" aria-label="Suscribirse al boletín">
+                                    Enviar
+                                    <i class="fa fa-arrow-right" aria-hidden="true"/>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FOOTER PRINCIPAL -->
+                <div class="isekai-container">
+                    <div class="isekai-footer-main">
+
+                        <!-- MARCA -->
+                        <div class="isekai-footer-section isekai-footer-brand">
+                            <div class="isekai-footer-logo">ISEKAI</div>
+                            <strong>ISEKAI TCG STORE</strong>
+                            <p>Tu tienda especializada en TCG, Warhammer, Funko POP, figuras anime y coleccionismo.</p>
+                            <p class="isekai-footer-location">
+                                <i class="fa fa-map-marker" aria-hidden="true"/>
+                                Alcorcón, Madrid
+                            </p>
+                        </div>
+
+                        <!-- TIENDA -->
+                        <div class="isekai-footer-section">
+                            <h3>Tienda</h3>
+                            <a href="/shop"><i class="fa fa-angle-right" aria-hidden="true"/>Tienda</a>
+                            <a href="/shop"><i class="fa fa-angle-right" aria-hidden="true"/>Categorías</a>
+                            <a href="/shop"><i class="fa fa-angle-right" aria-hidden="true"/>Novedades</a>
+                        </div>
+
+                        <!-- MI CUENTA -->
+                        <div class="isekai-footer-section">
+                            <h3>Mi cuenta</h3>
+                            <a href="/my/home"><i class="fa fa-angle-right" aria-hidden="true"/>Mi perfil</a>
+                            <a href="/my/orders"><i class="fa fa-angle-right" aria-hidden="true"/>Mis pedidos</a>
+                            <a href="/shop/cart"><i class="fa fa-angle-right" aria-hidden="true"/>Mi carrito</a>
+                        </div>
+
+                        <!-- CONTACTO -->
+                        <div class="isekai-footer-section">
+                            <h3>Contacto</h3>
+                            <a href="tel:+34604949849"><i class="fa fa-phone" aria-hidden="true"/>604 94 98 49</a>
+                            <a href="mailto:isekaigeekshop@gmail.com"><i class="fa fa-envelope" aria-hidden="true"/>isekaigeekshop@gmail.com</a>
+                            <div class="isekai-footer-address">
+                                <i class="fa fa-map-marker" aria-hidden="true"/>
+                                <span>Avenida Torres Bellas, 4<br/>28923 Alcorcón, Madrid<br/>España</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COMUNIDAD -->
+                    <div class="isekai-footer-community">
+                        <div class="isekai-footer-community-column">
+                            <h3>Nuestras redes</h3>
+                            <div class="isekai-footer-social">
+                                <a href="https://twitter.com/ISEKAI_ALCORCON" target="_blank" rel="noopener noreferrer" aria-label="Twitter" title="Twitter">
+                                    <i class="fa fa-twitter" aria-hidden="true"/>
+                                    <span>Twitter</span>
+                                </a>
+                                <a href="https://www.instagram.com/isekai.alcorcon/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+                                    <i class="fa fa-instagram" aria-hidden="true"/>
+                                    <span>Instagram</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="isekai-footer-community-column isekai-footer-groups">
+                            <h3>Únete a nuestra comunidad</h3>
+                            <div class="isekai-footer-group-list">
+                                <a href="https://chat.whatsapp.com/GBbaAx0tZjFEjawZ8uiMHC" target="_blank" rel="noopener noreferrer">Magic The Gathering</a>
+                                <a href="https://chat.whatsapp.com/JxQ0IJIg8wsEmYJiQoa9Ml" target="_blank" rel="noopener noreferrer">One Piece Card Game</a>
+                                <a href="https://chat.whatsapp.com/C2yBWYtLRwKCR5JVDMZpTu" target="_blank" rel="noopener noreferrer">Riftbound</a>
+                                <a href="https://chat.whatsapp.com/CvMDq95DQSa0gwmoe4nJol" target="_blank" rel="noopener noreferrer">Digimon Card Game</a>
+                                <a href="https://chat.whatsapp.com/HwX9OjW7Ma59A19VDfsPyJ" target="_blank" rel="noopener noreferrer">Pokémon TCG</a>
+                                <a href="https://chat.whatsapp.com/JDiAqNLEF5I3yUprRnLLxF" target="_blank" rel="noopener noreferrer">Gundam</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INFORMACIÓN LEGAL -->
+                    <div class="isekai-footer-legal">
+                        <div class="isekai-footer-legal-title">Condiciones</div>
+                        <div class="isekai-footer-legal-links">
+                            <a href="/es/cms/condiciones-generales">Condiciones generales</a>
+                            <a href="/es/cms/aviso-legal">Aviso legal</a>
+                            <a href="/es/cms/politica-de-privacidad">Política de privacidad</a>
+                            <a href="/es/cms/politica-cookies">Política de cookies</a>
+                            <a href="/es/cms/entrega-y-transporte">Política de envíos</a>
+                            <a href="/es/cms/formas-de-pago">Formas de pago</a>
+                            <a href="/es/cms/devolucion-y-reembolso">Devolución y reembolso</a>
+                        </div>
+                    </div>
+
+                    <!-- FOOTER INFERIOR -->
+                    <div class="isekai-footer-bottom">
+                        <div class="isekai-footer-copyright">© 2026 Isekai TCG Store</div>
+                        <div class="isekai-footer-tax">Todos los precios incluyen IVA</div>
+                        <div class="isekai-footer-developer">
+                            Diseñado y desarrollado por
+                            <strong>Javier Galán Cortés</strong>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </t>
+</t>
