@@ -1,848 +1,389 @@
 <t t-name="website.homepage">
     <t t-call="website.layout">
-
         <!-- =====================================================
              HOME
              ===================================================== -->
-
         <div id="isekai-home">
 
             <!-- =================================================
                  HEADER
                  ================================================= -->
-
             <header class="isekai-header">
-
                 <div class="isekai-container isekai-header-inner">
 
                     <!-- LOGO -->
-
                     <a href="/" class="isekai-logo" aria-label="Isekai TCG Store">
-
-                        <img src="/web/image/1329-73065db4/01_Marca%20completa_fondo%20claro%20%284%29.webp" alt="" data-attachment-id="1328" class="isekai-logo-image img img-fluid o_we_custom_image o_attachment_pending_record_id" data-format-mimetype="image/webp" data-resize-width="162" data-original-id="1328" data-original-src="/web/image/1328-48608fe1/01_Marca%20completa_fondo%20claro%20%284%29.png" data-mimetype-before-conversion="image/png" data-mimetype="image/webp"/>
-
+                        <img src="/web/image/1329-73065db4/01_Marca%20completa_fondo%20claro%20%284%29.webp"
+                             alt=""
+                             data-attachment-id="1328"
+                             class="isekai-logo-image img img-fluid o_we_custom_image o_attachment_pending_record_id"
+                             data-format-mimetype="image/webp"
+                             data-resize-width="162"
+                             data-original-id="1328"
+                             data-original-src="/web/image/1328-48608fe1/01_Marca%20completa_fondo%20claro%20%284%29.png"
+                             data-mimetype-before-conversion="image/png"
+                             data-mimetype="image/webp"/>
                     </a>
 
-
                     <!-- BUSCADOR -->
-
                     <form action="/shop" method="get" class="isekai-search" role="search">
-
                         <input type="search" name="search" placeholder="Buscar productos..." autocomplete="off" aria-label="Buscar productos"/>
-
                         <button type="submit" aria-label="Buscar" title="Buscar">
-
                             <span class="isekai-search-icon"/>
-
                         </button>
-
                     </form>
-
 
                     <!-- =================================================
                          MODO CLARO / OSCURO
                          ================================================= -->
-
                     <button type="button" class="isekai-theme-toggle" aria-label="Cambiar a modo claro" aria-pressed="false" title="Cambiar a modo claro">
-
                         <i class="fa fa-moon-o isekai-theme-icon-dark" aria-hidden="true"/>
-
                         <i class="fa fa-sun-o isekai-theme-icon-light" aria-hidden="true"/>
-
                     </button>
-
 
                     <!-- =================================================
                          USUARIO
                          ================================================= -->
-
                     <div class="isekai-user">
 
                         <!-- USUARIO NO CONECTADO -->
-
                         <t t-if="request.env.user._is_public()">
-
                             <div class="isekai-user-dropdown">
-
                                 <button type="button" class="isekai-user-button" aria-expanded="false" aria-label="Abrir menú de usuario">
-
                                     <i class="fa fa-user" aria-hidden="true"/>
-
-                                    <span>
-                                        Mi cuenta
-                                    </span>
-
+                                    <span>Mi cuenta</span>
                                     <i class="fa fa-chevron-down isekai-user-arrow" aria-hidden="true"/>
-
                                 </button>
-
-
                                 <div class="isekai-user-menu">
-
                                     <div class="isekai-user-menu-header">
-
                                         <i class="fa fa-user-circle" aria-hidden="true"/>
-
                                         <div>
-
-                                            <strong>
-                                                Bienvenido
-                                            </strong>
-
-                                            <small>
-                                                Accede a tu cuenta
-                                            </small>
-
+                                            <strong>Bienvenido</strong>
+                                            <small>Accede a tu cuenta</small>
                                         </div>
-
                                     </div>
-
-
                                     <div class="isekai-user-menu-links">
-
                                         <a href="/web/login?redirect=/">
-
                                             <i class="fa fa-sign-in" aria-hidden="true"/>
-
-                                            <span>
-                                                Iniciar sesión
-                                            </span>
-
+                                            <span>Iniciar sesión</span>
                                         </a>
-
-
                                         <a href="/web/signup?redirect=/">
-
                                             <i class="fa fa-user-plus" aria-hidden="true"/>
-
-                                            <span>
-                                                Crear cuenta
-                                            </span>
-
+                                            <span>Crear cuenta</span>
                                         </a>
-
                                     </div>
-
                                 </div>
-
                             </div>
-
                         </t>
 
-
                         <!-- USUARIO CONECTADO -->
-
                         <t t-else="">
-
                             <div class="isekai-user-dropdown">
-
                                 <button type="button" class="isekai-user-button" aria-expanded="false" aria-label="Abrir menú de usuario">
-
                                     <i class="fa fa-user" aria-hidden="true"/>
-
                                     <span t-out="request.env.user.name"/>
-
                                     <i class="fa fa-chevron-down isekai-user-arrow" aria-hidden="true"/>
-
                                 </button>
-
-
                                 <div class="isekai-user-menu">
-
                                     <div class="isekai-user-menu-header">
-
                                         <i class="fa fa-user-circle" aria-hidden="true"/>
-
                                         <div>
-
-                                            <strong>
-                                                Mi cuenta
-                                            </strong>
-
+                                            <strong>Mi cuenta</strong>
                                             <small t-out="request.env.user.email"/>
-
                                         </div>
-
                                     </div>
-
-
                                     <div class="isekai-user-menu-links">
-
                                         <a href="/my/home">
-
                                             <i class="fa fa-user" aria-hidden="true"/>
-
-                                            <span>
-                                                Mi perfil
-                                            </span>
-
+                                            <span>Mi perfil</span>
                                         </a>
-
-
                                         <a href="/my/orders">
-
                                             <i class="fa fa-box" aria-hidden="true"/>
-
-                                            <span>
-                                                Mis pedidos
-                                            </span>
-
+                                            <span>Mis pedidos</span>
                                         </a>
-
-
                                         <a href="/shop/cart">
-
                                             <i class="fa fa-shopping-cart" aria-hidden="true"/>
-
-                                            <span>
-                                                Mi carrito
-                                            </span>
-
+                                            <span>Mi carrito</span>
                                         </a>
-
-
                                         <a href="/web/session/logout?redirect=/" class="isekai-logout">
-
                                             <i class="fa fa-sign-out" aria-hidden="true"/>
-
-                                            <span>
-                                                Cerrar sesión
-                                            </span>
-
+                                            <span>Cerrar sesión</span>
                                         </a>
-
                                     </div>
-
                                 </div>
-
                             </div>
-
                         </t>
 
                     </div>
-
                 </div>
-
             </header>
-
 
             <!-- =================================================
                  CATEGORÍAS AUTOMÁTICAS
                  ================================================= -->
-
             <nav class="isekai-category-nav" aria-label="Categorías de productos">
-
                 <div class="isekai-container">
-
                     <div class="isekai-category-list">
-
                         <t t-foreach="request.env['product.public.category'].sudo().search([('parent_id', '=', False)], order='sequence, name')" t-as="category">
-
                             <div class="isekai-category-dropdown">
-
                                 <a t-att-href="'/shop/category/%s' % category.id" class="isekai-category-button" t-att-data-category-id="category.id" t-att-aria-expanded="'false' if category.child_id else None">
-
-                                    <span>
-                                        <t t-out="category.name"/>
-                                    </span>
-
+                                    <span><t t-out="category.name"/></span>
                                     <i t-if="category.child_id" class="fa fa-chevron-down isekai-category-arrow" aria-hidden="true"/>
-
                                 </a>
-
-
                                 <div t-if="category.child_id" class="isekai-subcategory-menu" role="menu">
-
                                     <t t-foreach="category.child_id.sorted(key=lambda c: (c.sequence, c.name))" t-as="subcategory">
-
                                         <a t-att-href="'/shop/category/%s' % subcategory.id" class="isekai-subcategory-link" role="menuitem">
-
                                             <t t-out="subcategory.name"/>
-
                                         </a>
-
                                     </t>
-
                                 </div>
-
                             </div>
-
                         </t>
-
                     </div>
-
                 </div>
-
             </nav>
-
 
             <!-- =================================================
                  CARRUSEL
+                 =================================================
+                 FIX: se han eliminado los "style" inline
+                 (opacity/visibility) que traían los 3 <article>.
+                 Un estilo inline siempre gana sobre cualquier regla
+                 de style.css, así que el JS del carrusel (que solo
+                 mueve la clase "active") nunca conseguía que se
+                 vieran los slides 1 y 2. Ahora la visibilidad la
+                 controla ÚNICAMENTE la clase "active" vía CSS
+                 (.isekai-slide / .isekai-slide.active).
                  ================================================= -->
-
             <section class="isekai-hero o_colored_level">
-
                 <div class="isekai-container">
-
                     <div class="isekai-carousel" data-isekai-carousel="true" aria-label="Promociones destacadas">
 
-                        
-
-                        <article class="isekai-slide isekai-slide-1" style="opacity: 0; visibility: hidden;">
-
+                        <article class="isekai-slide isekai-slide-1">
                             <div class="isekai-slide-overlay"/>
-
                             <div class="isekai-slide-content">
-
-                                <span class="isekai-hero-label">
-                                    ISEKAI TCG STORE
-                                </span>
-
-                                <h1>
-                                    Tu tienda de TCG
-                                    y coleccionismo
-                                </h1>
-
-                                <p>
-                                    Descubre cartas,
-                                    accesorios,
-                                    Warhammer,
-                                    Funko POP,
-                                    figuras anime
-                                    y mucho más.
-                                </p>
-
+                                <span class="isekai-hero-label">ISEKAI TCG STORE</span>
+                                <h1>Tu tienda de TCG y coleccionismo</h1>
+                                <p>Descubre cartas, accesorios, Warhammer, Funko POP, figuras anime y mucho más.</p>
                                 <a href="/shop" class="isekai-hero-button">
-
                                     VER TIENDA
-
                                     <i class="fa fa-arrow-right" aria-hidden="true"/>
-
                                 </a>
-
                             </div>
-
                         </article>
 
-
-                        
-
-                        <article class="isekai-slide isekai-slide-2" style="opacity: 0; visibility: hidden;">
-
+                        <article class="isekai-slide isekai-slide-2">
                             <div class="isekai-slide-overlay"/>
-
                             <div class="isekai-slide-content">
-
-                                <span class="isekai-hero-label">
-                                    NUEVAS LLEGADAS
-                                </span>
-
-                                <h1>
-                                    Las últimas novedades
-                                </h1>
-
-                                <p>
-                                    Descubre los productos
-                                    que acabamos de incorporar
-                                    a la tienda.
-                                </p>
-
+                                <span class="isekai-hero-label">NUEVAS LLEGADAS</span>
+                                <h1>Las últimas novedades</h1>
+                                <p>Descubre los productos que acabamos de incorporar a la tienda.</p>
                                 <a href="#isekai-novedades" class="isekai-hero-button">
-
                                     VER NOVEDADES
-
                                     <i class="fa fa-arrow-right" aria-hidden="true"/>
-
                                 </a>
-
                             </div>
-
                         </article>
 
-
-                        
-
-                        <article class="isekai-slide isekai-slide-3 active" style="opacity: 1; visibility: visible;">
-
+                        <article class="isekai-slide isekai-slide-3 active">
                             <div class="isekai-slide-overlay"/>
-
                             <div class="isekai-slide-content">
-
-                                <span class="isekai-hero-label">
-                                    COLECCIONISMO
-                                </span>
-
-                                <h1>
-                                    Encuentra tu
-                                    próxima colección
-                                </h1>
-
-                                <p>
-                                    TCG, figuras,
-                                    Funko POP y productos
-                                    para coleccionistas.
-                                </p>
-
+                                <span class="isekai-hero-label">COLECCIONISMO</span>
+                                <h1>Encuentra tu próxima colección</h1>
+                                <p>TCG, figuras, Funko POP y productos para coleccionistas.</p>
                                 <a href="/shop" class="isekai-hero-button">
-
                                     EXPLORAR
-
                                     <i class="fa fa-arrow-right" aria-hidden="true"/>
-
                                 </a>
-
                             </div>
-
                         </article>
-
-
-                        
 
                         <button type="button" class="isekai-carousel-arrow isekai-carousel-prev" aria-label="Anterior" title="Anterior">
-
                             <i class="fa fa-chevron-left" aria-hidden="true"/>
-
                         </button>
-
-
-                        
-
                         <button type="button" class="isekai-carousel-arrow isekai-carousel-next" aria-label="Siguiente" title="Siguiente">
-
                             <i class="fa fa-chevron-right" aria-hidden="true"/>
-
                         </button>
-
-
-                        
 
                         <div class="isekai-carousel-dots" aria-label="Seleccionar diapositiva">
-
                             <button type="button" class="isekai-carousel-dot" aria-label="Diapositiva 1"/>
-
                             <button type="button" class="isekai-carousel-dot" aria-label="Diapositiva 2"/>
-
                             <button type="button" class="isekai-carousel-dot active" aria-label="Diapositiva 3" aria-current="true"/>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </section>
-
 
             <!-- =================================================
                  NOVEDADES
                  ================================================= -->
-
             <section class="isekai-section" id="isekai-novedades">
-
                 <div class="isekai-container">
-
                     <div class="isekai-section-title">
-
                         <div>
-
-                            <span>
-                                DESCUBRE
-                            </span>
-
-                            <h2>
-                                Últimas novedades
-                            </h2>
-
+                            <span>DESCUBRE</span>
+                            <h2>Últimas novedades</h2>
                         </div>
-
-
                         <a href="/shop">
-
                             Ver todos
-
                             <i class="fa fa-arrow-right" aria-hidden="true"/>
-
                         </a>
-
                     </div>
-
 
                     <div class="isekai-products-grid">
-
-                        <t t-foreach="request.env['product.template'].sudo().search([('sale_ok', '=', True)], order='create_date desc', limit=20)" t-as="product">
-
+                        <!--
+                            FIX: se añade ('website_published', '=', True)
+                            al dominio. Antes, con sudo() y solo
+                            sale_ok=True, un producto en borrador o
+                            despublicado podía llegar a mostrarse a
+                            visitantes anónimos en la home.
+                        -->
+                        <t t-foreach="request.env['product.template'].sudo().search([('sale_ok', '=', True), ('website_published', '=', True)], order='create_date desc', limit=20)" t-as="product">
                             <a t-att-href="'/shop/' + str(product.id)" class="isekai-product-card">
-
                                 <div class="isekai-product-image">
-
                                     <img t-if="product.image_1920" t-att-src="'/web/image/product.template/%s/image_1920' % product.id" t-att-alt="product.name" loading="lazy"/>
-
-                                    <span t-else="">
-                                        Sin imagen
-                                    </span>
-
+                                    <span t-else="">Sin imagen</span>
                                 </div>
-
-
                                 <div class="isekai-product-info">
-
                                     <div class="isekai-product-name" t-out="product.name"/>
-
-                                    <div class="isekai-product-price">
-
-                                        <span t-out="product.list_price"/>
-
-                                        €
-
-                                    </div>
-
+                                    <!--
+                                        FIX: precio con el widget monetario
+                                        de Odoo en vez de t-out en crudo +
+                                        "€" a mano (respeta pricelist,
+                                        redondeo y moneda de la web).
+                                    -->
+                                    <div class="isekai-product-price"
+                                         t-out="product.list_price"
+                                         t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
                                 </div>
-
                             </a>
-
                         </t>
-
                     </div>
-
                 </div>
-
             </section>
-
 
             <!-- =================================================
                  FOOTER
                  ================================================= -->
-
             <footer class="isekai-footer">
 
-                <!-- =================================================
-                     NEWSLETTER
-                     ================================================= -->
-
+                <!-- NEWSLETTER -->
                 <div class="isekai-footer-newsletter">
-
                     <div class="isekai-container">
-
                         <div class="isekai-newsletter-content">
-
                             <div class="isekai-newsletter-text">
-
-                                <span class="isekai-footer-eyebrow">
-                                    MANTENTE AL DÍA
-                                </span>
-
-                                <h2>
-                                    Recibe las últimas ofertas y novedades
-                                </h2>
-
-                                <p>
-                                    Suscríbete para conocer nuestras novedades,
-                                    nuevos productos, promociones y eventos.
-                                </p>
-
+                                <span class="isekai-footer-eyebrow">MANTENTE AL DÍA</span>
+                                <h2>Recibe las últimas ofertas y novedades</h2>
+                                <p>Suscríbete para conocer nuestras novedades, nuevos productos, promociones y eventos.</p>
                             </div>
-
-
                             <form class="isekai-newsletter-form" action="/website_mass_mailing/subscribe" method="post">
-
                                 <input type="email" name="email" placeholder="Su dirección de email" aria-label="Su dirección de email" required="required"/>
-
                                 <button type="submit" aria-label="Suscribirse al boletín">
                                     Enviar
                                     <i class="fa fa-arrow-right" aria-hidden="true"/>
                                 </button>
-
                             </form>
-
                         </div>
-
                     </div>
-
                 </div>
 
-
-                <!-- =================================================
-                     CONTENIDO PRINCIPAL FOOTER
-                     ================================================= -->
-
+                <!-- CONTENIDO PRINCIPAL FOOTER -->
                 <div class="isekai-container">
-
                     <div class="isekai-footer-main">
 
                         <!-- MARCA -->
-
                         <div class="isekai-footer-section isekai-footer-brand">
-
-                            <div class="isekai-footer-logo">
-                                ISEKAI
-                            </div>
-
-                            <strong>
-                                ISEKAI TCG STORE
-                            </strong>
-
-                            <p>
-                                Tu tienda especializada en TCG,
-                                Warhammer, Funko POP, figuras anime
-                                y coleccionismo.
-                            </p>
-
+                            <div class="isekai-footer-logo">ISEKAI</div>
+                            <strong>ISEKAI TCG STORE</strong>
+                            <p>Tu tienda especializada en TCG, Warhammer, Funko POP, figuras anime y coleccionismo.</p>
                             <p class="isekai-footer-location">
                                 <i class="fa fa-map-marker" aria-hidden="true"/>
                                 Alcorcón, Madrid
                             </p>
-
                         </div>
-
 
                         <!-- TIENDA -->
-
                         <div class="isekai-footer-section">
-
-                            <h3>
-                                Tienda
-                            </h3>
-
-                            <a href="/shop">
-                                <i class="fa fa-angle-right" aria-hidden="true"/>
-                                Tienda
-                            </a>
-
-                            <a href="/shop">
-                                <i class="fa fa-angle-right" aria-hidden="true"/>
-                                Categorías
-                            </a>
-
-                            <a href="#isekai-novedades">
-                                <i class="fa fa-angle-right" aria-hidden="true"/>
-                                Novedades
-                            </a>
-
+                            <h3>Tienda</h3>
+                            <a href="/shop"><i class="fa fa-angle-right" aria-hidden="true"/>Tienda</a>
+                            <a href="/shop"><i class="fa fa-angle-right" aria-hidden="true"/>Categorías</a>
+                            <a href="#isekai-novedades"><i class="fa fa-angle-right" aria-hidden="true"/>Novedades</a>
                         </div>
-
 
                         <!-- MI CUENTA -->
-
                         <div class="isekai-footer-section">
-
-                            <h3>
-                                Mi cuenta
-                            </h3>
-
-                            <a href="/my/home">
-                                <i class="fa fa-angle-right" aria-hidden="true"/>
-                                Mi perfil
-                            </a>
-
-                            <a href="/my/orders">
-                                <i class="fa fa-angle-right" aria-hidden="true"/>
-                                Mis pedidos
-                            </a>
-
-                            <a href="/shop/cart">
-                                <i class="fa fa-angle-right" aria-hidden="true"/>
-                                Mi carrito
-                            </a>
-
+                            <h3>Mi cuenta</h3>
+                            <a href="/my/home"><i class="fa fa-angle-right" aria-hidden="true"/>Mi perfil</a>
+                            <a href="/my/orders"><i class="fa fa-angle-right" aria-hidden="true"/>Mis pedidos</a>
+                            <a href="/shop/cart"><i class="fa fa-angle-right" aria-hidden="true"/>Mi carrito</a>
                         </div>
-
 
                         <!-- CONTACTO -->
-
                         <div class="isekai-footer-section">
-
-                            <h3>
-                                Contacto
-                            </h3>
-
-                            <a href="tel:+34604949849">
-                                <i class="fa fa-phone" aria-hidden="true"/>
-                                604 94 98 49
-                            </a>
-
-                            <a href="mailto:isekaigeekshop@gmail.com">
-                                <i class="fa fa-envelope" aria-hidden="true"/>
-                                isekaigeekshop@gmail.com
-                            </a>
-
+                            <h3>Contacto</h3>
+                            <a href="tel:+34604949849"><i class="fa fa-phone" aria-hidden="true"/>604 94 98 49</a>
+                            <a href="mailto:isekaigeekshop@gmail.com"><i class="fa fa-envelope" aria-hidden="true"/>isekaigeekshop@gmail.com</a>
                             <div class="isekai-footer-address">
-
                                 <i class="fa fa-map-marker" aria-hidden="true"/>
-
-                                <span>
-                                    Avenida Torres Bellas, 4<br/>
-                                    28923 Alcorcón, Madrid<br/>
-                                    España
-                                </span>
-
+                                <span>Avenida Torres Bellas, 4<br/>28923 Alcorcón, Madrid<br/>España</span>
                             </div>
-
                         </div>
-
                     </div>
 
-
-                    <!-- =================================================
-                         COMUNIDAD
-                         ================================================= -->
-
+                    <!-- COMUNIDAD -->
                     <div class="isekai-footer-community">
-
                         <div class="isekai-footer-community-column">
-
-                            <h3>
-                                Nuestras redes
-                            </h3>
-
+                            <h3>Nuestras redes</h3>
                             <div class="isekai-footer-social">
-
                                 <a href="https://twitter.com/ISEKAI_ALCORCON" target="_blank" rel="noopener noreferrer" aria-label="Twitter" title="Twitter">
-
                                     <i class="fa fa-twitter" aria-hidden="true"/>
-
-                                    <span>
-                                        Twitter
-                                    </span>
-
+                                    <span>Twitter</span>
                                 </a>
-
-
                                 <a href="https://www.instagram.com/isekai.alcorcon/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
-
                                     <i class="fa fa-instagram" aria-hidden="true"/>
-
-                                    <span>
-                                        Instagram
-                                    </span>
-
+                                    <span>Instagram</span>
                                 </a>
-
                             </div>
-
                         </div>
-
-
                         <div class="isekai-footer-community-column isekai-footer-groups">
-
-                            <h3>
-                                Únete a nuestra comunidad
-                            </h3>
-
+                            <h3>Únete a nuestra comunidad</h3>
                             <div class="isekai-footer-group-list">
-
-                                <a href="https://chat.whatsapp.com/GBbaAx0tZjFEjawZ8uiMHC" target="_blank" rel="noopener noreferrer">
-                                    Magic The Gathering
-                                </a>
-
-                                <a href="https://chat.whatsapp.com/JxQ0IJIg8wsEmYJiQoa9Ml" target="_blank" rel="noopener noreferrer">
-                                    One Piece Card Game
-                                </a>
-
-                                <a href="https://chat.whatsapp.com/C2yBWYtLRwKCR5JVDMZpTu" target="_blank" rel="noopener noreferrer">
-                                    Riftbound
-                                </a>
-
-                                <a href="https://chat.whatsapp.com/CvMDq95DQSa0gwmoe4nJol" target="_blank" rel="noopener noreferrer">
-                                    Digimon Card Game
-                                </a>
-
-                                <a href="https://chat.whatsapp.com/HwX9OjW7Ma59A19VDfsPyJ" target="_blank" rel="noopener noreferrer">
-                                    Pokémon TCG
-                                </a>
-
-                                <a href="https://chat.whatsapp.com/JDiAqNLEF5I3yUprRnLLxF" target="_blank" rel="noopener noreferrer">
-                                    Gundam
-                                </a>
-
+                                <a href="https://chat.whatsapp.com/GBbaAx0tZjFEjawZ8uiMHC" target="_blank" rel="noopener noreferrer">Magic The Gathering</a>
+                                <a href="https://chat.whatsapp.com/JxQ0IJIg8wsEmYJiQoa9Ml" target="_blank" rel="noopener noreferrer">One Piece Card Game</a>
+                                <a href="https://chat.whatsapp.com/C2yBWYtLRwKCR5JVDMZpTu" target="_blank" rel="noopener noreferrer">Riftbound</a>
+                                <a href="https://chat.whatsapp.com/CvMDq95DQSa0gwmoe4nJol" target="_blank" rel="noopener noreferrer">Digimon Card Game</a>
+                                <a href="https://chat.whatsapp.com/HwX9OjW7Ma59A19VDfsPyJ" target="_blank" rel="noopener noreferrer">Pokémon TCG</a>
+                                <a href="https://chat.whatsapp.com/JDiAqNLEF5I3yUprRnLLxF" target="_blank" rel="noopener noreferrer">Gundam</a>
                             </div>
-
                         </div>
-
                     </div>
 
-
-                    <!-- =================================================
-                         INFORMACIÓN LEGAL
-                         ================================================= -->
-
+                    <!-- INFORMACIÓN LEGAL -->
                     <div class="isekai-footer-legal">
-
-                        <div class="isekai-footer-legal-title">
-                            Condiciones
-                        </div>
-
+                        <div class="isekai-footer-legal-title">Condiciones</div>
                         <div class="isekai-footer-legal-links">
-
-                            <a href="/es/cms/condiciones-generales">
-                                Condiciones generales
-                            </a>
-
-                            <a href="/es/cms/aviso-legal">
-                                Aviso legal
-                            </a>
-
-                            <a href="/es/cms/politica-de-privacidad">
-                                Política de privacidad
-                            </a>
-
-                            <a href="/es/cms/politica-cookies">
-                                Política de cookies
-                            </a>
-
-                            <a href="/es/cms/entrega-y-transporte">
-                                Política de envíos
-                            </a>
-
-                            <a href="/es/cms/formas-de-pago">
-                                Formas de pago
-                            </a>
-
-                            <a href="/es/cms/devolucion-y-reembolso">
-                                Devolución y reembolso
-                            </a>
-
+                            <a href="/es/cms/condiciones-generales">Condiciones generales</a>
+                            <a href="/es/cms/aviso-legal">Aviso legal</a>
+                            <a href="/es/cms/politica-de-privacidad">Política de privacidad</a>
+                            <a href="/es/cms/politica-cookies">Política de cookies</a>
+                            <a href="/es/cms/entrega-y-transporte">Política de envíos</a>
+                            <a href="/es/cms/formas-de-pago">Formas de pago</a>
+                            <a href="/es/cms/devolucion-y-reembolso">Devolución y reembolso</a>
                         </div>
-
                     </div>
 
-
-                    <!-- =================================================
-                         FOOTER INFERIOR
-                         ================================================= -->
-
+                    <!-- FOOTER INFERIOR -->
                     <div class="isekai-footer-bottom">
-
-                        <div class="isekai-footer-copyright">
-
-                            © 2026 Isekai TCG Store
-
-                        </div>
-
-
-                        <div class="isekai-footer-tax">
-
-                            Todos los precios incluyen IVA
-
-                        </div>
-
-
+                        <div class="isekai-footer-copyright">© 2026 Isekai TCG Store</div>
+                        <div class="isekai-footer-tax">Todos los precios incluyen IVA</div>
                         <div class="isekai-footer-developer">
-
                             Diseñado y desarrollado por
-
-                            <strong>
-                                Javier Galán Cortés
-                            </strong>
-
+                            <strong>Javier Galán Cortés</strong>
                         </div>
-
                     </div>
-
                 </div>
-
             </footer>
 
         </div>
-
     </t>
 </t>
