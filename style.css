@@ -318,14 +318,14 @@
 .isekai-user-menu-header strong {
     display: block;
     color: #ffffff !important;
-    font-size: 14px;
+    font-size: 14px !important;
 }
 
 .isekai-user-menu-header small {
     display: block;
     margin-top: 3px;
     color: #b8c5dd !important;
-    font-size: 12px;
+    font-size: 12px !important;
 }
 
 .isekai-user-menu-links {
@@ -389,6 +389,7 @@
 .isekai-category-dropdown {
     position: relative;
     flex-shrink: 0;
+    z-index: 20;
 }
 
 .isekai-category-button {
@@ -424,7 +425,7 @@
 }
 
 .isekai-category-arrow {
-    font-size: 10px;
+    font-size: 10px !important;
     color: #8db0ff !important;
     transition: transform .2s ease;
 }
@@ -875,7 +876,7 @@
 
     .isekai-category-button {
         padding: 8px 14px;
-        font-size: 13px;
+        font-size: 13px !important;
     }
 
     #isekai-home .isekai-hero {
@@ -982,22 +983,22 @@
     .isekai-category-button {
         flex-shrink: 0;
         padding: 8px 14px;
-        font-size: 13px;
+        font-size: 13px !important;
     }
 
     .isekai-subcategory-menu {
         position: absolute;
-        left: 50%;
+        left: 0;
         right: auto;
         top: 54px;
-        width: 240px;
+        width: 220px;
         max-width: 280px;
-        transform: translateX(-50%) translateY(-8px);
+        transform: translateX(0) translateY(-8px);
         margin-top: 0;
     }
 
     .isekai-category-dropdown.isekai-open .isekai-subcategory-menu {
-        transform: translateX(-50%) translateY(0);
+        transform: translateX(0) translateY(0);
     }
 
     #isekai-home .isekai-hero {
@@ -1505,7 +1506,61 @@
    GRID / PRODUCTO
    FIX: hover unificado con las tarjetas ".isekai-product-card"
    de la home (mismo desplazamiento y color de borde en hover).
+
+   FIX: imagen, nombre y precio con el MISMO estilo visual que las
+   tarjetas de "Novedades" de la home (recuadro cuadrado blanco con
+   la foto en "contain", nombre en negrita y precio en azul de
+   acento y negrita). El grid del Shop sigue siendo la plantilla
+   nativa de Odoo (website_sale.products_item), así que aquí solo
+   se reestilan sus clases (.oe_product_image*, .o_wsale_products_
+   item_title, .product_price) — no se toca el markup, por lo que
+   filtros, paginación, variantes, añadir al carrito y wishlist
+   siguen funcionando igual.
    ================================================================ */
+
+#wrap.isekai-shop-page .oe_product_image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    flex-grow: 0;
+    background: #ffffff !important;
+}
+
+#wrap.isekai-shop-page .oe_product_image_link,
+#wrap.isekai-shop-page .oe_product_image_img_wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+#wrap.isekai-shop-page .oe_product_image_img,
+#wrap.isekai-shop-page .oe_product_image_img_secondary {
+    width: 100%;
+    height: 100%;
+    object-fit: contain !important;
+}
+
+#wrap.isekai-shop-page .o_wsale_product_information {
+    padding: 16px;
+}
+
+#wrap.isekai-shop-page .o_wsale_products_item_title {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+#wrap.isekai-shop-page .o_wsale_products_item_title a {
+    color: var(--isekai-text, #f8fafc) !important;
+    text-decoration: none !important;
+}
+
+/* El precio y los botones (.o_wsale_product_sub) son hermanos de
+   .o_wsale_product_information, no van dentro, así que necesitan su
+   propio padding lateral/inferior para quedar alineados con el
+   nombre y no pegados al borde de la tarjeta. */
+#wrap.isekai-shop-page .o_wsale_product_sub {
+    padding: 0 16px 16px;
+}
 
 #wrap.isekai-shop-page .isekai-products-grid-wrapper {
     width: 100%;
@@ -1555,9 +1610,15 @@
     color: var(--isekai-accent, #8db0ff);
 }
 
-#wrap.isekai-shop-page .isekai-product-wrapper .oe_price,
-#wrap.isekai-shop-page .isekai-product-wrapper .product_price {
+#wrap.isekai-shop-page .isekai-product-wrapper .oe_price {
     color: var(--isekai-text, #f8fafc);
+}
+
+#wrap.isekai-shop-page .isekai-product-wrapper .product_price,
+#wrap.isekai-shop-page .isekai-product-wrapper .product_price .oe_currency_value {
+    color: var(--isekai-accent, #8db0ff) !important;
+    font-size: 18px;
+    font-weight: 800;
 }
 
 #wrap.isekai-shop-page .isekai-product-wrapper .text-muted {
@@ -2404,29 +2465,10 @@
     line-height: 1.2 !important;
 }
 
-.isekai-category-arrow {
-    font-size: 10px !important;
-}
-
-.isekai-user-menu-header strong {
-    font-size: 14px !important;
-}
-
-.isekai-user-menu-header small {
-    font-size: 12px !important;
-}
-
-@media (min-width: 601px) and (max-width: 768px) {
-    .isekai-category-button {
-        font-size: 13px !important;
-    }
-}
-
-@media (max-width: 600px) {
-    .isekai-category-button {
-        font-size: 13px !important;
-    }
-}
+/* NOTA: font-size de .isekai-category-arrow, .isekai-user-menu-header
+   strong/small y .isekai-category-button (en los breakpoints de
+   768px/600px) ya se fija con !important donde se definen esas
+   reglas más arriba en el archivo; antes se repetía aquí. */
 
 
 /* ================================================================
@@ -2436,10 +2478,6 @@
 .isekai-category-nav .isekai-category-list {
     list-style: none !important;
     margin: 0 auto !important;
-}
-
-.isekai-category-dropdown {
-    z-index: 20;
 }
 
 .isekai-category-dropdown.isekai-open {
@@ -2468,17 +2506,10 @@
     }
 }
 
-@media (max-width: 600px) {
-    .isekai-subcategory-menu {
-        left: 0;
-        transform: translateX(0) translateY(-8px);
-        width: 220px;
-    }
-
-    .isekai-category-dropdown.isekai-open .isekai-subcategory-menu {
-        transform: translateX(0) translateY(0);
-    }
-}
+/* NOTA: el z-index de .isekai-category-dropdown y el
+   posicionamiento de .isekai-subcategory-menu en <=600px ya se
+   definen más arriba (junto a la regla base de cada selector);
+   antes se repetían aquí con los mismos valores finales. */
 
 
 /* ================================================================
@@ -2496,6 +2527,21 @@ body.isekai-shop-active #wrapwrap,
 body.isekai-shop-active #wrap.isekai-shop-page {
     padding-top: 0 !important;
     margin-top: 0 !important;
+}
+
+
+/* ================================================================
+   OCULTAR FOOTER NATIVO DE ODOO EN SHOP
+   FIX: igual que con el header, products.xml pinta su propio
+   <footer class="isekai-footer"> pero el footer nativo de Odoo
+   (<footer id="bottom">, con o sin clase o_footer) se seguía
+   renderizando debajo, duplicando el footer en el Shop.
+   ================================================================ */
+
+body.isekai-shop-active #wrapwrap > footer#bottom,
+body.isekai-shop-active #wrapwrap > footer.o_footer,
+body.isekai-shop-active footer#bottom {
+    display: none !important;
 }
 
 
@@ -2687,6 +2733,15 @@ body.isekai-light-theme .isekai-user-menu-header {
 
 body.isekai-light-theme .isekai-user-menu-header > i {
     color: #254587 !important;
+}
+
+/* FIX: igual que la cabecerita del popup, el bloque de enlaces
+   ("Mi perfil", "Mis pedidos", "Mi carrito", "Cerrar sesión") tenía
+   un fondo azul marino fijo (#131c35) que nunca cambiaba en modo
+   claro, mientras que el texto sí pasaba a oscuro -> texto oscuro
+   sobre fondo oscuro, ilegible. */
+body.isekai-light-theme .isekai-user-menu-links {
+    background: #ffffff !important;
 }
 
 body.isekai-light-theme .isekai-user-menu-links a i {
@@ -2969,6 +3024,14 @@ body.isekai-portal-active #wrapwrap,
 body.isekai-portal-active .isekai-portal-page {
     padding-top: 0 !important;
     margin-top: 0 !important;
+}
+
+/* OCULTAR FOOTER NATIVO DE ODOO TAMBIÉN EN EL PORTAL (mismo motivo
+   que en el Shop: user.xml ya pinta su propio .isekai-footer). */
+body.isekai-portal-active #wrapwrap > footer#bottom,
+body.isekai-portal-active #wrapwrap > footer.o_footer,
+body.isekai-portal-active footer#bottom {
+    display: none !important;
 }
 
 /* Odoo suele envolver el contenido del portal en un breadcrumb +

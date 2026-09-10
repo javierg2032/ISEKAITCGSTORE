@@ -13,16 +13,7 @@
 
                     <!-- LOGO -->
                     <a href="/" class="isekai-logo" aria-label="Isekai TCG Store">
-                        <img src="/web/image/1329-73065db4/01_Marca%20completa_fondo%20claro%20%284%29.webp"
-                             alt=""
-                             data-attachment-id="1328"
-                             class="isekai-logo-image img img-fluid o_we_custom_image o_attachment_pending_record_id"
-                             data-format-mimetype="image/webp"
-                             data-resize-width="162"
-                             data-original-id="1328"
-                             data-original-src="/web/image/1328-48608fe1/01_Marca%20completa_fondo%20claro%20%284%29.png"
-                             data-mimetype-before-conversion="image/png"
-                             data-mimetype="image/webp"/>
+                        <img src="/web/image/1329-73065db4/01_Marca%20completa_fondo%20claro%20%284%29.webp" alt="" data-attachment-id="1328" class="isekai-logo-image img img-fluid o_we_custom_image o_attachment_pending_record_id" data-format-mimetype="image/webp" data-resize-width="162" data-original-id="1328" data-original-src="/web/image/1328-48608fe1/01_Marca%20completa_fondo%20claro%20%284%29.png" data-mimetype-before-conversion="image/png" data-mimetype="image/webp"/>
                     </a>
 
                     <!-- BUSCADOR -->
@@ -252,9 +243,7 @@
                                         "€" a mano (respeta pricelist,
                                         redondeo y moneda de la web).
                                     -->
-                                    <div class="isekai-product-price"
-                                         t-out="product.list_price"
-                                         t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                    <div class="isekai-product-price" t-out="product.list_price" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
                                 </div>
                             </a>
                         </t>

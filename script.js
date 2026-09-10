@@ -12,13 +12,13 @@
     "use strict";
 
     function initIsekai() {
-
         /* =========================================================
            DETECCIÓN DE PÁGINA
            ========================================================= */
 
         const home = document.getElementById("isekai-home");
         const shop = document.querySelector("#wrap.isekai-shop-page");
+        const portal = document.querySelector(".isekai-portal-page");
         const body = document.body;
 
         if (!body) {
@@ -27,13 +27,21 @@
 
         body.classList.toggle("isekai-shop-active", !!shop);
 
+        /*
+         * FIX: faltaba esta línea. style.css define un bloque
+         * completo de reglas bajo "body.isekai-portal-active"
+         * (oculta el header nativo de Odoo, aplica el tema
+         * oscuro, etc. en /my/home, /my/orders...) pero nunca se
+         * añadía la clase al <body>, así que ese CSS no se
+         * aplicaba nunca.
+         */
+        body.classList.toggle("isekai-portal-active", !!portal);
 
         /* =========================================================
            MODO CLARO / OSCURO
            ========================================================= */
 
-        const themeButtons =
-            document.querySelectorAll(".isekai-theme-toggle");
+        const themeButtons = document.querySelectorAll(".isekai-theme-toggle");
 
         function getSavedTheme() {
             try {
@@ -53,86 +61,52 @@
         }
 
         function applyTheme(theme) {
-
             const isLight = theme === "light";
 
-            body.classList.toggle(
-                "isekai-light-theme",
-                isLight
-            );
+            body.classList.toggle("isekai-light-theme", isLight);
 
-            body.classList.toggle(
-                "isekai-dark-theme",
-                !isLight
-            );
+            body.classList.toggle("isekai-dark-theme", !isLight);
 
             themeButtons.forEach(function (button) {
+                button.classList.toggle("isekai-light-mode", isLight);
 
-                button.classList.toggle(
-                    "isekai-light-mode",
-                    isLight
-                );
-
-                button.setAttribute(
-                    "aria-pressed",
-                    isLight ? "true" : "false"
-                );
+                button.setAttribute("aria-pressed", isLight ? "true" : "false");
 
                 button.setAttribute(
                     "aria-label",
-                    isLight
-                        ? "Cambiar a modo oscuro"
-                        : "Cambiar a modo claro"
+                    isLight ? "Cambiar a modo oscuro" : "Cambiar a modo claro",
                 );
 
                 button.setAttribute(
                     "title",
-                    isLight
-                        ? "Cambiar a modo oscuro"
-                        : "Cambiar a modo claro"
+                    isLight ? "Cambiar a modo oscuro" : "Cambiar a modo claro",
                 );
             });
         }
 
         const savedTheme = getSavedTheme();
 
-        applyTheme(
-            savedTheme === "light"
-                ? "light"
-                : "dark"
-        );
+        applyTheme(savedTheme === "light" ? "light" : "dark");
 
         themeButtons.forEach(function (button) {
-
             if (button.dataset.isekaiThemeReady === "true") {
                 return;
             }
 
             button.dataset.isekaiThemeReady = "true";
 
-            button.addEventListener(
-                "click",
-                function (event) {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
 
-                    event.preventDefault();
-                    event.stopPropagation();
+                const isLight = body.classList.contains("isekai-light-theme");
 
-                    const isLight =
-                        body.classList.contains(
-                            "isekai-light-theme"
-                        );
+                const newTheme = isLight ? "dark" : "light";
 
-                    const newTheme =
-                        isLight
-                            ? "dark"
-                            : "light";
-
-                    applyTheme(newTheme);
-                    saveTheme(newTheme);
-                }
-            );
+                applyTheme(newTheme);
+                saveTheme(newTheme);
+            });
         });
-
 
         /* =========================================================
            CATEGORÍAS
@@ -144,46 +118,28 @@
          * De esta forma el mismo header funciona también en Shop.
          */
 
-        const categoryDropdowns =
-            document.querySelectorAll(
-                ".isekai-category-dropdown"
-            );
+        const categoryDropdowns = document.querySelectorAll(
+            ".isekai-category-dropdown",
+        );
 
         function closeAllCategories() {
+            categoryDropdowns.forEach(function (dropdown) {
+                dropdown.classList.remove("isekai-open");
 
-            categoryDropdowns.forEach(
-                function (dropdown) {
+                const button = dropdown.querySelector(
+                    ".isekai-category-button",
+                );
 
-                    dropdown.classList.remove(
-                        "isekai-open"
-                    );
-
-                    const button =
-                        dropdown.querySelector(
-                            ".isekai-category-button"
-                        );
-
-                    if (button) {
-                        button.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-                    }
+                if (button) {
+                    button.setAttribute("aria-expanded", "false");
                 }
-            );
+            });
         }
 
         categoryDropdowns.forEach(function (dropdown) {
+            const button = dropdown.querySelector(".isekai-category-button");
 
-            const button =
-                dropdown.querySelector(
-                    ".isekai-category-button"
-                );
-
-            const menu =
-                dropdown.querySelector(
-                    ".isekai-subcategory-menu"
-                );
+            const menu = dropdown.querySelector(".isekai-subcategory-menu");
 
             /*
              * Las categorías sin subcategorías siguen siendo
@@ -193,234 +149,144 @@
                 return;
             }
 
-            button.addEventListener(
-                "click",
-                function (event) {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
 
-                    event.preventDefault();
-                    event.stopPropagation();
+                const isOpen = dropdown.classList.contains("isekai-open");
 
-                    const isOpen =
-                        dropdown.classList.contains(
-                            "isekai-open"
-                        );
+                closeAllCategories();
 
-                    closeAllCategories();
+                if (!isOpen) {
+                    dropdown.classList.add("isekai-open");
 
-                    if (!isOpen) {
-
-                        dropdown.classList.add(
-                            "isekai-open"
-                        );
-
-                        button.setAttribute(
-                            "aria-expanded",
-                            "true"
-                        );
-                    }
+                    button.setAttribute("aria-expanded", "true");
                 }
-            );
+            });
 
-            menu.addEventListener(
-                "click",
-                function (event) {
-                    event.stopPropagation();
-                }
-            );
+            menu.addEventListener("click", function (event) {
+                event.stopPropagation();
+            });
         });
-
 
         /* =========================================================
            MENÚ DE USUARIO
            ========================================================= */
 
-        const userDropdowns =
-            document.querySelectorAll(
-                ".isekai-user-dropdown"
-            );
+        const userDropdowns = document.querySelectorAll(
+            ".isekai-user-dropdown",
+        );
 
         function closeAllUserMenus() {
+            userDropdowns.forEach(function (dropdown) {
+                dropdown.classList.remove("isekai-open");
 
-            userDropdowns.forEach(
-                function (dropdown) {
+                const button = dropdown.querySelector(".isekai-user-button");
 
-                    dropdown.classList.remove(
-                        "isekai-open"
-                    );
-
-                    const button =
-                        dropdown.querySelector(
-                            ".isekai-user-button"
-                        );
-
-                    if (button) {
-                        button.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-                    }
+                if (button) {
+                    button.setAttribute("aria-expanded", "false");
                 }
-            );
+            });
         }
 
         userDropdowns.forEach(function (dropdown) {
+            const button = dropdown.querySelector(".isekai-user-button");
 
-            const button =
-                dropdown.querySelector(
-                    ".isekai-user-button"
-                );
-
-            const menu =
-                dropdown.querySelector(
-                    ".isekai-user-menu"
-                );
+            const menu = dropdown.querySelector(".isekai-user-menu");
 
             if (!button || !menu) {
                 return;
             }
 
-            button.addEventListener(
-                "click",
-                function (event) {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
 
-                    event.preventDefault();
-                    event.stopPropagation();
+                const isOpen = dropdown.classList.contains("isekai-open");
 
-                    const isOpen =
-                        dropdown.classList.contains(
-                            "isekai-open"
-                        );
+                closeAllUserMenus();
 
-                    closeAllUserMenus();
+                if (!isOpen) {
+                    dropdown.classList.add("isekai-open");
 
-                    if (!isOpen) {
-
-                        dropdown.classList.add(
-                            "isekai-open"
-                        );
-
-                        button.setAttribute(
-                            "aria-expanded",
-                            "true"
-                        );
-                    }
+                    button.setAttribute("aria-expanded", "true");
                 }
-            );
+            });
 
-            menu.addEventListener(
-                "click",
-                function (event) {
-                    event.stopPropagation();
-                }
-            );
+            menu.addEventListener("click", function (event) {
+                event.stopPropagation();
+            });
         });
-
 
         /* =========================================================
            CLICK FUERA DE LOS MENÚS
            ========================================================= */
 
-        document.addEventListener(
-            "click",
-            function () {
-
-                closeAllCategories();
-                closeAllUserMenus();
-            }
-        );
-
+        document.addEventListener("click", function () {
+            closeAllCategories();
+            closeAllUserMenus();
+        });
 
         /* =========================================================
            ESCAPE
            ========================================================= */
 
-        document.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (event.key !== "Escape") {
-                    return;
-                }
-
-                closeAllCategories();
-                closeAllUserMenus();
+        document.addEventListener("keydown", function (event) {
+            if (event.key !== "Escape") {
+                return;
             }
-        );
 
+            closeAllCategories();
+            closeAllUserMenus();
+        });
 
         /* =========================================================
            CARRUSEL HOME
            ========================================================= */
 
         if (home) {
+            const carousel = home.querySelector(".isekai-carousel");
 
-            const carousel =
-                home.querySelector(
-                    ".isekai-carousel"
-                );
-
-            if (carousel &&
-                carousel.dataset.isekaiCarouselReady !== "true") {
-
+            if (carousel && carousel.dataset.isekaiCarouselReady !== "true") {
                 carousel.dataset.isekaiCarouselReady = "true";
 
-                const slides =
-                    carousel.querySelectorAll(
-                        ".isekai-slide"
-                    );
+                const slides = carousel.querySelectorAll(".isekai-slide");
 
-                const dots =
-                    carousel.querySelectorAll(
-                        ".isekai-carousel-dot"
-                    );
+                const dots = carousel.querySelectorAll(".isekai-carousel-dot");
 
-                const previousButton =
-                    carousel.querySelector(
-                        ".isekai-carousel-prev"
-                    );
+                const previousButton = carousel.querySelector(
+                    ".isekai-carousel-prev",
+                );
 
-                const nextButton =
-                    carousel.querySelector(
-                        ".isekai-carousel-next"
-                    );
+                const nextButton = carousel.querySelector(
+                    ".isekai-carousel-next",
+                );
 
                 if (slides.length > 1) {
-
                     let currentSlide = 0;
                     let autoplay = null;
 
                     function showSlide(index) {
+                        currentSlide = (index + slides.length) % slides.length;
 
-                        currentSlide =
-                            (index + slides.length) %
-                            slides.length;
+                        slides.forEach(function (slide, slideIndex) {
+                            slide.classList.toggle(
+                                "active",
+                                slideIndex === currentSlide,
+                            );
+                        });
 
-                        slides.forEach(
-                            function (slide, slideIndex) {
+                        dots.forEach(function (dot, dotIndex) {
+                            dot.classList.toggle(
+                                "active",
+                                dotIndex === currentSlide,
+                            );
 
-                                slide.classList.toggle(
-                                    "active",
-                                    slideIndex === currentSlide
-                                );
-                            }
-                        );
-
-                        dots.forEach(
-                            function (dot, dotIndex) {
-
-                                dot.classList.toggle(
-                                    "active",
-                                    dotIndex === currentSlide
-                                );
-
-                                dot.setAttribute(
-                                    "aria-current",
-                                    dotIndex === currentSlide
-                                        ? "true"
-                                        : "false"
-                                );
-                            }
-                        );
+                            dot.setAttribute(
+                                "aria-current",
+                                dotIndex === currentSlide ? "true" : "false",
+                            );
+                        });
                     }
 
                     function nextSlide() {
@@ -432,7 +298,6 @@
                     }
 
                     function stopAutoplay() {
-
                         if (autoplay !== null) {
                             clearInterval(autoplay);
                             autoplay = null;
@@ -440,91 +305,61 @@
                     }
 
                     function startAutoplay() {
-
                         stopAutoplay();
 
-                        autoplay = setInterval(
-                            function () {
-                                nextSlide();
-                            },
-                            6000
-                        );
+                        autoplay = setInterval(function () {
+                            nextSlide();
+                        }, 6000);
                     }
 
                     if (previousButton) {
-
                         previousButton.addEventListener(
                             "click",
                             function (event) {
-
                                 event.preventDefault();
                                 event.stopPropagation();
 
                                 previousSlide();
                                 startAutoplay();
-                            }
+                            },
                         );
                     }
 
                     if (nextButton) {
+                        nextButton.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            event.stopPropagation();
 
-                        nextButton.addEventListener(
-                            "click",
-                            function (event) {
-
-                                event.preventDefault();
-                                event.stopPropagation();
-
-                                nextSlide();
-                                startAutoplay();
-                            }
-                        );
+                            nextSlide();
+                            startAutoplay();
+                        });
                     }
 
-                    dots.forEach(
-                        function (dot, dotIndex) {
+                    dots.forEach(function (dot, dotIndex) {
+                        dot.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            event.stopPropagation();
 
-                            dot.addEventListener(
-                                "click",
-                                function (event) {
-
-                                    event.preventDefault();
-                                    event.stopPropagation();
-
-                                    showSlide(dotIndex);
-                                    startAutoplay();
-                                }
-                            );
-                        }
-                    );
-
-                    carousel.addEventListener(
-                        "mouseenter",
-                        function () {
-                            stopAutoplay();
-                        }
-                    );
-
-                    carousel.addEventListener(
-                        "mouseleave",
-                        function () {
+                            showSlide(dotIndex);
                             startAutoplay();
-                        }
-                    );
+                        });
+                    });
 
-                    carousel.addEventListener(
-                        "focusin",
-                        function () {
-                            stopAutoplay();
-                        }
-                    );
+                    carousel.addEventListener("mouseenter", function () {
+                        stopAutoplay();
+                    });
 
-                    carousel.addEventListener(
-                        "focusout",
-                        function () {
-                            startAutoplay();
-                        }
-                    );
+                    carousel.addEventListener("mouseleave", function () {
+                        startAutoplay();
+                    });
+
+                    carousel.addEventListener("focusin", function () {
+                        stopAutoplay();
+                    });
+
+                    carousel.addEventListener("focusout", function () {
+                        startAutoplay();
+                    });
 
                     showSlide(0);
                     startAutoplay();
@@ -533,21 +368,13 @@
         }
     }
 
-
     /* =============================================================
        INICIO SEGURO
        ============================================================= */
 
     if (document.readyState === "loading") {
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            initIsekai
-        );
-
+        document.addEventListener("DOMContentLoaded", initIsekai);
     } else {
-
         initIsekai();
     }
-
 })();

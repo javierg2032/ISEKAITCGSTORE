@@ -47,16 +47,7 @@
 
                     <!-- LOGO -->
                     <a href="/" class="isekai-logo" aria-label="Isekai TCG Store">
-                        <img src="/web/image/1329-73065db4/01_Marca%20completa_fondo%20claro%20%284%29.webp"
-                             alt=""
-                             data-attachment-id="1328"
-                             class="isekai-logo-image img img-fluid o_we_custom_image o_attachment_pending_record_id"
-                             data-format-mimetype="image/webp"
-                             data-resize-width="162"
-                             data-original-id="1328"
-                             data-original-src="/web/image/1328-48608fe1/01_Marca%20completa_fondo%20claro%20%284%29.png"
-                             data-mimetype-before-conversion="image/png"
-                             data-mimetype="image/webp"/>
+                        <img src="/web/image/1329-73065db4/01_Marca%20completa_fondo%20claro%20%284%29.webp" alt="" data-attachment-id="1328" class="isekai-logo-image img img-fluid o_we_custom_image o_attachment_pending_record_id" data-format-mimetype="image/webp" data-resize-width="162" data-original-id="1328" data-original-src="/web/image/1328-48608fe1/01_Marca%20completa_fondo%20claro%20%284%29.png" data-mimetype-before-conversion="image/png" data-mimetype="image/webp"/>
                     </a>
 
                     <!-- BUSCADOR -->
@@ -173,9 +164,7 @@
                  ================================================= -->
             <div class="oe_structure oe_empty oe_structure_not_nearest" id="oe_structure_website_sale_products_1"/>
 
-            <div id="o_wsale_container"
-                 t-attf-class="oe_website_sale isekai-shop-container isekai-section {{opt_wsale_fullwidth and 'container-fluid o_wsale_page_fluid' or 'o_wsale_page_contained container'}} {{opt_wsale_categories_top and 'o_wsale_has_filmstrip'}} {{opt_wsale_floating_bar and 'o_wsale_has_floating_bar'}} {{hasLeftColumn and 'o_wsale_has_sidebar'}} {{editionPreviews and 'o_wsale_edit_preview_enabled'}} {{opt_wsale_design_grid and 'o_wsale_uses_grid_design'}}"
-                 t-att-data-ppg="ppg" t-att-data-ppr="ppr" t-att-data-default-sort="website.shop_default_sort">
+            <div id="o_wsale_container" t-attf-class="oe_website_sale isekai-shop-container isekai-section {{opt_wsale_fullwidth and 'container-fluid o_wsale_page_fluid' or 'o_wsale_page_contained container'}} {{opt_wsale_categories_top and 'o_wsale_has_filmstrip'}} {{opt_wsale_floating_bar and 'o_wsale_has_floating_bar'}} {{hasLeftColumn and 'o_wsale_has_sidebar'}} {{editionPreviews and 'o_wsale_edit_preview_enabled'}} {{opt_wsale_design_grid and 'o_wsale_uses_grid_design'}}" t-att-data-ppg="ppg" t-att-data-ppr="ppr" t-att-data-default-sort="website.shop_default_sort">
 
                 <!-- =============================================
                      FILA PRINCIPAL
@@ -236,10 +225,7 @@
                         <!-- =====================================
                              CABECERA DE PRODUCTOS
                              ===================================== -->
-                        <header id="o_wsale_products_header"
-                                t-att-data-category-id="category.id"
-                                t-att-data-category-name="category.name"
-                                t-attf-class="d-flex flex-column gap-2 isekai-products-header {{_header_has_content and 'pt-4 pb-3' or opt_wsale_design_grid and 'py-3'}} {{category and 'o_wsale_products_header_is_category' or 'o_wsale_products_header_is_shop'}} {{opt_wsale_show_category_title and 'o_wsale_products_header_show_category_title'}} {{opt_wsale_show_category_description and 'o_wsale_products_header_show_category_description'}} {{opt_wsale_category_align and 'o_wsale_products_header_category_center_content'}} {{opt_wsale_show_shop_title and 'o_wsale_products_header_show_shop_title'}} {{opt_wsale_shop_title_align and 'o_wsale_products_header_shop_center_content'}}">
+                        <header id="o_wsale_products_header" t-att-data-category-id="category.id" t-att-data-category-name="category.name" t-attf-class="d-flex flex-column gap-2 isekai-products-header {{_header_has_content and 'pt-4 pb-3' or opt_wsale_design_grid and 'py-3'}} {{category and 'o_wsale_products_header_is_category' or 'o_wsale_products_header_is_shop'}} {{opt_wsale_show_category_title and 'o_wsale_products_header_show_category_title'}} {{opt_wsale_show_category_description and 'o_wsale_products_header_show_category_description'}} {{opt_wsale_category_align and 'o_wsale_products_header_category_center_content'}} {{opt_wsale_show_shop_title and 'o_wsale_products_header_show_shop_title'}} {{opt_wsale_shop_title_align and 'o_wsale_products_header_shop_center_content'}}">
 
                             <!-- BREADCRUMB -->
                             <t t-if="category and not search" t-call="website_sale.products_breadcrumb" _classes.f="w-100 p-0 mb-0 small isekai-breadcrumb {{not opt_wsale_show_category_title and 'mb-2 mb-lg-0'}}"/>
@@ -331,10 +317,7 @@
                         <div t-if="products" class="o_wsale_products_grid_table_wrapper isekai-products-grid-wrapper">
                             <t t-set="grid_md_allow_custom_cols" t-value="hasLeftColumn"/>
                             <t t-set="grid_md_use_3col" t-value="(not hasLeftColumn and ppr == 4) or (opt_wsale_fullwidth and ppr &gt; 3)"/>
-                            <section id="o_wsale_products_grid"
-                                     t-attf-class="o_wsale_products_grid_table grid isekai-products-grid {{grid_md_allow_custom_cols and 'o_wsale_products_grid_table_md'}} {{website.shop_opt_products_design_classes}}"
-                                     t-attf-style="--o-wsale-ppr: {{ppr}}; --o-wsale-ppg: {{ppg}}; --o-wsale-products-grid-gap: {{gap}};"
-                                     t-att-data-name="grid_block_name">
+                            <section id="o_wsale_products_grid" t-attf-class="o_wsale_products_grid_table grid isekai-products-grid {{grid_md_allow_custom_cols and 'o_wsale_products_grid_table_md'}} {{website.shop_opt_products_design_classes}}" t-attf-style="--o-wsale-ppr: {{ppr}}; --o-wsale-ppg: {{ppg}}; --o-wsale-products-grid-gap: {{gap}};" t-att-data-name="grid_block_name">
                                 <t t-foreach="bins" t-as="tr_product">
                                     <t t-foreach="tr_product" t-as="td_product">
                                         <t t-if="td_product">
@@ -349,11 +332,7 @@
                                             <t t-set="product_variant" t-value="product_variants[product]"/>
                                             <t t-set="template_price_vals" t-value="get_product_prices(product)"/>
                                             <t t-set="ribbon" t-value="product._get_ribbon(price_vals=template_price_vals, auto_assign_ribbons=auto_assign_ribbons, variant=product_variants[product])"/>
-                                            <div t-attf-class="oe_product isekai-product {{col_is_custom_portrait and 'oe_product_custom_portrait'}} {{col_class}} {{col_class_md}} {{col_class_lg}} {{col_is_stretched and 'oe_product_size_stretch'}}"
-                                                 t-attf-style="--o-wsale-products-grid-product-col-height: {{col_height}};"
-                                                 t-att-data-colspan="td_product['x'] != 1 and td_product['x']"
-                                                 t-att-data-rowspan="td_product['y'] != 1 and td_product['y']"
-                                                 t-att-data-name="product_block_name">
+                                            <div t-attf-class="oe_product isekai-product {{col_is_custom_portrait and 'oe_product_custom_portrait'}} {{col_class}} {{col_class_md}} {{col_class_lg}} {{col_is_stretched and 'oe_product_size_stretch'}}" t-attf-style="--o-wsale-products-grid-product-col-height: {{col_height}};" t-att-data-colspan="td_product['x'] != 1 and td_product['x']" t-att-data-rowspan="td_product['y'] != 1 and td_product['y']" t-att-data-name="product_block_name">
                                                 <div t-attf-class="o_wsale_product_grid_wrapper position-relative h-100 o_wsale_product_grid_wrapper_#{td_product['x']}_#{td_product['y']} isekai-product-wrapper">
                                                     <t t-call="website_sale.products_item" design_field="website.shop_opt_products_design_classes" product_href="product._get_product_url(product_query_params, grouped_attributes_values)"/>
                                                 </div>
