@@ -2,7 +2,7 @@
    ISEKAI TCG STORE - GLOBAL + HOME + SHOP + PORTAL
    Header y footer compartidos por todas las páginas
 
-   ISEKAI-CSS-REV: 2026-09-09-r5
+   ISEKAI-CSS-REV: 2026-09-16-r6
 
    ^ Marca de versión para depurar. Si al buscar este texto con
    Ctrl+F dentro del archivo CSS que carga el navegador (pestaña
@@ -1516,6 +1516,18 @@
    item_title, .product_price) — no se toca el markup, por lo que
    filtros, paginación, variantes, añadir al carrito y wishlist
    siguen funcionando igual.
+
+   FIX (2026-09-16): el HTML real que renderiza website_sale.products_item
+   mete TODO el contenido de la tarjeta (imagen + info + precio)
+   dentro de un <article class="oe_product_cart"> hijo de
+   ".isekai-product-wrapper". Ese <article> trae su propio fondo
+   por defecto de Odoo, que tapaba el "--isekai-card" que
+   pintábamos en el wrapper -- por eso el título y el precio del
+   Shop no coincidían con la home ni en claro ni en oscuro (el
+   fondo se quedaba fijo con el de Odoo, sin reaccionar al tema).
+   Se añade la regla sobre ".oe_product_cart" y se refuerza con
+   "!important" tanto el wrapper como el peso de fuente del precio,
+   igual que ya se hacía en la home.
    ================================================================ */
 
 #wrap.isekai-shop-page .oe_product_image {
@@ -1579,12 +1591,21 @@
 #wrap.isekai-shop-page .isekai-product-wrapper {
     position: relative;
     height: 100%;
-    background: var(--isekai-card, #1a2647);
+    background: var(--isekai-card, #1a2647) !important;
     border: 1px solid var(--isekai-border, rgba(255,255,255,.10));
     border-radius: var(--isekai-radius-lg, 16px);
     overflow: hidden;
     box-shadow: var(--isekai-shadow, 0 8px 24px rgba(0,0,0,.18));
     transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* FIX (2026-09-16): fondo real de la tarjeta. El <article
+   class="oe_product_cart"> que trae website_sale.products_item
+   vive DENTRO de .isekai-product-wrapper y ocupa el 100% de su
+   alto/ancho, tapando el fondo tematizado del wrapper con el
+   fondo por defecto de Odoo. Se iguala aquí al mismo valor. */
+#wrap.isekai-shop-page .oe_product_cart {
+    background: var(--isekai-card, #1a2647) !important;
 }
 
 #wrap.isekai-shop-page .isekai-product-wrapper:hover {
@@ -1617,8 +1638,8 @@
 #wrap.isekai-shop-page .isekai-product-wrapper .product_price,
 #wrap.isekai-shop-page .isekai-product-wrapper .product_price .oe_currency_value {
     color: var(--isekai-accent, #8db0ff) !important;
-    font-size: 18px;
-    font-weight: 800;
+    font-size: 18px !important;
+    font-weight: 800 !important;
 }
 
 #wrap.isekai-shop-page .isekai-product-wrapper .text-muted {
@@ -2845,6 +2866,13 @@ body.isekai-light-theme #wrap.isekai-shop-page .form-select {
 
 body.isekai-light-theme #wrap.isekai-shop-page .isekai-product-wrapper {
     border-color: #d9e2f0 !important;
+}
+
+/* FIX (2026-09-16): con el <article class="oe_product_cart">
+   ahora heredando/forzando --isekai-card, en modo claro también
+   necesita quedarse en blanco puro igual que el wrapper. */
+body.isekai-light-theme #wrap.isekai-shop-page .oe_product_cart {
+    background-color: #ffffff !important;
 }
 
 body.isekai-light-theme #wrap.isekai-shop-page .text-muted {
