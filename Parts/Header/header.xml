@@ -1,0 +1,113 @@
+<t t-name="website.homepage">
+    <t t-call="website.layout">
+        <!-- =====================================================
+             HOME
+             ===================================================== -->
+        <div id="isekai-home">
+            
+            <!-- =================================================
+                 HEADER
+                 ================================================= -->
+            <header class="isekai-header">
+                <div class="isekai-container isekai-header-inner">
+
+                    <!-- LOGO -->
+                    <a href="/" class="isekai-logo" aria-label="Isekai TCG Store">
+                        <img src="/web/image/1329-73065db4/01_Marca%20completa_fondo%20claro%20%284%29.webp" alt="" data-attachment-id="1328" class="isekai-logo-image img img-fluid o_we_custom_image o_attachment_pending_record_id" data-format-mimetype="image/webp" data-resize-width="162" data-original-id="1328" data-original-src="/web/image/1328-48608fe1/01_Marca%20completa_fondo%20claro%20%284%29.png" data-mimetype-before-conversion="image/png" data-mimetype="image/webp"/>
+                    </a>
+
+                    <!-- BUSCADOR -->
+                    <form action="/shop" method="get" class="isekai-search" role="search">
+                        <input type="search" name="search" placeholder="Buscar productos..." autocomplete="off" aria-label="Buscar productos"/>
+                        <button type="submit" aria-label="Buscar" title="Buscar">
+                            <span class="isekai-search-icon"/>
+                        </button>
+                    </form>
+
+                    <!-- =================================================
+                         MODO CLARO / OSCURO
+                         ================================================= -->
+                    <button type="button" class="isekai-theme-toggle" aria-label="Cambiar a modo claro" aria-pressed="false" title="Cambiar a modo claro">
+                        <i class="fa fa-moon-o isekai-theme-icon-dark" aria-hidden="true"/>
+                        <i class="fa fa-sun-o isekai-theme-icon-light" aria-hidden="true"/>
+                    </button>
+
+                    <!-- =================================================
+                         USUARIO
+                         ================================================= -->
+                    <div class="isekai-user">
+
+                        <!-- USUARIO NO CONECTADO -->
+                        <t t-if="request.env.user._is_public()">
+                            <div class="isekai-user-dropdown">
+                                <button type="button" class="isekai-user-button" aria-expanded="false" aria-label="Abrir menú de usuario">
+                                    <i class="fa fa-user" aria-hidden="true"/>
+                                    <span>Mi cuenta</span>
+                                    <i class="fa fa-chevron-down isekai-user-arrow" aria-hidden="true"/>
+                                </button>
+                                <div class="isekai-user-menu">
+                                    <div class="isekai-user-menu-header">
+                                        <i class="fa fa-user-circle" aria-hidden="true"/>
+                                        <div>
+                                            <strong>Bienvenido</strong>
+                                            <small>Accede a tu cuenta</small>
+                                        </div>
+                                    </div>
+                                    <div class="isekai-user-menu-links">
+                                        <a href="/web/login?redirect=/">
+                                            <i class="fa fa-sign-in" aria-hidden="true"/>
+                                            <span>Iniciar sesión</span>
+                                        </a>
+                                        <a href="/web/signup?redirect=/">
+                                            <i class="fa fa-user-plus" aria-hidden="true"/>
+                                            <span>Crear cuenta</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+                        <!-- USUARIO CONECTADO -->
+                        <t t-else="">
+                            <div class="isekai-user-dropdown">
+                                <button type="button" class="isekai-user-button" aria-expanded="false" aria-label="Abrir menú de usuario">
+                                    <i class="fa fa-user" aria-hidden="true"/>
+                                    <span t-out="request.env.user.name"/>
+                                    <i class="fa fa-chevron-down isekai-user-arrow" aria-hidden="true"/>
+                                </button>
+                                <div class="isekai-user-menu">
+                                    <div class="isekai-user-menu-header">
+                                        <i class="fa fa-user-circle" aria-hidden="true"/>
+                                        <div>
+                                            <strong>Mi cuenta</strong>
+                                            <small t-out="request.env.user.email"/>
+                                        </div>
+                                    </div>
+                                    <div class="isekai-user-menu-links">
+                                        <a href="/my/home">
+                                            <i class="fa fa-user" aria-hidden="true"/>
+                                            <span>Mi perfil</span>
+                                        </a>
+                                        <a href="/my/orders">
+                                            <i class="fa fa-shopping-bag" aria-hidden="true"/>
+                                            <span>Mis pedidos</span>
+                                        </a>
+                                        <a href="/shop/cart">
+                                            <i class="fa fa-shopping-cart" aria-hidden="true"/>
+                                            <span>Mi carrito</span>
+                                        </a>
+                                        <a href="/web/session/logout?redirect=/" class="isekai-logout">
+                                            <i class="fa fa-sign-out" aria-hidden="true"/>
+                                            <span>Cerrar sesión</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+                    </div>
+                </div>
+            </header>    
+         </div>
+    </t>
+</t>

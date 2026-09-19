@@ -1,0 +1,830 @@
+/* ================================================================
+   ISEKAI TCG STORE - FOOTER (extraído de style.css)
+
+   Contiene solo los estilos que afectan al bloque
+   <footer class="isekai-footer"> (newsletter, columnas de enlaces,
+   comunidad, legal, barra inferior) y lo relacionado con él:
+   contenedor compartido, ocultar el footer nativo de Odoo y modo
+   claro.
+
+   VARIABLES: casi todos los colores del footer son var(--isekai-*).
+   Antes esas variables solo las definía el contenedor que envuelve
+   al footer (#isekai-home, #wrap.isekai-shop-page o
+   .isekai-portal-page), así que si el footer quedaba fuera de
+   ellos no cambiaba de tema. Ahora el propio .isekai-footer define
+   sus variables (oscuras por defecto, claras con
+   body.isekai-light-theme), sin depender del contenedor.
+   ================================================================ */
+
+
+/* =========================================================
+   CONTENEDOR  (COMPARTIDO con header y secciones de la home:
+   si separas el footer de verdad, NO lo borres del archivo
+   principal)
+   ========================================================= */
+
+.isekai-container {
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+@media (min-width: 1201px) {
+    .isekai-container {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+    .isekai-container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+    .isekai-container {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+}
+
+@media (max-width: 600px) {
+    .isekai-container {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+}
+
+@media (max-width: 380px) {
+    .isekai-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+
+/* ================================================================
+   FOOTER GLOBAL - HOME + SHOP + OTRAS PÁGINAS
+   ================================================================ */
+
+/* FIX: variables propias del footer (tema oscuro por defecto).
+   Definirlas en el propio elemento hace que el footer cambie de
+   tema aunque no esté dentro de #isekai-home / #wrap.isekai-shop-page
+   / .isekai-portal-page. Si sí está dentro, estos valores coinciden
+   con los del contenedor, así que no cambia nada. */
+.isekai-footer {
+    --isekai-primary: #406fce;
+    --isekai-primary-hover: #315db4;
+    --isekai-accent: #8db0ff;
+
+    --isekai-bg: #0b1120;
+    --isekai-surface: #131c35;
+    --isekai-card: #1a2647;
+
+    --isekai-text: #f8fafc;
+    --isekai-muted: #94a3b8;
+
+    --isekai-border: rgba(255,255,255,.10);
+}
+
+.isekai-footer.isekai-footer {
+    position: relative;
+    width: 100%;
+    margin: 0 !important;
+    padding: 70px 0 0 !important;
+    background: linear-gradient(180deg, var(--isekai-surface, #131c35) 0%, var(--isekai-bg, #0b1120) 100%) !important;
+    border-top: 1px solid rgba(64,111,206,.35) !important;
+    overflow: hidden;
+    color: var(--isekai-text, #f8fafc) !important;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+.isekai-footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 280px;
+    height: 2px;
+    transform: translateX(-50%);
+    background: var(--isekai-primary, #406fce);
+    box-shadow: 0 0 20px rgba(64,111,206,.65);
+}
+
+.isekai-footer .isekai-container {
+    position: relative;
+}
+
+.isekai-footer .isekai-container {
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* ---------- NEWSLETTER ---------- */
+
+.isekai-footer-newsletter.isekai-footer-newsletter {
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    background: transparent !important;
+}
+
+.isekai-newsletter-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.isekai-footer-eyebrow.isekai-footer-eyebrow {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--isekai-accent, #8db0ff) !important;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .12em;
+}
+
+.isekai-newsletter-text h2 {
+    margin: 0 0 6px;
+    color: var(--isekai-text, #f8fafc) !important;
+    font-size: 22px !important;
+}
+
+.isekai-newsletter-text p {
+    margin: 0;
+    color: var(--isekai-muted, #94a3b8) !important;
+    font-size: 14px !important;
+}
+
+.isekai-newsletter-form {
+    display: flex;
+    gap: 8px;
+}
+
+.isekai-newsletter-form input {
+    min-width: 260px;
+    height: 46px;
+    padding: 0 18px;
+    border: 1px solid var(--isekai-border, rgba(255,255,255,.10));
+    border-radius: 999px;
+    background: var(--isekai-surface, #131c35);
+    color: var(--isekai-text, #f8fafc);
+}
+
+.isekai-newsletter-form input::placeholder {
+    color: var(--isekai-muted, #94a3b8);
+}
+
+.isekai-newsletter-form button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 46px;
+    padding: 0 22px;
+    border: 1px solid var(--isekai-primary, #406fce);
+    border-radius: 999px;
+    background: var(--isekai-primary, #406fce);
+    color: #ffffff;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.isekai-newsletter-form button:hover {
+    background: var(--isekai-primary-hover, #315db4);
+    border-color: var(--isekai-primary-hover, #315db4);
+}
+
+
+/* ---------- COLUMNAS PRINCIPALES ---------- */
+
+.isekai-footer-main {
+    display: grid !important;
+    grid-template-columns: 1.7fr 1fr 1fr 1fr !important;
+    gap: 55px !important;
+    padding-bottom: 55px !important;
+}
+
+.isekai-footer-section {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 11px !important;
+}
+
+.isekai-footer-brand {
+    max-width: 390px !important;
+}
+
+.isekai-footer-logo {
+    color: var(--isekai-accent, #8db0ff);
+    font-weight: 800;
+    letter-spacing: .1em;
+}
+
+.isekai-footer-brand strong {
+    display: inline-block !important;
+    margin-bottom: 4px !important;
+    color: var(--isekai-text, #f8fafc) !important;
+    font-size: 22px !important;
+    font-weight: 800 !important;
+    letter-spacing: .05em;
+    line-height: 1.2;
+}
+
+.isekai-footer-brand strong::after {
+    content: "";
+    display: block;
+    width: 42px;
+    height: 3px;
+    margin-top: 10px;
+    border-radius: 3px;
+    background: var(--isekai-primary, #406fce);
+    box-shadow: 0 0 12px rgba(64,111,206,.45);
+}
+
+.isekai-footer-brand p {
+    margin: 12px 0 0 !important;
+    max-width: 350px;
+    color: var(--isekai-muted, #94a3b8) !important;
+    font-size: 14px !important;
+    line-height: 1.7;
+}
+
+.isekai-footer-location {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--isekai-muted, #94a3b8) !important;
+    font-size: 13px;
+}
+
+.isekai-footer-section h3 {
+    position: relative;
+    margin: 0 0 8px !important;
+    padding-bottom: 10px;
+    color: var(--isekai-text, #f8fafc) !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    letter-spacing: .04em;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.isekai-footer-section:not(.isekai-footer-brand) h3::after {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 2px;
+    margin-top: 9px;
+    border-radius: 2px;
+    background: var(--isekai-primary, #406fce);
+}
+
+.isekai-footer-section a {
+    position: relative;
+    width: fit-content;
+    padding: 2px 0 !important;
+    color: var(--isekai-muted, #94a3b8) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 1.5;
+    text-decoration: none !important;
+    transition: color .2s ease, transform .2s ease;
+}
+
+.isekai-footer-section a::before {
+    content: "›";
+    display: inline-block;
+    margin-right: 7px;
+    color: var(--isekai-primary, #406fce);
+    font-size: 17px;
+    font-weight: 700;
+    transition: transform .2s ease;
+}
+
+.isekai-footer-section a:hover {
+    color: var(--isekai-text, #f8fafc) !important;
+    transform: translateX(4px);
+}
+
+.isekai-footer-section a:hover::before {
+    transform: translateX(3px);
+}
+
+.isekai-footer-address {
+    display: flex;
+    gap: 8px;
+    color: var(--isekai-muted, #94a3b8);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* ---------- COMUNIDAD / REDES / GRUPOS ---------- */
+
+.isekai-footer-community {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    padding: 30px 0;
+    border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.isekai-footer-community-column h3 {
+    margin: 0 0 12px;
+    color: var(--isekai-text, #f8fafc);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.isekai-footer-social {
+    display: flex;
+    gap: 10px;
+}
+
+.isekai-footer-social a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    border: 1px solid var(--isekai-border, rgba(255,255,255,.10));
+    border-radius: 999px;
+    background: var(--isekai-surface, #131c35);
+    color: var(--isekai-text, #f8fafc);
+    text-decoration: none;
+    font-size: 13px;
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.isekai-footer-social a:hover {
+    background: var(--isekai-primary, #406fce);
+    border-color: var(--isekai-primary, #406fce);
+    color: #ffffff;
+}
+
+.isekai-footer-group-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.isekai-footer-group-list a {
+    padding: 8px 14px;
+    border: 1px solid var(--isekai-border, rgba(255,255,255,.10));
+    border-radius: 999px;
+    background: var(--isekai-surface, #131c35);
+    color: var(--isekai-muted, #94a3b8);
+    text-decoration: none;
+    font-size: 13px;
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.isekai-footer-group-list a:hover {
+    background: var(--isekai-card, #1a2647);
+    border-color: var(--isekai-primary, #406fce);
+    color: var(--isekai-accent, #8db0ff);
+}
+
+
+/* ---------- LEGAL ---------- */
+
+.isekai-footer-legal {
+    padding: 22px 0;
+    border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.isekai-footer-legal-title {
+    margin-bottom: 10px;
+    color: var(--isekai-muted, #94a3b8);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.isekai-footer-legal-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+}
+
+.isekai-footer-legal-links a {
+    color: var(--isekai-muted, #94a3b8);
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.isekai-footer-legal-links a:hover {
+    color: var(--isekai-accent, #8db0ff);
+}
+
+
+/* ---------- BARRA INFERIOR ---------- */
+
+.isekai-footer-bottom {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 25px !important;
+    min-height: 70px;
+    padding: 20px 0 !important;
+    border-top: 1px solid rgba(255,255,255,.08) !important;
+    color: var(--isekai-muted, #94a3b8) !important;
+    font-size: 12px !important;
+}
+
+.isekai-footer-developer {
+    text-align: right;
+}
+
+.isekai-footer-developer strong {
+    color: var(--isekai-muted, #94a3b8) !important;
+    font-weight: 600 !important;
+}
+
+.isekai-footer-developer strong:hover {
+    color: var(--isekai-accent, #8db0ff) !important;
+}
+
+
+/* ================================================================
+   RESPONSIVE FOOTER
+   ================================================================ */
+
+@media (min-width: 769px) and (max-width: 1200px) {
+    .isekai-footer {
+        padding-top: 55px !important;
+    }
+
+    .isekai-footer-main {
+        grid-template-columns: 1.5fr 1fr 1fr !important;
+        gap: 40px !important;
+        padding-bottom: 45px !important;
+    }
+
+    .isekai-footer-brand {
+        max-width: 100% !important;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+    .isekai-footer {
+        padding-top: 50px !important;
+    }
+
+    .isekai-footer-main {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 35px 25px !important;
+        padding-bottom: 40px !important;
+    }
+
+    .isekai-footer-brand {
+        grid-column: 1 / -1 !important;
+        max-width: 100% !important;
+    }
+
+    .isekai-footer-brand p {
+        max-width: 500px;
+    }
+
+    .isekai-footer-community {
+        grid-template-columns: 1fr;
+    }
+
+    .isekai-newsletter-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .isekai-newsletter-form {
+        width: 100%;
+    }
+
+    .isekai-newsletter-form input {
+        flex: 1;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .isekai-footer {
+        padding-top: 45px !important;
+    }
+
+    .isekai-footer-main {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+        padding-bottom: 35px !important;
+    }
+
+    .isekai-footer-brand {
+        grid-column: auto !important;
+        max-width: 100% !important;
+    }
+
+    .isekai-footer-brand strong {
+        font-size: 20px !important;
+    }
+
+    .isekai-footer-brand p {
+        max-width: 100%;
+        font-size: 13px !important;
+    }
+
+    .isekai-footer-section {
+        gap: 9px !important;
+    }
+
+    .isekai-footer-section h3 {
+        margin-bottom: 5px !important;
+    }
+
+    .isekai-footer-section a {
+        font-size: 13px !important;
+    }
+
+    .isekai-footer-community {
+        grid-template-columns: 1fr;
+    }
+
+    .isekai-newsletter-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .isekai-newsletter-form {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .isekai-newsletter-form input,
+    .isekai-newsletter-form button {
+        width: 100%;
+    }
+
+    .isekai-footer-bottom {
+        flex-direction: column !important;
+        justify-content: center !important;
+        text-align: center !important;
+        gap: 8px !important;
+        padding: 18px 10px !important;
+    }
+
+    .isekai-footer-developer {
+        text-align: center !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .isekai-footer-main {
+        gap: 27px !important;
+        padding-bottom: 30px !important;
+    }
+
+    .isekai-footer-brand strong {
+        font-size: 18px !important;
+    }
+
+    .isekai-footer-brand p {
+        font-size: 13px !important;
+        line-height: 1.6;
+    }
+
+    .isekai-footer-bottom {
+        font-size: 11px !important;
+    }
+}
+
+
+/* ================================================================
+   OCULTAR FOOTER NATIVO DE ODOO (Shop y Portal)
+   Cada página pinta su propio <footer class="isekai-footer">;
+   esto evita que se vea también el footer nativo debajo.
+   ================================================================ */
+
+body.isekai-shop-active #wrapwrap > footer#bottom,
+body.isekai-shop-active #wrapwrap > footer.o_footer,
+body.isekai-shop-active footer#bottom {
+    display: none !important;
+}
+
+body.isekai-portal-active #wrapwrap > footer#bottom,
+body.isekai-portal-active #wrapwrap > footer.o_footer,
+body.isekai-portal-active footer#bottom {
+    display: none !important;
+}
+
+
+/* ================================================================
+   HUECO ANTES DEL FOOTER EN EL SHOP
+   (regla de #wrap.isekai-shop-page, pero su único fin es quitar el
+   padding inferior que deja Odoo antes del footer)
+   ================================================================ */
+
+#wrap.isekai-shop-page {
+    padding-bottom: 0 !important;
+}
+
+@media (max-width: 600px) {
+    #wrap.isekai-shop-page {
+        padding-bottom: 0 !important;
+    }
+}
+
+
+/* ================================================================
+   MODO CLARO - FOOTER
+   Casi todo cambia solo porque las variables --isekai-* se
+   redefinen en el contenedor padre; aquí quedan los detalles que
+   usan rgba(255,255,255,...) fijo.
+   ================================================================ */
+
+/* FIX: variables del footer en modo claro (mismos valores que ya
+   usan la home, el Shop y el portal en modo claro). */
+body.isekai-light-theme .isekai-footer {
+    --isekai-primary: #3b75d4;
+    --isekai-primary-hover: #2f65bd;
+    --isekai-accent: #254587;
+
+    --isekai-bg: #f5f7fb;
+    --isekai-surface: #ffffff;
+    --isekai-card: #ffffff;
+
+    --isekai-text: #172033;
+    --isekai-muted: #64748b;
+
+    --isekai-border: #d9e2f0;
+}
+
+body.isekai-light-theme .isekai-footer {
+    border-top-color: rgba(59, 117, 212, .25) !important;
+}
+
+body.isekai-light-theme .isekai-footer-newsletter,
+body.isekai-light-theme .isekai-footer-community,
+body.isekai-light-theme .isekai-footer-legal,
+body.isekai-light-theme .isekai-footer-bottom {
+    border-color: #e2e8f0 !important;
+}
+
+
+/* ================================================================
+   MODO CLARO - FOOTER (colores explícitos)
+   FIX: mismo enfoque que el botón de tema y el botón de usuario del
+   header. Estas reglas NO dependen de var(--isekai-*), así que el
+   footer cambia de tema aunque las variables no le lleguen. Las de
+   :hover van aparte porque las reglas base de hover tienen
+   !important y, sin ellas, en modo claro el hover no se aplicaría.
+   ================================================================ */
+
+body.isekai-light-theme .isekai-footer.isekai-footer {
+    background: linear-gradient(180deg, #ffffff 0%, #f5f7fb 100%) !important;
+    color: #172033 !important;
+}
+
+body.isekai-light-theme .isekai-footer::before {
+    background: #3b75d4;
+    box-shadow: 0 0 20px rgba(59,117,212,.45);
+}
+
+/* ---------- Newsletter ---------- */
+
+body.isekai-light-theme .isekai-footer .isekai-footer-eyebrow {
+    color: #254587 !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-newsletter-text h2 {
+    color: #172033 !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-newsletter-text p {
+    color: #64748b !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-newsletter-form input {
+    background: #ffffff !important;
+    border-color: #d9e2f0 !important;
+    color: #172033 !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-newsletter-form input::placeholder {
+    color: #94a3b8 !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-newsletter-form button {
+    background: #3b75d4 !important;
+    border-color: #3b75d4 !important;
+    color: #ffffff !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-newsletter-form button:hover {
+    background: #2f65bd !important;
+    border-color: #2f65bd !important;
+}
+
+/* ---------- Marca ---------- */
+
+body.isekai-light-theme .isekai-footer .isekai-footer-logo {
+    color: #254587 !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-footer-brand strong {
+    color: #172033 !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-footer-brand strong::after {
+    background: #3b75d4;
+    box-shadow: 0 0 12px rgba(59,117,212,.35);
+}
+
+body.isekai-light-theme .isekai-footer .isekai-footer-brand p,
+body.isekai-light-theme .isekai-footer .isekai-footer-location {
+    color: #64748b !important;
+}
+
+/* ---------- Columnas de enlaces ---------- */
+
+body.isekai-light-theme .isekai-footer .isekai-footer-section h3 {
+    color: #172033 !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-footer-section:not(.isekai-footer-brand) h3::after {
+    background: #3b75d4 !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-footer-section a {
+    color: #64748b !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-footer-section a::before {
+    color: #3b75d4;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-footer-section a:hover {
+    color: #172033 !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-footer-address {
+    color: #64748b !important;
+}
+
+/* ---------- Comunidad ---------- */
+
+body.isekai-light-theme .isekai-footer .isekai-footer-community-column h3 {
+    color: #172033 !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-footer-social a {
+    background: #ffffff !important;
+    border-color: #d9e2f0 !important;
+    color: #172033 !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-footer-social a:hover {
+    background: #3b75d4 !important;
+    border-color: #3b75d4 !important;
+    color: #ffffff !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-footer-group-list a {
+    background: #ffffff !important;
+    border-color: #d9e2f0 !important;
+    color: #64748b !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-footer-group-list a:hover {
+    background: #eef3ff !important;
+    border-color: #3b75d4 !important;
+    color: #254587 !important;
+}
+
+/* ---------- Legal y barra inferior ---------- */
+
+body.isekai-light-theme .isekai-footer .isekai-footer-legal-title,
+body.isekai-light-theme .isekai-footer .isekai-footer-legal-links a {
+    color: #64748b !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-footer-legal-links a:hover {
+    color: #254587 !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-footer-bottom,
+body.isekai-light-theme .isekai-footer .isekai-footer-developer strong {
+    color: #64748b !important;
+}
+
+body.isekai-light-theme .isekai-footer .isekai-footer-developer strong:hover {
+    color: #254587 !important;
+}

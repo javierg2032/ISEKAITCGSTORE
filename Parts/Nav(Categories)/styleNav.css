@@ -1,0 +1,380 @@
+
+/* ================================================================
+   ISEKAI TCG STORE - NAV DE CATEGORÍAS (extraído de style.css)
+
+   Contiene solo los estilos que afectan al bloque:
+     <nav class="isekai-category-nav"> con las categorías
+     (.isekai-category-dropdown / -button / -arrow) y sus menús de
+     subcategorías (.isekai-subcategory-menu / -link).
+
+   NO incluye: header, footer, hero, productos, portal, ni nada
+   del Shop.
+
+   El orden de las reglas es el mismo que en el archivo original,
+   para conservar la cascada (varias reglas se pisan entre sí por
+   orden, no por especificidad).
+   ================================================================ */
+
+
+/* =========================================================
+   VARIABLE DEL NAV (global en <body>)
+   Solo se incluye --isekai-nav-bg; las demás variables de
+   cabecera (--isekai-header-bg, etc.) son del header.
+   ========================================================= */
+
+body {
+    --isekai-nav-bg: #263570;
+}
+
+body.isekai-light-theme {
+    --isekai-nav-bg: #eef3ff;
+}
+
+
+/* =========================================================
+   CONTENEDOR  (COMPARTIDO con header, footer y secciones de la
+   home: si separas el nav de verdad, NO lo borres del archivo
+   principal)
+   ========================================================= */
+
+.isekai-container {
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.isekai-category-nav .isekai-container {
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width: 1201px) {
+    .isekai-container {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+    .isekai-container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+    .isekai-container {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+}
+
+@media (max-width: 600px) {
+    .isekai-container {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+}
+
+@media (max-width: 380px) {
+    .isekai-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+
+/* =========================================================
+   CATEGORÍAS
+   ========================================================= */
+
+.isekai-category-nav {
+    width: 100%;
+    background: #263570 !important;
+    border-bottom: 2px solid #406fce !important;
+}
+
+.isekai-category-nav {
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+.isekai-category-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 0;
+}
+
+.isekai-category-dropdown {
+    position: relative;
+    flex-shrink: 0;
+    z-index: 20;
+}
+
+.isekai-category-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 9px 18px;
+    border: 1px solid rgba(255,255,255,.10) !important;
+    border-radius: 999px;
+    background: #131827 !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.isekai-category-button:hover {
+    background: #406fce !important;
+    border-color: #406fce !important;
+    color: #ffffff !important;
+}
+
+.isekai-category-dropdown.isekai-open .isekai-category-button {
+    background: #406fce !important;
+    border-color: #406fce !important;
+}
+
+.isekai-category-dropdown.isekai-open .isekai-category-arrow {
+    transform: rotate(180deg);
+}
+
+.isekai-category-arrow {
+    font-size: 10px !important;
+    color: #8db0ff !important;
+    transition: transform .2s ease;
+}
+
+
+/* =========================================================
+   SUBCATEGORÍAS
+   ========================================================= */
+
+.isekai-subcategory-menu {
+    position: absolute;
+    top: 54px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    width: 240px;
+    max-width: calc(100vw - 24px);
+    padding: 8px;
+    background: #131c35 !important;
+    border: 1px solid rgba(64,111,206,.40);
+    border-radius: 14px;
+    box-shadow: 0 18px 45px rgba(0,0,0,.45);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 1500;
+    transition: opacity .2s ease, visibility .2s ease, transform .2s ease;
+}
+
+.isekai-category-dropdown.isekai-open .isekai-subcategory-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.isekai-subcategory-link {
+    display: block !important;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    border-radius: 9px;
+    background: transparent !important;
+    color: #f8fafc !important;
+    text-decoration: none !important;
+    font-size: 14px !important;
+    font-weight: 500;
+    line-height: 1.2 !important;
+    white-space: normal;
+    transition: background-color .2s ease, color .2s ease, padding-left .2s ease;
+}
+
+.isekai-subcategory-link:hover,
+.isekai-subcategory-link:focus {
+    background: #263570 !important;
+    color: #ffffff !important;
+    padding-left: 16px;
+    text-decoration: none !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE NAV
+   ========================================================= */
+
+@media (min-width: 769px) and (max-width: 1200px) {
+    .isekai-category-list {
+        justify-content: center;
+        flex-wrap: wrap;
+        overflow-x: visible;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+    .isekai-category-list {
+        justify-content: center;
+        flex-wrap: wrap;
+        overflow-x: visible;
+        gap: 8px;
+        padding: 10px 5px;
+    }
+
+    .isekai-category-button {
+        padding: 8px 14px;
+        font-size: 13px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .isekai-category-list {
+        justify-content: center;
+        flex-wrap: wrap;
+        overflow-x: visible;
+        gap: 8px;
+        padding: 10px 5px;
+    }
+
+    .isekai-category-button {
+        flex-shrink: 0;
+        padding: 8px 14px;
+        font-size: 13px !important;
+    }
+
+    .isekai-subcategory-menu {
+        position: absolute;
+        left: 0;
+        right: auto;
+        top: 54px;
+        width: 220px;
+        max-width: 280px;
+        transform: translateX(0) translateY(-8px);
+        margin-top: 0;
+    }
+
+    .isekai-category-dropdown.isekai-open .isekai-subcategory-menu {
+        transform: translateX(0) translateY(0);
+    }
+}
+
+
+/* =========================================================
+   NORMALIZACIÓN TIPOGRÁFICA (solo selectores del nav)
+   OJO: como esto va DESPUÉS de los breakpoints de arriba y tiene
+   la misma especificidad, el "font-size: 14px !important" de
+   .isekai-category-button gana al "13px !important" de los
+   breakpoints de 768px/600px, que por tanto no llega a aplicarse.
+   ========================================================= */
+
+.isekai-category-nav,
+.isekai-category-list {
+    font-size: 14px !important;
+}
+
+.isekai-category-button,
+.isekai-subcategory-link {
+    font-size: 14px !important;
+}
+
+.isekai-category-button,
+.isekai-subcategory-link {
+    line-height: 1.2 !important;
+}
+
+
+/* =========================================================
+   CATEGORÍAS + SUBCATEGORÍAS (ajustes finales)
+   ========================================================= */
+
+.isekai-category-nav .isekai-category-list {
+    list-style: none !important;
+    margin: 0 auto !important;
+}
+
+.isekai-category-dropdown.isekai-open {
+    z-index: 1501;
+}
+
+@media (max-width: 768px) {
+    .isekai-category-nav {
+        overflow: visible;
+    }
+
+    .isekai-category-list {
+        justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .isekai-category-list::-webkit-scrollbar {
+        display: none;
+    }
+
+    .isekai-subcategory-menu {
+        width: 220px;
+    }
+}
+
+
+/* =========================================================
+   MODO CLARO - NAV (solo selectores del nav)
+   ========================================================= */
+
+body.isekai-light-theme .isekai-category-nav {
+    background: var(--isekai-nav-bg, #263570) !important;
+    border-bottom-color: #c9d7ef !important;
+}
+
+body.isekai-light-theme .isekai-category-button {
+    background: #ffffff !important;
+    border-color: #d9e2f0 !important;
+    color: #3b75d4 !important;
+}
+
+body.isekai-light-theme .isekai-category-button:hover,
+body.isekai-light-theme .isekai-category-dropdown.isekai-open .isekai-category-button {
+    background: #3b75d4 !important;
+    border-color: #3b75d4 !important;
+    color: #ffffff !important;
+}
+
+body.isekai-light-theme .isekai-category-arrow {
+    color: #3b75d4 !important;
+}
+
+body.isekai-light-theme .isekai-category-button:hover .isekai-category-arrow,
+body.isekai-light-theme .isekai-category-dropdown.isekai-open .isekai-category-arrow {
+    color: #ffffff !important;
+}
+
+body.isekai-light-theme .isekai-subcategory-menu {
+    background: #ffffff !important;
+    border-color: #d9e2f0 !important;
+    box-shadow: 0 18px 45px rgba(23, 32, 51, .16) !important;
+}
+
+body.isekai-light-theme .isekai-subcategory-link {
+    color: #3b75d4 !important;
+}
+
+body.isekai-light-theme .isekai-subcategory-link:hover,
+body.isekai-light-theme .isekai-subcategory-link:focus {
+    background: #3b75d4 !important;
+    color: #ffffff !important;
+}
