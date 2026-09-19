@@ -1,11 +1,4 @@
-<t t-name="website.homepage">
-    <t t-call="website.layout">
-        <!-- =====================================================
-             HOME
-             ===================================================== -->
-        <div id="isekai-home">
-            
-            <!-- =================================================
+           <!-- =================================================
                  HEADER
                  ================================================= -->
             <header class="isekai-header">
@@ -20,7 +13,7 @@
                     <form action="/shop" method="get" class="isekai-search" role="search">
                         <input type="search" name="search" placeholder="Buscar productos..." autocomplete="off" aria-label="Buscar productos"/>
                         <button type="submit" aria-label="Buscar" title="Buscar">
-                            <span class="isekai-search-icon"/>
+                            <span class="fa fa-search"/>
                         </button>
                     </form>
 
@@ -107,7 +100,4 @@
 
                     </div>
                 </div>
-            </header>    
-         </div>
-    </t>
-</t>
+            </header>   

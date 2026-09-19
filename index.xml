@@ -88,8 +88,8 @@
                                             <i class="fa fa-user" aria-hidden="true"/>
                                             <span>Mi perfil</span>
                                         </a>
-                                        <a href="/my/orders">
-                                            <i class="fa fa-box" aria-hidden="true"/>
+                                          <a href="/my/orders">
+                                            <i class="fa fa-shopping-bag" aria-hidden="true"/>
                                             <span>Mis pedidos</span>
                                         </a>
                                         <a href="/shop/cart">

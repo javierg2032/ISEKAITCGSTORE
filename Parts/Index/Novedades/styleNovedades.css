@@ -1,0 +1,304 @@
+/* ================================================================
+   ISEKAI TCG STORE - SECCIÓN "NOVEDADES" (extraído de style.css)
+
+   Contiene solo los estilos que afectan al bloque:
+     <section class="isekai-section" id="isekai-novedades">
+       - cabecera de sección (.isekai-section-title: eyebrow,
+         título y enlace "Ver todos")
+       - grid de productos (.isekai-products-grid)
+       - tarjeta de producto (.isekai-product-card, -image, -info,
+         -name, -price)
+
+   NO incluye: header, nav, hero, footer, Shop ni portal.
+
+   COLORES: adaptados a la paleta actual de header / nav / footer
+   (fondos #131c34 y #263570, bordes de 2px en #406fce en oscuro;
+   fondos blancos, bordes #d9e2f0 y azul #3b75d4 en claro). Son
+   colores explícitos: esta sección ya NO depende de las variables
+   --isekai-* de "#isekai-home", así que cambia de tema por sí sola.
+
+   El orden de las reglas es el mismo que en el archivo original.
+   ================================================================ */
+
+
+/* =========================================================
+   CONTENEDOR  (COMPARTIDO con header, nav, footer y el resto de
+   secciones de la home: si separas Novedades de verdad, NO lo
+   borres del archivo principal)
+   ========================================================= */
+
+.isekai-container {
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+@media (min-width: 1201px) {
+    .isekai-container {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+    .isekai-container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+    .isekai-container {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+}
+
+@media (max-width: 600px) {
+    .isekai-container {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+}
+
+@media (max-width: 380px) {
+    .isekai-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+
+/* =========================================================
+   SECCIÓN / TÍTULO DE SECCIÓN
+   (En el original, la regla del padding va agrupada con
+   "#wrap.isekai-shop-page .isekai-section", que es del Shop:
+   aquí solo se copia la parte de la home.)
+   ========================================================= */
+
+#isekai-home .isekai-section {
+    padding: 30px 0 70px;
+}
+
+#isekai-home .isekai-section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 25px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #406fce;
+}
+
+#isekai-home .isekai-section-title span {
+    color: #8db0ff !important;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .12em;
+}
+
+#isekai-home .isekai-section-title h2 {
+    margin: 4px 0 0;
+    color: #f8fafc !important;
+    font-size: 32px;
+}
+
+#isekai-home .isekai-section-title a {
+    color: #8db0ff !important;
+    text-decoration: none !important;
+}
+
+
+/* =========================================================
+   PRODUCTOS (grid "Novedades" de la home)
+   ========================================================= */
+
+#isekai-home .isekai-products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+#isekai-home .isekai-product-card {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    background: #131c34 !important;
+    border: 2px solid #406fce;
+    border-radius: 16px;
+    text-decoration: none !important;
+    transition: transform .2s ease, border-color .2s ease, background-color .2s ease, box-shadow .2s ease;
+}
+
+#isekai-home .isekai-product-card:hover {
+    transform: translateY(-5px);
+    background: #263570 !important;
+    border-color: #406fce;
+    box-shadow: 0 15px 35px rgba(64,111,206,.30);
+}
+
+#isekai-home .isekai-product-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* El fondo blanco de la ficha de producto se mantiene
+       fijo en ambos temas: es el mismo criterio que ya usan
+       las fotos de producto del catálogo (fondo neutro). */
+    background: #ffffff !important;
+}
+
+#isekai-home .isekai-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#isekai-home .isekai-product-image span {
+    color: #64748b !important;
+    font-size: 14px;
+}
+
+#isekai-home .isekai-product-info {
+    padding: 16px;
+}
+
+#isekai-home .isekai-product-name {
+    margin-bottom: 8px;
+    color: #f8fafc !important;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+#isekai-home .isekai-product-price {
+    color: #8db0ff !important;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   RESPONSIVE NOVEDADES
+   ========================================================= */
+
+@media (min-width: 769px) and (max-width: 1200px) {
+    #isekai-home .isekai-products-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+    #isekai-home .isekai-products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    #isekai-home .isekai-product-name {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    #isekai-home .isekai-section {
+        padding: 20px 0 45px;
+    }
+
+    #isekai-home .isekai-section-title {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+
+    #isekai-home .isekai-section-title h2 {
+        font-size: 27px;
+    }
+
+    #isekai-home .isekai-products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    #isekai-home .isekai-product-info {
+        padding: 11px;
+    }
+
+    #isekai-home .isekai-product-name {
+        font-size: 14px;
+        line-height: 1.3;
+    }
+
+    #isekai-home .isekai-product-price {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 380px) {
+    #isekai-home .isekai-products-grid {
+        gap: 9px;
+    }
+
+    #isekai-home .isekai-product-info {
+        padding: 9px;
+    }
+
+    #isekai-home .isekai-product-name {
+        font-size: 13px;
+    }
+
+    #isekai-home .isekai-product-price {
+        font-size: 15px;
+    }
+}
+
+
+/* =========================================================
+   MODO CLARO - NOVEDADES
+   Colores explícitos, alineados con header / nav / footer en
+   modo claro: fondo blanco, borde #d9e2f0, azul #3b75d4.
+   Los hover van aparte porque las reglas base de hover llevan
+   !important en el fondo y, sin ellas, en claro el hover no se
+   aplicaría.
+   ========================================================= */
+
+body.isekai-light-theme #isekai-home .isekai-section-title {
+    border-bottom-color: #3b75d4;
+}
+
+body.isekai-light-theme #isekai-home .isekai-section-title span {
+    color: #254587 !important;
+}
+
+body.isekai-light-theme #isekai-home .isekai-section-title h2 {
+    color: #172033 !important;
+}
+
+body.isekai-light-theme #isekai-home .isekai-section-title a {
+    color: #3b75d4 !important;
+}
+
+body.isekai-light-theme #isekai-home .isekai-product-card {
+    background: #ffffff !important;
+    border-color: #d9e2f0;
+    box-shadow: 0 8px 24px rgba(23, 32, 51, .08);
+}
+
+body.isekai-light-theme #isekai-home .isekai-product-card:hover {
+    background: #ffffff !important;
+    border-color: #3b75d4;
+    box-shadow: 0 15px 35px rgba(23, 32, 51, .14);
+}
+
+body.isekai-light-theme #isekai-home .isekai-product-name {
+    color: #172033 !important;
+}
+
+body.isekai-light-theme #isekai-home .isekai-product-price {
+    color: #3b75d4 !important;
+}

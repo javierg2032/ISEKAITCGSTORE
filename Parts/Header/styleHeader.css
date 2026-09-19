@@ -117,9 +117,9 @@ body.isekai-light-theme {
     width: 100% !important;
     height: 46px !important;
     padding: 0 55px 0 20px !important;
-    border: 1px solid rgba(64,111,206,.35) !important;
+    border: 2px solid #406fce !important;
     border-radius: 25px !important;
-    background: #263570 !important;
+    background: #131c34 !important;
     color: #ffffff !important;
     outline: none !important;
     box-shadow: none !important;
@@ -142,51 +142,36 @@ body.isekai-light-theme {
 
 .isekai-search button {
     position: absolute !important;
-    top: 5px;
-    right: 5px;
-    width: 36px !important;
-    height: 36px !important;
+    right: 0px;
+    width: 46px !important;
+    height: 46px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     padding: 0 !important;
-    border: 0 !important;
+    border: 2px solid #406fce !important;
     border-radius: 50% !important;
-    background: #131827 !important;
+    background: #263570 !important;
     color: #ffffff !important;
     cursor: pointer;
     box-shadow: none !important;
 }
 
 .isekai-search button:hover {
-    background: #315db4 !important;
+    background: #406fce !important;
 }
 
 
 /* =========================================================
    LUPA
+   Ahora es un icono Font Awesome (<span class="fa fa-search"/>):
+   se pinta con el "color" del botón, que es el que hereda. Ya no
+   existen .isekai-search-icon ni su ::after.
    ========================================================= */
 
-.isekai-search-icon {
-    position: relative;
-    display: block !important;
-    width: 14px !important;
-    height: 14px !important;
-    border: 2px solid #ffffff !important;
-    border-radius: 50%;
-    box-sizing: border-box;
-}
-
-.isekai-search-icon::after {
-    content: "";
-    position: absolute;
-    right: -6px;
-    bottom: -3px;
-    width: 7px;
-    height: 2px;
-    background: #ffffff !important;
-    border-radius: 2px;
-    transform: rotate(45deg);
+.isekai-search button .fa-search {
+    font-size: 16px;
+    line-height: 1;
 }
 
 
@@ -210,9 +195,9 @@ body.isekai-light-theme {
     justify-content: center;
     gap: 8px;
     padding: 0 16px !important;
-    border: 1px solid rgba(64,111,206,.30) !important;
+    border: 2px solid #406fce !important;
     border-radius: 25px !important;
-    background: #131c35 !important;
+    background: #263570 !important;
     color: #ffffff !important;
     cursor: pointer;
     white-space: nowrap;
@@ -527,10 +512,10 @@ body.isekai-light-theme {
     flex: 0 0 46px;
     padding: 0 !important;
     margin: 0;
-    border: 1px solid rgba(64,111,206,.30) !important;
+    border: 2px solid #406fce !important;
     border-radius: 50% !important;
-    background: var(--isekai-surface, #131c35) !important;
-    color: var(--isekai-accent-theme, #8db0ff) !important;
+    background: #263570 !important;
+    color: #fff !important;
     cursor: pointer;
     position: relative;
     overflow: hidden;
@@ -542,9 +527,8 @@ body.isekai-light-theme {
 }
 
 .isekai-theme-toggle:hover {
-    border-color: var(--isekai-primary-theme, #406fce) !important;
-    color: var(--isekai-primary-theme, #406fce) !important;
-    transform: translateY(-1px);
+    color: #fff !important;
+    background: #406fce !important;
 }
 
 .isekai-theme-toggle:focus,
@@ -610,6 +594,22 @@ body.isekai-light-theme .isekai-header {
     background: var(--isekai-header-bg, #111a31) !important;
     border-bottom-color: #d9e2f0 !important;
 }
+
+/* Botón del buscador. La lupa (<span class="fa fa-search"/>) no
+   tiene color propio: hereda el "color" del botón, así que basta
+   con cambiarlo aquí (azul en reposo, blanco en hover). */
+body.isekai-light-theme .isekai-search button {
+    background: #ffffff !important;
+    border-color: #d9e2f0 !important;
+    color: #3b75d4 !important;
+}
+
+body.isekai-light-theme .isekai-search button:hover {
+    background: #406fce !important;
+    border-color: #406fce !important;
+    color: #ffffff !important;
+}
+
 
 body.isekai-light-theme .isekai-user-menu {
     background: #ffffff !important;
