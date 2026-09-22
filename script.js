@@ -19,6 +19,7 @@
         const home = document.getElementById("isekai-home");
         const shop = document.querySelector("#wrap.isekai-shop-page");
         const portal = document.querySelector(".isekai-portal-page");
+        const cart = document.querySelector(".isekai-cart-page");
         const body = document.body;
 
         if (!body) {
@@ -36,6 +37,15 @@
          * aplicaba nunca.
          */
         body.classList.toggle("isekai-portal-active", !!portal);
+
+        /*
+         * FIX (mismo patrón que el portal): style.css define
+         * "body.isekai-cart-active" para ocultar el header/footer
+         * nativos de Odoo y aplicar el tema en /shop/cart, pero
+         * faltaba la detección de ".isekai-cart-page" (el wrapper
+         * añadido en website_sale.cart) para activar esa clase.
+         */
+        body.classList.toggle("isekai-cart-active", !!cart);
 
         /* =========================================================
            MODO CLARO / OSCURO
@@ -377,4 +387,25 @@
     } else {
         initIsekai();
     }
+})();
+
+
+
+/* ================================================================
+   ALTURA REAL DEL HEADER (para el nav sticky)
+   ================================================================ */
+(function () {
+    var header = document.querySelector(".isekai-header");
+    if (!header) return;
+
+    function setHeaderHeight() {
+        document.documentElement.style.setProperty(
+            "--isekai-header-h",
+            header.offsetHeight + "px"
+        );
+    }
+
+    setHeaderHeight();
+    window.addEventListener("resize", setHeaderHeight);
+    window.addEventListener("load", setHeaderHeight); // por si logo/fuentes cambian la altura tras el primer pintado
 })();

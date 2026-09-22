@@ -1,0 +1,36 @@
+<t name="Payment" t-name="website_sale.payment">
+        <!--
+            FIX (mismo patrón que website_sale.cart, address y checkout):
+            se envuelve en ".isekai-cart-page" porque esta vista también
+            usa "website_sale.checkout_layout" y es el último paso del
+            mismo flujo de compra (carrito -> dirección -> checkout ->
+            ESTE PASO), así que hereda sin trabajo extra los TOKENS de
+            tema, el fondo de página y el header/footer nativos ocultos.
+        -->
+        <div class="isekai-cart-page">
+            <t t-set="hide_payment_button" t-value="True" t-if="cart_has_blocking_alerts or (website_sale_order.amount_total and not (payment_methods_sudo or tokens_sudo))"/>
+            <t t-set="oe_structure">
+                <!-- This is the drag-and-drop area for website building blocs at the end of each
+                     checkout page. This is append at the of the page in `checkout_layout`. The
+                     templates created in the database to store blocs are hooked using XPath on the
+                     `oe_struture` element ID. Therefore, we can't use dynamic IDs (like with
+                     t-att-id) and each template needs to define a div element. -->
+                <div class="oe_structure" id="oe_structure_website_sale_payment_2"/>
+            </t>
+            <t t-call="website_sale.checkout_layout" additional_title.translate="Tienda - Seleccionar método de pago" redirect.f="/shop/payment" hide_payment_button="hide_payment_button" oe_structure="oe_structure">
+                <div class="oe_structure clearfix" id="oe_structure_website_sale_payment_1"/>
+
+                <div t-if="not cart_has_blocking_alerts and website_sale_order.amount_total" name="website_sale_non_free_cart">
+                    <div id="payment_method" class="o_not_editable mb-3">
+                        <t t-call="payment.form"/>
+                    </div>
+                </div>
+                <h4 t-else="" class="mb-3">
+                    Confirmar pedido
+                </h4>
+                <div id="address_on_payment">
+                    <t t-call="website_sale.address_on_checkout"/>
+                </div>
+            </t>
+        </div>
+    </t>

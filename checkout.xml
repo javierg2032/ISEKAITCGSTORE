@@ -1,0 +1,25 @@
+<t t-name="website_sale.checkout">
+        <!--
+            FIX (mismo patrón que website_sale.cart y website_sale.address):
+            se envuelve en ".isekai-cart-page" porque esta vista también usa
+            "website_sale.checkout_layout" y es el mismo flujo de compra
+            (carrito -> dirección -> ESTE PASO -> pago), así que hereda sin
+            trabajo extra los TOKENS de tema, el fondo de página y el
+            header/footer nativos ocultos.
+        -->
+        <div class="isekai-cart-page">
+            <t t-call="website_sale.checkout_layout" additional_title.translate="Tienda - Proceso de pago" redirect.f="/shop/checkout" same_shipping="bool(order.partner_shipping_id==order.partner_invoice_id or only_services)">
+                <div id="shop_checkout">
+                    <t t-if="order._has_deliverable_products()">
+                        <div class="mb-4">
+                            <t t-call="website_sale.delivery_form" selected_dm_id="order.carrier_id.id"/>
+                        </div>
+                        <div class="mb-4">
+                            <t t-call="website_sale.delivery_address_list" addresses="delivery_addresses"/>
+                        </div>
+                    </t>
+                    <t t-call="website_sale.billing_address_list" addresses="billing_addresses"/>
+                </div>
+            </t>
+        </div>
+    </t>
