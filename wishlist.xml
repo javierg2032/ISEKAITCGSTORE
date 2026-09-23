@@ -1,20 +1,19 @@
-<t name="My Addresses" t-name="portal.my_addresses">
-    <t t-set="additional_title">Mis direcciones</t>
-    <t t-call="portal.portal_layout">
-
-        <!-- =====================================================
-             MIS DIRECCIONES (PORTAL)
-             =====================================================
-             Mismo patrón que portal_my_home.xml, sale.portal_my_orders
-             y account.portal_my_invoices (/my/home, /my/orders,
-             /my/invoices): se mantiene t-call="portal.portal_layout"
-             tal cual y solo se viste el contenido con la cabecera,
-             nav y footer de Isekai.
-             ===================================================== -->
-        <div class="isekai-portal-page">
+<t name="Wishlist Page" t-name="website_sale.product_wishlist">
+    <t t-call="website.layout" additional_title.translate="Tienda - Lista de deseos">
+        <!--
+            FIX (mismo patrón que Shop): se reutiliza "isekai-shop-page"
+            en #wrap en vez de crear un wrapper nuevo, porque esta
+            página pinta su grid con la misma plantilla nativa que el
+            Shop ("website_sale.products_item"), así que hereda gratis
+            casi todo el estilo (tarjetas, tema oscuro/claro, header
+            nativo oculto, etc.). Cada tarjeta ("o_wishlist_item") lleva
+            además la clase "isekai-product-wrapper" para heredar
+            también el aspecto exacto de las tarjetas del Shop.
+        -->
+        <div id="wrap" class="o_wsale_wishlist_page isekai-shop-page">
 
             <!-- =================================================
-                 HEADER ISEKAI (idéntico al resto del sitio)
+                 HEADER ISEKAI (idéntico al del Shop)
                  ================================================= -->
             <header class="isekai-header">
                 <div class="isekai-container isekai-header-inner">
@@ -62,11 +61,11 @@
                                         </div>
                                     </div>
                                     <div class="isekai-user-menu-links">
-                                        <a href="/web/login?redirect=/my/addresses">
+                                        <a href="/web/login?redirect=/shop/wishlist">
                                             <i class="fa fa-sign-in" aria-hidden="true"/>
                                             <span>Iniciar sesión</span>
                                         </a>
-                                        <a href="/web/signup?redirect=/my/addresses">
+                                        <a href="/web/signup?redirect=/shop/wishlist">
                                             <i class="fa fa-user-plus" aria-hidden="true"/>
                                             <span>Crear cuenta</span>
                                         </a>
@@ -139,52 +138,101 @@
                 </div>
             </nav>
 
-            <!-- =================================================
-                 CONTENIDO: MIS DIRECCIONES
-                 ================================================= -->
-            <div class="isekai-container isekai-portal-content">
+            <div class="oe_structure" id="oe_structure_website_sale_wishlist_product_wishlist_1"/>
+            <div class="container oe_website_sale isekai-shop-container isekai-section">
+                <section class="container wishlist-section pb-5">
 
-                <!-- CABECERA DE PÁGINA: mismo patrón "eyebrow + título"
-                     que "Mi cuenta" en el resto del portal. -->
-                <div class="isekai-portal-heading">
-                    <span class="isekai-shop-eyebrow">MI CUENTA</span>
-                    <h1 class="isekai-shop-title">Mis direcciones</h1>
-                    <p class="isekai-portal-subtitle">
-                        Gestiona tus direcciones de entrega y facturación.
-                    </p>
-                </div>
+                    <!-- CABECERA: mismo patrón "eyebrow + título" que el Shop. -->
+                    <div class="o_wishlist_products_header isekai-products-header pt-4 pb-3">
+                        <div class="o_wsale_shop_title isekai-shop-title-wrapper">
+                            <span class="isekai-shop-eyebrow">MI CUENTA</span>
+                            <h1 class="h4-fs mb-0 isekai-shop-title">Mi lista de deseos</h1>
+                        </div>
+                    </div>
 
-                <t t-set="address_type" t-valuef="delivery"/>
-                <t t-set="new_address_url" t-valuef="{{address_url}}?address_type={{address_type}}&amp;use_delivery_as_billing={{use_delivery_as_billing}}"/>
-                <section class="o_portal_addresses">
-                    <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
-                        <h5 class="mb-0">Dirección de entrega</h5>
-                        <a role="button" t-att-href="new_address_url" t-att-data-address-type="address_type" class="o_address_card_add_new btn btn-outline-primary btn-sm" title="Añadir una dirección" aria-label="Añadir una dirección">
-                            <i class="oi oi-plus me-2"/>Añadir dirección
-                        </a>
+                    <div id="empty-wishlist-message" t-attf-class="w-100 isekai-empty-products {{'d-none' if wishes else ''}}">
+                        <div class="mt-5 mb-3 isekai-empty-image">
+                            <t t-call="website_sale.empty_wishlist_svg"/>
+                        </div>
+                        <h5 class="mb-3 isekai-empty-title" style="text-align: center;">
+                            ¡Tu lista de deseos está vacía!
+                        </h5>
+                        <p style="text-align: center;">
+                            <a href="/shop" class="btn btn-primary">
+                                Tienda
+                            </a>
+                        </p>
                     </div>
-                    <t t-call="portal.address_list" addresses="delivery_addresses"/>
-                    <t t-set="address_type" t-valuef="billing"/>
-                    <t t-set="new_address_url" t-valuef="{{address_url}}?address_type={{address_type}}"/>
-                    <div class="d-flex justify-content-between align-items-start gap-3 mt-4 pt-2">
-                        <h5 class="mb-0">Dirección de facturación</h5>
-                        <a role="button" t-att-href="new_address_url" t-att-data-address-type="address_type" t-attf-class="o_address_card_add_new o_add_billing_address_btn btn btn-outline-primary btn-sm {{'d-none' if use_delivery_as_billing else ''}}" title="Añadir una dirección" aria-label="Añadir una dirección">
-                            <i class="oi oi-plus me-2"/>Añadir dirección
-                        </a>
-                    </div>
-                    <div class="form-check form-switch mt-2">
-                        <label id="use_delivery_as_billing_label">
-                            <input type="checkbox" id="use_delivery_as_billing" class="form-check-input" t-att-checked="use_delivery_as_billing"/> Igual que la dirección de entrega
-                        </label>
-                    </div>
-                    <div id="billing_container" t-attf-class="mt-3 {{'d-none' if use_delivery_as_billing else ''}}">
-                        <t t-call="portal.address_list" addresses="billing_addresses"/>
+
+                    <div id="o_comparelist_table" t-att-data-wishlist-grid-columns="website.wishlist_grid_columns" t-att-data-wishlist-mobile-columns="website.wishlist_mobile_columns" t-attf-style="--o-wsale-wishlist-grid-gap: {{website.wishlist_gap}};" t-attf-class="o_wishlist_table grid table-comparator mb-5 isekai-products-grid {{website.wishlist_opt_products_design_classes}}">
+                        <t t-foreach="wishes" t-as="wish">
+                            <t t-set="product_variant" t-value="wish.product_id"/>
+                            <t t-set="product" t-value="product_variant.product_tmpl_id"/>
+                            <t t-set="product_href" t-value="product_variant.website_url"/>
+                            <t t-set="combination_info" t-value="product_variant._get_combination_info_variant()"/>
+                            <div class="o_wishlist_item isekai-product-wrapper" name="wishlist_item" t-att-data-wish-id="wish.id" t-att-data-product-id="product_variant.id">
+                                <t t-set="product_price">
+                                    <br t-if="combination_info['hide_price']"/>
+                                    <div t-else="" class="align-middle o_wish_price">
+                                        <span aria-label="Precio de venta">
+                                            <t t-out="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                        </span>
+                                        <small t-if="combination_info['has_discounted_price']" class="cart_product_base_unit_price text-muted">
+                                            <del aria-label="Precio original" t-out="combination_info['list_price']" class="text-nowrap" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" name="product_list_price"/>
+                                        </small>
+                                        <t t-if="combination_info.get('base_unit_price')" t-call="website_sale.base_unit_price" base_unit_price="combination_info['base_unit_price']"/>
+                                    </div>
+                                </t>
+                                <t t-set="product_actions">
+                                    <div class="o_wsale_product_action_row">
+                                        <a t-if="combination_info['prevent_sale']" t-att-href="website._get_contact_us_url(combination_info['display_name'])" class="o_wsale_product_btn_primary btn btn-primary">
+                                            <span class="d-inline-flex align-items-baseline">
+                                                <i class="fa fa-fw fa-envelope o_not-animable" role="presentation"/>
+                                                <span class="o_label small ms-1">
+                                                    Contáctanos
+                                                </span>
+                                            </span>
+                                        </a>
+                                        <button t-else="" name="add_to_cart" class="o_wsale_product_btn_primary btn btn-primary" t-att-data-product-id="product_variant.id" t-att-data-product-template-id="product.id" t-att-data-product-type="product.type" t-att-data-ptav-ids="json.dumps(product_variant.product_template_attribute_value_ids.ids)" t-att-data-show-quantity="is_view_active('website_sale.product_quantity')" t-att-disabled="wish.product_id._is_sold_out()">
+                                            <span class="d-inline-flex align-items-baseline">
+                                                <i class="fa fa-fw fa-shopping-cart o_not-animable" role="presentation"/>
+                                                <span class="o_label small ms-1">
+                                                    Añadir al carrito
+                                                </span>
+                                            </span>
+                                        </button>
+                                        <t t-if="is_view_active('website_sale.add_to_compare')">
+                                            <button t-if="product_variant and product._can_be_added_to_comparison()" class="btn btn-light o_add_to_compare d-inline-flex" aria-label="Añadir a comparar" t-att-data-product-id="wish.product_id.id">
+                                                <i class="fa fa-fw fa-exchange" role="presentation"/>
+                                            </button>
+
+                                            <!-- Render placeholder when product is not comparable to ensure alignment -->
+                                            <div t-else="" class="o_add_to_compare_placeholder btn btn-light pe-none opacity-0">
+                                                <i class="fa fa-exchange fa-fw" aria-hidden="true"/>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </t>
+                                <t t-set="extra_actions">
+                                    <button type="button" class="btn btn-light o_wish_rm z-3 rounded-pill lh-1" title="Quitar de la lista de deseos">
+                                        <i class="oi oi-close" role="presentation"/>
+                                    </button>
+                                </t>
+                                <t t-set="product_extra_information">
+                                    <span t-if="wish.product_id._is_sold_out() and not wish.product_id.allow_out_of_stock_order" class="o_wsale_stock_badge badge text-bg-danger align-self-start align-top">
+                                        <i class="fa fa-circle text-danger me-1" aria-hidden="true"/>
+                                        Agotado
+                                    </span>
+                                </t>
+                                <t t-call="website_sale.products_item" show_variations="False" show_ribbons="False" product_price="product_price" product_actions="product_actions" extra_actions="extra_actions" show_combination_name="True" product_extra_information="product_extra_information"/>
+                            </div>
+                        </t>
                     </div>
                 </section>
             </div>
 
             <!-- =================================================
-                 FOOTER ISEKAI (idéntico al resto del sitio)
+                 FOOTER ISEKAI (idéntico al del Shop)
                  ================================================= -->
             <footer class="isekai-footer">
 
@@ -231,7 +279,7 @@
                             <a href="/shop"><i class="fa fa-angle-right" aria-hidden="true"/>Novedades</a>
                         </div>
 
-                        <!-- MI CUENTA -->
+                        <!-- CUENTA -->
                         <div class="isekai-footer-section">
                             <h3>Mi cuenta</h3>
                             <a href="/my/home"><i class="fa fa-angle-right" aria-hidden="true"/>Mi perfil</a>

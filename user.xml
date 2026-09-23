@@ -40,6 +40,12 @@
                         <i class="fa fa-sun-o isekai-theme-icon-light" aria-hidden="true"/>
                     </button>
 
+                    <!-- CARRITO (mismo patrón que la home) -->
+                    <a href="/shop/cart" class="isekai-cart-link" aria-label="Ver carrito" title="Ver carrito">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"/>
+                        <sup class="my_cart_quantity isekai-cart-badge" t-esc="website_sale_cart_quantity" t-att-style="'display:none;' if not website_sale_cart_quantity else None"/>
+                    </a>
+
                     <!-- USUARIO -->
                     <div class="isekai-user">
                         <t t-if="request.env.user._is_public()">
@@ -90,13 +96,13 @@
                                             <i class="fa fa-user" aria-hidden="true"/>
                                             <span>Mi perfil</span>
                                         </a>
-                                   <a href="/my/orders">
-                                                <i class="fa fa-shopping-bag" aria-hidden="true"/>
-                                                <span>Mis pedidos</span>
-                                            </a>
-                                        <a href="/shop/cart">
-                                            <i class="fa fa-shopping-cart" aria-hidden="true"/>
-                                            <span>Mi carrito</span>
+                                        <a href="/my/orders">
+                                            <i class="fa fa-box" aria-hidden="true"/>
+                                            <span>Mis pedidos</span>
+                                        </a>
+                                        <a href="/shop/wishlist">
+                                            <i class="fa fa-heart" aria-hidden="true"/>
+                                            <span>Mi lista de deseos</span>
                                         </a>
                                         <a href="/web/session/logout?redirect=/" class="isekai-logout">
                                             <i class="fa fa-sign-out" aria-hidden="true"/>
