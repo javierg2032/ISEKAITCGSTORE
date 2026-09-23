@@ -2741,6 +2741,32 @@ body.isekai-shop-active #wrap.isekai-shop-page {
     flex-direction: column;
 }
 
+/* Fila que junta el título ("Todos los productos" / nombre de
+   categoría / resultados de búsqueda) con los controles de orden y
+   filtros, en vez de ir uno encima del otro. En pantallas estrechas
+   pasa a apilarse porque los dos hijos son de ancho variable dentro
+   de un flex-wrap. */
+#wrap.isekai-shop-page .isekai-title-controls-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+#wrap.isekai-shop-page .isekai-title-controls-row .isekai-shop-title-wrapper,
+#wrap.isekai-shop-page .isekai-title-controls-row > h1 {
+    margin-bottom: 0;
+}
+
+/* Dentro de la fila, los controles ya no necesitan ocupar el 100% de
+   ancho ni el margen superior que tenían cuando iban en su propia
+   línea debajo del título. */
+#wrap.isekai-shop-page .isekai-title-controls-row .isekai-products-controls {
+    width: auto;
+    margin-top: 0;
+}
+
 #wrap.isekai-shop-page .isekai-shop-eyebrow {
     display: block;
     margin-bottom: 4px;
@@ -3494,6 +3520,220 @@ body.isekai-light-theme #wrap.isekai-shop-page .text-muted {
 /* Spinner de carga de contadores (fetch AJAX de Odoo) */
 .isekai-portal-docs .o_portal_doc_spinner {
     color: var(--isekai-highlight, #8db0ff) !important;
+}
+
+
+/* ---------- TABLA DE PEDIDOS (/my/orders, portal.portal_table) ----------
+   Compartida por cualquier listado del portal que use esta plantilla
+   nativa de Odoo (pedidos, facturas...). */
+
+.isekai-portal-page .table {
+    color: var(--isekai-text, #f8fafc);
+}
+
+.isekai-portal-page .table > :not(caption) > * > * {
+    border-color: var(--isekai-border, rgba(255,255,255,.10)) !important;
+    background: transparent !important;
+    color: var(--isekai-text, #f8fafc);
+}
+
+.isekai-portal-page .table thead th {
+    color: var(--isekai-muted, #94a3b8);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: .04em;
+}
+
+.isekai-portal-page .table tbody tr:hover {
+    background: var(--isekai-card-hover, #263570);
+}
+
+.isekai-portal-page .table a {
+    color: var(--isekai-highlight, #8db0ff);
+    text-decoration: none;
+}
+
+.isekai-portal-page .table a:hover {
+    text-decoration: underline;
+}
+
+/* Aviso "no hay pedidos" (alert-warning). */
+.isekai-portal-page .alert-warning {
+    background: var(--isekai-surface, #131c34) !important;
+    border: 2px solid #f0b429 !important;
+    border-radius: 12px !important;
+    color: var(--isekai-text, #f8fafc) !important;
+}
+
+/* Buscador del portal (portal.portal_searchbar): inputs/selects con
+   el mismo patrón que el resto del sitio.
+   AVISO: no se compartió el HTML renderizado de esta subplantilla;
+   ".o_portal_search_panel" es el contenedor habitual en Odoo para
+   este componente. Si al probarlo no coge el tema, pedir el HTML
+   renderizado para ajustar el selector. */
+.isekai-portal-page .o_portal_search_panel .form-control,
+.isekai-portal-page .o_portal_search_panel .form-select {
+    background-color: var(--isekai-surface, #131c34);
+    border: 2px solid var(--isekai-control-border, #406fce);
+    color: var(--isekai-text, #f8fafc);
+}
+
+.isekai-portal-page .o_portal_search_panel .form-control::placeholder {
+    color: var(--isekai-muted, #94a3b8);
+}
+
+/* Badges de estado de factura (/my/invoices): mismos colores
+   semánticos (verde pagado, azul en proceso, ámbar cancelado) pero
+   sin el gris nativo de Bootstrap alrededor. */
+.isekai-portal-page .badge.text-bg-success {
+    background: #22c55e !important;
+    color: #ffffff !important;
+}
+
+.isekai-portal-page .badge.text-bg-info {
+    background: var(--isekai-primary, #406fce) !important;
+    color: #ffffff !important;
+}
+
+.isekai-portal-page .badge.text-bg-warning {
+    background: #f0b429 !important;
+    color: #172033 !important;
+}
+
+/* Fecha de vencimiento pasada (factura impagada vencida). */
+.isekai-portal-page .text-danger {
+    color: #ef4444 !important;
+}
+
+/* ---------- MIS DIRECCIONES (/my/addresses, portal.my_addresses) ----------
+   Cabeceras "Dirección de entrega"/"Dirección de facturación", botón
+   "Añadir dirección" (o_address_card_add_new, ya usado también en
+   website_sale.address) y el switch "Igual que la dirección de
+   entrega".
+
+   AVISO: "portal.address_list" (las tarjetas de cada dirección
+   guardada, con sus botones de editar/eliminar) no se compartió con
+   su HTML renderizado, así que esa parte concreta no tiene estilo
+   propio todavía. Si al probarlo no coge el tema, pedir el HTML
+   renderizado de una tarjeta de dirección. */
+
+.isekai-portal-page h5 {
+    color: var(--isekai-text, #f8fafc);
+    font-weight: 700;
+}
+
+.isekai-portal-page .btn-outline-primary {
+    border: 2px solid var(--isekai-primary, #406fce) !important;
+    border-radius: 999px !important;
+    background: transparent !important;
+    color: var(--isekai-primary, #406fce) !important;
+    font-weight: 600;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+.isekai-portal-page .btn-outline-primary:hover {
+    background: var(--isekai-primary, #406fce) !important;
+    color: #ffffff !important;
+}
+
+.isekai-portal-page .form-switch .form-check-input {
+    background-color: var(--isekai-surface, #131c34);
+    border: 2px solid var(--isekai-control-border, #406fce);
+}
+
+.isekai-portal-page .form-switch .form-check-input:checked {
+    background-color: var(--isekai-primary, #406fce);
+    border-color: var(--isekai-primary, #406fce);
+}
+
+.isekai-portal-page .form-switch label {
+    color: var(--isekai-text, #f8fafc);
+}
+
+
+/* ---------- SEGURIDAD (/my/security, portal.portal_my_security) ---------- */
+
+.isekai-portal-page .text-muted {
+    color: var(--isekai-muted, #94a3b8) !important;
+}
+
+.isekai-portal-page hr {
+    border-color: var(--isekai-border, rgba(255,255,255,.10));
+    opacity: 1;
+}
+
+/* Avisos de éxito/error del formulario de contraseña. */
+.isekai-portal-page .alert-success {
+    background: var(--isekai-surface, #131c34) !important;
+    border: 2px solid #22c55e !important;
+    border-radius: 12px !important;
+    color: var(--isekai-text, #f8fafc) !important;
+}
+
+.isekai-portal-page .alert-danger {
+    background: var(--isekai-surface, #131c34) !important;
+    border: 2px solid #ef4444 !important;
+    border-radius: 12px !important;
+    color: var(--isekai-text, #f8fafc) !important;
+}
+
+/* Campos de contraseña con el botón "mostrar" (o_show_password). */
+.isekai-portal-page .input-group .form-control {
+    background-color: var(--isekai-surface, #131c34);
+    border: 2px solid var(--isekai-control-border, #406fce);
+    border-right: 0;
+    color: var(--isekai-text, #f8fafc);
+}
+
+.isekai-portal-page .input-group .btn {
+    border: 2px solid var(--isekai-control-border, #406fce);
+    border-left: 0;
+    background: var(--isekai-surface, #131c34);
+    color: var(--isekai-muted, #94a3b8);
+}
+
+.isekai-portal-page .form-control.is-invalid {
+    border-color: #ef4444;
+}
+
+.isekai-portal-page .invalid-feedback {
+    color: #ef4444;
+}
+
+.isekai-portal-page .btn-danger {
+    background: #ef4444 !important;
+    border: 2px solid #ef4444 !important;
+    border-radius: 999px !important;
+    color: #ffffff !important;
+}
+
+.isekai-portal-page .btn-danger:hover {
+    background: #dc2626 !important;
+    border-color: #dc2626 !important;
+}
+
+/* Modal "¿Está seguro?" (eliminar cuenta). */
+.isekai-portal-page .modal-content {
+    background: var(--isekai-card, #131c34) !important;
+    border: 2px solid var(--isekai-control-border, #406fce) !important;
+    border-radius: var(--isekai-radius-lg, 16px) !important;
+    color: var(--isekai-text, #f8fafc) !important;
+}
+
+.isekai-portal-page .modal-header.bg-danger {
+    background: #ef4444 !important;
+    border-bottom: none;
+    border-top-left-radius: var(--isekai-radius-lg, 16px);
+    border-top-right-radius: var(--isekai-radius-lg, 16px);
+}
+
+.isekai-portal-page .modal-header .btn-close {
+    filter: invert(1);
+}
+
+.isekai-portal-page .modal-footer {
+    border-top: 1px solid var(--isekai-border, rgba(255,255,255,.10));
 }
 
 
