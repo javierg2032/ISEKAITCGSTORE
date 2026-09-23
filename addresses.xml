@@ -1,22 +1,20 @@
-<t name="My Portal" t-name="portal.portal_my_home">
-    <t t-call="portal.portal_layout" my_details="True">
+<t name="My Addresses" t-name="portal.my_addresses">
+    <t t-set="additional_title">Mis direcciones</t>
+    <t t-call="portal.portal_layout">
 
         <!-- =====================================================
-             MI CUENTA (PORTAL)
+             MIS DIRECCIONES (PORTAL)
              =====================================================
-             NOTA: se mantiene t-call="portal.portal_layout" tal
-             cual, porque ese template (que no forma parte de este
-             archivo) es el que gestiona el breadcrumb, el menú
-             lateral compartido con /my/orders, /my/invoices,
-             /my/addresses, etc. y la seguridad del portal. Aquí
-             solo se viste el contenido con la cabecera, nav y
-             footer de Isekai, igual que en index.xml y
-             products.xml.
+             Mismo patrón que portal_my_home.xml, sale.portal_my_orders
+             y account.portal_my_invoices (/my/home, /my/orders,
+             /my/invoices): se mantiene t-call="portal.portal_layout"
+             tal cual y solo se viste el contenido con la cabecera,
+             nav y footer de Isekai.
              ===================================================== -->
         <div class="isekai-portal-page">
 
             <!-- =================================================
-                 HEADER ISEKAI (idéntico a home/shop)
+                 HEADER ISEKAI (idéntico al resto del sitio)
                  ================================================= -->
             <header class="isekai-header">
                 <div class="isekai-container isekai-header-inner">
@@ -40,7 +38,7 @@
                         <i class="fa fa-sun-o isekai-theme-icon-light" aria-hidden="true"/>
                     </button>
 
-                    <!-- CARRITO (mismo patrón que la home) -->
+                    <!-- CARRITO -->
                     <a href="/shop/cart" class="isekai-cart-link" aria-label="Ver carrito" title="Ver carrito">
                         <i class="fa fa-shopping-cart" aria-hidden="true"/>
                         <sup class="my_cart_quantity isekai-cart-badge" t-esc="website_sale_cart_quantity" t-att-style="'display:none;' if not website_sale_cart_quantity else None"/>
@@ -64,11 +62,11 @@
                                         </div>
                                     </div>
                                     <div class="isekai-user-menu-links">
-                                        <a href="/web/login?redirect=/my/home">
+                                        <a href="/web/login?redirect=/my/addresses">
                                             <i class="fa fa-sign-in" aria-hidden="true"/>
                                             <span>Iniciar sesión</span>
                                         </a>
-                                        <a href="/web/signup?redirect=/my/home">
+                                        <a href="/web/signup?redirect=/my/addresses">
                                             <i class="fa fa-user-plus" aria-hidden="true"/>
                                             <span>Crear cuenta</span>
                                         </a>
@@ -97,7 +95,7 @@
                                             <span>Mi perfil</span>
                                         </a>
                                         <a href="/my/orders">
-                                            <i class="fa fa-box" aria-hidden="true"/>
+                                            <i class="fa fa-shopping-bag" aria-hidden="true"/>
                                             <span>Mis pedidos</span>
                                         </a>
                                         <a href="/shop/wishlist">
@@ -117,7 +115,7 @@
             </header>
 
             <!-- =================================================
-                 CATEGORÍAS (idéntico patrón que home/shop)
+                 CATEGORÍAS (idéntico patrón que el resto del sitio)
                  ================================================= -->
             <nav class="isekai-category-nav" aria-label="Categorías de productos">
                 <div class="isekai-container">
@@ -142,56 +140,51 @@
             </nav>
 
             <!-- =================================================
-                 CONTENIDO DEL PORTAL
+                 CONTENIDO: MIS DIRECCIONES
                  ================================================= -->
             <div class="isekai-container isekai-portal-content">
 
-                <!-- CABECERA DE PÁGINA: mismo patrón "eyebrow +
-                     título" que "Todos los productos" en el Shop
-                     y "Últimas novedades" en la Home. -->
+                <!-- CABECERA DE PÁGINA: mismo patrón "eyebrow + título"
+                     que "Mi cuenta" en el resto del portal. -->
                 <div class="isekai-portal-heading">
                     <span class="isekai-shop-eyebrow">MI CUENTA</span>
-                    <h1 class="isekai-shop-title">
-                        Bienvenido<t t-if="not request.env.user._is_public()">, <t t-out="request.env.user.name"/></t>
-                    </h1>
+                    <h1 class="isekai-shop-title">Mis direcciones</h1>
                     <p class="isekai-portal-subtitle">
-                        Consulta tus pedidos, facturas, direcciones de envío y toda la información de tu cuenta.
+                        Gestiona tus direcciones de entrega y facturación.
                     </p>
                 </div>
 
-                <div class="o_portal_my_home isekai-portal-docs">
-                    <div class="oe_structure" id="oe_structure_portal_my_home_1"/>
-
-                    <div class="o_portal_docs">
-
-                        <!-- AVISOS (p.ej. facturas pendientes, tickets abiertos...) -->
-                        <div t-if="portal_entries.get('alert', [])" class="o_portal_category d-flex flex-wrap gap-2 mt-3 o_not_editable isekai-portal-alerts" id="portal_alert_category">
-                            <t t-foreach="portal_entries.get('alert', [])" t-as="entry">
-                                <t t-call="portal.portal_docs_entry" bg_color.f="alert alert-primary align-items-center" show_count="True" placeholder_count="entry.placeholder_count"/>
-                            </t>
-                        </div>
-
-                        <!-- TARJETAS (Pedidos, Facturas, Direcciones, Tickets...) -->
-                        <div t-if="portal_cards or (editable and portal_hidden_cards)" class="o_portal_cards d-grid mt-3 isekai-portal-cards" id="portal_cards">
-                            <t t-foreach="portal_cards" t-as="entry">
-                                <t t-call="portal.portal_docs_entry" placeholder_count="entry.placeholder_count"/>
-                            </t>
-                            <t t-if="editable">
-                                <t t-foreach="portal_hidden_cards" t-as="entry">
-                                    <t t-call="portal.portal_docs_entry" placeholder_count="entry.placeholder_count"/>
-                                </t>
-                            </t>
-                        </div>
-
-                        <div class="o_portal_doc_spinner spinner-border text-o-color-2 align-self-center mt-5"/>
+                <t t-set="address_type" t-valuef="delivery"/>
+                <t t-set="new_address_url" t-valuef="{{address_url}}?address_type={{address_type}}&amp;use_delivery_as_billing={{use_delivery_as_billing}}"/>
+                <section class="o_portal_addresses">
+                    <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                        <h5 class="mb-0">Dirección de entrega</h5>
+                        <a role="button" t-att-href="new_address_url" t-att-data-address-type="address_type" class="o_address_card_add_new btn btn-outline-primary btn-sm" title="Añadir una dirección" aria-label="Añadir una dirección">
+                            <i class="oi oi-plus me-2"/>Añadir dirección
+                        </a>
                     </div>
-                </div>
-
-                <div class="oe_structure" id="oe_structure_portal_my_home_2"/>
+                    <t t-call="portal.address_list" addresses="delivery_addresses"/>
+                    <t t-set="address_type" t-valuef="billing"/>
+                    <t t-set="new_address_url" t-valuef="{{address_url}}?address_type={{address_type}}"/>
+                    <div class="d-flex justify-content-between align-items-start gap-3 mt-4 pt-2">
+                        <h5 class="mb-0">Dirección de facturación</h5>
+                        <a role="button" t-att-href="new_address_url" t-att-data-address-type="address_type" t-attf-class="o_address_card_add_new o_add_billing_address_btn btn btn-outline-primary btn-sm {{'d-none' if use_delivery_as_billing else ''}}" title="Añadir una dirección" aria-label="Añadir una dirección">
+                            <i class="oi oi-plus me-2"/>Añadir dirección
+                        </a>
+                    </div>
+                    <div class="form-check form-switch mt-2">
+                        <label id="use_delivery_as_billing_label">
+                            <input type="checkbox" id="use_delivery_as_billing" class="form-check-input" t-att-checked="use_delivery_as_billing"/> Igual que la dirección de entrega
+                        </label>
+                    </div>
+                    <div id="billing_container" t-attf-class="mt-3 {{'d-none' if use_delivery_as_billing else ''}}">
+                        <t t-call="portal.address_list" addresses="billing_addresses"/>
+                    </div>
+                </section>
             </div>
 
             <!-- =================================================
-                 FOOTER ISEKAI (idéntico a home/shop)
+                 FOOTER ISEKAI (idéntico al resto del sitio)
                  ================================================= -->
             <footer class="isekai-footer">
 

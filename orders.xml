@@ -1,22 +1,19 @@
-<t name="My Portal" t-name="portal.portal_my_home">
-    <t t-call="portal.portal_layout" my_details="True">
+<t name="My Sales Orders" t-name="sale.portal_my_orders">
+    <t t-call="portal.portal_layout" breadcrumbs_searchbar="True">
 
         <!-- =====================================================
-             MI CUENTA (PORTAL)
+             MIS PEDIDOS (PORTAL)
              =====================================================
-             NOTA: se mantiene t-call="portal.portal_layout" tal
-             cual, porque ese template (que no forma parte de este
-             archivo) es el que gestiona el breadcrumb, el menú
-             lateral compartido con /my/orders, /my/invoices,
-             /my/addresses, etc. y la seguridad del portal. Aquí
-             solo se viste el contenido con la cabecera, nav y
-             footer de Isekai, igual que en index.xml y
-             products.xml.
+             Mismo patrón que portal_my_home.xml (/my/home): se
+             mantiene t-call="portal.portal_layout" tal cual (gestiona
+             el breadcrumb, el menú lateral compartido con el resto de
+             /my/... y la seguridad del portal) y solo se viste el
+             contenido con la cabecera, nav y footer de Isekai.
              ===================================================== -->
         <div class="isekai-portal-page">
 
             <!-- =================================================
-                 HEADER ISEKAI (idéntico a home/shop)
+                 HEADER ISEKAI (idéntico al resto del sitio)
                  ================================================= -->
             <header class="isekai-header">
                 <div class="isekai-container isekai-header-inner">
@@ -40,7 +37,7 @@
                         <i class="fa fa-sun-o isekai-theme-icon-light" aria-hidden="true"/>
                     </button>
 
-                    <!-- CARRITO (mismo patrón que la home) -->
+                    <!-- CARRITO -->
                     <a href="/shop/cart" class="isekai-cart-link" aria-label="Ver carrito" title="Ver carrito">
                         <i class="fa fa-shopping-cart" aria-hidden="true"/>
                         <sup class="my_cart_quantity isekai-cart-badge" t-esc="website_sale_cart_quantity" t-att-style="'display:none;' if not website_sale_cart_quantity else None"/>
@@ -64,11 +61,11 @@
                                         </div>
                                     </div>
                                     <div class="isekai-user-menu-links">
-                                        <a href="/web/login?redirect=/my/home">
+                                        <a href="/web/login?redirect=/my/orders">
                                             <i class="fa fa-sign-in" aria-hidden="true"/>
                                             <span>Iniciar sesión</span>
                                         </a>
-                                        <a href="/web/signup?redirect=/my/home">
+                                        <a href="/web/signup?redirect=/my/orders">
                                             <i class="fa fa-user-plus" aria-hidden="true"/>
                                             <span>Crear cuenta</span>
                                         </a>
@@ -97,7 +94,7 @@
                                             <span>Mi perfil</span>
                                         </a>
                                         <a href="/my/orders">
-                                            <i class="fa fa-box" aria-hidden="true"/>
+                                            <i class="fa fa-shopping-bag" aria-hidden="true"/>
                                             <span>Mis pedidos</span>
                                         </a>
                                         <a href="/shop/wishlist">
@@ -117,7 +114,7 @@
             </header>
 
             <!-- =================================================
-                 CATEGORÍAS (idéntico patrón que home/shop)
+                 CATEGORÍAS (idéntico patrón que el resto del sitio)
                  ================================================= -->
             <nav class="isekai-category-nav" aria-label="Categorías de productos">
                 <div class="isekai-container">
@@ -142,56 +139,52 @@
             </nav>
 
             <!-- =================================================
-                 CONTENIDO DEL PORTAL
+                 CONTENIDO: MIS PEDIDOS
                  ================================================= -->
             <div class="isekai-container isekai-portal-content">
 
-                <!-- CABECERA DE PÁGINA: mismo patrón "eyebrow +
-                     título" que "Todos los productos" en el Shop
-                     y "Últimas novedades" en la Home. -->
+                <!-- CABECERA DE PÁGINA: mismo patrón "eyebrow + título"
+                     que "Mi cuenta" en /my/home. -->
                 <div class="isekai-portal-heading">
                     <span class="isekai-shop-eyebrow">MI CUENTA</span>
-                    <h1 class="isekai-shop-title">
-                        Bienvenido<t t-if="not request.env.user._is_public()">, <t t-out="request.env.user.name"/></t>
-                    </h1>
+                    <h1 class="isekai-shop-title">Mis pedidos</h1>
                     <p class="isekai-portal-subtitle">
-                        Consulta tus pedidos, facturas, direcciones de envío y toda la información de tu cuenta.
+                        Consulta el historial de tus pedidos de venta.
                     </p>
                 </div>
 
-                <div class="o_portal_my_home isekai-portal-docs">
-                    <div class="oe_structure" id="oe_structure_portal_my_home_1"/>
-
-                    <div class="o_portal_docs">
-
-                        <!-- AVISOS (p.ej. facturas pendientes, tickets abiertos...) -->
-                        <div t-if="portal_entries.get('alert', [])" class="o_portal_category d-flex flex-wrap gap-2 mt-3 o_not_editable isekai-portal-alerts" id="portal_alert_category">
-                            <t t-foreach="portal_entries.get('alert', [])" t-as="entry">
-                                <t t-call="portal.portal_docs_entry" bg_color.f="alert alert-primary align-items-center" show_count="True" placeholder_count="entry.placeholder_count"/>
-                            </t>
-                        </div>
-
-                        <!-- TARJETAS (Pedidos, Facturas, Direcciones, Tickets...) -->
-                        <div t-if="portal_cards or (editable and portal_hidden_cards)" class="o_portal_cards d-grid mt-3 isekai-portal-cards" id="portal_cards">
-                            <t t-foreach="portal_cards" t-as="entry">
-                                <t t-call="portal.portal_docs_entry" placeholder_count="entry.placeholder_count"/>
-                            </t>
-                            <t t-if="editable">
-                                <t t-foreach="portal_hidden_cards" t-as="entry">
-                                    <t t-call="portal.portal_docs_entry" placeholder_count="entry.placeholder_count"/>
-                                </t>
-                            </t>
-                        </div>
-
-                        <div class="o_portal_doc_spinner spinner-border text-o-color-2 align-self-center mt-5"/>
-                    </div>
+                <t t-call="portal.portal_searchbar" title.translate="Sus pedidos"/>
+                <div t-if="not orders" class="alert alert-warning" role="alert">
+                    Actualmente no hay pedidos de venta para su cuenta.
                 </div>
-
-                <div class="oe_structure" id="oe_structure_portal_my_home_2"/>
+                <t t-if="orders" t-call="portal.portal_table">
+                    <thead>
+                        <tr class="active">
+                            <th>
+                                <span class="d-none d-md-inline">Pedido de venta nº </span>
+                                <span class="d-block d-md-none">Ref.</span>
+                            </th>
+                            <th class="text-end">Fecha de pedido</th>
+                            <th name="order_total" class="text-end">Total</th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="orders" t-as="order">
+                        <tr>
+                            <td><a t-att-href="order.get_portal_url()"><t t-out="order.name"/></a></td>
+                            <td class="text-end">
+                                <span t-field="order.date_order" t-options="{'widget': 'date'}"/>&amp;nbsp;
+                                <span class="d-none d-md-inline" t-field="order.date_order" t-options="{'time_only': True}"/>
+                            </td>
+                            <td name="order_amount_total" class="text-end">
+                                <span t-field="order.amount_total"/>
+                            </td>
+                        </tr>
+                    </t>
+                </t>
             </div>
 
             <!-- =================================================
-                 FOOTER ISEKAI (idéntico a home/shop)
+                 FOOTER ISEKAI (idéntico al resto del sitio)
                  ================================================= -->
             <footer class="isekai-footer">
 

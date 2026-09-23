@@ -49,20 +49,24 @@
                     <a href="/" class="isekai-logo" aria-label="Isekai TCG Store">
                         <img src="/web/image/1329-73065db4/01_Marca%20completa_fondo%20claro%20%284%29.webp" alt="" data-attachment-id="1328" class="isekai-logo-image img img-fluid o_we_custom_image o_attachment_pending_record_id" data-format-mimetype="image/webp" data-resize-width="162" data-original-id="1328" data-original-src="/web/image/1328-48608fe1/01_Marca%20completa_fondo%20claro%20%284%29.png" data-mimetype-before-conversion="image/png" data-mimetype="image/webp"/>
                     </a>
-
                     <!-- BUSCADOR -->
                     <form action="/shop" method="get" class="isekai-search" role="search">
-                        <input type="search" name="search" t-att-value="search" placeholder="Buscar productos..." autocomplete="off" aria-label="Buscar productos"/>
+                        <input type="search" name="search" placeholder="Buscar productos..." autocomplete="off" aria-label="Buscar productos"/>
                         <button type="submit" aria-label="Buscar" title="Buscar">
-                            <span class="isekai-search-icon"/>
+                            <span class="fa fa-search"/>
                         </button>
                     </form>
-
                     <!-- MODO CLARO / OSCURO -->
                     <button type="button" class="isekai-theme-toggle" aria-label="Cambiar a modo claro" aria-pressed="false" title="Cambiar a modo claro">
                         <i class="fa fa-moon-o isekai-theme-icon-dark" aria-hidden="true"/>
                         <i class="fa fa-sun-o isekai-theme-icon-light" aria-hidden="true"/>
                     </button>
+
+                    <!-- CARRITO (mismo patrón que la home) -->
+                    <a href="/shop/cart" class="isekai-cart-link" aria-label="Ver carrito" title="Ver carrito">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"/>
+                        <sup class="my_cart_quantity isekai-cart-badge" t-esc="website_sale_cart_quantity" t-att-style="'display:none;' if not website_sale_cart_quantity else None"/>
+                    </a>
 
                     <!-- USUARIO -->
                     <div class="isekai-user">
@@ -114,13 +118,13 @@
                                             <i class="fa fa-user" aria-hidden="true"/>
                                             <span>Mi perfil</span>
                                         </a>
-                                        <a href="/my/orders">
-                                            <i class="fa fa-box" aria-hidden="true"/>
-                                            <span>Mis pedidos</span>
-                                        </a>
-                                        <a href="/shop/cart">
-                                            <i class="fa fa-shopping-cart" aria-hidden="true"/>
-                                            <span>Mi carrito</span>
+                                <a href="/my/orders">
+                                                <i class="fa fa-shopping-bag" aria-hidden="true"/>
+                                                <span>Mis pedidos</span>
+                                            </a>
+                                        <a href="/shop/wishlist">
+                                            <i class="fa fa-heart" aria-hidden="true"/>
+                                            <span>Mi lista de deseos</span>
                                         </a>
                                         <a href="/web/session/logout?redirect=/" class="isekai-logout">
                                             <i class="fa fa-sign-out" aria-hidden="true"/>
@@ -230,38 +234,73 @@
                             <!-- BREADCRUMB -->
                             <t t-if="category and not search" t-call="website_sale.products_breadcrumb" _classes.f="w-100 p-0 mb-0 small isekai-breadcrumb {{not opt_wsale_show_category_title and 'mb-2 mb-lg-0'}}"/>
 
-                            <!-- TÍTULO (búsqueda / categoría) -->
-                            <h1 t-if="category or search" t-attf-class="o_wsale_category_title isekai-shop-title d-flex gap-1 align-items-center mb-0 lh-lg {{search and bool(category) and 'mb-2'}} {{search and 'o_wsale_category_title_is_search base-fs font-sans-serif' or 'fs-3'}}">
-                                <t t-if="search and category">
-                                    <span class="isekai-title-muted">Buscando</span>
-                                    <span class="isekai-search-badge">
-                                        <t t-out="search"/>
-                                        <a title="Borrar la búsqueda de esta categoría" t-att-href="keep(search=0)" class="isekai-badge-close">
-                                            <i class="oi oi-close" role="img"/>
-                                        </a>
-                                    </span>
-                                    <span class="isekai-title-muted">en</span>
-                                    <span class="isekai-category-badge">
-                                        <t t-out="category.name"/>
-                                        <a title="Buscar de forma general" t-att-href="keep(shop_path, search=search)" class="isekai-badge-close">
-                                            <i class="oi oi-close" role="img"/>
-                                        </a>
-                                    </span>
-                                </t>
-                                <span t-elif="search">
-                                    <span class="isekai-title-muted">Resultados de búsqueda de</span>
-                                    '<strong t-out="search"/>'
-                                    <small t-if="search_count" class="isekai-search-count">(<t t-out="search_count"/>)</small>
-                                </span>
-                                <t t-elif="category">
-                                    <span t-field="category.name"/>
-                                </t>
-                            </h1>
+                            <!-- =================================
+                                 FILA: TÍTULO + CONTROLES (orden/filtros)
+                                 FIX: título ("TIENDA / Todos los
+                                 productos", o el de categoría/búsqueda)
+                                 y los controles de orden/filtros en la
+                                 misma fila, en vez de uno encima del
+                                 otro. Se elimina también el buscador de
+                                 productos propio de esta cabecera
+                                 (website_sale.search) y su versión
+                                 móvil (website.website_search_box_input),
+                                 porque el header ya tiene su propio
+                                 buscador ("isekai-search") que hacía el
+                                 mismo trabajo por duplicado.
+                                 ================================= -->
+                            <div class="isekai-title-controls-row">
 
-                            <!-- TÍTULO GENERAL (misma estética "eyebrow + título" que la sección "Novedades" de la home) -->
-                            <div class="o_wsale_shop_title isekai-shop-title-wrapper" t-if="not category and not search">
-                                <span class="isekai-shop-eyebrow">TIENDA</span>
-                                <h1 class="h4-fs isekai-shop-title">Todos los productos</h1>
+                                <!-- TÍTULO (búsqueda / categoría) -->
+                                <h1 t-if="category or search" t-attf-class="o_wsale_category_title isekai-shop-title d-flex gap-1 align-items-center mb-0 lh-lg {{search and bool(category) and 'mb-2'}} {{search and 'o_wsale_category_title_is_search base-fs font-sans-serif' or 'fs-3'}}">
+                                    <t t-if="search and category">
+                                        <span class="isekai-title-muted">Buscando</span>
+                                        <span class="isekai-search-badge">
+                                            <t t-out="search"/>
+                                            <a title="Borrar la búsqueda de esta categoría" t-att-href="keep(search=0)" class="isekai-badge-close">
+                                                <i class="oi oi-close" role="img"/>
+                                            </a>
+                                        </span>
+                                        <span class="isekai-title-muted">en</span>
+                                        <span class="isekai-category-badge">
+                                            <t t-out="category.name"/>
+                                            <a title="Buscar de forma general" t-att-href="keep(shop_path, search=search)" class="isekai-badge-close">
+                                                <i class="oi oi-close" role="img"/>
+                                            </a>
+                                        </span>
+                                    </t>
+                                    <span t-elif="search">
+                                        <span class="isekai-title-muted">Resultados de búsqueda de</span>
+                                        '<strong t-out="search"/>'
+                                        <small t-if="search_count" class="isekai-search-count">(<t t-out="search_count"/>)</small>
+                                    </span>
+                                    <t t-elif="category">
+                                        <span t-field="category.name"/>
+                                    </t>
+                                </h1>
+
+                                <!-- TÍTULO GENERAL (misma estética "eyebrow + título" que la sección "Novedades" de la home) -->
+                                <div class="o_wsale_shop_title isekai-shop-title-wrapper" t-if="not category and not search">
+                                    <span class="isekai-shop-eyebrow">TIENDA</span>
+                                    <h1 class="h4-fs isekai-shop-title">Todos los productos</h1>
+                                </div>
+
+                                <!-- CONTROLES (orden/filtros) -->
+                                <div t-if="not opt_wsale_floating_bar" class="products_header d-flex gap-1 gap-lg-2 gap-xl-3 isekai-products-controls">
+                                    <div class="o_wsale_products_header_inner d-flex justify-content-between w-100 isekai-products-controls-inner">
+                                        <t t-set="show_product_controls_header" t-value="hasPricelistDropdown or is_view_active('website_sale.sort') or wsale_has_filters_btn"/>
+                                        <div t-attf-class="{{'d-lg-none' if not show_product_controls_header else ''}} o_wsale_products_header_dropdown_wrap d-flex gap-3 isekai-products-dropdown-controls ms-auto">
+                                            <t t-if="hasPricelistDropdown" t-call="website_sale.pricelist_list" _classes.f="ms-auto"/>
+                                            <t t-if="is_view_active('website_sale.sort')" t-call="website_sale.sort"/>
+                                            <button t-if="wsale_has_filters_btn" t-attf-class="btn btn-{{navClass}} position-relative {{not wsale_has_filters_btn_lg and 'd-lg-none'}} text-nowrap isekai-filter-button" title="Filtros" data-bs-toggle="offcanvas" data-bs-target="#o_wsale_offcanvas">
+                                                <i class="oi oi-settings-adjust" role="img"/>
+                                                <small t-attf-class="ms-1 {{hasPricelistDropdown and 'd-none d-md-inline-block'}}">Filtros</small>
+                                                <span t-if="isFilteringByPrice or attrib_set or tags" class="isekai-filter-active-indicator">
+                                                    <span class="visually-hidden">filtros activos</span>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- DESCRIPCIÓN CATEGORÍA -->
@@ -276,33 +315,6 @@
 
                             <!-- CATEGORÍAS SUPERIORES -->
                             <t t-if="opt_wsale_categories_top and category_entries" t-call="website_sale.filmstrip_categories" entries="category_entries"/>
-
-                            <!-- =================================
-                                 BUSCADOR / CONTROLES
-                                 ================================= -->
-                            <div t-if="not opt_wsale_floating_bar" class="products_header d-flex gap-1 gap-lg-2 gap-xl-3 isekai-products-controls">
-                                <div class="o_wsale_products_header_inner d-flex justify-content-between w-100 isekai-products-controls-inner">
-                                    <t t-if="is_view_active('website_sale.search')">
-                                        <div class="o_wsale_products_header_search_form_container d-none d-sm-inline-block flex-grow-1 me-auto isekai-products-search">
-                                            <t t-if="category" t-set="placeholder" t-valuef.translate="Buscar en {{category.name}}"/>
-                                            <t t-call="website_sale.search" placeholder="placeholder" search="original_search or search"/>
-                                        </div>
-                                        <t t-call="website.website_search_box_input" search_type.f="products" _simple_button_layout="True" _simple_button_classes.f="d-inline-block d-sm-none me-auto btn-{{navClass}} isekai-mobile-search"/>
-                                    </t>
-                                    <t t-set="show_product_controls_header" t-value="hasPricelistDropdown or is_view_active('website_sale.sort') or wsale_has_filters_btn"/>
-                                    <div t-attf-class="{{'d-lg-none' if not show_product_controls_header else ''}} o_wsale_products_header_dropdown_wrap d-flex gap-3 isekai-products-dropdown-controls">
-                                        <t t-if="hasPricelistDropdown" t-call="website_sale.pricelist_list" _classes.f="ms-auto"/>
-                                        <t t-if="is_view_active('website_sale.sort')" t-call="website_sale.sort"/>
-                                        <button t-if="wsale_has_filters_btn" t-attf-class="btn btn-{{navClass}} position-relative {{not wsale_has_filters_btn_lg and 'd-lg-none'}} {{not is_view_active('website_sale.search') and 'ms-auto'}} text-nowrap isekai-filter-button" title="Filtros" data-bs-toggle="offcanvas" data-bs-target="#o_wsale_offcanvas">
-                                            <i class="oi oi-settings-adjust" role="img"/>
-                                            <small t-attf-class="ms-1 {{(hasPricelistDropdown and is_view_active('website_sale.search') and is_view_active('website_sale.sort')) and 'd-none d-md-inline-block'}}">Filtros</small>
-                                            <span t-if="isFilteringByPrice or attrib_set or tags" class="isekai-filter-active-indicator">
-                                                <span class="visually-hidden">filtros activos</span>
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
 
                             <!-- AVISO DE BÚSQUEDA -->
                             <div t-if="original_search and products" class="alert alert-warning mt8 isekai-search-warning">
