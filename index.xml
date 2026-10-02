@@ -158,9 +158,14 @@
      ANUNCIOS (carrusel)
      Lee los registros del modelo propio "x_isekai_anuncio"
      (app "Anuncios"): póster, título, subcategoría y "Publicado".
-     Solo salen los publicados con póster y subcategoría,
-     ordenados por "Secuencia" (arrastrable en la lista) y, a
-     igualdad, los más nuevos primero.
+
+     - Solo salen los publicados con póster y subcategoría.
+     - Un solo anuncio por subcategoría: el más reciente (el último
+       creado). Los anteriores siguen guardados y vuelven a salir
+       si se borra o despublica el más nuevo.
+     - Orden: "Secuencia" (arrastrable en la lista) y, a igualdad,
+       el más nuevo primero.
+
      El guard "in request.env" evita que la home dé error si el
      modelo no existiera.
      La lógica (flechas, puntos, autoplay) ya está en script.js
@@ -168,7 +173,14 @@
      llevan "active" desde el QWeb para que se vean aunque solo
      haya un anuncio.
      ================================================= -->
-<t t-set="isekai_announcements" t-value="request.env['x_isekai_anuncio'].sudo().search([('x_published', '=', True), ('x_image', '!=', False), ('x_category_id', '!=', False)], order='x_sequence, id desc') if 'x_isekai_anuncio' in request.env else []"/>
+
+<!-- 1) Todos los publicados, del más antiguo al más nuevo. -->
+<t t-set="isekai_announcements_all" t-value="request.env['x_isekai_anuncio'].sudo().search([('x_published', '=', True), ('x_image', '!=', False), ('x_category_id', '!=', False)], order='id asc') if 'x_isekai_anuncio' in request.env else []"/>
+
+<!-- 2) Uno por subcategoría (cada uno nuevo pisa al anterior de su
+        misma subcategoría) y 3) ordenados por secuencia. -->
+<t t-set="isekai_announcements" t-value="sorted({a.x_category_id.id: a for a in isekai_announcements_all}.values(), key=lambda a: (a.x_sequence, -a.id))"/>
+
 <section t-if="isekai_announcements" class="isekai-hero" aria-label="Anuncios de nuevas colecciones">
     <div class="isekai-container">
         <div class="isekai-carousel isekai-carousel-posters">
