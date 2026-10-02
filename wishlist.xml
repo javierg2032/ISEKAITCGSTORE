@@ -15,7 +15,7 @@
             <!-- =================================================
                  HEADER ISEKAI (idéntico al del Shop)
                  ================================================= -->
-            <header class="isekai-header">
+        <header class="isekai-header">
                 <div class="isekai-container isekai-header-inner">
 
                     <!-- LOGO -->
@@ -31,20 +31,36 @@
                         </button>
                     </form>
 
-                    <!-- MODO CLARO / OSCURO -->
+                    <!-- =================================================
+                         MODO CLARO / OSCURO
+                         ================================================= -->
                     <button type="button" class="isekai-theme-toggle" aria-label="Cambiar a modo claro" aria-pressed="false" title="Cambiar a modo claro">
                         <i class="fa fa-moon-o isekai-theme-icon-dark" aria-hidden="true"/>
                         <i class="fa fa-sun-o isekai-theme-icon-light" aria-hidden="true"/>
                     </button>
 
-                    <!-- CARRITO -->
+                    <!-- =================================================
+                         CARRITO
+                         FIX: antes solo se podía acceder al carrito desde
+                         "Mi carrito" dentro del desplegable de usuario.
+                         Se saca como icono propio entre el botón de tema y
+                         el usuario, visible tanto conectado como sin
+                         conectar. El badge reutiliza "my_cart_quantity",
+                         la clase que Odoo actualiza solo vía AJAX al
+                         añadir productos (misma lógica que el contador
+                         nativo del header estándar).
+                         ================================================= -->
                     <a href="/shop/cart" class="isekai-cart-link" aria-label="Ver carrito" title="Ver carrito">
                         <i class="fa fa-shopping-cart" aria-hidden="true"/>
                         <sup class="my_cart_quantity isekai-cart-badge" t-esc="website_sale_cart_quantity" t-att-style="'display:none;' if not website_sale_cart_quantity else None"/>
                     </a>
 
-                    <!-- USUARIO -->
+                    <!-- =================================================
+                         USUARIO
+                         ================================================= -->
                     <div class="isekai-user">
+
+                        <!-- USUARIO NO CONECTADO -->
                         <t t-if="request.env.user._is_public()">
                             <div class="isekai-user-dropdown">
                                 <button type="button" class="isekai-user-button" aria-expanded="false" aria-label="Abrir menú de usuario">
@@ -61,11 +77,11 @@
                                         </div>
                                     </div>
                                     <div class="isekai-user-menu-links">
-                                        <a href="/web/login?redirect=/shop/wishlist">
+                                        <a href="/web/login?redirect=/">
                                             <i class="fa fa-sign-in" aria-hidden="true"/>
                                             <span>Iniciar sesión</span>
                                         </a>
-                                        <a href="/web/signup?redirect=/shop/wishlist">
+                                        <a href="/web/signup?redirect=/">
                                             <i class="fa fa-user-plus" aria-hidden="true"/>
                                             <span>Crear cuenta</span>
                                         </a>
@@ -73,6 +89,8 @@
                                 </div>
                             </div>
                         </t>
+
+                        <!-- USUARIO CONECTADO -->
                         <t t-else="">
                             <div class="isekai-user-dropdown">
                                 <button type="button" class="isekai-user-button" aria-expanded="false" aria-label="Abrir menú de usuario">
@@ -109,10 +127,10 @@
                                 </div>
                             </div>
                         </t>
+
                     </div>
                 </div>
-            </header>
-
+            </header>  
             <!-- =================================================
                  CATEGORÍAS (idéntico patrón que el resto del sitio)
                  ================================================= -->

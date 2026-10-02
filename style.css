@@ -5188,3 +5188,138 @@ body.isekai-light-theme .isekai-cart-badge {
     border-color: var(--isekai-c-white);
     background: var(--isekai-c-primary-light);
 }
+
+.isekai-cart-page .isekai-cart-wishlist {
+    font-size: 22px;
+    color: var(--isekai-accent, #3b82f6);
+    text-decoration: none;
+    line-height: 1;
+}
+.isekai-cart-page .isekai-cart-wishlist:hover {
+    opacity: .8;
+}
+.isekai-cart-page .isekai-cart-wishlist-count {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    border-radius: 9px;
+    background: var(--isekai-accent, #3b82f6);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ---------- LISTA DE DESEOS VACÍA ----------
+   SVG nativo de Odoo (website_sale.empty_wishlist_svg): corazón con
+   fill="currentColor" + círculo/número con variables de Odoo
+   (--o-color-1, --body-bg, --o-color-3) que no siguen nuestro tema.
+   Las reglas CSS pisan los atributos fill/stroke del SVG. */
+
+/* Sin la opacidad .7 del estado vacío del Shop: aquí el corazón es
+   el protagonista y con opacidad se veía apagado. */
+   #wrap.o_wsale_wishlist_page .isekai-empty-image {
+    opacity: 1;
+    color: var(--isekai-primary, var(--isekai-c-primary));
+}
+
+/* Corazón: superficie de tarjeta con borde azul, igual que las
+   tarjetas de producto. */
+#wrap.o_wsale_wishlist_page .isekai-empty-image path.swing {
+    fill: var(--isekai-card-hover, var(--isekai-c-secondary));
+    stroke: var(--isekai-primary, var(--isekai-c-primary));
+    stroke-width: 2;
+}
+
+/* Círculo del contador: badge azul primario; el borde usa el color de
+   fondo de la página para "recortarlo" sobre el corazón. */
+#wrap.o_wsale_wishlist_page .isekai-empty-image circle.heartBeat {
+    fill: var(--isekai-primary, var(--isekai-c-primary));
+    stroke: var(--isekai-bg, var(--isekai-c-bg));
+}
+
+/* Número "0" dentro del círculo. */
+#wrap.o_wsale_wishlist_page .isekai-empty-image path.heartBeat {
+    fill: var(--isekai-c-white);
+}
+
+/* Botón "Tienda": mismo CTA píldora que el botón de filtros. */
+#wrap.o_wsale_wishlist_page .isekai-empty-products .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 24px;
+    border: 2px solid var(--isekai-primary, var(--isekai-c-primary));
+    border-radius: 999px;
+    background: var(--isekai-primary, var(--isekai-c-primary));
+    color: var(--isekai-c-white);
+    font-weight: 600;
+    box-shadow: none;
+    transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+#wrap.o_wsale_wishlist_page .isekai-empty-products .btn-primary:hover,
+#wrap.o_wsale_wishlist_page .isekai-empty-products .btn-primary:focus-visible {
+    background: var(--isekai-primary-hover, var(--isekai-c-primary-hover));
+    border-color: var(--isekai-primary-hover, var(--isekai-c-primary-hover));
+    color: var(--isekai-c-white);
+    transform: translateY(-1px);
+}
+
+/* ---------- CARRITO VACÍO ----------
+   SVG nativo de Odoo (website_sale.empty_cart_svg): carrito con
+   fill="currentColor" + círculo/número con variables de Odoo
+   (--o-color-1, --body-bg, --o-color-3) que no siguen nuestro tema.
+   Las reglas CSS pisan los atributos fill/stroke del SVG. */
+
+/* Carrito: superficie de tarjeta con contorno azul, igual que el
+   corazón de la lista de deseos. */
+   .isekai-cart-page svg path.tilt {
+    fill: var(--isekai-card-hover, var(--isekai-c-secondary));
+    stroke: var(--isekai-primary, var(--isekai-c-primary));
+    stroke-width: 2;
+    stroke-linejoin: round;
+}
+
+/* Círculo del contador: badge azul primario, "recortado" sobre el
+   fondo de la página. */
+.isekai-cart-page svg circle.heartBeat {
+    fill: var(--isekai-primary, var(--isekai-c-primary));
+    stroke: var(--isekai-bg, var(--isekai-c-bg));
+}
+
+/* Número "0" dentro del círculo. */
+.isekai-cart-page svg path.heartBeat {
+    fill: var(--isekai-c-white);
+}
+
+/* Botón para volver a la tienda: mismo CTA píldora que en la lista
+   de deseos. */
+.isekai-cart-page a.btn-primary[href="/shop"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 24px;
+    border: 2px solid var(--isekai-primary, var(--isekai-c-primary));
+    border-radius: 999px;
+    background: var(--isekai-primary, var(--isekai-c-primary));
+    color: var(--isekai-c-white);
+    font-weight: 600;
+    box-shadow: none;
+    transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.isekai-cart-page a.btn-primary[href="/shop"]:hover,
+.isekai-cart-page a.btn-primary[href="/shop"]:focus-visible {
+    background: var(--isekai-primary-hover, var(--isekai-c-primary-hover));
+    border-color: var(--isekai-primary-hover, var(--isekai-c-primary-hover));
+    color: var(--isekai-c-white);
+    transform: translateY(-1px);
+}

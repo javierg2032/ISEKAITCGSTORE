@@ -15,7 +15,7 @@
            <!-- =================================================
                  HEADER
                  ================================================= -->
-            <header class="isekai-header">
+        <header class="isekai-header">
                 <div class="isekai-container isekai-header-inner">
 
                     <!-- LOGO -->
@@ -38,6 +38,22 @@
                         <i class="fa fa-moon-o isekai-theme-icon-dark" aria-hidden="true"/>
                         <i class="fa fa-sun-o isekai-theme-icon-light" aria-hidden="true"/>
                     </button>
+
+                    <!-- =================================================
+                         CARRITO
+                         FIX: antes solo se podía acceder al carrito desde
+                         "Mi carrito" dentro del desplegable de usuario.
+                         Se saca como icono propio entre el botón de tema y
+                         el usuario, visible tanto conectado como sin
+                         conectar. El badge reutiliza "my_cart_quantity",
+                         la clase que Odoo actualiza solo vía AJAX al
+                         añadir productos (misma lógica que el contador
+                         nativo del header estándar).
+                         ================================================= -->
+                    <a href="/shop/cart" class="isekai-cart-link" aria-label="Ver carrito" title="Ver carrito">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"/>
+                        <sup class="my_cart_quantity isekai-cart-badge" t-esc="website_sale_cart_quantity" t-att-style="'display:none;' if not website_sale_cart_quantity else None"/>
+                    </a>
 
                     <!-- =================================================
                          USUARIO
@@ -99,9 +115,9 @@
                                             <i class="fa fa-shopping-bag" aria-hidden="true"/>
                                             <span>Mis pedidos</span>
                                         </a>
-                                        <a href="/shop/cart">
-                                            <i class="fa fa-shopping-cart" aria-hidden="true"/>
-                                            <span>Mi carrito</span>
+                                        <a href="/shop/wishlist">
+                                            <i class="fa fa-heart" aria-hidden="true"/>
+                                            <span>Mi lista de deseos</span>
                                         </a>
                                         <a href="/web/session/logout?redirect=/" class="isekai-logout">
                                             <i class="fa fa-sign-out" aria-hidden="true"/>
@@ -114,7 +130,7 @@
 
                     </div>
                 </div>
-            </header>   
+            </header>  
 
         <div class="isekai-cart-page">
             <t t-set="oe_structure">
@@ -130,6 +146,15 @@
                     <div class="d-flex align-items-center mb-3">
                         <h4 class="mb-0">Resumen del pedido</h4>
                         <div class="ms-3 border-start ps-2"><t t-call="website_sale.quick_reorder_button"/></div>
+
+                        <!-- ICONO WISHLIST (a la derecha del todo) -->
+                        <t t-if="'product.wishlist' in request.env">
+                            <t t-set="isekai_wish_count" t-value="len(request.env['product.wishlist'].current())"/>
+                            <a href="/shop/wishlist" class="isekai-cart-wishlist ms-auto position-relative" aria-label="Ver lista de deseos" title="Lista de deseos">
+                                <i class="fa fa-heart-o" aria-hidden="true"/>
+                                <span t-if="isekai_wish_count" class="isekai-cart-wishlist-count" t-out="isekai_wish_count"/>
+                            </a>
+                        </t>
                     </div>
                     <div t-if="abandoned_proceed or access_token" class="alert alert-info mt8 mb8" role="alert"> <!-- abandoned cart choices -->
                         <t t-if="abandoned_proceed">
