@@ -5323,3 +5323,74 @@ body.isekai-light-theme .isekai-cart-badge {
     color: var(--isekai-c-white);
     transform: translateY(-1px);
 }
+
+/* ---------- CARRUSEL DE ANUNCIOS (pósters por categoría) ----------
+   Reutiliza el carrusel del hero. Cambios: alto proporcional al
+   póster en vez de fijo, la imagen ocupa toda la diapositiva y el
+   texto va abajo sobre un degradado para no tapar el arte. */
+
+   #isekai-home .isekai-carousel.isekai-carousel-posters {
+    height: auto;
+    aspect-ratio: 3 / 1;
+}
+
+@media (max-width: 768px) {
+    #isekai-home .isekai-carousel.isekai-carousel-posters {
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
+}
+
+#isekai-home .isekai-slide-poster {
+    text-decoration: none !important;
+}
+
+#isekai-home .isekai-slide-poster-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .6s ease;
+}
+
+#isekai-home .isekai-slide-poster:hover .isekai-slide-poster-img {
+    transform: scale(1.02);
+}
+
+/* Texto sobre el póster: siempre claro sobre degradado oscuro, en
+   los dos temas (va encima de una imagen, no del fondo de página). */
+#isekai-home .isekai-slide-poster-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 60px 32px 48px;
+    background: linear-gradient(to top, rgba(11,17,32,.85), rgba(11,17,32,0));
+}
+
+#isekai-home .isekai-slide-poster-caption .isekai-hero-label,
+body.isekai-light-theme #isekai-home .isekai-slide-poster-caption .isekai-hero-label {
+    margin-bottom: 4px;
+    color: var(--isekai-c-accent) !important;
+}
+
+#isekai-home .isekai-slide-poster-caption strong {
+    color: var(--isekai-c-white) !important;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+@media (max-width: 600px) {
+    #isekai-home .isekai-slide-poster-caption {
+        padding: 40px 18px 38px;
+    }
+
+    #isekai-home .isekai-slide-poster-caption strong {
+        font-size: 20px;
+    }
+}

@@ -154,7 +154,56 @@
             </nav>
             
             
-            
+<!-- =================================================
+     ANUNCIOS (carrusel)
+     Lee los registros del modelo propio "x_isekai_anuncio"
+     (app "Anuncios"): póster, título, subcategoría y "Publicado".
+     Solo salen los publicados con póster y subcategoría,
+     ordenados por "Secuencia" (arrastrable en la lista) y, a
+     igualdad, los más nuevos primero.
+     El guard "in request.env" evita que la home dé error si el
+     modelo no existiera.
+     La lógica (flechas, puntos, autoplay) ya está en script.js
+     ("CARRUSEL HOME"); la primera diapositiva y el primer punto
+     llevan "active" desde el QWeb para que se vean aunque solo
+     haya un anuncio.
+     ================================================= -->
+<t t-set="isekai_announcements" t-value="request.env['x_isekai_anuncio'].sudo().search([('x_published', '=', True), ('x_image', '!=', False), ('x_category_id', '!=', False)], order='x_sequence, id desc') if 'x_isekai_anuncio' in request.env else []"/>
+<section t-if="isekai_announcements" class="isekai-hero" aria-label="Anuncios de nuevas colecciones">
+    <div class="isekai-container">
+        <div class="isekai-carousel isekai-carousel-posters">
+
+            <!-- DIAPOSITIVAS -->
+            <t t-foreach="isekai_announcements" t-as="announcement">
+                <t t-set="announcement_category" t-value="announcement.x_category_id"/>
+                <a t-att-href="'/shop/category/%s' % announcement_category.id" t-attf-class="isekai-slide isekai-slide-poster {{ 'active' if announcement_first else '' }}" t-att-aria-label="announcement.x_name">
+                    <img class="isekai-slide-poster-img" t-att-src="website.image_url(announcement, 'x_image')" t-att-alt="announcement.x_name" t-att-loading="'eager' if announcement_first else 'lazy'"/>
+                    <div class="isekai-slide-poster-caption">
+                        <span class="isekai-hero-label" t-out="(announcement_category.parent_id.name or announcement_category.name).upper()"/>
+                        <strong t-out="announcement.x_name"/>
+                    </div>
+                </a>
+            </t>
+
+            <!-- FLECHAS Y PUNTOS (solo si hay más de un anuncio) -->
+            <t t-if="len(isekai_announcements) &gt; 1">
+                <button type="button" class="isekai-carousel-arrow isekai-carousel-prev" aria-label="Anuncio anterior">
+                    <i class="fa fa-chevron-left" aria-hidden="true"/>
+                </button>
+                <button type="button" class="isekai-carousel-arrow isekai-carousel-next" aria-label="Anuncio siguiente">
+                    <i class="fa fa-chevron-right" aria-hidden="true"/>
+                </button>
+                <div class="isekai-carousel-dots">
+                    <t t-foreach="isekai_announcements" t-as="announcement_dot">
+                        <button type="button" t-attf-class="isekai-carousel-dot {{ 'active' if announcement_dot_first else '' }}" t-att-aria-label="'Ver anuncio: %s' % announcement_dot.x_name" t-att-aria-current="'true' if announcement_dot_first else 'false'"/>
+                    </t>
+                </div>
+            </t>
+
+        </div>
+    </div>
+</section>
+
             
             <!-- =================================================
                  NOVEDADES
