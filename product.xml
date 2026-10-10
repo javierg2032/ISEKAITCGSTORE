@@ -136,7 +136,7 @@
                                     </a>
                                     <div t-if="category_nav.child_id" class="isekai-subcategory-menu" role="menu">
                                         <t t-foreach="category_nav.child_id.sorted(key=lambda c: (c.sequence, c.name))" t-as="subcategory">
-                                            <a t-att-href="'/shop/category/%s' % subcategory.id" class="isekai-subcategory-link" role="menuitem">
+                                            <a t-att-href="'/gradea-con-nosotros' if (subcategory.name or '').strip().lower() == 'gradea con nosotros' else '/shop/category/%s' % subcategory.id" class="isekai-subcategory-link" role="menuitem">
                                                 <t t-out="subcategory.name"/>
                                             </a>
                                         </t>

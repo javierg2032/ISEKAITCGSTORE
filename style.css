@@ -5751,3 +5751,601 @@ body.isekai-light-theme #isekai-home .isekai-slide-poster-caption .isekai-hero-l
         align-items: flex-start;
     }
 }
+
+/* ################################################################
+   GRADEA CON NOSOTROS (/gradea-con-nosotros)
+   Página del servicio de gradeo con formulario de solicitud. Usa
+   "#wrap.isekai-shop-page" (header/footer, tema y ocultación del
+   header/footer nativos heredados) y las variables --isekai-* del
+   Shop, así que el modo claro se adapta solo.
+   ################################################################ */
+
+#wrap.isekai-grading-page .isekai-grading-eyebrow {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--isekai-accent);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+#wrap.isekai-grading-page h1,
+#wrap.isekai-grading-page h2,
+#wrap.isekai-grading-page h3 {
+    color: var(--isekai-text);
+    font-weight: 800;
+}
+
+#wrap.isekai-grading-page h2 {
+    margin: 0 0 16px;
+    font-size: 30px;
+    line-height: 1.2;
+}
+
+#wrap.isekai-grading-page p {
+    color: var(--isekai-text);
+    line-height: 1.7;
+}
+
+/* Datos del servicio pendientes de confirmar */
+#wrap.isekai-grading-page .isekai-fill {
+    padding: 0 4px;
+    border-radius: 4px;
+    background: var(--isekai-c-warning);
+    color: #1f1500;
+    font-weight: 700;
+}
+
+/* ---------- HERO ---------- */
+
+#wrap.isekai-grading-page .isekai-grading-hero {
+    position: relative;
+    padding: 72px 0 64px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--isekai-border);
+    background:
+        radial-gradient(circle at 85% 20%, rgba(64,111,206,.35), transparent 45%),
+        radial-gradient(circle at 10% 90%, rgba(141,176,255,.15), transparent 40%),
+        var(--isekai-bg);
+}
+
+body.isekai-light-theme #wrap.isekai-grading-page .isekai-grading-hero {
+    background:
+        radial-gradient(circle at 85% 20%, rgba(59,117,212,.18), transparent 45%),
+        radial-gradient(circle at 10% 90%, rgba(37,69,135,.08), transparent 40%),
+        var(--isekai-bg);
+}
+
+#wrap.isekai-grading-page .isekai-grading-hero-inner {
+    max-width: 760px;
+}
+
+#wrap.isekai-grading-page .isekai-grading-hero h1 {
+    margin: 0 0 18px;
+    font-size: 48px;
+    line-height: 1.08;
+}
+
+#wrap.isekai-grading-page .isekai-grading-lead {
+    margin: 0 0 30px;
+    font-size: 18px;
+    color: var(--isekai-muted);
+}
+
+#wrap.isekai-grading-page .isekai-grading-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+#wrap.isekai-grading-page .isekai-grading-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    border-radius: var(--isekai-radius-md);
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+#wrap.isekai-grading-page .isekai-grading-btn:hover {
+    transform: translateY(-2px);
+}
+
+#wrap.isekai-grading-page .isekai-grading-btn-primary {
+    background: var(--isekai-primary);
+    border: 2px solid var(--isekai-primary);
+    color: var(--isekai-c-white);
+}
+
+#wrap.isekai-grading-page .isekai-grading-btn-primary:hover {
+    background: var(--isekai-primary-hover);
+    border-color: var(--isekai-primary-hover);
+    color: var(--isekai-c-white);
+}
+
+#wrap.isekai-grading-page .isekai-grading-btn-secondary {
+    background: transparent;
+    border: 2px solid var(--isekai-control-border);
+    color: var(--isekai-text);
+}
+
+#wrap.isekai-grading-page .isekai-grading-btn-secondary:hover {
+    background: var(--isekai-primary);
+    border-color: var(--isekai-primary);
+    color: var(--isekai-c-white);
+}
+
+/* ---------- SECCIONES ---------- */
+
+#wrap.isekai-grading-page .isekai-grading-section {
+    padding: 64px 0;
+}
+
+#wrap.isekai-grading-page .isekai-grading-section-alt {
+    background: var(--isekai-surface);
+    border-top: 1px solid var(--isekai-border);
+    border-bottom: 1px solid var(--isekai-border);
+}
+
+body.isekai-light-theme #wrap.isekai-grading-page .isekai-grading-section-alt {
+    background: var(--isekai-c-surface-light-alt);
+}
+
+#wrap.isekai-grading-page .isekai-grading-heading {
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+/* Qué es + entidades */
+#wrap.isekai-grading-page .isekai-grading-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+#wrap.isekai-grading-page .isekai-grading-intro-text p {
+    margin: 0 0 12px;
+    font-size: 16px;
+}
+
+#wrap.isekai-grading-page .isekai-grading-companies {
+    padding: 28px;
+    border: 1px solid var(--isekai-border);
+    border-radius: var(--isekai-radius-lg);
+    background: var(--isekai-card);
+    box-shadow: var(--isekai-shadow);
+}
+
+#wrap.isekai-grading-page .isekai-grading-companies-title {
+    display: block;
+    margin-bottom: 14px;
+    color: var(--isekai-muted);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+#wrap.isekai-grading-page .isekai-grading-company-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#wrap.isekai-grading-page .isekai-grading-company {
+    padding: 8px 16px;
+    border: 2px solid var(--isekai-control-border);
+    border-radius: 999px;
+    color: var(--isekai-text);
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: .04em;
+}
+
+/* Ventajas */
+#wrap.isekai-grading-page .isekai-grading-benefits {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+#wrap.isekai-grading-page .isekai-grading-benefit {
+    padding: 24px;
+    border: 1px solid var(--isekai-border);
+    border-radius: var(--isekai-radius-lg);
+    background: var(--isekai-card);
+    box-shadow: var(--isekai-shadow);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+#wrap.isekai-grading-page .isekai-grading-benefit:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--isekai-shadow-hover);
+}
+
+#wrap.isekai-grading-page .isekai-grading-benefit .fa {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    border-radius: var(--isekai-radius-md);
+    background: rgba(64,111,206,.18);
+    color: var(--isekai-highlight);
+    font-size: 22px;
+}
+
+#wrap.isekai-grading-page .isekai-grading-benefit h3 {
+    margin: 0 0 8px;
+    font-size: 17px;
+}
+
+#wrap.isekai-grading-page .isekai-grading-benefit p {
+    margin: 0;
+    color: var(--isekai-muted);
+    font-size: 14px;
+}
+
+/* ---------- PASOS ---------- */
+
+#wrap.isekai-grading-page .isekai-grading-steps {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: none;
+}
+
+#wrap.isekai-grading-page .isekai-grading-step {
+    position: relative;
+    padding: 24px 20px;
+    border: 1px solid var(--isekai-border);
+    border-radius: var(--isekai-radius-lg);
+    background: var(--isekai-card);
+    box-shadow: var(--isekai-shadow);
+}
+
+#wrap.isekai-grading-page .isekai-grading-step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 14px;
+    border-radius: 50%;
+    background: var(--isekai-primary);
+    color: var(--isekai-c-white);
+    font-size: 17px;
+    font-weight: 800;
+}
+
+#wrap.isekai-grading-page .isekai-grading-step h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+}
+
+#wrap.isekai-grading-page .isekai-grading-step p {
+    margin: 0;
+    color: var(--isekai-muted);
+    font-size: 14px;
+}
+
+/* ---------- FORMULARIO ---------- */
+
+#wrap.isekai-grading-page .isekai-grading-request {
+    padding: 72px 0;
+    scroll-margin-top: calc(var(--isekai-header-h, 82px) + 60px);
+}
+
+#wrap.isekai-grading-page .isekai-grading-request-layout {
+    display: grid;
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.4fr);
+    gap: 48px;
+    align-items: start;
+}
+
+#wrap.isekai-grading-page .isekai-grading-request-info {
+    position: sticky;
+    top: calc(var(--isekai-header-h, 82px) + 80px);
+}
+
+#wrap.isekai-grading-page .isekai-grading-request-info p {
+    margin: 0 0 20px;
+    font-size: 16px;
+}
+
+#wrap.isekai-grading-page .isekai-grading-checklist {
+    margin: 0 0 24px;
+    padding: 0;
+    list-style: none;
+}
+
+#wrap.isekai-grading-page .isekai-grading-checklist li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 10px;
+    color: var(--isekai-text);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+#wrap.isekai-grading-page .isekai-grading-checklist .fa {
+    color: var(--isekai-c-success);
+}
+
+#wrap.isekai-grading-page .isekai-grading-request-contact {
+    color: var(--isekai-muted) !important;
+    font-size: 14px !important;
+}
+
+#wrap.isekai-grading-page .isekai-grading-request-contact a {
+    color: var(--isekai-highlight);
+    font-weight: 700;
+}
+
+#wrap.isekai-grading-page .isekai-grading-form-card {
+    padding: 32px;
+    border: 1px solid var(--isekai-border);
+    border-radius: var(--isekai-radius-lg);
+    background: var(--isekai-card);
+    box-shadow: var(--isekai-shadow);
+}
+
+#wrap.isekai-grading-page .isekai-grading-form-card .s_website_form {
+    padding: 0;
+    background: transparent;
+}
+
+#wrap.isekai-grading-page .s_website_form_label {
+    display: block;
+    width: auto !important;
+    margin-bottom: 6px;
+    color: var(--isekai-text);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#wrap.isekai-grading-page .s_website_form_mark {
+    color: var(--isekai-highlight);
+}
+
+#wrap.isekai-grading-page .isekai-grading-form-card .form-control,
+#wrap.isekai-grading-page .isekai-grading-form-card .form-select {
+    min-height: 46px;
+    border-radius: var(--isekai-radius-sm);
+    font-size: 15px;
+}
+
+#wrap.isekai-grading-page .isekai-grading-form-card textarea.form-control {
+    min-height: 0;
+    font-family: inherit;
+    resize: vertical;
+}
+
+#wrap.isekai-grading-page .isekai-grading-form-card .form-select option {
+    background: var(--isekai-surface);
+    color: var(--isekai-text);
+}
+
+#wrap.isekai-grading-page .isekai-grading-form-card input[type="file"].form-control {
+    padding: 10px 12px;
+}
+
+#wrap.isekai-grading-page .isekai-grading-help {
+    display: block;
+    margin-top: 6px;
+    color: var(--isekai-muted);
+    font-size: 13px;
+}
+
+/* Opciones de entrega como tarjetas seleccionables */
+#wrap.isekai-grading-page .isekai-grading-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 8px;
+    padding: 12px 14px 12px 40px;
+    border: 2px solid var(--isekai-control-border);
+    border-radius: var(--isekai-radius-sm);
+    background: var(--isekai-surface);
+    cursor: pointer;
+}
+
+#wrap.isekai-grading-page .isekai-grading-option:has(input:checked) {
+    border-color: var(--isekai-primary);
+    box-shadow: 0 0 0 3px rgba(64,111,206,.15);
+}
+
+#wrap.isekai-grading-page .form-check-label {
+    color: var(--isekai-text);
+    font-size: 15px;
+    cursor: pointer;
+}
+
+#wrap.isekai-grading-page .form-check-input {
+    border: 2px solid var(--isekai-control-border);
+    background-color: var(--isekai-surface);
+}
+
+#wrap.isekai-grading-page .form-check-input:checked {
+    border-color: var(--isekai-primary);
+    background-color: var(--isekai-primary);
+}
+
+#wrap.isekai-grading-page .isekai-grading-consent .form-check-label {
+    font-size: 14px;
+}
+
+#wrap.isekai-grading-page .isekai-grading-consent a {
+    color: var(--isekai-highlight);
+    font-weight: 700;
+}
+
+#wrap.isekai-grading-page .isekai-grading-submit {
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+    padding: 14px 24px;
+    border: 0;
+    border-radius: var(--isekai-radius-md);
+    background: var(--isekai-primary) !important;
+    color: var(--isekai-c-white) !important;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+#wrap.isekai-grading-page .isekai-grading-submit:hover {
+    background: var(--isekai-primary-hover) !important;
+}
+
+#wrap.isekai-grading-page #s_website_form_result {
+    display: block;
+    margin-top: 10px;
+    color: var(--isekai-c-danger);
+    font-size: 14px;
+}
+
+#wrap.isekai-grading-page .isekai-grading-success {
+    padding: 24px 0;
+    text-align: center;
+}
+
+#wrap.isekai-grading-page .isekai-grading-success .fa {
+    margin-bottom: 12px;
+    color: var(--isekai-c-success);
+    font-size: 48px;
+}
+
+#wrap.isekai-grading-page .isekai-grading-success h3 {
+    margin: 0 0 8px;
+    font-size: 22px;
+}
+
+#wrap.isekai-grading-page .isekai-grading-success p {
+    margin: 0;
+    color: var(--isekai-muted);
+}
+
+/* ---------- FAQ ---------- */
+
+#wrap.isekai-grading-page .isekai-grading-faq {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+#wrap.isekai-grading-page .isekai-grading-faq-item {
+    margin-bottom: 12px;
+    border: 1px solid var(--isekai-border);
+    border-radius: var(--isekai-radius-md);
+    background: var(--isekai-card);
+    box-shadow: var(--isekai-shadow);
+}
+
+#wrap.isekai-grading-page .isekai-grading-faq-item summary {
+    position: relative;
+    padding: 18px 52px 18px 22px;
+    color: var(--isekai-text);
+    font-size: 16px;
+    font-weight: 700;
+    list-style: none;
+    cursor: pointer;
+}
+
+#wrap.isekai-grading-page .isekai-grading-faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+#wrap.isekai-grading-page .isekai-grading-faq-item summary::after {
+    content: "+";
+    position: absolute;
+    top: 50%;
+    right: 22px;
+    transform: translateY(-50%);
+    color: var(--isekai-highlight);
+    font-size: 24px;
+    font-weight: 400;
+}
+
+#wrap.isekai-grading-page .isekai-grading-faq-item[open] summary::after {
+    content: "−";
+}
+
+#wrap.isekai-grading-page .isekai-grading-faq-item p {
+    margin: 0;
+    padding: 0 22px 20px;
+    color: var(--isekai-muted);
+    font-size: 15px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 1200px) {
+    #wrap.isekai-grading-page .isekai-grading-steps {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #wrap.isekai-grading-page .isekai-grading-benefits {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 991px) {
+    #wrap.isekai-grading-page .isekai-grading-intro,
+    #wrap.isekai-grading-page .isekai-grading-request-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+    }
+
+    #wrap.isekai-grading-page .isekai-grading-request-info {
+        position: static;
+    }
+
+    #wrap.isekai-grading-page .isekai-grading-steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    #wrap.isekai-grading-page .isekai-grading-hero {
+        padding: 48px 0 40px;
+    }
+
+    #wrap.isekai-grading-page .isekai-grading-hero h1 {
+        font-size: 32px;
+    }
+
+    #wrap.isekai-grading-page .isekai-grading-lead {
+        font-size: 16px;
+    }
+
+    #wrap.isekai-grading-page .isekai-grading-btn {
+        justify-content: center;
+        width: 100%;
+    }
+
+    #wrap.isekai-grading-page h2 {
+        font-size: 24px;
+    }
+
+    #wrap.isekai-grading-page .isekai-grading-section,
+    #wrap.isekai-grading-page .isekai-grading-request {
+        padding: 44px 0;
+    }
+
+    #wrap.isekai-grading-page .isekai-grading-benefits,
+    #wrap.isekai-grading-page .isekai-grading-steps {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    #wrap.isekai-grading-page .isekai-grading-form-card {
+        padding: 22px 18px;
+    }
+}

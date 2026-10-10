@@ -1,0 +1,606 @@
+<t name="Gradea con nosotros" t-name="website.gradea-con-nosotros">
+    <t t-call="website.layout" additional_title.translate="Gradea con nosotros">
+        <!--
+            GRADEA CON NOSOTROS (/gradea-con-nosotros)
+            Página del servicio de gradeo. El nav enlaza aquí la
+            subcategoría "Gradea con nosotros" de "Gradeadas" (la
+            condición está en el t-att-href de cada plantilla).
+            Reutiliza "isekai-shop-page" en #wrap (como la Wishlist y
+            las páginas legales) para heredar header/footer Isekai,
+            tema oscuro/claro y la ocultación del header/footer nativos.
+            Estilos: sección "GRADEA CON NOSOTROS" de style.css.
+            Los textos entre corchetes resaltados (.isekai-fill) son
+            datos del servicio que hay que confirmar.
+        -->
+        <t t-set="isekai_graded_category" t-value="request.env['product.public.category'].sudo().search([('name', '=ilike', 'Nuestras gradeadas')], limit=1)"/>
+        <div id="wrap" class="isekai-shop-page isekai-grading-page">
+
+            <!-- =================================================
+                 HEADER ISEKAI (idéntico al del Shop)
+                 ================================================= -->
+        <header class="isekai-header">
+                <div class="isekai-container isekai-header-inner">
+
+                    <!-- LOGO -->
+                    <a href="/" class="isekai-logo" aria-label="Isekai TCG Store">
+                        <img src="/web/image/1329-73065db4/01_Marca%20completa_fondo%20claro%20%284%29.webp" alt="" data-attachment-id="1328" class="isekai-logo-image img img-fluid o_we_custom_image o_attachment_pending_record_id" data-format-mimetype="image/webp" data-resize-width="162" data-original-id="1328" data-original-src="/web/image/1328-48608fe1/01_Marca%20completa_fondo%20claro%20%284%29.png" data-mimetype-before-conversion="image/png" data-mimetype="image/webp"/>
+                    </a>
+
+                    <!-- BUSCADOR -->
+                    <form action="/shop" method="get" class="isekai-search" role="search">
+                        <input type="search" name="search" placeholder="Buscar productos..." autocomplete="off" aria-label="Buscar productos"/>
+                        <button type="submit" aria-label="Buscar" title="Buscar">
+                            <span class="fa fa-search"/>
+                        </button>
+                    </form>
+
+                    <!-- =================================================
+                         MODO CLARO / OSCURO
+                         ================================================= -->
+                    <button type="button" class="isekai-theme-toggle" aria-label="Cambiar a modo claro" aria-pressed="false" title="Cambiar a modo claro">
+                        <i class="fa fa-moon-o isekai-theme-icon-dark" aria-hidden="true"/>
+                        <i class="fa fa-sun-o isekai-theme-icon-light" aria-hidden="true"/>
+                    </button>
+
+                    <!-- =================================================
+                         CARRITO
+                         FIX: antes solo se podía acceder al carrito desde
+                         "Mi carrito" dentro del desplegable de usuario.
+                         Se saca como icono propio entre el botón de tema y
+                         el usuario, visible tanto conectado como sin
+                         conectar. El badge reutiliza "my_cart_quantity",
+                         la clase que Odoo actualiza solo vía AJAX al
+                         añadir productos (misma lógica que el contador
+                         nativo del header estándar).
+                         ================================================= -->
+                    <a href="/shop/cart" class="isekai-cart-link" aria-label="Ver carrito" title="Ver carrito">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"/>
+                        <sup class="my_cart_quantity isekai-cart-badge" t-esc="website_sale_cart_quantity" t-att-style="'display:none;' if not website_sale_cart_quantity else None"/>
+                    </a>
+
+                    <!-- =================================================
+                         USUARIO
+                         ================================================= -->
+                    <div class="isekai-user">
+
+                        <!-- USUARIO NO CONECTADO -->
+                        <t t-if="request.env.user._is_public()">
+                            <div class="isekai-user-dropdown">
+                                <button type="button" class="isekai-user-button" aria-expanded="false" aria-label="Abrir menú de usuario">
+                                    <i class="fa fa-user" aria-hidden="true"/>
+                                    <span>Mi cuenta</span>
+                                    <i class="fa fa-chevron-down isekai-user-arrow" aria-hidden="true"/>
+                                </button>
+                                <div class="isekai-user-menu">
+                                    <div class="isekai-user-menu-header">
+                                        <i class="fa fa-user-circle" aria-hidden="true"/>
+                                        <div>
+                                            <strong>Bienvenido</strong>
+                                            <small>Accede a tu cuenta</small>
+                                        </div>
+                                    </div>
+                                    <div class="isekai-user-menu-links">
+                                        <a href="/web/login?redirect=/">
+                                            <i class="fa fa-sign-in" aria-hidden="true"/>
+                                            <span>Iniciar sesión</span>
+                                        </a>
+                                        <a href="/web/signup?redirect=/">
+                                            <i class="fa fa-user-plus" aria-hidden="true"/>
+                                            <span>Crear cuenta</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+                        <!-- USUARIO CONECTADO -->
+                        <t t-else="">
+                            <div class="isekai-user-dropdown">
+                                <button type="button" class="isekai-user-button" aria-expanded="false" aria-label="Abrir menú de usuario">
+                                    <i class="fa fa-user" aria-hidden="true"/>
+                                    <span t-out="request.env.user.name"/>
+                                    <i class="fa fa-chevron-down isekai-user-arrow" aria-hidden="true"/>
+                                </button>
+                                <div class="isekai-user-menu">
+                                    <div class="isekai-user-menu-header">
+                                        <i class="fa fa-user-circle" aria-hidden="true"/>
+                                        <div>
+                                            <strong>Mi cuenta</strong>
+                                            <small t-out="request.env.user.email"/>
+                                        </div>
+                                    </div>
+                                    <div class="isekai-user-menu-links">
+                                        <a href="/my/home">
+                                            <i class="fa fa-user" aria-hidden="true"/>
+                                            <span>Mi perfil</span>
+                                        </a>
+                                        <a href="/my/orders">
+                                            <i class="fa fa-shopping-bag" aria-hidden="true"/>
+                                            <span>Mis pedidos</span>
+                                        </a>
+                                        <a href="/shop/wishlist">
+                                            <i class="fa fa-heart" aria-hidden="true"/>
+                                            <span>Mi lista de deseos</span>
+                                        </a>
+                                        <a href="/web/session/logout?redirect=/" class="isekai-logout">
+                                            <i class="fa fa-sign-out" aria-hidden="true"/>
+                                            <span>Cerrar sesión</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+                    </div>
+                </div>
+            </header>  
+            <!-- =================================================
+                 CATEGORÍAS (idéntico patrón que el resto del sitio)
+                 ================================================= -->
+            <nav class="isekai-category-nav" aria-label="Categorías de productos">
+                <div class="isekai-container">
+                    <div class="isekai-category-list">
+                        <t t-foreach="request.env['product.public.category'].sudo().search([('parent_id', '=', False)], order='sequence, name')" t-as="category_nav">
+                            <div class="isekai-category-dropdown">
+                                <a t-att-href="'/shop/category/%s' % category_nav.id" class="isekai-category-button" t-att-data-category-id="category_nav.id" t-att-aria-expanded="'false' if category_nav.child_id else None">
+                                    <span><t t-out="category_nav.name"/></span>
+                                    <i t-if="category_nav.child_id" class="fa fa-chevron-down isekai-category-arrow" aria-hidden="true"/>
+                                </a>
+                                <div t-if="category_nav.child_id" class="isekai-subcategory-menu" role="menu">
+                                    <t t-foreach="category_nav.child_id.sorted(key=lambda c: (c.sequence, c.name))" t-as="subcategory_nav">
+                                        <a t-att-href="'/gradea-con-nosotros' if (subcategory_nav.name or '').strip().lower() == 'gradea con nosotros' else '/shop/category/%s' % subcategory_nav.id" class="isekai-subcategory-link" role="menuitem">
+                                            <t t-out="subcategory_nav.name"/>
+                                        </a>
+                                    </t>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- =================================================
+                 HERO
+                 ================================================= -->
+            <section class="isekai-grading-hero">
+                <div class="isekai-container">
+                    <div class="isekai-grading-hero-inner">
+                        <span class="isekai-grading-eyebrow">Servicio de gradeo</span>
+                        <h1>Gradea tus cartas con nosotros</h1>
+                        <p class="isekai-grading-lead">Nos encargamos de todo el proceso: revisamos tus cartas, las preparamos y las enviamos a la entidad de gradeo, y te las devolvemos certificadas y encapsuladas. Sin envíos internacionales, sin aduanas y con alguien a quien preguntar en la tienda.</p>
+                        <div class="isekai-grading-actions">
+                            <a href="#isekai-grading-request" class="isekai-grading-btn isekai-grading-btn-primary">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"/>
+                                Solicitar gradeo
+                            </a>
+                            <a t-att-href="'/shop/category/%s' % isekai_graded_category.id if isekai_graded_category else '/shop'" class="isekai-grading-btn isekai-grading-btn-secondary">
+                                <i class="fa fa-certificate" aria-hidden="true"/>
+                                Ver nuestras gradeadas
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =================================================
+                 QUÉ ES / POR QUÉ CON ISEKAI
+                 ================================================= -->
+            <section class="isekai-grading-section">
+                <div class="isekai-container">
+                    <div class="isekai-grading-intro">
+                        <div class="isekai-grading-intro-text">
+                            <span class="isekai-grading-eyebrow">¿Qué es gradear una carta?</span>
+                            <h2>Autenticidad y estado, certificados por un experto independiente</h2>
+                            <p>Una entidad especializada comprueba que la carta es auténtica y evalúa su estado (centrado, esquinas, bordes y superficie) con una nota del 1 al 10. Después la sella en una funda rígida (slab) con una etiqueta y un número de certificado que cualquiera puede consultar.</p>
+                            <p>Una carta gradeada queda protegida para siempre, es más fácil de vender y, con una buena nota, puede multiplicar su valor.</p>
+                        </div>
+                        <div class="isekai-grading-companies">
+                            <span class="isekai-grading-companies-title">Entidades con las que trabajamos</span>
+                            <div class="isekai-grading-company-list">
+                                <span class="isekai-grading-company"><span class="isekai-fill">[PSA, Beckett, CGC, PCA... confirmar cuáles]</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="isekai-grading-benefits">
+                        <div class="isekai-grading-benefit">
+                            <i class="fa fa-search" aria-hidden="true"/>
+                            <h3>Revisión previa</h3>
+                            <p>Revisamos tus cartas antes de enviarlas y te decimos con sinceridad cuáles merece la pena gradear.</p>
+                        </div>
+                        <div class="isekai-grading-benefit">
+                            <i class="fa fa-shield" aria-hidden="true"/>
+                            <h3>Preparación y envío seguro</h3>
+                            <p>Preparamos cada carta con fundas y protección adecuadas y gestionamos el envío y su seguimiento.</p>
+                        </div>
+                        <div class="isekai-grading-benefit">
+                            <i class="fa fa-globe" aria-hidden="true"/>
+                            <h3>Sin trámites internacionales</h3>
+                            <p>Te olvidas de cuentas en la entidad, formularios en inglés, envíos al extranjero y aduanas.</p>
+                        </div>
+                        <div class="isekai-grading-benefit">
+                            <i class="fa fa-users" aria-hidden="true"/>
+                            <h3>Envíos agrupados</h3>
+                            <p>Juntamos las cartas de varios clientes en cada envío para abaratar los costes.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =================================================
+                 CÓMO FUNCIONA
+                 ================================================= -->
+            <section class="isekai-grading-section isekai-grading-section-alt">
+                <div class="isekai-container">
+                    <div class="isekai-grading-heading">
+                        <span class="isekai-grading-eyebrow">Paso a paso</span>
+                        <h2>Cómo funciona</h2>
+                    </div>
+                    <ol class="isekai-grading-steps">
+                        <li class="isekai-grading-step">
+                            <span class="isekai-grading-step-number">1</span>
+                            <h3>Envía tu solicitud</h3>
+                            <p>Rellena el formulario con las cartas que quieres gradear. No te compromete a nada.</p>
+                        </li>
+                        <li class="isekai-grading-step">
+                            <span class="isekai-grading-step-number">2</span>
+                            <h3>Recibe tu presupuesto</h3>
+                            <p>Te contactamos en <span class="isekai-fill">[48 horas laborables]</span> con el precio según la entidad, el nivel de servicio y el valor de tus cartas.</p>
+                        </li>
+                        <li class="isekai-grading-step">
+                            <span class="isekai-grading-step-number">3</span>
+                            <h3>Entréganos las cartas</h3>
+                            <p>Tráelas a la tienda en Alcorcón o envíanoslas bien protegidas. Las revisamos contigo antes de seguir.</p>
+                        </li>
+                        <li class="isekai-grading-step">
+                            <span class="isekai-grading-step-number">4</span>
+                            <h3>Las enviamos a gradear</h3>
+                            <p>Preparamos el envío a la entidad y te mantenemos informado del estado de tu pedido.</p>
+                        </li>
+                        <li class="isekai-grading-step">
+                            <span class="isekai-grading-step-number">5</span>
+                            <h3>Recibe tus gradeadas</h3>
+                            <p>Cuando vuelvan, te avisamos para recogerlas en la tienda o te las enviamos a casa.</p>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- =================================================
+                 FORMULARIO DE SOLICITUD
+                 Va dentro de un "oe_structure" (sin QWeb dentro) para
+                 que se pueda abrir en el editor web: al hacer clic en
+                 el formulario se configura el destinatario ("Enviar
+                 a") y, al guardar, Odoo genera la firma de seguridad
+                 que necesita para enviar el correo.
+                 Modelo: mail.mail -> cada solicitud llega como correo a
+                 la dirección configurada, con todos los campos y las
+                 fotos adjuntas.
+                 ================================================= -->
+            <div id="isekai-grading-request" class="isekai-grading-request">
+                <div class="isekai-container">
+                    <div class="isekai-grading-request-layout">
+                        <div class="isekai-grading-request-info">
+                            <span class="isekai-grading-eyebrow">Solicitud de gradeo</span>
+                            <h2>Empieza tu solicitud</h2>
+                            <p>Cuéntanos qué cartas quieres gradear y te enviaremos un presupuesto sin compromiso. No necesitas enviarnos nada todavía.</p>
+                            <ul class="isekai-grading-checklist">
+                                <li><i class="fa fa-check" aria-hidden="true"/>Presupuesto gratuito y sin compromiso</li>
+                                <li><i class="fa fa-check" aria-hidden="true"/>Respuesta en <span class="isekai-fill">[48 horas laborables]</span></li>
+                                <li><i class="fa fa-check" aria-hidden="true"/>Entrega en tienda o por envío</li>
+                            </ul>
+                            <p class="isekai-grading-request-contact">¿Prefieres hablarlo en persona? Llámanos al <a href="tel:+34604949849">604 94 98 49</a> o pásate por la tienda.</p>
+                        </div>
+
+                        <div class="oe_structure isekai-grading-form-card" id="oe_structure_isekai_grading_form">
+                            <section class="s_website_form" data-snippet="s_website_form" data-name="Form">
+                                <div class="container-fluid p-0">
+                                    <form id="isekai_grading_form" action="/website/form/" method="post" enctype="multipart/form-data" class="o_mark_required" data-mark="*" data-model_name="mail.mail" data-success-mode="message" data-pre-fill="true">
+                                        <div class="s_website_form_rows row s_col_no_bgcolor">
+
+                                            <div class="mb-3 col-12 col-md-6 s_website_form_field s_website_form_custom s_website_form_required" data-type="char" data-name="Field">
+                                                <label class="s_website_form_label" for="isekai_grading_name">
+                                                    <span class="s_website_form_label_content">Nombre y apellidos</span>
+                                                    <span class="s_website_form_mark"> *</span>
+                                                </label>
+                                                <input id="isekai_grading_name" type="text" class="form-control s_website_form_input" name="Nombre y apellidos" required="1" data-fill-with="name" autocomplete="name"/>
+                                            </div>
+
+                                            <div class="mb-3 col-12 col-md-6 s_website_form_field s_website_form_required s_website_form_model_required" data-type="email" data-name="Field">
+                                                <label class="s_website_form_label" for="isekai_grading_email">
+                                                    <span class="s_website_form_label_content">Correo electrónico</span>
+                                                    <span class="s_website_form_mark"> *</span>
+                                                </label>
+                                                <input id="isekai_grading_email" type="email" class="form-control s_website_form_input" name="email_from" required="1" data-fill-with="email" autocomplete="email"/>
+                                            </div>
+
+                                            <div class="mb-3 col-12 col-md-6 s_website_form_field s_website_form_custom" data-type="char" data-name="Field">
+                                                <label class="s_website_form_label" for="isekai_grading_phone">
+                                                    <span class="s_website_form_label_content">Teléfono</span>
+                                                </label>
+                                                <input id="isekai_grading_phone" type="tel" class="form-control s_website_form_input" name="Teléfono" data-fill-with="phone" autocomplete="tel"/>
+                                            </div>
+
+                                            <div class="mb-3 col-12 col-md-6 s_website_form_field s_website_form_custom s_website_form_required" data-type="selection" data-name="Field">
+                                                <label class="s_website_form_label" for="isekai_grading_game">
+                                                    <span class="s_website_form_label_content">Juego</span>
+                                                    <span class="s_website_form_mark"> *</span>
+                                                </label>
+                                                <select id="isekai_grading_game" class="form-select s_website_form_input" name="Juego" required="1">
+                                                    <option value="">Selecciona un juego</option>
+                                                <option value="Pokémon TCG">Pokémon TCG</option>
+                                                <option value="Magic: The Gathering">Magic: The Gathering</option>
+                                                <option value="One Piece Card Game">One Piece Card Game</option>
+                                                <option value="Yu-Gi-Oh!">Yu-Gi-Oh!</option>
+                                                <option value="Disney Lorcana">Disney Lorcana</option>
+                                                <option value="Digimon Card Game">Digimon Card Game</option>
+                                                <option value="Dragon Ball Super Card Game">Dragon Ball Super Card Game</option>
+                                                <option value="Riftbound">Riftbound</option>
+                                                <option value="Gundam Card Game">Gundam Card Game</option>
+                                                <option value="Otro">Otro</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="mb-3 col-12 col-md-6 s_website_form_field s_website_form_custom s_website_form_required" data-type="integer" data-name="Field">
+                                                <label class="s_website_form_label" for="isekai_grading_qty">
+                                                    <span class="s_website_form_label_content">Número de cartas</span>
+                                                    <span class="s_website_form_mark"> *</span>
+                                                </label>
+                                                <input id="isekai_grading_qty" type="number" min="1" step="1" class="form-control s_website_form_input" name="Número de cartas" required="1"/>
+                                            </div>
+
+                                            <div class="mb-3 col-12 col-md-6 s_website_form_field s_website_form_custom" data-type="selection" data-name="Field">
+                                                <label class="s_website_form_label" for="isekai_grading_value">
+                                                    <span class="s_website_form_label_content">Valor aproximado por carta</span>
+                                                </label>
+                                                <select id="isekai_grading_value" class="form-select s_website_form_input" name="Valor aproximado por carta">
+                                                    <option value="No lo sé">No lo sé</option>
+                                                    <option value="Menos de 100 €">Menos de 100 €</option>
+                                                    <option value="Entre 100 € y 500 €">Entre 100 € y 500 €</option>
+                                                    <option value="Entre 500 € y 1.000 €">Entre 500 € y 1.000 €</option>
+                                                    <option value="Más de 1.000 €">Más de 1.000 €</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="mb-3 col-12 s_website_form_field s_website_form_custom s_website_form_required" data-type="text" data-name="Field">
+                                                <label class="s_website_form_label" for="isekai_grading_cards">
+                                                    <span class="s_website_form_label_content">Listado de cartas</span>
+                                                    <span class="s_website_form_mark"> *</span>
+                                                </label>
+                                                <textarea id="isekai_grading_cards" class="form-control s_website_form_input" name="Listado de cartas" rows="5" required="1" placeholder="Una carta por línea: nombre, colección, número e idioma. Ej.: Charizard ex, Obsidian Flames, 223/197, inglés"/>
+                                            </div>
+
+                                            <div class="mb-3 col-12 s_website_form_field s_website_form_custom s_website_form_required" data-type="selection" data-name="Field">
+                                                <span class="s_website_form_label">
+                                                    <span class="s_website_form_label_content">¿Cómo nos harás llegar las cartas?</span>
+                                                    <span class="s_website_form_mark"> *</span>
+                                                </span>
+                                                <div class="row s_col_no_resize s_col_no_bgcolor s_website_form_multiple" data-name="¿Cómo nos harás llegar las cartas?" data-display="horizontal">
+                                                    <div class="radio col-12 col-sm-6">
+                                                        <div class="form-check isekai-grading-option">
+                                                            <input type="radio" class="s_website_form_input form-check-input" id="isekai_grading_delivery_store" name="¿Cómo nos harás llegar las cartas?" value="En la tienda (Alcorcón)" required="1"/>
+                                                            <label class="form-check-label s_website_form_check_label" for="isekai_grading_delivery_store">En la tienda (Alcorcón)</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="radio col-12 col-sm-6">
+                                                        <div class="form-check isekai-grading-option">
+                                                            <input type="radio" class="s_website_form_input form-check-input" id="isekai_grading_delivery_ship" name="¿Cómo nos harás llegar las cartas?" value="Por envío" required="1"/>
+                                                            <label class="form-check-label s_website_form_check_label" for="isekai_grading_delivery_ship">Por envío</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-3 col-12 s_website_form_field s_website_form_custom" data-type="binary" data-name="Field">
+                                                <label class="s_website_form_label" for="isekai_grading_photos">
+                                                    <span class="s_website_form_label_content">Fotos de las cartas (opcional)</span>
+                                                </label>
+                                                <input id="isekai_grading_photos" type="file" class="form-control s_website_form_input" name="Fotos de las cartas" multiple="1" accept="image/*"/>
+                                                <small class="isekai-grading-help">Anverso y reverso nos ayudan a darte una orientación más precisa.</small>
+                                            </div>
+
+                                            <div class="mb-3 col-12 s_website_form_field s_website_form_custom" data-type="text" data-name="Field">
+                                                <label class="s_website_form_label" for="isekai_grading_notes">
+                                                    <span class="s_website_form_label_content">Comentarios</span>
+                                                </label>
+                                                <textarea id="isekai_grading_notes" class="form-control s_website_form_input" name="Comentarios" rows="3" placeholder="Entidad o nivel de servicio que prefieres, plazos, dudas..."/>
+                                            </div>
+
+                                            <div class="mb-3 col-12 s_website_form_field s_website_form_custom s_website_form_required" data-type="boolean" data-name="Field">
+                                                <div class="form-check isekai-grading-consent">
+                                                    <input id="isekai_grading_privacy" type="checkbox" class="s_website_form_input form-check-input" name="Acepta la política de privacidad" value="Sí" required="1"/>
+                                                    <label class="form-check-label s_website_form_check_label" for="isekai_grading_privacy">He leído y acepto la <a href="/es/cms/politica-de-privacidad" target="_blank">política de privacidad</a>. *</label>
+                                                </div>
+                                            </div>
+
+                                            <!-- Campos ocultos: asunto y destinatario del correo -->
+                                            <div class="mb-0 col-12 s_website_form_field s_website_form_dnone s_website_form_model_required" data-type="char" data-name="Field">
+                                                <input type="hidden" class="form-control s_website_form_input" name="subject" value="Nueva solicitud de gradeo - Isekai TCG Store"/>
+                                            </div>
+                                            <div class="mb-0 col-12 s_website_form_field s_website_form_dnone" data-type="char" data-name="Field">
+                                                <input type="hidden" class="form-control s_website_form_input" name="email_to" value="isekaigeekshop@gmail.com"/>
+                                            </div>
+
+                                            <div class="mb-0 col-12 s_website_form_submit s_website_form_no_submit_label" data-name="Submit Button">
+                                                <a href="#" role="button" class="btn btn-primary s_website_form_send isekai-grading-submit">Enviar solicitud</a>
+                                                <span id="s_website_form_result"/>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="s_website_form_end_message d-none">
+                                        <div class="isekai-grading-success">
+                                            <i class="fa fa-check-circle" aria-hidden="true"/>
+                                            <h3>¡Solicitud enviada!</h3>
+                                            <p>Gracias por confiar en Isekai. Revisaremos tus cartas y te enviaremos el presupuesto por correo lo antes posible.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- =================================================
+                 PREGUNTAS FRECUENTES
+                 ================================================= -->
+            <section class="isekai-grading-section">
+                <div class="isekai-container">
+                    <div class="isekai-grading-heading">
+                        <span class="isekai-grading-eyebrow">Dudas</span>
+                        <h2>Preguntas frecuentes</h2>
+                    </div>
+                    <div class="isekai-grading-faq">
+                        <details class="isekai-grading-faq-item">
+                            <summary>¿Qué cartas se pueden gradear?</summary>
+                            <p>Cartas de la mayoría de juegos coleccionables (Pokémon, Magic, One Piece, Yu-Gi-Oh!, Lorcana...). Si tienes dudas sobre un juego o una edición concreta, indícalo en el formulario y te lo confirmamos.</p>
+                        </details>
+                        <details class="isekai-grading-faq-item">
+                            <summary>¿Cuánto cuesta?</summary>
+                            <p>Depende de la entidad, del nivel de servicio (plazo) y del valor declarado de cada carta. Por eso te enviamos un presupuesto personalizado antes de que nos entregues nada.</p>
+                        </details>
+                        <details class="isekai-grading-faq-item">
+                            <summary>¿Cuánto tarda?</summary>
+                            <p>Los plazos los marca la entidad de gradeo y varían según el nivel de servicio y su volumen de trabajo, normalmente de varias semanas a algunos meses. Te indicamos el plazo estimado en el presupuesto y te avisamos de cada cambio de estado.</p>
+                        </details>
+                        <details class="isekai-grading-faq-item">
+                            <summary>¿Me aseguráis la nota?</summary>
+                            <p>No. La nota la decide únicamente la entidad de gradeo. En la revisión previa te damos una orientación honesta, pero no es una garantía del resultado.</p>
+                        </details>
+                        <details class="isekai-grading-faq-item">
+                            <summary>¿Puedo cancelar la solicitud?</summary>
+                            <p>Sí, sin coste, en cualquier momento antes de que las cartas se envíen a la entidad. Una vez enviadas, el servicio ya está en marcha.</p>
+                        </details>
+                        <details class="isekai-grading-faq-item">
+                            <summary>¿Están aseguradas mis cartas?</summary>
+                            <p><span class="isekai-fill">[Confirmar: p. ej. Las cartas viajan con seguro por su valor declarado, tanto a la entidad como de vuelta. Te detallamos las condiciones en el presupuesto]</span></p>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =================================================
+                 FOOTER ISEKAI (idéntico al del Shop)
+                 ================================================= -->
+            <footer class="isekai-footer">
+
+                <!-- NEWSLETTER -->
+                <div class="isekai-footer-newsletter">
+                    <div class="isekai-container">
+                        <div class="isekai-newsletter-content">
+                            <div class="isekai-newsletter-text">
+                                <span class="isekai-footer-eyebrow">MANTENTE AL DÍA</span>
+                                <h2>Recibe las últimas ofertas y novedades</h2>
+                                <p>Suscríbete para conocer nuestras novedades, nuevos productos, promociones y eventos.</p>
+                            </div>
+                            <form class="isekai-newsletter-form" action="/website_mass_mailing/subscribe" method="post">
+                                <input type="email" name="email" placeholder="Su dirección de email" aria-label="Su dirección de email" required="required"/>
+                                <button type="submit" aria-label="Suscribirse al boletín">
+                                    Enviar
+                                    <i class="fa fa-arrow-right" aria-hidden="true"/>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FOOTER PRINCIPAL -->
+                <div class="isekai-container">
+                    <div class="isekai-footer-main">
+
+                        <!-- MARCA -->
+                        <div class="isekai-footer-section isekai-footer-brand">
+                            <div class="isekai-footer-logo">ISEKAI</div>
+                            <strong>ISEKAI TCG STORE</strong>
+                            <p>Tu tienda especializada en TCG, Warhammer, Funko POP, figuras anime y coleccionismo.</p>
+                            <p class="isekai-footer-location">
+                                <i class="fa fa-map-marker" aria-hidden="true"/>
+                                Alcorcón, Madrid
+                            </p>
+                        </div>
+
+                        <!-- TIENDA -->
+                        <div class="isekai-footer-section">
+                            <h3>Tienda</h3>
+                            <a href="/shop"><i class="fa fa-angle-right" aria-hidden="true"/>Tienda</a>
+                            <a href="/shop"><i class="fa fa-angle-right" aria-hidden="true"/>Categorías</a>
+                            <a href="/shop"><i class="fa fa-angle-right" aria-hidden="true"/>Novedades</a>
+                        </div>
+
+                        <!-- CUENTA -->
+                        <div class="isekai-footer-section">
+                            <h3>Mi cuenta</h3>
+                            <a href="/my/home"><i class="fa fa-angle-right" aria-hidden="true"/>Mi perfil</a>
+                            <a href="/my/orders"><i class="fa fa-angle-right" aria-hidden="true"/>Mis pedidos</a>
+                            <a href="/shop/cart"><i class="fa fa-angle-right" aria-hidden="true"/>Mi carrito</a>
+                        </div>
+
+                        <!-- CONTACTO -->
+                        <div class="isekai-footer-section">
+                            <h3>Contacto</h3>
+                            <a href="tel:+34604949849"><i class="fa fa-phone" aria-hidden="true"/>604 94 98 49</a>
+                            <a href="mailto:isekaigeekshop@gmail.com"><i class="fa fa-envelope" aria-hidden="true"/>isekaigeekshop@gmail.com</a>
+                            <div class="isekai-footer-address">
+                                <i class="fa fa-map-marker" aria-hidden="true"/>
+                                <span>Avenida Torres Bellas, 4<br/>28923 Alcorcón, Madrid<br/>España</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COMUNIDAD -->
+                    <div class="isekai-footer-community">
+                        <div class="isekai-footer-community-column">
+                            <h3>Nuestras redes</h3>
+                            <div class="isekai-footer-social">
+                                <a href="https://twitter.com/ISEKAI_ALCORCON" target="_blank" rel="noopener noreferrer" aria-label="Twitter" title="Twitter">
+                                    <i class="fa fa-twitter" aria-hidden="true"/>
+                                    <span>Twitter</span>
+                                </a>
+                                <a href="https://www.instagram.com/isekai.alcorcon/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+                                    <i class="fa fa-instagram" aria-hidden="true"/>
+                                    <span>Instagram</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="isekai-footer-community-column isekai-footer-groups">
+                            <h3>Únete a nuestra comunidad</h3>
+                            <div class="isekai-footer-group-list">
+                                <a href="https://chat.whatsapp.com/GBbaAx0tZjFEjawZ8uiMHC" target="_blank" rel="noopener noreferrer">Magic The Gathering</a>
+                                <a href="https://chat.whatsapp.com/JxQ0IJIg8wsEmYJiQoa9Ml" target="_blank" rel="noopener noreferrer">One Piece Card Game</a>
+                                <a href="https://chat.whatsapp.com/C2yBWYtLRwKCR5JVDMZpTu" target="_blank" rel="noopener noreferrer">Riftbound</a>
+                                <a href="https://chat.whatsapp.com/CvMDq95DQSa0gwmoe4nJol" target="_blank" rel="noopener noreferrer">Digimon Card Game</a>
+                                <a href="https://chat.whatsapp.com/HwX9OjW7Ma59A19VDfsPyJ" target="_blank" rel="noopener noreferrer">Pokémon TCG</a>
+                                <a href="https://chat.whatsapp.com/JDiAqNLEF5I3yUprRnLLxF" target="_blank" rel="noopener noreferrer">Gundam</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INFORMACIÓN LEGAL -->
+                    <div class="isekai-footer-legal">
+                        <div class="isekai-footer-legal-title">Condiciones</div>
+                        <div class="isekai-footer-legal-links">
+                            <a href="/es/cms/condiciones-generales">Condiciones generales</a>
+                            <a href="/es/cms/aviso-legal">Aviso legal</a>
+                            <a href="/es/cms/politica-de-privacidad">Política de privacidad</a>
+                            <a href="/es/cms/politica-cookies">Política de cookies</a>
+                            <a href="/es/cms/entrega-y-transporte">Política de envíos</a>
+                            <a href="/es/cms/formas-de-pago">Formas de pago</a>
+                            <a href="/es/cms/devolucion-y-reembolso">Devolución y reembolso</a>
+                        </div>
+                    </div>
+
+                    <!-- FOOTER INFERIOR -->
+                    <div class="isekai-footer-bottom">
+                        <div class="isekai-footer-copyright">© 2026 Isekai TCG Store</div>
+                        <div class="isekai-footer-tax">Todos los precios incluyen IVA</div>
+                        <div class="isekai-footer-developer">
+                            Diseñado y desarrollado por
+                            <strong>Javier Galán Cortés</strong>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </t>
+</t>
