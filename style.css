@@ -1349,9 +1349,11 @@ body.isekai-light-theme .isekai-subcategory-link:focus {
    PRODUCTOS (grid "Novedades" de la home)
    ========================================================= */
 
+/* 6 por fila en escritorio; index.xml carga 18 novedades (3 filas
+   completas de 6, 6 de 3 en tablet y 9 de 2 en móvil) */
 #isekai-home .isekai-products-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 20px;
 }
 

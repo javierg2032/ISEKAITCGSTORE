@@ -245,7 +245,7 @@
                             despublicado podía llegar a mostrarse a
                             visitantes anónimos en la home.
                         -->
-                        <t t-foreach="request.env['product.template'].sudo().search([('sale_ok', '=', True), ('website_published', '=', True)], order='create_date desc', limit=20)" t-as="product">
+                        <t t-foreach="request.env['product.template'].sudo().search([('sale_ok', '=', True), ('website_published', '=', True)], order='create_date desc', limit=18)" t-as="product">
                             <a t-att-href="'/shop/' + str(product.id)" class="isekai-product-card">
                                 <div class="isekai-product-image">
                                     <img t-if="product.image_1920" t-att-src="'/web/image/product.template/%s/image_1920' % product.id" t-att-alt="product.name" loading="lazy"/>

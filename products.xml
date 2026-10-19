@@ -331,17 +331,25 @@
                              GRID PRODUCTOS
                              ===================================== -->
                         <div t-if="products" class="o_wsale_products_grid_table_wrapper isekai-products-grid-wrapper">
+                            <!--
+                                COLUMNAS: 6 productos por fila en escritorio
+                                (xl, >= 1200px), fijo aquí en vez de usar el
+                                ajuste "productos por fila" (ppr) de Odoo.
+                                En pantallas menores se baja a 4 (lg), 3 (md)
+                                y 2 (móvil) para que las tarjetas no queden
+                                demasiado estrechas junto a la barra lateral.
+                            -->
+                            <t t-set="isekai_ppr" t-value="6"/>
                             <t t-set="grid_md_allow_custom_cols" t-value="hasLeftColumn"/>
-                            <t t-set="grid_md_use_3col" t-value="(not hasLeftColumn and ppr == 4) or (opt_wsale_fullwidth and ppr &gt; 3)"/>
-                            <section id="o_wsale_products_grid" t-attf-class="o_wsale_products_grid_table grid isekai-products-grid {{grid_md_allow_custom_cols and 'o_wsale_products_grid_table_md'}} {{website.shop_opt_products_design_classes}}" t-attf-style="--o-wsale-ppr: {{ppr}}; --o-wsale-ppg: {{ppg}}; --o-wsale-products-grid-gap: {{gap}};" t-att-data-name="grid_block_name">
+                            <section id="o_wsale_products_grid" t-attf-class="o_wsale_products_grid_table grid isekai-products-grid {{grid_md_allow_custom_cols and 'o_wsale_products_grid_table_md'}} {{website.shop_opt_products_design_classes}}" t-attf-style="--o-wsale-ppr: {{isekai_ppr}}; --o-wsale-ppg: {{ppg}}; --o-wsale-products-grid-gap: {{gap}};" t-att-data-name="grid_block_name">
                                 <t t-foreach="bins" t-as="tr_product">
                                     <t t-foreach="tr_product" t-as="td_product">
                                         <t t-if="td_product">
                                             <t t-set="col_height" t-value="td_product['y']"/>
-                                            <t t-set="col_width" t-value="12 // ppr * td_product['x']"/>
+                                            <t t-set="col_width" t-value="min(12, 12 // isekai_ppr * td_product['x'])"/>
                                             <t t-set="col_class" t-valuef="g-col-6"/>
-                                            <t t-set="col_class_lg" t-value="'g-col-lg-' + str(col_width)"/>
-                                            <t t-set="col_class_md" t-value="grid_md_allow_custom_cols and ('g-col-md-' + str(col_width)) or grid_md_use_3col and 'g-col-md-4' or 'g-col-md-6'"/>
+                                            <t t-set="col_class_lg" t-value="'g-col-lg-' + str(min(12, 3 * td_product['x'])) + ' g-col-xl-' + str(col_width)"/>
+                                            <t t-set="col_class_md" t-value="'g-col-md-' + str(min(12, 4 * td_product['x']))"/>
                                             <t t-set="col_is_stretched" t-value="td_product['x'] &gt;= td_product['y'] * 2"/>
                                             <t t-set="col_is_custom_portrait" t-value="not col_is_stretched and col_height &gt; td_product['x']"/>
                                             <t t-set="product" t-value="td_product['product']"/>
