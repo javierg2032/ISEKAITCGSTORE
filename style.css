@@ -4119,6 +4119,150 @@ body.isekai-light-theme.isekai-portal-active .col-lg-4 > .mt-3.mw-100 > .d-flex 
 }
 
 
+/* ============================================
+   PORTAL · Detalles del contacto (/my/account)
+   ============================================ */
+
+/* Enlace "volver" encima del eyebrow */
+.isekai-account-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+    color: var(--isekai-muted, var(--isekai-c-muted)) !important;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none !important;
+    transition: color .2s ease;
+}
+
+.isekai-account-back:hover {
+    color: var(--isekai-highlight, var(--isekai-c-accent)) !important;
+}
+
+.isekai-account-back + .isekai-shop-eyebrow {
+    display: block;
+}
+
+/* Tarjeta que envuelve el formulario (mismo borde que las tarjetas del portal) */
+.isekai-account-form {
+    background: var(--isekai-card, var(--isekai-c-surface));
+    border: 2px solid var(--isekai-control-border, var(--isekai-c-primary));
+    border-radius: 16px;
+    box-shadow: var(--isekai-shadow, none);
+    padding: 24px;
+    margin-bottom: 48px;
+}
+
+.isekai-account-form label,
+.isekai-account-form .form-label,
+.isekai-account-form .col-form-label {
+    color: var(--isekai-text, var(--isekai-c-text)) !important;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.isekai-account-form .form-text,
+.isekai-account-form .text-muted,
+.isekai-account-form small,
+.isekai-account-form p {
+    color: var(--isekai-muted, var(--isekai-c-muted)) !important;
+}
+
+/* Inputs/selects: mismo patrón que carrito, Shop y ficha de producto */
+.isekai-account-form .form-control,
+.isekai-account-form .form-select {
+    background-color: var(--isekai-surface, var(--isekai-c-surface));
+    border: 2px solid var(--isekai-control-border, var(--isekai-c-primary));
+    border-radius: 10px;
+    color: var(--isekai-text, var(--isekai-c-text));
+}
+
+.isekai-account-form .form-control::placeholder {
+    color: var(--isekai-muted, var(--isekai-c-muted));
+}
+
+.isekai-account-form .form-control:focus,
+.isekai-account-form .form-select:focus {
+    background-color: var(--isekai-surface, var(--isekai-c-surface));
+    border-color: var(--isekai-primary, var(--isekai-c-primary));
+    color: var(--isekai-text, var(--isekai-c-text));
+    box-shadow: 0 0 0 3px rgba(64, 111, 206, 0.15);
+}
+
+.isekai-account-form .form-control:disabled,
+.isekai-account-form .form-control[readonly] {
+    opacity: .7;
+}
+
+.isekai-account-form .form-control.is-invalid,
+.isekai-account-form .form-select.is-invalid {
+    border-color: var(--isekai-c-danger);
+}
+
+/* Botones "Guardar" / "Descartar": píldoras como en el resto del sitio */
+.isekai-account-form .btn-primary {
+    border: 2px solid var(--isekai-primary, var(--isekai-c-primary)) !important;
+    border-radius: 999px !important;
+    background: var(--isekai-primary, var(--isekai-c-primary)) !important;
+    color: var(--isekai-c-white) !important;
+    font-weight: 700;
+    transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.isekai-account-form .btn-primary:hover {
+    background: var(--isekai-primary-hover, var(--isekai-c-primary-hover)) !important;
+    border-color: var(--isekai-primary-hover, var(--isekai-c-primary-hover)) !important;
+    transform: translateY(-1px);
+}
+
+.isekai-account-form .btn-outline-secondary {
+    border: 2px solid var(--isekai-control-border, var(--isekai-c-primary)) !important;
+    border-radius: 999px !important;
+    background: transparent !important;
+    color: var(--isekai-text, var(--isekai-c-text)) !important;
+    font-weight: 600;
+    transition: background-color .2s ease, border-color .2s ease;
+}
+
+.isekai-account-form .btn-outline-secondary:hover {
+    background: var(--isekai-card-hover, var(--isekai-c-secondary)) !important;
+    border-color: var(--isekai-primary, var(--isekai-c-primary)) !important;
+}
+
+/* Tarjeta de la foto de perfil (portal.profile_picture_card) */
+.isekai-account-form .card {
+    background: var(--isekai-surface, var(--isekai-c-surface)) !important;
+    border: 2px solid var(--isekai-control-border, var(--isekai-c-primary)) !important;
+    border-radius: 16px !important;
+    overflow: hidden;
+}
+
+.isekai-account-form .card img {
+    border-radius: 12px;
+}
+
+/* Botones editar/quitar foto: cuadrados pequeños, no píldoras */
+.isekai-account-form .card .btn {
+    border-radius: 10px !important;
+}
+
+/* La regla general del portal pinta todas las .row con el fondo de la
+   página (#wrap.o_portal_wrap .row) y Odoo da fondo blanco al
+   card-body de la foto: aquí deben ser transparentes para que se vea
+   la tarjeta. Mismo selector con id para ganar en especificidad. */
+body.isekai-portal-active #wrap.o_portal_wrap .isekai-account-form .row,
+body.isekai-portal-active #wrap.o_portal_wrap .isekai-account-form .card-body {
+    background: transparent !important;
+}
+
+@media (max-width: 767px) {
+    .isekai-account-form {
+        padding: 16px;
+        border-radius: 12px;
+    }
+}
+
 /* ################################################################
    10. FICHA DE PRODUCTO (website_sale.product)  #wrap.isekai-product-page
    La plantilla es la nativa de Odoo: solo se reestilan sus clases e
