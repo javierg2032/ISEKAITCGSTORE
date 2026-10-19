@@ -119,6 +119,10 @@
                 <div class="oe_structure" id="oe_structure_website_sale_confirmation_3"/>
             </t>
             <t t-call="website_sale.checkout_layout" show_wizard_checkout="False" show_mobile_cart_summary="False" show_navigation_button="False" show_footer="True" additional_title.translate="Tienda - Confirmado" hide_promotions="True" oe_structure="oe_structure">
+                <!-- AUTOR: web.layout vuelca la variable "head" dentro de <head> -->
+                <t t-set="head">
+                    <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
+                </t>
 
                 <t t-set="tx_sudo" t-value="order.get_portal_last_transaction()"/>
                 <div t-if="tx_sudo.state in ['pending', 'done'] or not order.amount_total" class="d-flex justify-content-between align-items-center">

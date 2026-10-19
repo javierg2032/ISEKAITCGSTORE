@@ -1913,19 +1913,6 @@ body.isekai-light-theme #isekai-home .isekai-product-price {
     font-size: 12px !important;
 }
 
-.isekai-footer-developer {
-    text-align: right;
-}
-
-.isekai-footer-developer strong {
-    color: var(--isekai-muted, var(--isekai-c-muted)) !important;
-    font-weight: 600 !important;
-}
-
-.isekai-footer-developer strong:hover {
-    color: var(--isekai-accent, var(--isekai-c-accent)) !important;
-}
-
 
 /* =========================================================
    RESPONSIVE FOOTER
@@ -2048,10 +2035,6 @@ body.isekai-light-theme #isekai-home .isekai-product-price {
         text-align: center !important;
         gap: 8px !important;
         padding: 18px 10px !important;
-    }
-
-    .isekai-footer-developer {
-        text-align: center !important;
     }
 }
 
@@ -2296,13 +2279,8 @@ body.isekai-light-theme .isekai-footer .isekai-footer-legal-links a:hover {
     color: var(--isekai-c-secondary-light) !important;
 }
 
-body.isekai-light-theme .isekai-footer .isekai-footer-bottom,
-body.isekai-light-theme .isekai-footer .isekai-footer-developer strong {
+body.isekai-light-theme .isekai-footer .isekai-footer-bottom {
     color: var(--isekai-c-muted-light) !important;
-}
-
-body.isekai-light-theme .isekai-footer .isekai-footer-developer strong:hover {
-    color: var(--isekai-c-secondary-light) !important;
 }
 
 

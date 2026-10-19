@@ -1,6 +1,10 @@
 <t name="Products" t-name="website_sale.products">
     <t t-set="website_sale_sortable" t-value="website._get_product_sort_mapping()"/>
     <t t-call="website.layout" additional_title="category.name" website_sale_sortable="website_sale_sortable">
+        <!-- AUTOR: web.layout vuelca la variable "head" dentro de <head> -->
+        <t t-set="head">
+            <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
+        </t>
         <t t-set="grid_block_name">Cuadrícula</t>
         <t t-set="product_block_name">Producto</t>
 
@@ -527,10 +531,6 @@
                     <div class="isekai-footer-bottom">
                         <div class="isekai-footer-copyright">© 2026 Isekai TCG Store</div>
                         <div class="isekai-footer-tax">Todos los precios incluyen IVA</div>
-                        <div class="isekai-footer-developer">
-                            Diseñado y desarrollado por
-                            <strong>Javier Galán Cortés</strong>
-                        </div>
                     </div>
                 </div>
             </footer>

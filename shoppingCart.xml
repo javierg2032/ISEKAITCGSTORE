@@ -142,6 +142,10 @@
                 <div class="oe_structure" id="oe_structure_website_sale_cart_2"/>
             </t>
             <t t-call="website_sale.checkout_layout" show_shorter_cart_summary="True" show_footer="True" oe_structure="oe_structure">
+                <!-- AUTOR: web.layout vuelca la variable "head" dentro de <head> -->
+                <t t-set="head">
+                    <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
+                </t>
                 <div id="shop_cart" class="col">
                     <div class="d-flex align-items-center mb-3">
                         <h4 class="mb-0">Resumen del pedido</h4>

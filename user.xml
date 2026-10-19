@@ -1,5 +1,9 @@
 <t name="My Portal" t-name="portal.portal_my_home">
     <t t-call="portal.portal_layout" my_details="True">
+        <!-- AUTOR: web.layout vuelca la variable "head" dentro de <head> -->
+        <t t-set="head">
+            <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
+        </t>
 
         <!-- =====================================================
              MI CUENTA (PORTAL)
@@ -304,10 +308,6 @@
                     <div class="isekai-footer-bottom">
                         <div class="isekai-footer-copyright">© 2026 Isekai TCG Store</div>
                         <div class="isekai-footer-tax">Todos los precios incluyen IVA</div>
-                        <div class="isekai-footer-developer">
-                            Diseñado y desarrollado por
-                            <strong>Javier Galán Cortés</strong>
-                        </div>
                     </div>
                 </div>
             </footer>
