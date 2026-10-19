@@ -4012,6 +4012,109 @@ body.isekai-light-theme.isekai-portal-active .offcanvas .btn-close {
     filter: none;
 }
 
+/* ============================================
+   PORTAL · Columna lateral de contacto
+   ============================================ */
+
+/* Tarjeta contenedora (el div interior con .mt-3.mw-100) */
+body.isekai-portal-active .col-lg-4 > .mt-3.mw-100 {
+  background: var(--isekai-card-bg, #131c35) !important;
+  border: 1px solid var(--isekai-border, rgba(255, 255, 255, 0.08)) !important;
+  border-radius: 16px !important;
+  padding: 20px !important;
+  margin-top: 0 !important;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Avatar + nombre */
+body.isekai-portal-active .col-lg-4 > .mt-3.mw-100 > .d-flex img {
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 50% !important;
+  border: 2px solid var(--isekai-accent) !important;
+  object-fit: cover;
+}
+
+body.isekai-portal-active .col-lg-4 > .mt-3.mw-100 h5 {
+  color: var(--isekai-text, #ffffff) !important;
+  font-weight: 700 !important;
+  font-size: 18px !important;
+}
+
+/* Separador entre cabecera y datos */
+body.isekai-portal-active .col-lg-4 > .mt-3.mw-100 > .d-flex {
+  padding-bottom: 16px;
+  margin-bottom: 16px !important;
+  border-bottom: 1px solid var(--isekai-border, rgba(255, 255, 255, 0.08));
+}
+
+/* Datos de contacto */
+body.isekai-portal-active .o_portal_my_details address > div {
+  display: flex;
+  flex-direction: column;
+  gap: 12px !important;
+}
+
+body.isekai-portal-active .o_portal_my_details address,
+body.isekai-portal-active .o_portal_my_details address span {
+  color: var(--isekai-text-muted, #b8c2e0) !important;
+  font-size: 14px !important;
+  line-height: 1.4;
+}
+
+/* Iconos en azul de acento, dentro de un círculo */
+body.isekai-portal-active .o_portal_my_details address i.fa {
+  color: var(--isekai-accent) !important;
+  background: rgba(79, 140, 255, 0.12);
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 8px;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* Botón "Editar información" */
+body.isekai-portal-active .col-lg-4 > .mt-3.mw-100 > a.btn-link {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 10px 16px !important;
+  margin-top: 20px !important;
+  border: 1px solid var(--isekai-accent);
+  border-radius: 10px;
+  color: var(--isekai-accent) !important;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: background 0.2s, color 0.2s;
+}
+
+body.isekai-portal-active .col-lg-4 > .mt-3.mw-100 > a.btn-link:hover {
+  background: var(--isekai-accent);
+  color: #ffffff !important;
+}
+
+/* Modo claro */
+body.isekai-light-theme.isekai-portal-active .col-lg-4 > .mt-3.mw-100 {
+  background: #ffffff !important;
+  border-color: #e3e8f2 !important;
+  box-shadow: 0 6px 18px rgba(20, 30, 60, 0.08);
+}
+body.isekai-light-theme.isekai-portal-active .col-lg-4 > .mt-3.mw-100 h5 {
+  color: #131c35 !important;
+}
+body.isekai-light-theme.isekai-portal-active .o_portal_my_details address,
+body.isekai-light-theme.isekai-portal-active .o_portal_my_details address span {
+  color: #4a5575 !important;
+}
+body.isekai-light-theme.isekai-portal-active .col-lg-4 > .mt-3.mw-100 > .d-flex {
+  border-bottom-color: #e3e8f2;
+}
+
+
 /* ################################################################
    10. FICHA DE PRODUCTO (website_sale.product)  #wrap.isekai-product-page
    La plantilla es la nativa de Odoo: solo se reestilan sus clases e
