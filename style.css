@@ -3979,12 +3979,16 @@ body.isekai-portal-active .offcanvas-body h5 {
     color: var(--isekai-text, var(--isekai-c-text)) !important;
 }
 
-body.isekai-portal-active a[href="/my/account"] {
+/* Solo el enlace de la columna lateral (escritorio y offcanvas móvil);
+   la tarjeta "Editar información" de user.xml usa el estilo de tarjeta */
+body.isekai-portal-active .d-none.d-lg-flex.justify-content-end a[href="/my/account"],
+body.isekai-portal-active .offcanvas a[href="/my/account"] {
     color: var(--isekai-highlight, var(--isekai-c-accent)) !important;
     text-decoration: none !important;
 }
 
-body.isekai-portal-active a[href="/my/account"]:hover {
+body.isekai-portal-active .d-none.d-lg-flex.justify-content-end a[href="/my/account"]:hover,
+body.isekai-portal-active .offcanvas a[href="/my/account"]:hover {
     text-decoration: underline !important;
 }
 

@@ -3,7 +3,11 @@
     <t t-set="head">
         <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
     </t>
-    <t t-call="portal.portal_layout" my_details="True">
+    <!-- SIN COLUMNA LATERAL: sin "my_details", portal.portal_layout no pinta
+         portal.side_content (avatar, datos de contacto y "Editar información");
+         ese botón pasa a ser una tarjeta más junto a Facturas, Pedidos...
+         "no_breadcrumbs" evita el breadcrumb que aparecería sin my_details. -->
+    <t t-call="portal.portal_layout" no_breadcrumbs="True">
 
         <!-- =====================================================
              MI CUENTA (PORTAL)
@@ -176,7 +180,7 @@
                         </div>
 
                         <!-- TARJETAS (Pedidos, Facturas, Direcciones, Tickets...) -->
-                        <div t-if="portal_cards or (editable and portal_hidden_cards)" class="o_portal_cards d-grid mt-3 isekai-portal-cards" id="portal_cards">
+                        <div class="o_portal_cards d-grid mt-3 isekai-portal-cards" id="portal_cards">
                             <t t-foreach="portal_cards" t-as="entry">
                                 <t t-call="portal.portal_docs_entry" placeholder_count="entry.placeholder_count"/>
                             </t>
@@ -185,6 +189,28 @@
                                     <t t-call="portal.portal_docs_entry" placeholder_count="entry.placeholder_count"/>
                                 </t>
                             </t>
+
+                            <!-- EDITAR INFORMACIÓN: tarjeta fija con el mismo marcado
+                                 que genera portal.portal_docs_entry (sustituye al botón
+                                 de la columna lateral). Sin data-id, el JS de contadores
+                                 del portal no la oculta. -->
+                            <div class="o_portal_index_card order-2">
+                                <a href="/my/account" title="Editar información" class="d-flex gap-2 gap-md-3 py-3 pe-2 px-md-3 h-100 rounded text-decoration-none">
+                                    <div class="o_portal_icon d-block align-self-start">
+                                        <span role="img" aria-label="Editar información" class="d-flex align-items-center justify-content-center" style="width: 64px; height: 64px;">
+                                            <i class="fa fa-user-circle fa-3x" aria-hidden="true"/>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <div class="fs-5 lh-1">
+                                            <h5 class="mb-0">Editar información</h5>
+                                        </div>
+                                        <div class="opacity-75">
+                                            <p class="mt-1 mb-0">Actualiza tu nombre, dirección, teléfono y correo</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
 
                         <div class="o_portal_doc_spinner spinner-border text-o-color-2 align-self-center mt-5"/>
