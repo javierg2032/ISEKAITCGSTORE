@@ -1,9 +1,9 @@
 <t name="Wishlist Page" t-name="website_sale.product_wishlist">
+    <!-- AUTOR: se define antes del t-call para que exista al pintar <head> -->
+    <t t-set="head">
+        <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
+    </t>
     <t t-call="website.layout" additional_title.translate="Tienda - Lista de deseos">
-        <!-- AUTOR: web.layout vuelca la variable "head" dentro de <head> -->
-        <t t-set="head">
-            <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
-        </t>
         <!--
             FIX (mismo patrón que Shop): se reutiliza "isekai-shop-page"
             en #wrap en vez de crear un wrapper nuevo, porque esta

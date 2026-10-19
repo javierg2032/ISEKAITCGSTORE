@@ -17,11 +17,11 @@
                      t-att-id) and each template needs to define a div element. -->
                 <div class="oe_structure" id="oe_structure_website_sale_payment_2"/>
             </t>
+            <!-- AUTOR: se define antes del t-call para que exista al pintar <head> -->
+            <t t-set="head">
+                <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
+            </t>
             <t t-call="website_sale.checkout_layout" additional_title.translate="Tienda - Seleccionar método de pago" redirect.f="/shop/payment" hide_payment_button="hide_payment_button" oe_structure="oe_structure">
-                <!-- AUTOR: web.layout vuelca la variable "head" dentro de <head> -->
-                <t t-set="head">
-                    <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
-                </t>
                 <div class="oe_structure clearfix" id="oe_structure_website_sale_payment_1"/>
 
                 <div t-if="not cart_has_blocking_alerts and website_sale_order.amount_total" name="website_sale_non_free_cart">

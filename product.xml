@@ -6,15 +6,11 @@
         <t t-set="is_fullwidth_content" t-value="website.product_page_image_width in ['none', '100_pc']"/>
         <t t-set="is_50_pc" t-value="website.product_page_image_width == '50_pc'"/>
 
+        <!-- AUTOR: se define antes del t-call para que exista al pintar <head> -->
+        <t t-set="head">
+            <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
+        </t>
         <t t-call="website.layout" additional_title="product.name">
-
-            <!-- AUTOR: web.layout vuelca la variable "head" dentro de <head> -->
-
-            <t t-set="head">
-
-                <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
-
-            </t>
             <!-- =====================================================
                  FICHA DE PRODUCTO
                  FIX: se añade la clase "isekai-product-page" a #wrap

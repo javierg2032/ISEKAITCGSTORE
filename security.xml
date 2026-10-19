@@ -1,9 +1,9 @@
 <t t-name="portal.portal_my_security">
+    <!-- AUTOR: se define antes del t-call para que exista al pintar <head> -->
+    <t t-set="head">
+        <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
+    </t>
     <t t-call="portal.portal_layout" additional_title.translate="Seguridad" no_breadcrumbs="1">
-        <!-- AUTOR: web.layout vuelca la variable "head" dentro de <head> -->
-        <t t-set="head">
-            <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
-        </t>
 
         <!-- =====================================================
              SEGURIDAD (PORTAL)

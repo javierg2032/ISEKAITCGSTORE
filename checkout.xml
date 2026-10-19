@@ -8,11 +8,11 @@
             header/footer nativos ocultos.
         -->
         <div class="isekai-cart-page">
+            <!-- AUTOR: se define antes del t-call para que exista al pintar <head> -->
+            <t t-set="head">
+                <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
+            </t>
             <t t-call="website_sale.checkout_layout" additional_title.translate="Tienda - Proceso de pago" redirect.f="/shop/checkout" same_shipping="bool(order.partner_shipping_id==order.partner_invoice_id or only_services)">
-                <!-- AUTOR: web.layout vuelca la variable "head" dentro de <head> -->
-                <t t-set="head">
-                    <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
-                </t>
                 <div id="shop_checkout">
                     <t t-if="order._has_deliverable_products()">
                         <div class="mb-4">
