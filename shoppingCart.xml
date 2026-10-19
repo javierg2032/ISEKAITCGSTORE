@@ -1,188 +1,189 @@
 <t name="Shopping Cart" t-name="website_sale.cart">
         <!--
-            FIX (mismo patrón que Shop y Portal): se envuelve todo el
-            contenido en ".isekai-cart-page" para que script.js pueda
-            detectar esta página y añadir "isekai-cart-active" al
-            <body>. Esa clase es la que hace que style.css oculte el
-            header/footer nativos de Odoo y aplique el tema
-            oscuro/claro aquí, igual que ya pasa en /shop y /my/home.
-
-
-            
+            FLUJO DE COMPRA (ESTE PASO -> dirección -> checkout -> pago):
+            la clase ".isekai-cart-page" se pasa en "pageName", que
+            web.frontend_layout añade a #wrapwrap. Así script.js detecta
+            la página (añade "isekai-cart-active" al <body>) y style.css
+            aplica TOKENS de tema, fondo y header/footer nativos ocultos.
+            No envolver la vista en un <div> fuera del t-call: ese HTML
+            se imprimía antes del DOCTYPE y rompía el documento.
+            La cabecera Isekai se pasa en "isekai_header", que pinta
+            checkoutLayout.xml justo antes de #wrap.
         -->
 
+        <t t-set="isekai_header">
+            <!-- =================================================
+                     HEADER
+                     ================================================= -->
+            <header class="isekai-header">
+                    <div class="isekai-container isekai-header-inner">
 
-           <!-- =================================================
-                 HEADER
-                 ================================================= -->
-        <header class="isekai-header">
-                <div class="isekai-container isekai-header-inner">
+                        <!-- LOGO -->
+                        <a href="/" class="isekai-logo" aria-label="Isekai TCG Store">
+                            <img src="/web/image/1329-73065db4/01_Marca%20completa_fondo%20claro%20%284%29.webp" alt="" data-attachment-id="1328" class="isekai-logo-image img img-fluid o_we_custom_image o_attachment_pending_record_id" data-format-mimetype="image/webp" data-resize-width="162" data-original-id="1328" data-original-src="/web/image/1328-48608fe1/01_Marca%20completa_fondo%20claro%20%284%29.png" data-mimetype-before-conversion="image/png" data-mimetype="image/webp"/>
+                        </a>
 
-                    <!-- LOGO -->
-                    <a href="/" class="isekai-logo" aria-label="Isekai TCG Store">
-                        <img src="/web/image/1329-73065db4/01_Marca%20completa_fondo%20claro%20%284%29.webp" alt="" data-attachment-id="1328" class="isekai-logo-image img img-fluid o_we_custom_image o_attachment_pending_record_id" data-format-mimetype="image/webp" data-resize-width="162" data-original-id="1328" data-original-src="/web/image/1328-48608fe1/01_Marca%20completa_fondo%20claro%20%284%29.png" data-mimetype-before-conversion="image/png" data-mimetype="image/webp"/>
-                    </a>
+                        <!-- BUSCADOR -->
+                        <form action="/shop" method="get" class="isekai-search" role="search">
+                            <input type="search" name="search" placeholder="Buscar productos..." autocomplete="off" aria-label="Buscar productos"/>
+                            <button type="submit" aria-label="Buscar" title="Buscar">
+                                <span class="fa fa-search"/>
+                            </button>
+                        </form>
 
-                    <!-- BUSCADOR -->
-                    <form action="/shop" method="get" class="isekai-search" role="search">
-                        <input type="search" name="search" placeholder="Buscar productos..." autocomplete="off" aria-label="Buscar productos"/>
-                        <button type="submit" aria-label="Buscar" title="Buscar">
-                            <span class="fa fa-search"/>
+                        <!-- =================================================
+                             MODO CLARO / OSCURO
+                             ================================================= -->
+                        <button type="button" class="isekai-theme-toggle" aria-label="Cambiar a modo claro" aria-pressed="false" title="Cambiar a modo claro">
+                            <i class="fa fa-moon-o isekai-theme-icon-dark" aria-hidden="true"/>
+                            <i class="fa fa-sun-o isekai-theme-icon-light" aria-hidden="true"/>
                         </button>
-                    </form>
 
-                    <!-- =================================================
-                         MODO CLARO / OSCURO
-                         ================================================= -->
-                    <button type="button" class="isekai-theme-toggle" aria-label="Cambiar a modo claro" aria-pressed="false" title="Cambiar a modo claro">
-                        <i class="fa fa-moon-o isekai-theme-icon-dark" aria-hidden="true"/>
-                        <i class="fa fa-sun-o isekai-theme-icon-light" aria-hidden="true"/>
-                    </button>
+                        <!-- =================================================
+                             CARRITO
+                             FIX: antes solo se podía acceder al carrito desde
+                             "Mi carrito" dentro del desplegable de usuario.
+                             Se saca como icono propio entre el botón de tema y
+                             el usuario, visible tanto conectado como sin
+                             conectar. El badge reutiliza "my_cart_quantity",
+                             la clase que Odoo actualiza solo vía AJAX al
+                             añadir productos (misma lógica que el contador
+                             nativo del header estándar).
+                             ================================================= -->
+                        <a href="/shop/cart" class="isekai-cart-link" aria-label="Ver carrito" title="Ver carrito">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"/>
+                            <sup class="my_cart_quantity isekai-cart-badge" t-esc="website_sale_cart_quantity" t-att-style="'display:none;' if not website_sale_cart_quantity else None"/>
+                        </a>
 
-                    <!-- =================================================
-                         CARRITO
-                         FIX: antes solo se podía acceder al carrito desde
-                         "Mi carrito" dentro del desplegable de usuario.
-                         Se saca como icono propio entre el botón de tema y
-                         el usuario, visible tanto conectado como sin
-                         conectar. El badge reutiliza "my_cart_quantity",
-                         la clase que Odoo actualiza solo vía AJAX al
-                         añadir productos (misma lógica que el contador
-                         nativo del header estándar).
-                         ================================================= -->
-                    <a href="/shop/cart" class="isekai-cart-link" aria-label="Ver carrito" title="Ver carrito">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"/>
-                        <sup class="my_cart_quantity isekai-cart-badge" t-esc="website_sale_cart_quantity" t-att-style="'display:none;' if not website_sale_cart_quantity else None"/>
-                    </a>
+                        <!-- =================================================
+                             USUARIO
+                             ================================================= -->
+                        <div class="isekai-user">
 
-                    <!-- =================================================
-                         USUARIO
-                         ================================================= -->
-                    <div class="isekai-user">
-
-                        <!-- USUARIO NO CONECTADO -->
-                        <t t-if="request.env.user._is_public()">
-                            <div class="isekai-user-dropdown">
-                                <button type="button" class="isekai-user-button" aria-expanded="false" aria-label="Abrir menú de usuario">
-                                    <i class="fa fa-user" aria-hidden="true"/>
-                                    <span>Mi cuenta</span>
-                                    <i class="fa fa-chevron-down isekai-user-arrow" aria-hidden="true"/>
-                                </button>
-                                <div class="isekai-user-menu">
-                                    <div class="isekai-user-menu-header">
-                                        <i class="fa fa-user-circle" aria-hidden="true"/>
-                                        <div>
-                                            <strong>Bienvenido</strong>
-                                            <small>Accede a tu cuenta</small>
+                            <!-- USUARIO NO CONECTADO -->
+                            <t t-if="request.env.user._is_public()">
+                                <div class="isekai-user-dropdown">
+                                    <button type="button" class="isekai-user-button" aria-expanded="false" aria-label="Abrir menú de usuario">
+                                        <i class="fa fa-user" aria-hidden="true"/>
+                                        <span>Mi cuenta</span>
+                                        <i class="fa fa-chevron-down isekai-user-arrow" aria-hidden="true"/>
+                                    </button>
+                                    <div class="isekai-user-menu">
+                                        <div class="isekai-user-menu-header">
+                                            <i class="fa fa-user-circle" aria-hidden="true"/>
+                                            <div>
+                                                <strong>Bienvenido</strong>
+                                                <small>Accede a tu cuenta</small>
+                                            </div>
+                                        </div>
+                                        <div class="isekai-user-menu-links">
+                                            <a href="/web/login?redirect=/">
+                                                <i class="fa fa-sign-in" aria-hidden="true"/>
+                                                <span>Iniciar sesión</span>
+                                            </a>
+                                            <a href="/web/signup?redirect=/">
+                                                <i class="fa fa-user-plus" aria-hidden="true"/>
+                                                <span>Crear cuenta</span>
+                                            </a>
                                         </div>
                                     </div>
-                                    <div class="isekai-user-menu-links">
-                                        <a href="/web/login?redirect=/">
-                                            <i class="fa fa-sign-in" aria-hidden="true"/>
-                                            <span>Iniciar sesión</span>
-                                        </a>
-                                        <a href="/web/signup?redirect=/">
-                                            <i class="fa fa-user-plus" aria-hidden="true"/>
-                                            <span>Crear cuenta</span>
-                                        </a>
-                                    </div>
                                 </div>
-                            </div>
-                        </t>
+                            </t>
 
-                        <!-- USUARIO CONECTADO -->
-                        <t t-else="">
-                            <div class="isekai-user-dropdown">
-                                <button type="button" class="isekai-user-button" aria-expanded="false" aria-label="Abrir menú de usuario">
-                                    <i class="fa fa-user" aria-hidden="true"/>
-                                    <span t-out="request.env.user.name"/>
-                                    <i class="fa fa-chevron-down isekai-user-arrow" aria-hidden="true"/>
-                                </button>
-                                <div class="isekai-user-menu">
-                                    <div class="isekai-user-menu-header">
-                                        <i class="fa fa-user-circle" aria-hidden="true"/>
-                                        <div>
-                                            <strong>Mi cuenta</strong>
-                                            <small t-out="request.env.user.email"/>
+                            <!-- USUARIO CONECTADO -->
+                            <t t-else="">
+                                <div class="isekai-user-dropdown">
+                                    <button type="button" class="isekai-user-button" aria-expanded="false" aria-label="Abrir menú de usuario">
+                                        <i class="fa fa-user" aria-hidden="true"/>
+                                        <span t-out="request.env.user.name"/>
+                                        <i class="fa fa-chevron-down isekai-user-arrow" aria-hidden="true"/>
+                                    </button>
+                                    <div class="isekai-user-menu">
+                                        <div class="isekai-user-menu-header">
+                                            <i class="fa fa-user-circle" aria-hidden="true"/>
+                                            <div>
+                                                <strong>Mi cuenta</strong>
+                                                <small t-out="request.env.user.email"/>
+                                            </div>
+                                        </div>
+                                        <div class="isekai-user-menu-links">
+                                            <a href="/my/home">
+                                                <i class="fa fa-user" aria-hidden="true"/>
+                                                <span>Mi perfil</span>
+                                            </a>
+                                            <a href="/my/orders">
+                                                <i class="fa fa-shopping-bag" aria-hidden="true"/>
+                                                <span>Mis pedidos</span>
+                                            </a>
+                                            <a href="/shop/wishlist">
+                                                <i class="fa fa-heart" aria-hidden="true"/>
+                                                <span>Mi lista de deseos</span>
+                                            </a>
+                                            <a href="/web/session/logout?redirect=/" class="isekai-logout">
+                                                <i class="fa fa-sign-out" aria-hidden="true"/>
+                                                <span>Cerrar sesión</span>
+                                            </a>
                                         </div>
                                     </div>
-                                    <div class="isekai-user-menu-links">
-                                        <a href="/my/home">
-                                            <i class="fa fa-user" aria-hidden="true"/>
-                                            <span>Mi perfil</span>
-                                        </a>
-                                        <a href="/my/orders">
-                                            <i class="fa fa-shopping-bag" aria-hidden="true"/>
-                                            <span>Mis pedidos</span>
-                                        </a>
-                                        <a href="/shop/wishlist">
-                                            <i class="fa fa-heart" aria-hidden="true"/>
-                                            <span>Mi lista de deseos</span>
-                                        </a>
-                                        <a href="/web/session/logout?redirect=/" class="isekai-logout">
-                                            <i class="fa fa-sign-out" aria-hidden="true"/>
-                                            <span>Cerrar sesión</span>
-                                        </a>
-                                    </div>
                                 </div>
-                            </div>
-                        </t>
+                            </t>
 
+                        </div>
                     </div>
+            </header>
+        </t>
+
+        <t t-set="oe_structure">
+            <!-- This is the drag-and-drop area for website building blocs at the end of each
+                 checkout page. This is append at the of the page in `checkout_layout`. The
+                 templates created in the database to store blocs are hooked using XPath on the
+                 `oe_struture` element ID. Therefore, we can't use dynamic IDs (like with
+                 t-att-id) and each template needs to define a div element. -->
+            <div class="oe_structure" id="oe_structure_website_sale_cart_2"/>
+        </t>
+        <!-- CLASE DE PÁGINA: web.frontend_layout pone "pageName" en #wrapwrap -->
+        <t t-set="pageName" t-valuef="isekai-cart-page"/>
+        <!-- AUTOR: se define antes del t-call para que exista al pintar <head> -->
+        <t t-set="head">
+            <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
+        </t>
+        <t t-call="website_sale.checkout_layout" show_shorter_cart_summary="True" show_footer="True" oe_structure="oe_structure">
+            <div id="shop_cart" class="col">
+                <div class="d-flex align-items-center mb-3">
+                    <h4 class="mb-0">Resumen del pedido</h4>
+                    <div class="ms-3 border-start ps-2"><t t-call="website_sale.quick_reorder_button"/></div>
+
+                    <!-- ICONO WISHLIST (a la derecha del todo) -->
+                    <t t-if="'product.wishlist' in request.env">
+                        <t t-set="isekai_wish_count" t-value="len(request.env['product.wishlist'].current())"/>
+                        <a href="/shop/wishlist" class="isekai-cart-wishlist ms-auto position-relative" aria-label="Ver lista de deseos" title="Lista de deseos">
+                            <i class="fa fa-heart-o" aria-hidden="true"/>
+                            <span t-if="isekai_wish_count" class="isekai-cart-wishlist-count" t-out="isekai_wish_count"/>
+                        </a>
+                    </t>
                 </div>
-            </header>  
-
-        <div class="isekai-cart-page">
-            <t t-set="oe_structure">
-                <!-- This is the drag-and-drop area for website building blocs at the end of each
-                     checkout page. This is append at the of the page in `checkout_layout`. The
-                     templates created in the database to store blocs are hooked using XPath on the
-                     `oe_struture` element ID. Therefore, we can't use dynamic IDs (like with
-                     t-att-id) and each template needs to define a div element. -->
-                <div class="oe_structure" id="oe_structure_website_sale_cart_2"/>
-            </t>
-            <!-- AUTOR: se define antes del t-call para que exista al pintar <head> -->
-            <t t-set="head">
-                <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
-            </t>
-            <t t-call="website_sale.checkout_layout" show_shorter_cart_summary="True" show_footer="True" oe_structure="oe_structure">
-                <div id="shop_cart" class="col">
-                    <div class="d-flex align-items-center mb-3">
-                        <h4 class="mb-0">Resumen del pedido</h4>
-                        <div class="ms-3 border-start ps-2"><t t-call="website_sale.quick_reorder_button"/></div>
-
-                        <!-- ICONO WISHLIST (a la derecha del todo) -->
-                        <t t-if="'product.wishlist' in request.env">
-                            <t t-set="isekai_wish_count" t-value="len(request.env['product.wishlist'].current())"/>
-                            <a href="/shop/wishlist" class="isekai-cart-wishlist ms-auto position-relative" aria-label="Ver lista de deseos" title="Lista de deseos">
-                                <i class="fa fa-heart-o" aria-hidden="true"/>
-                                <span t-if="isekai_wish_count" class="isekai-cart-wishlist-count" t-out="isekai_wish_count"/>
-                            </a>
-                        </t>
-                    </div>
-                    <div t-if="abandoned_proceed or access_token" class="alert alert-info mt8 mb8" role="alert"> <!-- abandoned cart choices -->
-                        <t t-if="abandoned_proceed">
-                            <p>Se ha completado su cesta anterior.</p>
-                            <p t-if="website_sale_order">Continúe con su cesta actual.</p>
-                        </t>
-                        <t t-if="access_token">
-                            <p>Este es su cesta actual.</p>
-                            <p>
-                                <strong>
-                                    <a class="o_translate_inline" t-attf-href="/shop/cart/?id={{id}}&amp;access_token={{access_token}}&amp;revive_method=squash">Haga clic aquí</a>
-                                </strong> si desea recuperar su carro anterior. Su carro actual será sustituido por el anterior.
-                            </p>
-                            <p>
-                                <strong>
-                                    <a class="o_translate_inline" t-attf-href="/shop/cart/?id={{id}}&amp;access_token={{access_token}}&amp;revive_method=merge">Haga clic aquí</a>
-                                </strong> si desea combinar su carro anterior con el actual.
-                            </p>
-                        </t>
-                    </div>
-                    <t t-call="website_sale.cart_lines"/>
-                    <div class="clearfix"/>
-                    <div class="oe_structure" id="oe_structure_website_sale_cart_1"/>
+                <div t-if="abandoned_proceed or access_token" class="alert alert-info mt8 mb8" role="alert"> <!-- abandoned cart choices -->
+                    <t t-if="abandoned_proceed">
+                        <p>Se ha completado su cesta anterior.</p>
+                        <p t-if="website_sale_order">Continúe con su cesta actual.</p>
+                    </t>
+                    <t t-if="access_token">
+                        <p>Este es su cesta actual.</p>
+                        <p>
+                            <strong>
+                                <a class="o_translate_inline" t-attf-href="/shop/cart/?id={{id}}&amp;access_token={{access_token}}&amp;revive_method=squash">Haga clic aquí</a>
+                            </strong> si desea recuperar su carro anterior. Su carro actual será sustituido por el anterior.
+                        </p>
+                        <p>
+                            <strong>
+                                <a class="o_translate_inline" t-attf-href="/shop/cart/?id={{id}}&amp;access_token={{access_token}}&amp;revive_method=merge">Haga clic aquí</a>
+                            </strong> si desea combinar su carro anterior con el actual.
+                        </p>
+                    </t>
                 </div>
-            </t>
-        </div>
+                <t t-call="website_sale.cart_lines"/>
+                <div class="clearfix"/>
+                <div class="oe_structure" id="oe_structure_website_sale_cart_1"/>
+            </div>
+        </t>
     </t>

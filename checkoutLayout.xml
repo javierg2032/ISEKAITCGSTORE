@@ -1,0 +1,18 @@
+<data name="Isekai: cabecera en checkout_layout">
+    <!-- =====================================================
+         CABECERA ISEKAI EN EL FLUJO DE COMPRA
+         =====================================================
+         Vista de EXTENSIÓN (no primaria) en Odoo:
+           key        website_sale.isekai_checkout_layout_header
+           hereda de  website_sale.checkout_layout
+           sitio web  IsekaiTCGStore
+         Pinta la variable "isekai_header" (si la vista que llama a
+         checkout_layout la define antes del t-call, como hacen
+         shoppingCart.xml y confirmation.xml) al principio de <main>,
+         justo antes de #wrap. Así la cabecera queda dentro del
+         documento y no antes del DOCTYPE.
+         ===================================================== -->
+    <xpath expr="//div[@id='wrap']" position="before">
+        <t t-if="isekai_header" t-out="isekai_header"/>
+    </xpath>
+</data>

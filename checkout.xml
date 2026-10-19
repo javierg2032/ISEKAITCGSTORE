@@ -1,29 +1,30 @@
 <t t-name="website_sale.checkout">
         <!--
-            FIX (mismo patrón que website_sale.cart y website_sale.address):
-            se envuelve en ".isekai-cart-page" porque esta vista también usa
-            "website_sale.checkout_layout" y es el mismo flujo de compra
-            (carrito -> dirección -> ESTE PASO -> pago), así que hereda sin
-            trabajo extra los TOKENS de tema, el fondo de página y el
-            header/footer nativos ocultos.
+            FLUJO DE COMPRA (carrito -> dirección -> ESTE PASO -> pago):
+            la clase ".isekai-cart-page" se pasa en "pageName", que
+            web.frontend_layout añade a #wrapwrap. Así script.js detecta
+            la página (añade "isekai-cart-active" al <body>) y style.css
+            aplica TOKENS de tema, fondo y header/footer nativos ocultos.
+            No envolver la vista en un <div> fuera del t-call: ese HTML
+            se imprimía antes del DOCTYPE y rompía el documento.
         -->
-        <div class="isekai-cart-page">
-            <!-- AUTOR: se define antes del t-call para que exista al pintar <head> -->
-            <t t-set="head">
-                <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
-            </t>
-            <t t-call="website_sale.checkout_layout" additional_title.translate="Tienda - Proceso de pago" redirect.f="/shop/checkout" same_shipping="bool(order.partner_shipping_id==order.partner_invoice_id or only_services)">
-                <div id="shop_checkout">
-                    <t t-if="order._has_deliverable_products()">
-                        <div class="mb-4">
-                            <t t-call="website_sale.delivery_form" selected_dm_id="order.carrier_id.id"/>
-                        </div>
-                        <div class="mb-4">
-                            <t t-call="website_sale.delivery_address_list" addresses="delivery_addresses"/>
-                        </div>
-                    </t>
-                    <t t-call="website_sale.billing_address_list" addresses="billing_addresses"/>
-                </div>
-            </t>
-        </div>
+        <!-- CLASE DE PÁGINA: web.frontend_layout pone "pageName" en #wrapwrap -->
+        <t t-set="pageName" t-valuef="isekai-cart-page"/>
+        <!-- AUTOR: se define antes del t-call para que exista al pintar <head> -->
+        <t t-set="head">
+            <meta name="author" content="Javier Galán Cortés - https://github.com/javierg2032"/>
+        </t>
+        <t t-call="website_sale.checkout_layout" additional_title.translate="Tienda - Proceso de pago" redirect.f="/shop/checkout" same_shipping="bool(order.partner_shipping_id==order.partner_invoice_id or only_services)">
+            <div id="shop_checkout">
+                <t t-if="order._has_deliverable_products()">
+                    <div class="mb-4">
+                        <t t-call="website_sale.delivery_form" selected_dm_id="order.carrier_id.id"/>
+                    </div>
+                    <div class="mb-4">
+                        <t t-call="website_sale.delivery_address_list" addresses="delivery_addresses"/>
+                    </div>
+                </t>
+                <t t-call="website_sale.billing_address_list" addresses="billing_addresses"/>
+            </div>
+        </t>
     </t>
