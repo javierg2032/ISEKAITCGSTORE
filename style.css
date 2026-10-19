@@ -1772,13 +1772,16 @@ body.isekai-light-theme #isekai-home .isekai-product-price {
     transition: color .2s ease, transform .2s ease;
 }
 
-.isekai-footer-section a::before {
-    content: "›";
+/* Icono de cada enlace: viene en el HTML (fa-angle-right en Tienda y
+   Mi cuenta, teléfono y sobre en Contacto). No se añade otra flecha con
+   ::before, que duplicaba la de Tienda/Mi cuenta ("› ›Tienda") y se
+   colaba delante de los iconos de Contacto. */
+.isekai-footer-section a > .fa {
     display: inline-block;
-    margin-right: 7px;
+    width: 1em;
+    margin-right: 8px;
     color: var(--isekai-primary, var(--isekai-c-primary));
-    font-size: 17px;
-    font-weight: 700;
+    text-align: center;
     transition: transform .2s ease;
 }
 
@@ -1787,7 +1790,7 @@ body.isekai-light-theme #isekai-home .isekai-product-price {
     transform: translateX(4px);
 }
 
-.isekai-footer-section a:hover::before {
+.isekai-footer-section a:hover > .fa {
     transform: translateX(3px);
 }
 
@@ -2228,7 +2231,7 @@ body.isekai-light-theme .isekai-footer .isekai-footer-section a {
     color: var(--isekai-c-muted-light) !important;
 }
 
-body.isekai-light-theme .isekai-footer .isekai-footer-section a::before {
+body.isekai-light-theme .isekai-footer .isekai-footer-section a > .fa {
     color: var(--isekai-c-primary-light);
 }
 
