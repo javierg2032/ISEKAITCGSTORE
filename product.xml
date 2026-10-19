@@ -247,6 +247,57 @@
                 <div class="oe_structure oe_empty oe_structure_not_nearest mt16" id="oe_structure_website_sale_product_2" data-editor-message.translate="Drag blocks here to add them on all products"/>
 
                 <!-- =================================================
+                     PRODUCTOS RELACIONADOS
+                     6 productos publicados de la misma categoría web
+                     (si no llegan a 6, se completan con el resto del
+                     catálogo). El orden es "aleatorio" pero estable:
+                     se ordena con una fórmula fija sobre el id de cada
+                     candidato y el del producto actual, así cada ficha
+                     muestra su propia mezcla y no cambia al recargar
+                     (solo si cambia el catálogo). Mismas tarjetas que
+                     "Últimas novedades" de la home (index.xml); los
+                     estilos se comparten en style.css con
+                     #isekai-related-products.
+                     ================================================= -->
+                <t t-set="isekai_related_domain" t-value="[('sale_ok', '=', True), ('website_published', '=', True), ('id', '!=', product.id)]"/>
+                <t t-set="isekai_related_key" t-value="lambda p: (p.id * 2654435761 * (product.id + 7)) % 1000003"/>
+                <t t-set="isekai_related" t-value="request.env['product.template'].sudo().search(isekai_related_domain + [('public_categ_ids', 'in', product.public_categ_ids.ids)]).sorted(key=isekai_related_key)[:6] if product.public_categ_ids else request.env['product.template']"/>
+                <t t-if="len(isekai_related) &lt; 6">
+                    <t t-set="isekai_related" t-value="isekai_related + request.env['product.template'].sudo().search(isekai_related_domain + [('id', 'not in', isekai_related.ids)]).sorted(key=isekai_related_key)[:6 - len(isekai_related)]"/>
+                </t>
+                <div t-if="isekai_related" id="isekai-related-products">
+                    <section class="isekai-section">
+                        <div class="isekai-container">
+                            <div class="isekai-section-title">
+                                <div>
+                                    <span>TE PUEDE INTERESAR</span>
+                                    <h2>Productos relacionados</h2>
+                                </div>
+                                <a t-att-href="product.public_categ_ids and '/shop/category/%s' % product.public_categ_ids[:1].id or '/shop'">
+                                    Ver todos
+                                    <i class="fa fa-arrow-right" aria-hidden="true"/>
+                                </a>
+                            </div>
+
+                            <div class="isekai-products-grid">
+                                <t t-foreach="isekai_related" t-as="related_product">
+                                    <a t-att-href="related_product.website_url" class="isekai-product-card">
+                                        <div class="isekai-product-image">
+                                            <img t-if="related_product.image_1920" t-att-src="'/web/image/product.template/%s/image_1920' % related_product.id" t-att-alt="related_product.name" loading="lazy"/>
+                                            <span t-else="">Sin imagen</span>
+                                        </div>
+                                        <div class="isekai-product-info">
+                                            <div class="isekai-product-name" t-out="related_product.name"/>
+                                            <div class="isekai-product-price" t-out="related_product.list_price" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                        </div>
+                                    </a>
+                                </t>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- =================================================
                      FOOTER
                      ================================================= -->
                 <footer class="isekai-footer">
