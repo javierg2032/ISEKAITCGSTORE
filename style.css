@@ -3341,10 +3341,35 @@ body.isekai-shop-active #wrap.isekai-shop-page {
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+/* La opción seleccionada (.active) y la pulsada (:active) usan el mismo
+   estilo que el hover; si no, Bootstrap las pinta con el morado de Odoo. */
 #wrap.isekai-shop-page .dropdown-menu .dropdown-item:hover,
-#wrap.isekai-shop-page .dropdown-menu .dropdown-item:focus {
+#wrap.isekai-shop-page .dropdown-menu .dropdown-item:focus,
+#wrap.isekai-shop-page .dropdown-menu .dropdown-item:active,
+#wrap.isekai-shop-page .dropdown-menu .dropdown-item.active {
     background: var(--isekai-btn-hover-bg, var(--isekai-c-primary));
     color: var(--isekai-c-white);
+}
+
+/* Botones primarios sin regla propia: "Apply Filters" del offcanvas de
+   filtros en móvil y "Enviar solicitud" de /gradea-con-nosotros (que
+   también usa #wrap.isekai-shop-page). Las tarjetas de producto tienen
+   su propia regla más específica (.isekai-product-wrapper .btn-primary). */
+#wrap.isekai-shop-page .btn-primary {
+    border: 2px solid var(--isekai-primary, var(--isekai-c-primary)) !important;
+    border-radius: 999px !important;
+    background: var(--isekai-primary, var(--isekai-c-primary)) !important;
+    color: var(--isekai-c-white) !important;
+    font-weight: 700;
+    transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+#wrap.isekai-shop-page .btn-primary:hover,
+#wrap.isekai-shop-page .btn-primary:focus-visible,
+#wrap.isekai-shop-page .btn-primary:active {
+    background: var(--isekai-primary-hover, var(--isekai-c-primary-hover)) !important;
+    border-color: var(--isekai-primary-hover, var(--isekai-c-primary-hover)) !important;
+    color: var(--isekai-c-white) !important;
 }
 
 #wrap.isekai-shop-page input[type="checkbox"] {
@@ -3683,6 +3708,69 @@ body.isekai-light-theme #wrap.isekai-shop-page .text-muted {
 
 .isekai-portal-page .o_portal_search_panel .form-control::placeholder {
     color: var(--isekai-muted, var(--isekai-c-muted));
+}
+
+/* Barra "Ordenar por / Filtrar por" del portal (portal.portal_searchbar,
+   nav.o_portal_navbar) en /my/orders, /my/invoices...: título, textos,
+   botones y desplegables con el mismo patrón que la tienda. Sin esto
+   salían los btn-light blancos de Odoo, textos negros sobre el fondo
+   oscuro y la opción seleccionada en morado. */
+.isekai-portal-page .o_portal_navbar .navbar-brand {
+    color: var(--isekai-text, var(--isekai-c-text)) !important;
+    font-weight: 700;
+}
+
+.isekai-portal-page .o_portal_navbar .navbar-text {
+    color: var(--isekai-muted, var(--isekai-c-muted)) !important;
+}
+
+.isekai-portal-page .o_portal_navbar .navbar-toggler {
+    border: 2px solid var(--isekai-control-border, var(--isekai-c-primary));
+    color: var(--isekai-text, var(--isekai-c-text));
+}
+
+.isekai-portal-page .o_portal_navbar .navbar-toggler .fa {
+    color: var(--isekai-text, var(--isekai-c-text));
+}
+
+.isekai-portal-page .o_portal_navbar .btn-light {
+    background: var(--isekai-btn-bg, var(--isekai-c-secondary)) !important;
+    border: 2px solid var(--isekai-control-border, var(--isekai-c-primary)) !important;
+    border-radius: 999px !important;
+    color: var(--isekai-btn-color, var(--isekai-c-white)) !important;
+    font-weight: 600;
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.isekai-portal-page .o_portal_navbar .btn-light:hover,
+.isekai-portal-page .o_portal_navbar .btn-light:focus-visible,
+.isekai-portal-page .o_portal_navbar .btn-light:active,
+.isekai-portal-page .o_portal_navbar .btn-light.show {
+    background: var(--isekai-btn-hover-bg, var(--isekai-c-primary)) !important;
+    border-color: var(--isekai-btn-hover-bg, var(--isekai-c-primary)) !important;
+    color: var(--isekai-c-white) !important;
+}
+
+.isekai-portal-page .dropdown-menu {
+    background: var(--isekai-popup-bg, var(--isekai-c-surface-popup));
+    border: 1px solid var(--isekai-popup-border, rgba(64,111,206,.40));
+    border-radius: var(--isekai-radius-lg, 16px);
+    box-shadow: var(--isekai-popup-shadow, 0 20px 50px rgba(0,0,0,.50));
+    padding: 8px;
+}
+
+.isekai-portal-page .dropdown-menu .dropdown-item {
+    border-radius: 9px;
+    color: var(--isekai-dd-color, var(--isekai-c-text));
+    transition: background-color .2s ease, color .2s ease;
+}
+
+.isekai-portal-page .dropdown-menu .dropdown-item:hover,
+.isekai-portal-page .dropdown-menu .dropdown-item:focus,
+.isekai-portal-page .dropdown-menu .dropdown-item:active,
+.isekai-portal-page .dropdown-menu .dropdown-item.active {
+    background: var(--isekai-btn-hover-bg, var(--isekai-c-primary));
+    color: var(--isekai-c-white);
 }
 
 /* Badges de estado de factura (/my/invoices): mismos colores
@@ -4578,7 +4666,9 @@ body.isekai-light-theme:has(#wrap.isekai-product-page) {
 }
 
 #wrap.isekai-product-page .dropdown-menu .dropdown-item:hover,
-#wrap.isekai-product-page .dropdown-menu .dropdown-item:focus {
+#wrap.isekai-product-page .dropdown-menu .dropdown-item:focus,
+#wrap.isekai-product-page .dropdown-menu .dropdown-item:active,
+#wrap.isekai-product-page .dropdown-menu .dropdown-item.active {
     background: var(--isekai-btn-hover-bg, var(--isekai-c-primary));
     color: var(--isekai-c-white);
 }
@@ -5072,6 +5162,7 @@ body.isekai-cart-active .isekai-cart-page {
 
 .isekai-cart-page .btn-light .o_cart_item_count.bg-primary {
     background: var(--isekai-primary, var(--isekai-c-primary)) !important;
+    border-color: var(--isekai-primary, var(--isekai-c-primary)) !important;
     color: var(--isekai-c-white) !important;
 }
 
@@ -5211,7 +5302,9 @@ body.isekai-cart-active .isekai-cart-page {
 }
 
 .isekai-cart-page .dropdown-item:hover,
-.isekai-cart-page .dropdown-item:focus {
+.isekai-cart-page .dropdown-item:focus,
+.isekai-cart-page .dropdown-item:active,
+.isekai-cart-page .dropdown-item.active {
     background: var(--isekai-btn-hover-bg, var(--isekai-c-primary)) !important;
     color: var(--isekai-c-white) !important;
 }
@@ -5506,6 +5599,34 @@ body.isekai-light-theme .isekai-cart-badge {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* ---------- LISTA DE DESEOS: REJILLA ----------
+   Mismas columnas que el Shop (g-col-6 / md-4 / lg-3 / xl-2 sobre 12):
+   2 en móvil, 3 en tablet, 4 en portátil y 6 en escritorio. Odoo fija
+   las de la wishlist con data-wishlist-grid-columns (5); con dos ids
+   esta regla gana en especificidad. Las tarjetas (.isekai-product >
+   .isekai-product-wrapper) y su hover salen de las reglas del Shop. */
+#wrap.o_wsale_wishlist_page #o_comparelist_table.isekai-products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+    #wrap.o_wsale_wishlist_page #o_comparelist_table.isekai-products-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 992px) {
+    #wrap.o_wsale_wishlist_page #o_comparelist_table.isekai-products-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1200px) {
+    #wrap.o_wsale_wishlist_page #o_comparelist_table.isekai-products-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
 }
 
 /* ---------- LISTA DE DESEOS VACÍA ----------
