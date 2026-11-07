@@ -24,6 +24,11 @@
                  ================================================= -->
         <header class="isekai-header">
                 <div class="isekai-container isekai-header-inner">
+                    <!-- MENÚ MÓVIL: abre el nav de categorías como panel lateral
+                         (solo se muestra en pantallas de 768px o menos; script.js). -->
+                    <button type="button" class="isekai-nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+                        <i class="fa fa-bars" aria-hidden="true"/>
+                    </button>
 
                     <!-- LOGO -->
                     <a href="/" class="isekai-logo" aria-label="Isekai TCG Store">
@@ -142,6 +147,13 @@
                  CATEGORÍAS (idéntico patrón que el resto del sitio)
                  ================================================= -->
             <nav class="isekai-category-nav" aria-label="Categorías de productos">
+                <!-- Cabecera del panel lateral (solo móvil, oculta en escritorio). -->
+                <div class="isekai-nav-panel-head">
+                    <span>Menú</span>
+                    <button type="button" class="isekai-nav-close" aria-label="Cerrar menú">
+                        <i class="fa fa-times" aria-hidden="true"/>
+                    </button>
+                </div>
                 <div class="isekai-container">
                     <div class="isekai-category-list">
                         <t t-foreach="request.env['product.public.category'].sudo().search([('parent_id', '=', False)], order='sequence, name')" t-as="category_nav">

@@ -1256,6 +1256,237 @@ body.isekai-cart-active header#top {
 
 
 /* =========================================================
+   MENÚ LATERAL (MÓVIL, <= 768px)
+   El nav de categorías se convierte en un panel que entra desde la
+   izquierda al pulsar ".isekai-nav-toggle" (botón de la cabecera).
+   script.js añade "isekai-nav-open" al <body> y crea el fondo
+   oscurecido ".isekai-nav-backdrop". Dentro del panel las categorías
+   van en lista vertical y sus subcategorías se abren como acordeón
+   (la misma clase "isekai-open" de siempre). En escritorio el botón
+   y la cabecera del panel están ocultos y el nav no cambia.
+   ========================================================= */
+
+.isekai-nav-toggle,
+.isekai-nav-panel-head,
+.isekai-nav-backdrop {
+    display: none;
+}
+
+/* Botones redondos de abrir/cerrar: mismo aspecto que el de modo
+   claro/oscuro. */
+.isekai-nav-toggle,
+.isekai-nav-close {
+    width: 46px;
+    height: 46px;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 46px;
+    padding: 0 !important;
+    margin: 0;
+    border: 2px solid var(--isekai-c-primary) !important;
+    border-radius: 50% !important;
+    background: var(--isekai-c-secondary) !important;
+    color: #fff !important;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    box-shadow: none !important;
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.isekai-nav-toggle:hover,
+.isekai-nav-close:hover {
+    background: var(--isekai-c-primary) !important;
+}
+
+.isekai-nav-toggle:focus-visible,
+.isekai-nav-close:focus-visible {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(64,111,206,.16) !important;
+}
+
+@media (max-width: 768px) {
+    .isekai-nav-toggle {
+        display: inline-flex;
+        grid-area: menu;
+    }
+
+    /* Cabecera: columna nueva para el botón de menú, a la izquierda
+       del logo (mismas áreas que en RESPONSIVE HEADER más "menu").
+       Solo si la cabecera tiene el botón: la del carrito no lleva nav. */
+    .isekai-header-inner:has(.isekai-nav-toggle) {
+        grid-template-columns: auto auto 1fr auto auto auto;
+        grid-template-areas: "menu logo search toggle cart user";
+    }
+
+    /* Panel. Se repite el selector del portal porque allí el nav lleva
+       "width/flex/order" con !important para encajar en su fila. */
+    .isekai-category-nav,
+    body.isekai-portal-active .isekai-category-nav {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: min(320px, 86vw) !important;
+        max-width: none;
+        flex: none !important;
+        height: 100vh;
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        border-bottom: 0 !important;
+        border-right: 2px solid var(--isekai-c-primary) !important;
+        box-shadow: 0 0 40px rgba(0,0,0,.45);
+        transform: translateX(-105%);
+        visibility: hidden;
+        transition: transform .3s ease, visibility .3s ease;
+        z-index: 2001;
+    }
+
+    body.isekai-nav-open .isekai-category-nav {
+        transform: translateX(0);
+        visibility: visible;
+    }
+
+    body.isekai-nav-open {
+        overflow: hidden;
+    }
+
+    .isekai-nav-panel-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 16px;
+        border-bottom: 1px solid rgba(64,111,206,.30);
+        color: var(--isekai-c-white);
+        font-size: 18px !important;
+        font-weight: 800;
+    }
+
+    .isekai-nav-close {
+        display: inline-flex;
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+        font-size: 16px;
+    }
+
+    .isekai-category-nav .isekai-container {
+        width: 100%;
+        padding: 14px 16px 24px;
+    }
+
+    /* Categorías en lista vertical a ancho completo. */
+    .isekai-category-nav .isekai-category-list {
+        flex-direction: column;
+        align-items: stretch;
+        flex-wrap: nowrap;
+        gap: 8px;
+        padding: 0;
+    }
+
+    .isekai-category-dropdown {
+        position: static;
+        width: 100%;
+    }
+
+    .isekai-category-button {
+        width: 100%;
+        justify-content: space-between;
+        padding: 12px 16px;
+        border-radius: 12px;
+    }
+
+    /* Subcategorías como acordeón dentro del panel (no flotantes). */
+    .isekai-subcategory-menu {
+        position: static;
+        display: none;
+        width: auto;
+        max-width: none;
+        margin: 6px 0 0;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        box-shadow: none;
+    }
+
+    .isekai-category-dropdown.isekai-open .isekai-subcategory-menu {
+        display: block;
+        transform: none;
+    }
+
+    .isekai-nav-backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(5, 8, 18, .55);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .3s ease, visibility .3s ease;
+        z-index: 2000;
+    }
+
+    body.isekai-nav-open .isekai-nav-backdrop {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@media (max-width: 600px) {
+    .isekai-header-inner:has(.isekai-nav-toggle) {
+        grid-template-columns: auto auto 1fr auto auto auto;
+        grid-template-areas:
+            "menu logo logo toggle cart user"
+            "search search search search search search";
+    }
+
+    .isekai-nav-toggle {
+        width: 42px;
+        height: 42px;
+        flex-basis: 42px;
+        font-size: 16px;
+    }
+}
+
+/* Modo claro */
+body.isekai-light-theme .isekai-nav-toggle,
+body.isekai-light-theme .isekai-nav-close {
+    background: var(--isekai-c-white) !important;
+    border-color: var(--isekai-c-border-light) !important;
+    color: var(--isekai-c-primary-light) !important;
+}
+
+body.isekai-light-theme .isekai-nav-toggle:hover,
+body.isekai-light-theme .isekai-nav-close:hover {
+    background: var(--isekai-c-primary-light) !important;
+    border-color: var(--isekai-c-primary-light) !important;
+    color: var(--isekai-c-white) !important;
+}
+
+@media (max-width: 768px) {
+    body.isekai-light-theme .isekai-category-nav {
+        border-right-color: var(--isekai-c-border-light) !important;
+        box-shadow: 0 0 40px rgba(23, 32, 51, .18);
+    }
+
+    body.isekai-light-theme .isekai-nav-panel-head {
+        color: var(--isekai-c-text-light);
+        border-bottom-color: var(--isekai-c-border-light);
+    }
+
+    body.isekai-light-theme .isekai-nav-backdrop {
+        background: rgba(23, 32, 51, .35);
+    }
+}
+
+
+/* =========================================================
    MODO CLARO - NAV
    ========================================================= */
 

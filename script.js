@@ -2,6 +2,7 @@
    ISEKAI TCG STORE
    JAVASCRIPT GLOBAL
    - Menú de categorías
+   - Menú lateral (móvil)
    - Menú de usuario
    - Modo claro / oscuro
    - Carrusel de Home
@@ -178,6 +179,79 @@
                 event.stopPropagation();
             });
         });
+
+        /* =========================================================
+           MENÚ LATERAL (MÓVIL)
+           ========================================================= */
+
+        /*
+         * En pantallas de 768px o menos el nav de categorías es un
+         * panel lateral (ver "MENÚ LATERAL" en style.css). El botón
+         * ".isekai-nav-toggle" de la cabecera lo abre añadiendo
+         * "isekai-nav-open" al <body>; se cierra con la X del panel,
+         * pulsando el fondo oscurecido, con Escape o al volver a un
+         * ancho de escritorio.
+         */
+        const navToggles = document.querySelectorAll(".isekai-nav-toggle");
+        const categoryNav = document.querySelector(".isekai-category-nav");
+
+        if (navToggles.length && categoryNav) {
+            /*
+             * El fondo va justo antes del nav (no al final del <body>):
+             * así comparten contexto de apilamiento y el z-index del
+             * panel (2001) queda por encima del fondo (2000). Colgado
+             * del <body> el fondo tapaba también el panel.
+             */
+            const backdrop = document.createElement("div");
+            backdrop.className = "isekai-nav-backdrop";
+            categoryNav.parentNode.insertBefore(backdrop, categoryNav);
+
+            const setNavOpen = function (open) {
+                body.classList.toggle("isekai-nav-open", open);
+
+                navToggles.forEach(function (toggle) {
+                    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+                });
+
+                if (!open) {
+                    closeAllCategories();
+                }
+            };
+
+            navToggles.forEach(function (toggle) {
+                toggle.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    setNavOpen(!body.classList.contains("isekai-nav-open"));
+                });
+            });
+
+            const navClose = categoryNav.querySelector(".isekai-nav-close");
+
+            if (navClose) {
+                navClose.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    setNavOpen(false);
+                });
+            }
+
+            backdrop.addEventListener("click", function () {
+                setNavOpen(false);
+            });
+
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape") {
+                    setNavOpen(false);
+                }
+            });
+
+            window.addEventListener("resize", function () {
+                if (window.innerWidth > 768) {
+                    setNavOpen(false);
+                }
+            });
+        }
 
         /* =========================================================
            MENÚ DE USUARIO
