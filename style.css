@@ -1329,8 +1329,10 @@ body.isekai-cart-active header#top {
         top: 0;
         bottom: 0;
         left: 0;
-        width: min(320px, 86vw) !important;
-        max-width: none;
+        /* 86vw con tope de 320px (sin min(): el compilador SCSS de
+           Odoo no admite mezclar px y vw dentro de min()). */
+        width: 86vw !important;
+        max-width: 320px !important;
         flex: none !important;
         height: 100vh;
         height: 100dvh;
