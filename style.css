@@ -1197,8 +1197,13 @@ body.isekai-cart-active header#top {
 }
 
 @media (max-width: 768px) {
+    /* En móvil/tablet el nav ocupa varias filas: si siguiera fijo bajo
+       el header (también fijo) ambos taparían más de un tercio de la
+       pantalla. Aquí solo el header se queda fijo. */
     .isekai-category-nav {
         overflow: visible;
+        position: relative;
+        top: auto;
     }
 
     /* Sin "overflow-x: auto": en CSS, en cuanto "overflow-x" es
@@ -3494,6 +3499,20 @@ body.isekai-shop-active #wrap.isekai-shop-page {
     #wrap.isekai-shop-page .isekai-products-pager {
         margin-top: 24px;
     }
+
+    /* 8 botones de 40px + huecos no caben en ~345px: más pequeños,
+       centrados y, si aun así no caben, en dos líneas. */
+    #wrap.isekai-shop-page .isekai-products-pager .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+    }
+
+    #wrap.isekai-shop-page .isekai-products-pager .page-link {
+        min-width: 32px;
+        min-height: 32px;
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 380px) {
@@ -3549,8 +3568,12 @@ body.isekai-light-theme #wrap.isekai-shop-page .text-muted {
     box-sizing: border-box;
 }
 
+/* Solo padding vertical: el lateral lo da .isekai-container. Con la
+   forma abreviada "padding: 40px 0 70px" se anulaba y, por debajo de
+   992px, el contenido del portal quedaba pegado a los bordes. */
 .isekai-portal-content {
-    padding: 40px 0 70px;
+    padding-top: 40px;
+    padding-bottom: 70px;
 }
 
 /* Cabecera: mismo patrón que la de Novedades / Shop (línea de 2px
@@ -3951,15 +3974,18 @@ body.isekai-portal-active nav[aria-label="breadcrumb"] {
 
 @media (max-width: 600px) {
     .isekai-portal-content {
-        padding: 24px 0 45px;
+        padding-top: 24px;
+        padding-bottom: 45px;
     }
 
     .isekai-portal-heading h1 {
         font-size: 24px;
     }
 
+    /* Una columna: a 2 columnas las tarjetas (icono de 64px + texto)
+       quedaban con una palabra por línea y el título se salía. */
     .isekai-portal-cards {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1fr;
         gap: 10px;
     }
 }
@@ -4338,6 +4364,13 @@ body.isekai-light-theme.isekai-portal-active .col-lg-4 > .mt-3.mw-100 > .d-flex 
 /* Botones editar/quitar foto: cuadrados pequeños, no píldoras */
 .isekai-account-form .card .btn {
     border-radius: 10px !important;
+}
+
+/* En móvil la foto (w-75 de la columna) ocupaba casi toda la pantalla. */
+@media (max-width: 767px) {
+    .isekai-account-form .o_profile_picture {
+        width: 140px !important;
+    }
 }
 
 /* La regla general del portal pinta todas las .row con el fondo de la
@@ -4855,9 +4888,12 @@ body.isekai-light-theme:has(#wrap.isekai-product-page) {
 }
 
 @media (max-width: 600px) {
+    /* 16px (no 10px): la fila de Bootstrap de la ficha tiene márgenes
+       de -15px y con menos padding se salía 5px por cada lado,
+       provocando scroll horizontal. */
     #wrap.isekai-product-page #product_detail {
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 16px;
+        padding-right: 16px;
     }
 
     #wrap.isekai-product-page #product_details h1 {
@@ -5204,6 +5240,41 @@ body.isekai-cart-active .isekai-cart-page {
     color: var(--isekai-text, var(--isekai-c-text));
 }
 
+
+/* ---------- CARD-BODY DE ODOO 19 ----------
+   Odoo 19 da a todo ".card .card-body" un fondo blanco al 90% (y texto
+   y .text-muted oscuros, con !important). En nuestras páginas las
+   tarjetas ya tienen el fondo del tema, así que eso dejaba recuadros
+   claros con texto ilegible (resumen del carrito, direcciones del
+   checkout y del pago). :is() con ids gana en especificidad. */
+:is(#wrap.isekai-shop-page, #wrap.isekai-product-page, .isekai-portal-page, .isekai-cart-page) .card .card-body {
+    background-color: transparent !important;
+    color: inherit !important;
+}
+
+:is(#wrap.isekai-shop-page, #wrap.isekai-product-page, .isekai-portal-page, .isekai-cart-page) .card .card-body .text-muted {
+    color: var(--isekai-muted, var(--isekai-c-muted)) !important;
+}
+
+/* Dirección de la tarjeta del checkout (el widget de contacto la pinta
+   en gris oscuro). */
+#wrapwrap.isekai-cart-page .o_address_card .card-body span:not(.badge) {
+    color: var(--isekai-text, var(--isekai-c-text));
+}
+
+/* Franja fija inferior del checkout/pago en móvil (.o_mobile_summary):
+   lleva "bg-body" (blanco) de Bootstrap. */
+#wrapwrap.isekai-cart-page .o_mobile_summary.bg-body {
+    background-color: var(--isekai-bg, var(--isekai-c-bg)) !important;
+}
+
+/* Resumen del carrito en móvil: Odoo usa "card-body p-0 p-lg-4", así
+   que por debajo de 992px el contenido iba pegado al borde. */
+@media (max-width: 991px) {
+    #wrapwrap.isekai-cart-page .o_total_card .card-body {
+        padding: 16px !important;
+    }
+}
 
 /* ---------- RESUMEN DEL PEDIDO (.o_total_card, tablas, offcanvas) ----------
    Tarjeta lateral (escritorio) y offcanvas inferior (móvil) con las
