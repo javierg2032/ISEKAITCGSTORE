@@ -6554,6 +6554,30 @@ body.isekai-light-theme #wrap.isekai-grading-page .isekai-grading-section-alt {
 
 #wrap.isekai-grading-page .isekai-grading-form-card input[type="file"].form-control {
     padding: 10px 12px;
+    cursor: pointer;
+}
+
+/* Botón "Elegir archivos": píldora con el mismo patrón que los botones
+   del sitio (fondo/texto --isekai-btn-*, borde de 2px, hover azul) en
+   vez del bloque gris de Bootstrap pegado al borde del campo. */
+#wrap.isekai-grading-page .isekai-grading-form-card input[type="file"].form-control::file-selector-button {
+    margin: 0 12px 0 0;
+    padding: 6px 16px;
+    border: 2px solid var(--isekai-control-border, var(--isekai-c-primary));
+    border-radius: 999px;
+    background: var(--isekai-btn-bg, var(--isekai-c-secondary));
+    color: var(--isekai-btn-color, var(--isekai-c-white));
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+}
+
+#wrap.isekai-grading-page .isekai-grading-form-card input[type="file"].form-control:hover::file-selector-button,
+#wrap.isekai-grading-page .isekai-grading-form-card input[type="file"].form-control:focus-visible::file-selector-button {
+    background: var(--isekai-btn-hover-bg, var(--isekai-c-primary));
+    border-color: var(--isekai-btn-hover-bg, var(--isekai-c-primary));
+    color: var(--isekai-c-white);
 }
 
 #wrap.isekai-grading-page .isekai-grading-help {
